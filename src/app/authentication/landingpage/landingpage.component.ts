@@ -21,13 +21,17 @@ export class LandingpageComponent {
   }
 
   checkMail() {
-    this.http.getMails().subscribe(data => console.log(data))
-    /*if (this.mail.valid) {
-      console.log(this.mail.value)  
+    
+    /*this.http.getMails().subscribe(data => {
+      console.log(data)
+    })*/
+    if (this.mail.value) {
+      console.log(this.mail.value)
+      this.http.getMailsWithResponse(this.mail.value) 
     } else {
       console.log('invalid')
     }
-    */
+    
   }
 
 }

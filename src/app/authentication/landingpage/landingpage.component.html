@@ -1,4 +1,4 @@
-<section class="login-cont">
+<section class="landing-cont">
     <div class="header-cont">
         <div class="logo">
             <span>CHILL</span>
@@ -11,4 +11,20 @@
             </a>
         </div>
     </div>
+
+    <div class="mail-cont">
+        <span>Unbegrenzt Filme, Serien und mehr.</span>
+        <p>Geniessen Sie Chill'n'Flix wo immer sie moechten.</p>
+        <p>Sind Sie startklar? Geben Sie Ihre E-Mailadresse ein, um loszulegen!</p>
+
+        <div class="mail-input">
+            <div class="mail-input-cont">
+                <input type="email" name="mail" placeholder="E-Mailadresse" [formControl]="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required> 
+            </div>
+            <div (click)="checkMail()" class="go-btn">
+                <span>Loslegen </span> <mat-icon>arrow_forward</mat-icon>
+            </div>
+        </div>
+    </div>
+
 </section>

@@ -1,7 +1,7 @@
 @import '../../../styles.scss';
 
 
-.login-cont{
+.landing-cont{
     max-width: 1920px;
     height: 100vh;
     @include dFlex(column, flex-start, center);
@@ -42,5 +42,61 @@
                 }
             }
         } 
+    }
+
+    > .mail-cont {
+        margin-top: 256px;
+        @include dFlex(column, center, center);
+        > span {
+            color: #ffffff;
+            font-size: 48px;
+            font-weight: 700;
+        }
+        > p {
+            color:#ffffff;
+            font-size: 28px;
+            &:nth-child(3){
+                margin-top: 0px;
+            }
+        }
+     
+        > .mail-input {
+            @include dFlex(row, center, center);
+            gap: 8px;
+            > .mail-input-cont {
+                padding: 12px 18px;
+                border-radius: 4px;
+                border: 1px solid #ffffff;
+                > input {
+                    width: 100%;
+                    max-width: 100%;
+                    overflow: hidden;
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    color: #ffffff;
+                    font-size: 20px;
+                    &::placeholder {
+                        color: #ffffff;
+                    }
+                }
+            }
+            > .go-btn {
+                @include dFlex(row, center, center);
+                gap: 16px;
+                background-color: #e50815;
+                padding: 12px 24px;
+                border-radius: 4px;
+                > span {
+                    color: #ffffff;
+                    font-size: 24px;
+                    font-weight: 500;
+                }
+                > mat-icon {
+                    color: #ffffff;
+                }
+            }	
+        }
+        
     }
 }

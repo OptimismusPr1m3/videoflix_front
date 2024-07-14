@@ -19,12 +19,15 @@
 
         <div class="mail-input">
             <div class="mail-input-cont">
-                <input type="email" name="mail" placeholder="E-Mailadresse" [formControl]="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required> 
+                <input type="email" name="mail" placeholder="E-Mailadresse" [formControl]="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>  
             </div>
             <div (click)="checkMail()" class="go-btn">
                 <span>Loslegen </span> <mat-icon>arrow_forward</mat-icon>
             </div>
         </div>
+        @if (mail.invalid && mail.touched) {
+            <span>Email Adresse ungueltig!</span>
+        }
     </div>
 
 </section>

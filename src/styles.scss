@@ -47,6 +47,11 @@ body{
     background-size: cover;
 }
 
+body.registration-page {
+  background-color: #ffffff;
+  background-image: none;
+}
+
 @mixin dFlex($direction, $justify, $align){
     display: flex;
     flex-direction: $direction;
@@ -55,6 +60,15 @@ body{
 }
 
 
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+label {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
 
 
 /*RALEWAY*/

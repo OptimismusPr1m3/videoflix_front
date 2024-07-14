@@ -16,22 +16,15 @@ export class LandingpageComponent {
 
   mail = new FormControl('');
 
-  constructor(private http: BackendCommunicationService) {
-    //this.http.getMails().subscribe(data => console.log(data))
-  }
+  constructor(private http: BackendCommunicationService) {}
 
   checkMail() {
-    
-    /*this.http.getMails().subscribe(data => {
-      console.log(data)
-    })*/
-    if (this.mail.value) {
+    if (this.mail.valid) {
       console.log(this.mail.value)
-      this.http.getMailsWithResponse(this.mail.value) 
+      this.http.checkMailAndRedirect(this.mail.value)
     } else {
       console.log('invalid')
     }
-    
   }
 
 }

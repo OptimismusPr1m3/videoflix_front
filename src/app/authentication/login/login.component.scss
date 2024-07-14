@@ -1,0 +1,110 @@
+@import "../../../styles.scss";
+
+.landing-cont {
+  max-width: 1920px;
+  height: 100vh;
+  @include dFlex(column, flex-start, center);
+  margin: 0px 124px;
+  > .header-cont {
+    width: 100%;
+    height: 100px;
+    @include dFlex(row, space-between, center);
+    > .logo {
+      @include dFlex(row, flex-start, center);
+      > span {
+        color: #e50815;
+        font-size: 32px;
+        font-weight: 700;
+      }
+      > .n-letter {
+        color: #ffffff;
+        padding: 0px 4px;
+      }
+    }
+  }
+
+  > .login-cont {
+    @include dFlex(row, center, center);
+    width: 100%;
+    > .login-form {
+      min-width: 400px;
+      padding: 48px 64px;
+      background-color: rgba($color: #000000, $alpha: 0.6);
+      > h3 {
+        font-size: 32px;
+        color: #ffffff;
+        font-weight: 600;
+      }
+      > div {
+        > .mail-container {
+          margin-bottom: 16px;
+          > mat-form-field {
+            width: 100%;
+            font-family: "Raleway", sans-serif;
+          }
+        }
+        > .password-container {
+          > mat-form-field {
+            width: 100%;
+            font-family: "Raleway", sans-serif;
+          }
+        }
+        > .login-btn {
+          margin-top: 14px;
+          max-width: 100%;
+          width: 100%;
+          padding: 8px 4px;
+          background-color: #e50914;
+          @include dFlex(row, center, center);
+          border-radius: 4px;
+          color: #ffffff;
+            font-weight: 500;
+            font-size: 20px;
+          &:hover {
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            background-color: #c11119;
+          }
+          
+        }
+      }
+      > .or {
+        margin-top: 18px;
+        width: 100%;
+        @include dFlex(row, center, center);
+        > span {
+          color: #ffffff;
+          font-size: 20px;
+        }
+      }
+      > .pw-reset {
+        margin-top: 18px;
+        max-width: 100%;
+        @include dFlex(row, center, center);
+      }
+    }
+  }
+}
+
+input {
+  color: #ffffff !important;
+  &::placeholder {
+    color: #ffffff !important;
+  }
+}
+
+mat-icon {
+  //font-family: 'Material Icons Outlined';
+  color: #ffffff !important;
+}
+
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: #e50914;
+  }
+}

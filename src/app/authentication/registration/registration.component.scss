@@ -1,25 +1,50 @@
 @import "../../../styles.scss";
 
 .register-cont {
-    max-width: 1920px;
-    height: 100vh;
-    @include dFlex(column, flex-start, center);
-    margin: 0px 124px;
-    > .header-cont {
-      width: 100%;
-      height: 100px;
-      @include dFlex(row, space-between, center);
-      > .logo {
-        @include dFlex(row, flex-start, center);
-        > span {
-          color: #e50815;
-          font-size: 32px;
-          font-weight: 700;
-        }
-        > .n-letter {
-          color: #ffffff;
-          padding: 0px 4px;
+  max-width: 1920px;
+  height: 100vh;
+  @include dFlex(column, flex-start, center);
+  > .header-cont {
+    width: 100%;
+    height: 100px;
+    @include dFlex(row, space-between, center);
+    > .logo {
+      margin-left: 124px;
+      @include dFlex(row, flex-start, center);
+      > span {
+        color: #e50815;
+        font-size: 32px;
+        font-weight: 700;
+      }
+      > .n-letter {
+        color: #e50815;
+        padding: 0px 4px;
+      }
+    }
+    > .right-cont {
+      margin-right: 124px;
+      > a {
+        text-decoration: none;
+        font-size: 24px;
+        color: black;
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
         }
       }
     }
+  }
+  > .steps {
+    margin-top: 120px;
+    width: 448px;
+    text-align: center;
+  }
+  
+}
+
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba($color: #000000, $alpha: 0.1);
 }

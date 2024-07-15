@@ -1,0 +1,84 @@
+@import "../../../../styles.scss";
+
+.stepping {
+  @include dFlex(column, center, center);
+  > .step-headline {
+    width: 90%;
+    @include dFlex(row, space-between, center);
+    > div {
+      @include dFlex(row, center, center);
+      padding: 4px;
+      border-radius: 50%;
+      &:hover {
+        cursor: pointer;
+        background-color: rgba($color: #000000, $alpha: 0.2);
+      }
+    }
+  }
+  > span {
+    padding-top: 20px;
+  }
+  > h2 {
+    font-size: 32px;
+    margin-bottom: 0px;
+  }
+  > p {
+    font-size: 22px;
+    font-weight: 500;
+  }
+  > div {
+    width: 100%;
+    > .mail-container {
+      margin-bottom: 16px;
+      > mat-form-field {
+        width: 100%;
+        font-family: "Raleway", sans-serif;
+      }
+    }
+    > .password-container {
+      > mat-form-field {
+        width: 100%;
+        font-family: "Raleway", sans-serif;
+      }
+    }
+  }
+  > .continue-btn {
+    margin-top: 16px;
+    transition: all 0.125s ease-in-out;
+    @include dFlex(row, center, center);
+    padding: 8px 24px;
+    background-color: #e50914;
+    width: 360px;
+    height: 48px;
+    border-radius: 4px;
+    &:hover {
+      cursor: pointer;
+      background-color: #f1313b;
+    }
+    > span {
+      font-size: 28px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+  }
+}
+
+:host ::ng-deep .custom-input-register .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    border-color: black;
+    background-color: #ffffff;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    
+}
+
+input {
+    color: black;
+    &::placeholder {
+      color: black;
+    }
+}
+
+mat-label {
+    color: #000000;
+}

@@ -1,0 +1,39 @@
+@import "../../../../styles.scss";
+
+.stepping {
+    @include dFlex(column, center, center);
+    > img {
+        height: 90px;
+        margin-bottom: 20px;
+    }
+    > span {
+        padding-top: 20px;
+    }
+    > h2 {
+        font-size: 32px;
+        margin-bottom: 0px;
+    }
+    > p {
+        font-size: 22px;
+        font-weight: 500;
+    }
+    > .continue-btn {
+        margin-top: 16px;
+        transition: all 0.125s ease-in-out;
+        @include dFlex(row, center, center);
+        padding: 8px 24px;
+        background-color: #e50914;
+        width: 360px;
+        height: 48px;
+        border-radius: 4px;
+        &:hover {
+            cursor: pointer;
+            background-color: #f1313b;
+        }
+        > span {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+    }
+}

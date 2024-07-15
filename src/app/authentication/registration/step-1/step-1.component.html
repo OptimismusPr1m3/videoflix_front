@@ -1,0 +1,53 @@
+<div class="stepping">
+  <div class="step-headline">
+    <div (click)="stepBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </div>
+    <span>SCHRITT 1 VON 3</span>
+  </div>
+
+  <h2>Vergeben Sie ein Passwort, um Ihr Konto zu erstellen.</h2>
+  <p>
+    Nur noch ein paar Schritte und Sie haben es geschafft! <br />
+    Wir finden Papierkram auch nervig.
+  </p>
+  <div>
+    <div class="mail-container custom-input-register">
+      <mat-form-field>
+        <mat-label>Gib deine E-Mail ein</mat-label>
+        <input
+          matInput
+          placeholder="email@mail.com"
+          [formControl]="email"
+          (blur)="updateMailErrorMessage()"
+          required
+        />
+        @if (email.invalid) {
+        <mat-error> {{ mailErrorMessage() }} </mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <div class="password-container custom-input-register">
+      <mat-form-field>
+        <mat-label>Gib dein Passwort ein</mat-label>
+        <input
+          matInput
+          [formControl]="password"
+          [type]="hide() ? 'password' : 'text'"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide()"
+        >
+          <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+  <div (click)="nextStep()" class="continue-btn">
+    <span>Weiter</span>
+  </div>
+</div>

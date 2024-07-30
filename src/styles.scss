@@ -61,8 +61,29 @@ body.registration-page {
   align-items: $align;
 }
 
+app-landingpage {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
 
+app-login {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
 
+app-registration {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+app-pw-reset {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
 
 label {
   color: rgba(255, 255, 255, 0.8) !important;

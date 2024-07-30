@@ -3,7 +3,7 @@
     <div (click)="stepBack()">
       <mat-icon>arrow_back</mat-icon>
     </div>
-    <span>SCHRITT 1 VON 3</span>
+    <span>SCHRITT 2 VON 3</span>
   </div>
 
   <h2>Vergeben Sie ein Passwort, um Ihr Konto zu erstellen.</h2>
@@ -34,7 +34,11 @@
           matInput
           [formControl]="password"
           [type]="hide() ? 'password' : 'text'"
+          [minlength]="8"
         />
+        @if (password.invalid) {
+          <mat-error> Das Passwort sollte mind. 8 Zeichen beinhalten </mat-error>
+          }
         <button
           mat-icon-button
           matSuffix

@@ -1,0 +1,31 @@
+<section class="pw-cont">
+    <div class="header-cont">
+        <div [routerLink]="['']" class="logo">
+            <span>CHILL</span>
+            <span class="n-letter">'N'</span>
+            <span>FLIX</span>
+        </div>
+        <div class="right-cont">
+            <a [routerLink]="['/login']" class="login-btn">
+                <span>Login</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="mail-cont">
+        <span>Passwort zuruecksetzen</span>
+        <p>Geben Sie ihre E-Mailadresse ein um das Passwort zurueckzusetzen !</p>
+        <div class="mail-input">
+            <div class="mail-input-cont">
+                <input type="email" name="mail" placeholder="E-Mailadresse" [formControl]="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>  
+            </div>
+            <div (click)="checkMail()" class="go-btn">
+                <span>Passwort zuruecksetzen </span> <mat-icon>arrow_forward</mat-icon>
+            </div>
+        </div>
+        @if (mail.invalid && mail.touched) {
+            <span>Email Adresse ungueltig!</span>
+        }
+    </div>
+
+</section>

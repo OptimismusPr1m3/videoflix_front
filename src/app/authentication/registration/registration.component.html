@@ -14,10 +14,17 @@
   <div class="divider"></div>
 
 
-  <div class="steps">
+  <div class="steps"> 
     <app-step-0 *ngIf="!isStep1 && !isStep2" (stepChange)="changeStep($event)"></app-step-0>
     <app-step-1 *ngIf="isStep1" (stepChange)="changeStep($event)"></app-step-1>
     <app-step-2 *ngIf="isStep2"></app-step-2>
+  </div>
+  
+  <div class="spinner" *ngIf="this.globals.isProgressingData()">
+    <div class="spinner-cont">
+      <mat-spinner></mat-spinner>
+    </div>
+    
   </div>
   
 </section>

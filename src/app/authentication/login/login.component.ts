@@ -12,31 +12,40 @@ import {
 } from '@angular/forms';
 import { merge } from 'rxjs';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { GlobalVariablesService } from '../../services/global-variables.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    CommonModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterLink
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  email = new FormControl(this.backService.signaledMail(), [Validators.required, Validators.email]);
+  email = new FormControl(this.backService.signaledMail(), [
+    Validators.required,
+    Validators.email,
+    Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+  ]);
   password = new FormControl('', [Validators.required]);
 
   mailErrorMessage = signal('');
   pwErrorMessage = signal('');
   hide = signal(true);
 
-  constructor(public backService: BackendCommunicationService) {
+  constructor(public backService: BackendCommunicationService, public router: Router, public globals: GlobalVariablesService) {
     merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateMailErrorMessage());
@@ -47,8 +56,10 @@ export class LoginComponent {
       this.mailErrorMessage.set('Bitte gib deine E-Mail ein !');
     } else if (this.email.hasError('email')) {
       this.mailErrorMessage.set('E-Mailadresse ungueltig !');
+    }else if (this.email.hasError('pattern')) {
+      this.mailErrorMessage.set('Deine Email sollte ohne Sonderzeichen sein !');
     } else {
-      this.mailErrorMessage.set('Bist du dumm ?');
+      this.mailErrorMessage.set('');
     }
   }
 
@@ -58,8 +69,33 @@ export class LoginComponent {
   }
 
   tryLogin() {
-    console.log("hello guennni !!!!!")
+    if (this.email.valid && this.password.valid) {
+      this.backService.userLogin(this.email.value!, this.password.value!).subscribe({
+        next: (resp) => {
+          console.log(resp.body.token)
+          localStorage.setItem("token",resp.body.token)
+        },
+        error: (err) => {
+            console.error('Ging so nicht durch ',err)
+            this.errorHandling()
+        },
+        complete: () => {
+          console.log('Jetzt fertig mit Antwort')
+          this.router.navigate(['/main/'])
+        }
+      } 
+      )
+    }
   }
 
+  errorHandling() {
+    this.globals.accountNotExist.set(true)
+    setTimeout(() => {
+      this.globals.accountNotExist.set(false)
+      this.globals.tryAgain.set(true)
+      this.password.setValue('')
+      //this.email.setValue('')
+    }, 1500);
+  }
 
 }

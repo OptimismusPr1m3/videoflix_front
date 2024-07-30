@@ -9,10 +9,10 @@ import { Component, output, Output } from '@angular/core';
 })
 export class Step0Component {
 
-  stepChange = output<boolean>();
+  stepChange = output<string>();
 
   nextStep() {
-    this.stepChange.emit(true);
+    this.stepChange.emit('step1');
   }
 
 }

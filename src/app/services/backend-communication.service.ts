@@ -12,10 +12,16 @@ export class BackendCommunicationService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  USERS_API = 'http://127.0.0.1:8000/api/users/';
-  REGISTER = 'http://127.0.0.1:8000/api/accounts/signup/';
-  LOGIN = 'http://127.0.0.1:8000/api/accounts/login/';
-  RESET_PASSWORD = 'http://127.0.0.1:8000/api/accounts/password/reset/'
+  // USERS_API = 'http://127.0.0.1:8000/api/users/';
+  // REGISTER = 'http://127.0.0.1:8000/api/accounts/signup/';
+  // LOGIN = 'http://127.0.0.1:8000/api/accounts/login/';
+  // RESET_PASSWORD = 'http://127.0.0.1:8000/api/accounts/password/reset/'
+
+
+  USERS_API = 'http://adioz1337.pythonanywhere.com/api/users/';
+  REGISTER = 'http://adioz1337.pythonanywhere.com/api/accounts/signup/';
+  LOGIN = 'http://adioz1337.pythonanywhere.com/api/accounts/login/';
+  RESET_PASSWORD = 'http://adioz1337.pythonanywhere.com/api/accounts/password/reset/'
 
   checkMailAndRedirect(enteredMail: string | null) {
     this.http.get(this.USERS_API, { observe: 'response' }).subscribe((res) => {

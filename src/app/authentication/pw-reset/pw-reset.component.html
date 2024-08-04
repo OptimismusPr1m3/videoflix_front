@@ -12,20 +12,33 @@
         </div>
     </div>
 
-    <div class="mail-cont">
+    <div class="mail-cont" *ngIf="!resetWasSent">
         <span>Passwort zuruecksetzen</span>
         <p>Geben Sie ihre E-Mailadresse ein um das Passwort zurueckzusetzen !</p>
         <div class="mail-input">
             <div class="mail-input-cont">
-                <input type="email" name="mail" placeholder="E-Mailadresse" [formControl]="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>  
+                <input type="email" name="mail" placeholder="E-Mailadresse" [formControl]="mail" required>  
             </div>
-            <div (click)="checkMail()" class="go-btn">
+            <button (click)="checkMail()" class="go-btn" [disabled]="mail.invalid" [ngClass]="mail.invalid ? 'disabled' : 'enabled' ">
                 <span>Passwort zuruecksetzen </span> <mat-icon>arrow_forward</mat-icon>
-            </div>
+            </button>
         </div>
-        @if (mail.invalid && mail.touched) {
+        @if (mail.invalid && mail.touched && mail.hasError('pattern')) {
             <span>Email Adresse ungueltig!</span>
         }
+        @if (notFound()) {
+            <span>Email konnte nicht gefunden wurden</span>
+        }
+    </div>
+
+    <div *ngIf="resetWasSent" class="mail-cont">
+        <span>Eine Email wurde an die angegebene Adresse gesendet !</span>
+        <p>Folgen Sie den Anweisungen in der Email, um Ihr Passwort zurueckzusetzen !</p>
+        <div class="mail-input">
+            <button class="back-btn" [routerLink]="['/login/']">
+                <span>Zurueck zum Login</span>
+            </button>
+        </div>
     </div>
 
 </section>

@@ -12,6 +12,9 @@
     @include dFlex(row, space-between, center);
     > .logo {
       @include dFlex(row, flex-start, center);
+      &:hover {
+        cursor: pointer;
+      }
       > span {
         color: #e50815;
         font-size: 32px;

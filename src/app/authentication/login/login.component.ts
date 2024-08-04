@@ -81,7 +81,7 @@ export class LoginComponent {
         },
         complete: () => {
           console.log('Jetzt fertig mit Antwort')
-          this.router.navigate(['/main/'])
+          //this.router.navigate(['/main/'])
         }
       } 
       )

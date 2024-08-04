@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
@@ -13,7 +13,9 @@ import { BackendCommunicationService } from '../../services/backend-communicatio
   styleUrl: './pw-reset.component.scss',
 })
 export class PwResetComponent {
-  mail = new FormControl('');
+  mail = new FormControl('', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]);
+  notFound = signal<boolean>(false)
+  resetWasSent: boolean = false
 
   constructor(private http: BackendCommunicationService) {}
 
@@ -24,10 +26,21 @@ export class PwResetComponent {
       },
       error: (err) => {
         console.log('email nicht gefunden', err)
+        this.notFound.set(true)
+        this.resetSignal()
       },
       complete: () => {
         console.log('fertig')
+        this.resetWasSent = true
       },
     });
   }
+
+  resetSignal() {
+    setTimeout(() => {
+      this.notFound.set(false)
+    }, 2000);
+  }
+
+
 }

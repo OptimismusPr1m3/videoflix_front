@@ -4,11 +4,12 @@ import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
+import { HeaderComponent } from '../../head/header/header.component';
 
 @Component({
   selector: 'app-landingpage',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatIconModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, MatIconModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './landingpage.component.html',
   styleUrl: './landingpage.component.scss'
 })

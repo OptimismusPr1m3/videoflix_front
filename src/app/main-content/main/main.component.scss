@@ -1,0 +1,12 @@
+@import "../../../styles.scss";
+
+section {
+    width: 100%;
+    max-width: 1920px;
+    height: 100vh;
+    @include dFlex(column, flex-start, center);
+    margin: 0px 124px;
+    > app-logged-header {
+        width: 100%;
+    }
+}

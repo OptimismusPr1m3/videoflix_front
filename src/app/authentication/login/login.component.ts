@@ -15,6 +15,7 @@ import { BackendCommunicationService } from '../../services/backend-communicatio
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { GlobalVariablesService } from '../../services/global-variables.service';
+import { HeaderComponent } from "../../head/header/header.component";
 
 @Component({
   selector: 'app-login',
@@ -27,8 +28,9 @@ import { GlobalVariablesService } from '../../services/global-variables.service'
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterLink
-  ],
+    RouterLink,
+    HeaderComponent
+],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -81,7 +83,7 @@ export class LoginComponent {
         },
         complete: () => {
           console.log('Jetzt fertig mit Antwort')
-          //this.router.navigate(['/main/'])
+          this.router.navigate(['/main/'])
         }
       } 
       )

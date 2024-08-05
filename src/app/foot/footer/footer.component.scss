@@ -5,4 +5,13 @@
     max-width: 1920px;
     width: 100%;
     height: 104px;
+    margin: 32px 124px;
+    color: #ffffffff;
+    @include dFlex(row, space-between, center);
+
+    > .middle-cont {
+        @include dFlex(row, center, center);
+        gap: 12px;
+    }
 }
+

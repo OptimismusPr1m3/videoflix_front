@@ -1,16 +1,5 @@
 <section class="pw-cont">
-    <div class="header-cont">
-        <div [routerLink]="['']" class="logo">
-            <span>CHILL</span>
-            <span class="n-letter">'N'</span>
-            <span>FLIX</span>
-        </div>
-        <div class="right-cont">
-            <a [routerLink]="['/login']" class="login-btn">
-                <span>Login</span>
-            </a>
-        </div>
-    </div>
+    <app-header></app-header>
 
     <div class="mail-cont" *ngIf="!resetWasSent">
         <span>Passwort zuruecksetzen</span>

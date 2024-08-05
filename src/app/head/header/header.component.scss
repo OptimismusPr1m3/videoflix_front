@@ -1,0 +1,42 @@
+@import "../../../styles.scss";
+
+.header-cont {
+  width: 100%;
+  height: 100px;
+  @include dFlex(row, space-between, center);
+  > .logo {
+    &:hover {
+      cursor: pointer;
+    }
+    @include dFlex(row, flex-start, center);
+    > span {
+      color: #e50815;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    > .n-letter {
+      color: #ffffff;
+      padding: 0px 4px;
+    }
+  }
+  > .right-cont {
+    @include dFlex(row, flex-end, center);
+    > .login-btn {
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+      width: 98px;
+      height: 32px;
+      border-radius: 4px;
+      background-color: #e50815;
+      @include dFlex(row, center, center);
+      &:hover {
+        background-color: #ac040f;
+      }
+      > span {
+        font-size: 16px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+    }
+  }
+}

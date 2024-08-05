@@ -54,11 +54,21 @@ body.registration-page {
   background-image: none;
 }
 
+body.logged-in {
+  font-family: "Raleway", sans-serif;
+  background-color: #141414;
+  background-image: none;
+}
+
 @mixin dFlex($direction, $justify, $align) {
   display: flex;
   flex-direction: $direction;
   justify-content: $justify;
   align-items: $align;
+}
+
+app-header {
+  width: 100%;
 }
 
 app-landingpage {
@@ -89,11 +99,16 @@ app-footer {
   display: flex;
   width: 100%;
   justify-content: center;
-  background-color: rgba($color: #000000, $alpha: 0.3);
+  background-color: rgba($color: #000000, $alpha: 1.0);
 }
 
 label {
   color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.separator {
+  background-color: #232323;
+  height: 12px;
 }
 
 /*RALEWAY*/

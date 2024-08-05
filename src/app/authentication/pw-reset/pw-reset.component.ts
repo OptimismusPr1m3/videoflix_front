@@ -4,11 +4,12 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
+import { HeaderComponent } from "../../head/header/header.component";
 
 @Component({
   selector: 'app-pw-reset',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatIconModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, MatIconModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './pw-reset.component.html',
   styleUrl: './pw-reset.component.scss',
 })

@@ -5,12 +5,32 @@
       <span class="n-letter">'N'</span>
       <span>FLIX</span>
     </div>
-    <div class="menu"></div>
+    <div class="menu">
+      <span>Filme</span>
+      <span>Serien</span>
+      <span>Platzhalter</span>
+    </div>
   </div>
 
 
   <div class="right-cont">
-
+    <div class="drop-down-btn">
+      <img src="../../../assets/avatare/avatar1.png" alt="">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon class="arrow_drop_down">arrow_drop_down</mat-icon>
+      </button> 
+    </div>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span style="text-align: center;">Logout</span>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+    </mat-menu>
   </div>
 
 </div>
+

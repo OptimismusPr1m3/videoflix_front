@@ -5,6 +5,8 @@
   height: 100px;
   @include dFlex(row, space-between, center);
   > .left-cont {
+    @include dFlex(row, flex-start, center);
+    gap: 24px;
     > .logo {
       &:hover {
         cursor: pointer;
@@ -18,6 +20,20 @@
       > .n-letter {
         color: #ffffff;
         padding: 0px 4px;
+      }
+    }
+    > .menu {
+      @include dFlex(row, flex-start, center);
+      gap: 24px;
+      > span {
+        transition: all 0.15s ease-in-out;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 700;
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -40,5 +56,23 @@
         color: #ffffff;
       }
     }
+  }
+}
+
+
+.arrow_drop_down {
+  color: #ffffffff;
+  rotate: -90deg;
+}
+
+.drop-down-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  > img {
+    height: 38px;
+    width: 38px;
+    margin-right: 8px;
   }
 }

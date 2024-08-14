@@ -14,4 +14,13 @@ import {MatButtonModule} from '@angular/material/button';
 })
 export class LoggedHeaderComponent {
 
+  menuIsOpen: boolean = false;
+
+  toggleArrow() {
+    this.menuIsOpen = !this.menuIsOpen
+  }
+
+  menuOpened(isOpen: boolean) {
+    this.menuIsOpen = isOpen;
+  }
 }

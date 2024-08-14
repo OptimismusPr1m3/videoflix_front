@@ -2,6 +2,7 @@
 
 section {
     max-width: 1920px;
+    width: 100%;
     height: 100vh;
     @include dFlex(column, flex-start, center);
     margin: 0px 124px;

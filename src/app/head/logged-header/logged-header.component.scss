@@ -39,40 +39,27 @@
   }
   > .right-cont {
     @include dFlex(row, flex-end, center);
-    > .login-btn {
-      transition: all 0.3s ease-in-out;
-      text-decoration: none;
-      width: 98px;
-      height: 32px;
-      border-radius: 4px;
-      background-color: #e50815;
-      @include dFlex(row, center, center);
+    > .drop-down-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: auto;
       &:hover {
-        background-color: #ac040f;
+        cursor: pointer;
       }
-      > span {
-        font-size: 16px;
-        font-weight: 700;
+      > img {
+        height: 38px;
+        width: 38px;
+        margin-right: 8px;
+      }
+      .arrow-drop-up {
+        color: #ffffffff;
+        rotate: -90deg;
+      }
+      .arrow-drop-down {
         color: #ffffff;
       }
     }
-  }
-}
 
-
-.arrow_drop_down {
-  color: #ffffffff;
-  rotate: -90deg;
-}
-
-.drop-down-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  > img {
-    height: 38px;
-    width: 38px;
-    margin-right: 8px;
   }
 }

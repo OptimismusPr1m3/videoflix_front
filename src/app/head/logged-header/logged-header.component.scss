@@ -63,3 +63,31 @@
 
   }
 }
+
+.menu-pnts {
+  font-family: 'Raleway';
+  color: #ffffff;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  padding: 0 !important;
+  background-color: rgba($color: #000000, $alpha: 0.8);
+}
+
+::ng-deep .mat-mdc-menu-item {
+  transition: all 150ms ease-in-out !important;
+  &:hover {
+    background-color: rgba($color: #ffffff, $alpha: 0.05) !important;
+  }
+}
+
+::ng-deep .cdk-overlay-pane {
+  padding-top: 8px;
+}
+::ng-deep .mat-mdc-menu-panel {
+  background-color: rgba($color: #000000, $alpha: 0.0001) !important;
+}
+
+mat-icon {
+  color: #ffffff !important;
+}

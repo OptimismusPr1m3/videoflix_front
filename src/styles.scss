@@ -263,11 +263,30 @@ label {
   font-weight: 900;
   src: url("./assets/fonts/raleway-v34-latin-900italic.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-html,
-body {
-  height: 100%;
+
+/*Angular Material*/
+
+@font-face {
+  font-family: 'Material Icons Outlined';
+  src: local('Material Icons Outlined'),
+       url('./assets/fonts/material-outlined/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].woff2') format('woff2'),
+       url('./assets/fonts/material-outlined/MaterialSymbolsOutlined[FILL,GRAD,opsz,wght].ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block; /* prevents FOUT (Flash of Unstyled Text) */
 }
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+
+mat-icon {
+  font-family: 'Material Icons Outlined', 'Material Icons', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  color: #ffffff;
 }

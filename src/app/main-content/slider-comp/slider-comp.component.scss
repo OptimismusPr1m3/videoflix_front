@@ -1,0 +1,49 @@
+@import "../../../styles.scss";
+section {
+    padding: 0 124px;
+}
+
+.category-container {
+    margin-bottom: 20px;
+  }
+  
+  > .scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  > .content-container {
+    display: flex;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  > .content-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+  
+  .item {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+  }
+  
+  .scroll-button {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 1;
+  }
+  
+  .scroll-button.left {
+    left: 0;
+  }
+  
+  .scroll-button.right {
+    right: 0;
+  }

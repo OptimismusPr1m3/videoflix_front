@@ -1,0 +1,14 @@
+<section class="slider-cont">
+    <div class="category-container">
+        <h2>Kategorie 1</h2>
+        <div class="scroll-container">
+          <button class="scroll-button left" (click)="scrollTo(-200)"></button>
+          <div class="content-container" #category1>
+            <div class="item" *ngFor="let item of items1">
+              <img [src]="item" alt="Bild">
+            </div>
+          </div>
+          <button class="scroll-button right" (click)="scrollTo(200)"></button>
+        </div>
+      </div>
+</section>

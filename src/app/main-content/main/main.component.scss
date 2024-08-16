@@ -8,5 +8,10 @@ section {
     margin: 0px 124px;
     > app-logged-header {
         width: 100%;
+        margin-bottom: 64px;
+    }
+    > app-slider-comp {
+        width: 100%;
+        height: 300px;
     }
 }

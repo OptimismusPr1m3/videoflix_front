@@ -2,6 +2,10 @@
 
 .header-cont {
   width: 100%;
+  max-width: 1920px;
+  z-index: 10;
+  position: fixed;
+  background-color: #141414;
   height: 100px;
   @include dFlex(row, space-between, center);
   > .left-cont {

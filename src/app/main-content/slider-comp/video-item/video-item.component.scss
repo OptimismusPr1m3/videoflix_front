@@ -1,0 +1,13 @@
+@import "../../../../styles.scss";
+
+.videoitem-cont {
+    @include dFlex(column, center, flex-start);
+    > span {
+        color: #ffffff;
+        font-size: 18px;
+    }
+    > img {
+        height: 200px;
+        width: 200px;
+    }
+}

@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { VideoItemComponent } from "./video-item/video-item.component";
 
 @Component({
   selector: 'app-slider-comp',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule, VideoItemComponent],
   templateUrl: './slider-comp.component.html',
   styleUrl: './slider-comp.component.scss'
 })

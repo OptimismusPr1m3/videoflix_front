@@ -1,49 +1,61 @@
 @import "../../../styles.scss";
 section {
-    padding: 0 124px;
+  .category-container {
+    margin-bottom: 20px;
+    > h2 {
+      font-size: 32px;
+      color: #ffffff;
+    }
+    > .scroll-container {
+      position: relative;
+      @include dFlex(row, flex-start, center);
+      > .content-container {
+        display: flex;
+        align-items: center;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* Firefox */
+        ::-webkit-scrollbar {
+          display: none;
+        }
+        > .item {
+          width: 300px;
+          height: 300px;
+          margin: 10px;
+          @include dFlex(row, center,center)
+        }
+      }
+      > .scroll-button {
+        transition: all 150ms ease-in-out;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+        border: none;
+        border-radius: 50%;
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        z-index: 1;
+        padding: 6px;
+        @include dFlex(row, center, center);
+        > mat-icon {
+          font-size: 32px;
+          height: auto;
+          width: auto;
+        }
+      }
+    }
+    .scroll-button.left {
+      left: 8px;
+    }
+
+    .scroll-button.right {
+      right: 8px;
+    }
+  }
 }
 
-.category-container {
-    margin-bottom: 20px;
-  }
-  
-  > .scroll-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  
-  > .content-container {
-    display: flex;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
-  }
-  
-  > .content-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
-  }
-  
-  .item {
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-  }
-  
-  .scroll-button {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    z-index: 1;
-  }
-  
-  .scroll-button.left {
-    left: 0;
-  }
-  
-  .scroll-button.right {
-    right: 0;
-  }
+app-video-item {
+  cursor: pointer;
+}

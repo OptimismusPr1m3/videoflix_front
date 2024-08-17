@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -17,7 +17,7 @@ export class LandingpageComponent {
 
   mail = new FormControl('');
 
-  constructor(private http: BackendCommunicationService) {}
+  constructor(private http: BackendCommunicationService, private renderer: Renderer2) {}
 
   checkMail() {
     if (this.mail.valid) {

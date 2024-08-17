@@ -23,8 +23,9 @@ export class BackendCommunicationService {
   REGISTER = 'http://storage.bastian-wolff.com/api/accounts/signup/';
 
   LOGIN = 'http://storage.bastian-wolff.com/api/accounts/login/';
-
-  RESET_PASSWORD = 'http://storage.bastian-wolff.com/api/accounts/password/reset/'
+  LOGOUT = 'http://storage.bastian-wolff.com/api/accounts/logout/';
+  RESET_PASSWORD = 'http://storage.bastian-wolff.com/api/accounts/password/reset/';
+  USER_ME = 'http://storage.bastian-wolff.com/api/accounts/users/me/';
 
   checkMailAndRedirect(enteredMail: string | null) {
     this.http.get(this.USERS_API, { observe: 'response' }).subscribe((res) => {
@@ -65,6 +66,20 @@ export class BackendCommunicationService {
       {email: mail, password: password},
       { observe: 'response'}
     )
+  }
+
+  userLogout(): Observable<any>{
+    const token = localStorage.getItem('token') 
+    return this.http.get(this.LOGOUT, {
+      headers: {Authorization: 'Token ' + token}
+    })
+  }
+
+  fetchLoggedUser(): Observable<any> {
+    const token = localStorage.getItem('token')
+    return this.http.get(this.USER_ME, {
+      headers: {Authorization: 'Token ' + token}
+    })
   }
 
 }

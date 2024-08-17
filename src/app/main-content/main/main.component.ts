@@ -19,4 +19,8 @@ export class MainComponent {
     this.renderer.addClass(document.body, 'logged-in')
   }
 
+  ngOnDestroy(){
+    this.renderer.removeClass(document.body, 'logged-in');
+  }
+
 }

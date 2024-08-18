@@ -1,18 +1,27 @@
 <section class="slider-cont">
-    <div class="category-container">
-        <h2>Filme</h2>
-        <div class="scroll-container">
-          <button class="scroll-button left" (click)="scrollTo(-200)">
-            <mat-icon>chevron_left</mat-icon>
-          </button>
-          <div class="content-container" #category1>
-            <div class="item" *ngFor="let item of items1">
-              <app-video-item [videoItem]="item"></app-video-item>
-            </div>
-          </div>
-          <button class="scroll-button right" (click)="scrollTo(200)">
-            <mat-icon>chevron_right</mat-icon>
-          </button>
+  <div class="category-container">
+    <h2>Filme</h2>
+    <div class="scroll-container">
+      <button class="scroll-button left" (click)="scrollTo(-200)">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <div class="content-container" #category1>
+        <div
+          class="item"
+          *ngFor="let item of items1; let i = index"
+        >
+          <app-video-item
+            (mouseover)="hoveredIndex = i"
+            (mouseleave)="hoveredIndex = -1"
+            class="grow-shadow"
+            [videoItem]="item"
+            [isHovered]="hoveredIndex === i"
+          ></app-video-item>
         </div>
       </div>
+      <button class="scroll-button right" (click)="scrollTo(200)">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
 </section>

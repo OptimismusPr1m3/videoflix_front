@@ -13,19 +13,21 @@ import { VideoItemComponent } from "./video-item/video-item.component";
 export class SliderCompComponent implements AfterViewInit {
   @ViewChild('category1', { read: ElementRef }) category1: ElementRef | any;
 
+  hoveredIndex: number = -1
+
   items1 = [
-    './assets/avatare/avatar1.png',
-    './assets/avatare/avatar2.png',
-    './assets/avatare/avatar3.png',
-    './assets/avatare/avatar1.png',
-    './assets/avatare/avatar2.png',
-    './assets/avatare/avatar3.png',
-    './assets/avatare/avatar1.png',
-    './assets/avatare/avatar2.png',
-    './assets/avatare/avatar3.png',
-    './assets/avatare/avatar1.png',
-    './assets/avatare/avatar2.png',
-    './assets/avatare/avatar3.png',
+    './assets/img/pic0.jpg',
+    './assets/img/pic1.jpg',
+    './assets/img/pic2.jpg',
+    './assets/img/pic3.jpg',
+    './assets/img/pic0.jpg',
+    './assets/img/pic1.jpg',
+    './assets/img/pic2.jpg',
+    './assets/img/pic3.jpg',
+    './assets/img/pic0.jpg',
+    './assets/img/pic1.jpg',
+    './assets/img/pic2.jpg',
+    './assets/img/pic3.jpg',
   ];
 
   ngAfterViewInit() {}
@@ -33,4 +35,7 @@ export class SliderCompComponent implements AfterViewInit {
   scrollTo(leftValue: number) {
     this.category1.nativeElement.scrollBy({ left: leftValue , behavior: 'smooth'});
   }
+
+  
+
 }

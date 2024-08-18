@@ -10,7 +10,7 @@ import { Component, Input, input } from '@angular/core';
 })
 export class VideoItemComponent {
   @Input() videoItem: any
-
+  @Input() isHovered: boolean = false
 
 
 

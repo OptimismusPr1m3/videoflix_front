@@ -1,13 +1,28 @@
 @import "../../../../styles.scss";
 
 .videoitem-cont {
-    @include dFlex(column, center, flex-start);
-    > span {
-        color: #ffffff;
-        font-size: 18px;
-    }
-    > img {
-        height: 200px;
-        width: 200px;
-    }
+  @include dFlex(column, center, flex-start);
+  > span {
+    color: #ffffff;
+    font-size: 18px;
+  }
+  > img {
+    height: 200px;
+    width: 350px;
+  }
+  > .info-cont {
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    width: 100%;
+    background-color: #ffffff;
+    color: red;
+    height: 64px;
+  }
+  > .vis {
+    opacity: 1 !important;
+  }
+  > .invis {
+    opacity: 0 !important;
+  }
 }
+

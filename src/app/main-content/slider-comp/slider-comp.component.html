@@ -1,4 +1,5 @@
 <section class="slider-cont">
+ <!--Filme-->
   <div class="category-container">
     <h2>Filme</h2>
     <div class="scroll-container">
@@ -11,11 +12,11 @@
           *ngFor="let item of items1; let i = index"
         >
           <app-video-item
-            (mouseover)="hoveredIndex = i"
-            (mouseleave)="hoveredIndex = -1"
+            (mouseover)="hoveredIndex1 = i"
+            (mouseleave)="hoveredIndex1 = -1"
             class="grow-shadow"
             [videoItem]="item"
-            [isHovered]="hoveredIndex === i"
+            [isHovered]="hoveredIndex1 === i"
           ></app-video-item>
         </div>
       </div>
@@ -24,4 +25,60 @@
       </button>
     </div>
   </div>
+  <!--Serien bspw. lel-->
+
+  <div class="category-container">
+    <h2>Platzhalter</h2>
+    <div class="scroll-container">
+      <button class="scroll-button left" (click)="scrollTo(-200)">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <div class="content-container" #category1>
+        <div
+          class="item"
+          *ngFor="let item of items2; let i = index"
+        >
+          <app-video-item
+            (mouseover)="hoveredIndex2 = i"
+            (mouseleave)="hoveredIndex2 = -1"
+            class="grow-shadow"
+            [videoItem]="item"
+            [isHovered]="hoveredIndex2 === i"
+          ></app-video-item>
+        </div>
+      </div>
+      <button class="scroll-button right" (click)="scrollTo(200)">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+
+<!--Platzhalter-->
+  <div class="category-container">
+    <h2>Platzhalter</h2>
+    <div class="scroll-container">
+      <button class="scroll-button left" (click)="scrollTo(-200)">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <div class="content-container" #category1>
+        <div
+          class="item"
+          *ngFor="let item of items3; let i = index"
+        >
+          <app-video-item
+            (mouseover)="hoveredIndex3 = i"
+            (mouseleave)="hoveredIndex3 = -1"
+            class="grow-shadow"
+            [videoItem]="item"
+            [isHovered]="hoveredIndex3 === i"
+          ></app-video-item>
+        </div>
+      </div>
+      <button class="scroll-button right" (click)="scrollTo(200)">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </div>
+
+
 </section>

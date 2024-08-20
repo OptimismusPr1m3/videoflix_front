@@ -13,9 +13,39 @@ import { VideoItemComponent } from "./video-item/video-item.component";
 export class SliderCompComponent implements AfterViewInit {
   @ViewChild('category1', { read: ElementRef }) category1: ElementRef | any;
 
-  hoveredIndex: number = -1
+  hoveredIndex1: number = -1
+  hoveredIndex2: number = -1
+  hoveredIndex3: number = -1
 
   items1 = [
+    './assets/img/pic0.jpg',
+    './assets/img/pic1.jpg',
+    './assets/img/pic2.jpg',
+    './assets/img/pic3.jpg',
+    './assets/img/pic0.jpg',
+    './assets/img/pic1.jpg',
+    './assets/img/pic2.jpg',
+    './assets/img/pic3.jpg',
+    './assets/img/pic0.jpg',
+    './assets/img/pic1.jpg',
+    './assets/img/pic2.jpg',
+    './assets/img/pic3.jpg',
+  ];
+  items2 = [
+    './assets/img/pic0.jpg',
+    './assets/img/pic1.jpg',
+    './assets/img/pic2.jpg',
+    './assets/img/pic3.jpg',
+    './assets/img/pic0.jpg',
+    './assets/img/pic1.jpg',
+    './assets/img/pic2.jpg',
+    './assets/img/pic3.jpg',
+    './assets/img/pic0.jpg',
+    './assets/img/pic1.jpg',
+    './assets/img/pic2.jpg',
+    './assets/img/pic3.jpg',
+  ];
+  items3 = [
     './assets/img/pic0.jpg',
     './assets/img/pic1.jpg',
     './assets/img/pic2.jpg',

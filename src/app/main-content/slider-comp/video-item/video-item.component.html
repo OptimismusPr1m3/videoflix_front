@@ -1,5 +1,13 @@
 <div class="videoitem-cont">
   <!-- <span class="title">Penis</span> -->
   <img [ngSrc]="videoItem" width="350" height="200"/>
-  <div [ngClass]="isHovered ? 'vis' : 'invis'" class="info-cont">Test</div>
+  <div [ngClass]="isHovered ? 'vis' : 'invis'" class="info-cont">
+    <div class="info-head">
+      <div><span>Titel</span></div>
+      <div><span>Genre</span></div>
+    </div>
+    <div class="description-foot">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, sed.</p>
+    </div>
+  </div>
 </div>

@@ -1,16 +1,15 @@
 <section class="slider-cont">
- <!--Filme-->
+  <!--Filme-->
   <div class="category-container">
     <h2>Filme</h2>
     <div class="scroll-container">
-      <button class="scroll-button left" (click)="scrollTo(-200)">
-        <mat-icon>chevron_left</mat-icon>
-      </button>
+      <div class="scroll-button left">
+        <button (click)="scrollTo(-200, 'category1')">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
       <div class="content-container" #category1>
-        <div
-          class="item"
-          *ngFor="let item of items1; let i = index"
-        >
+        <div class="item" *ngFor="let item of items1; let i = index">
           <app-video-item
             (mouseover)="hoveredIndex1 = i"
             (mouseleave)="hoveredIndex1 = -1"
@@ -20,9 +19,11 @@
           ></app-video-item>
         </div>
       </div>
-      <button class="scroll-button right" (click)="scrollTo(200)">
-        <mat-icon>chevron_right</mat-icon>
-      </button>
+      <div class="scroll-button right">
+        <button (click)="scrollTo(200, 'category1')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
   <!--Serien bspw. lel-->
@@ -30,14 +31,13 @@
   <div class="category-container">
     <h2>Platzhalter</h2>
     <div class="scroll-container">
-      <button class="scroll-button left" (click)="scrollTo(-200)">
-        <mat-icon>chevron_left</mat-icon>
-      </button>
-      <div class="content-container" #category1>
-        <div
-          class="item"
-          *ngFor="let item of items2; let i = index"
-        >
+      <div class="scroll-button left">
+        <button (click)="scrollTo(-200, 'category2')">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+      <div class="content-container" #category2>
+        <div class="item" *ngFor="let item of items2; let i = index">
           <app-video-item
             (mouseover)="hoveredIndex2 = i"
             (mouseleave)="hoveredIndex2 = -1"
@@ -47,24 +47,25 @@
           ></app-video-item>
         </div>
       </div>
-      <button class="scroll-button right" (click)="scrollTo(200)">
-        <mat-icon>chevron_right</mat-icon>
-      </button>
+      <div class="scroll-button right">
+        <button (click)="scrollTo(200, 'category2')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 
-<!--Platzhalter-->
+  <!--Platzhalter-->
   <div class="category-container">
     <h2>Platzhalter</h2>
     <div class="scroll-container">
-      <button class="scroll-button left" (click)="scrollTo(-200)">
-        <mat-icon>chevron_left</mat-icon>
-      </button>
-      <div class="content-container" #category1>
-        <div
-          class="item"
-          *ngFor="let item of items3; let i = index"
-        >
+      <div class="scroll-button left">
+        <button (click)="scrollTo(-200, 'category3')">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+      <div class="content-container" #category3>
+        <div class="item" *ngFor="let item of items3; let i = index">
           <app-video-item
             (mouseover)="hoveredIndex3 = i"
             (mouseleave)="hoveredIndex3 = -1"
@@ -74,11 +75,11 @@
           ></app-video-item>
         </div>
       </div>
-      <button class="scroll-button right" (click)="scrollTo(200)">
-        <mat-icon>chevron_right</mat-icon>
-      </button>
+      <div class="scroll-button right">
+        <button (click)="scrollTo(200, 'category3')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-
-
 </section>

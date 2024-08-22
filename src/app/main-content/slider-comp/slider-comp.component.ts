@@ -12,6 +12,8 @@ import { VideoItemComponent } from "./video-item/video-item.component";
 })
 export class SliderCompComponent implements AfterViewInit {
   @ViewChild('category1', { read: ElementRef }) category1: ElementRef | any;
+  @ViewChild('category2', { read: ElementRef }) category2: ElementRef | any;
+  @ViewChild('category3', { read: ElementRef }) category3: ElementRef | any;
 
   hoveredIndex1: number = -1
   hoveredIndex2: number = -1
@@ -62,8 +64,20 @@ export class SliderCompComponent implements AfterViewInit {
 
   ngAfterViewInit() {}
 
-  scrollTo(leftValue: number) {
-    this.category1.nativeElement.scrollBy({ left: leftValue , behavior: 'smooth'});
+  scrollTo(leftValue: number, category: string) {
+    switch (category) {
+      case 'category1':
+        this.category1.nativeElement.scrollBy({ left: leftValue , behavior: 'smooth'});
+        break;
+      case 'category2':
+        this.category2.nativeElement.scrollBy({ left: leftValue , behavior: 'smooth'});
+        break;
+      case 'category3':
+        this.category3.nativeElement.scrollBy({ left: leftValue , behavior: 'smooth'});
+        break;
+      default:
+        break;
+    }
   }
 
   

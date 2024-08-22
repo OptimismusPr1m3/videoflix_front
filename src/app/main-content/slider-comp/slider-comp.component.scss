@@ -39,7 +39,8 @@ section {
             transition-property: box-shadow, transform;
             border-radius: 4px;
             &:hover {
-              box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+              box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.5),
+                -15px 10px 10px -10px rgba(0, 0, 0, 0.5);
               -webkit-transform: scale(1.5);
               transform: scale(1.5);
               z-index: 10;
@@ -48,7 +49,8 @@ section {
           &:first-child {
             .grow-shadow {
               &:hover {
-                box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+                box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.5),
+                  -15px 10px 10px -10px rgba(0, 0, 0, 0.5);
                 -webkit-transform: scale(1.5) translateX(60px);
                 transform: scale(1.5) translateX(60px);
                 z-index: 10;
@@ -58,7 +60,8 @@ section {
           &:last-child {
             .grow-shadow {
               &:hover {
-                box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+                box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.5),
+                  -15px 10px 10px -10px rgba(0, 0, 0, 0.5);
                 -webkit-transform: scale(1.5) translateX(-60px);
                 transform: scale(1.5) translateX(-60px);
                 z-index: 10;
@@ -70,34 +73,38 @@ section {
       > .scroll-button {
         transition: all 150ms ease-in-out;
         position: absolute;
-        background-color: rgba(0, 0, 0, 0.5);
-        border: none;
-        border-radius: 50%;
-        &:hover {
-          cursor: pointer;
-          background-color: rgba(0, 0, 0, 0.8);
+        height: 100%;
+        > button {
+          background-color: rgba(0, 0, 0, 0.5);
+          border: none;
+          padding: 6px;
+          border-radius: 50%;
+          > mat-icon {
+            font-size: 32px;
+            height: auto;
+            width: auto;
+          }
+          &:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.8);
+          }
         }
-
         z-index: 1;
-        padding: 6px;
+        
         @include dFlex(row, center, center);
-        > mat-icon {
-          font-size: 32px;
-          height: auto;
-          width: auto;
-        }
       }
     }
     .scroll-button.left {
-      left: 8px;
+      left: 0px;
     }
 
     .scroll-button.right {
-      right: 8px;
+      right: 0px;
     }
   }
 }
 
 app-video-item {
   cursor: pointer;
+  font-size: 12px;
 }

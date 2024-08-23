@@ -2,18 +2,21 @@ import { Component, Renderer2 } from '@angular/core';
 import { HeaderComponent } from "../../head/header/header.component";
 import { LoggedHeaderComponent } from '../../head/logged-header/logged-header.component';
 import { SliderCompComponent } from "../slider-comp/slider-comp.component";
+import { GlobalVariablesService } from '../../services/global-variables.service';
+import { CommonModule } from '@angular/common';
+import { ProfileComponent } from "../profile/profile.component";
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [HeaderComponent, LoggedHeaderComponent, SliderCompComponent],
+  imports: [CommonModule, HeaderComponent, LoggedHeaderComponent, SliderCompComponent, ProfileComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
 export class MainComponent {
 
 
-  constructor(private renderer: Renderer2){}
+  constructor(private renderer: Renderer2, public globals: GlobalVariablesService){}
 
   ngOnInit() {
     this.renderer.addClass(document.body, 'logged-in')

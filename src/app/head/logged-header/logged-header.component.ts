@@ -5,6 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
+import { User } from '../../models/user.class';
+import { GlobalVariablesService } from '../../services/global-variables.service';
 
 @Component({
   selector: 'app-logged-header',
@@ -21,10 +23,12 @@ import { BackendCommunicationService } from '../../services/backend-communicatio
 })
 export class LoggedHeaderComponent {
   menuIsOpen: boolean = false;
+  currentUser: User | any;
 
   constructor(
     public backService: BackendCommunicationService,
-    private router: Router
+    private router: Router,
+    private globals: GlobalVariablesService,
   ) {}
 
   ngOnInit() {
@@ -52,20 +56,26 @@ export class LoggedHeaderComponent {
   getLoggedUserData() {
     this.backService.fetchLoggedUser().subscribe({
       next: (resp) => {
-        console.log(resp);
+        //console.log(resp);
+        //this.currentUser = new User(resp)
+        this.globals.currentLoggedUser.set(new User(resp))
       },
       error: (err) => {
         console.error(err);
         this.router.navigate(['/login/']);
-        //console.log('Jetzt muesste man den User auf Login redirecten.');
       },
       complete: () => {
         console.log('Hier der User');
+        console.log(this.globals.currentLoggedUser());
       },
     });
   }
 
   menuOpened(isOpen: boolean) {
     this.menuIsOpen = isOpen;
+  }
+
+  openProfile() {
+    this.globals.isProfileOpen.set(!this.globals.isProfileOpen())
   }
 }

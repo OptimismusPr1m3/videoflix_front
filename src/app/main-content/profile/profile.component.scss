@@ -1,0 +1,23 @@
+@import "../../../styles.scss";
+.profile {
+    margin: 24px;
+    color: #ffffff;
+    > .profile-head {
+        @include dFlex(row, space-between, center);
+        gap: 64px;
+        > mat-icon {
+            height: 32px;
+            width: 32px;
+            font-size: 32px;
+        }
+        > h2 {
+            font-size: 32px ;
+        }
+    }
+
+    > .prename-cont {
+        @include dFlex(column, center, flex-start)
+    }
+}
+
+

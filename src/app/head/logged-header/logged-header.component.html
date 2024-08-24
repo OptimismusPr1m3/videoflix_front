@@ -20,7 +20,7 @@
       <mat-icon [ngClass]="menuIsOpen ? 'arrow-drop-down' : 'arrow-drop-up'">arrow_drop_down</mat-icon>
     </div>
     <mat-menu #menu="matMenu" (closed)="menuOpened(false)" xPosition="before">
-      <button mat-menu-item>
+      <button (click)="openProfile()" mat-menu-item>
         <mat-icon class="outlined">manage_accounts</mat-icon>
         <span class="menu-pnts">Konto</span>
       </button>

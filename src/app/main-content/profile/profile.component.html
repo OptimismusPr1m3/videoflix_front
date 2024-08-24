@@ -1,10 +1,18 @@
 <section class="profile">
-    <div>
-        <span>Vorname</span>
-
+    <div class="profile-head">
+        <mat-icon style="color: #E50815;">manage_accounts</mat-icon>
+        <h2>Profil</h2>
+        <mat-icon style="color: #E50815">manage_accounts</mat-icon>
     </div>
-    <div>
-        <span>Nachname</span>
+    
+    <div class="prename-cont">
+        <mat-form-field class="example-full-width">
+            <mat-label>Vorname</mat-label>
+            <input [formControl]="first_name" matInput>
+        </mat-form-field>
+    </div>
+    <div class="lastname-cont">
+        <span>{{ globals.currentLoggedUser()?.last_name}}</span>
     </div>
     
 </section>

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { VideoItemComponent } from "./video-item/video-item.component";
+import { BackendCommunicationService } from '../../services/backend-communication.service';
+import { VideoItem } from '../../models/videoItem.class';
 
 @Component({
   selector: 'app-slider-comp',
@@ -18,6 +20,8 @@ export class SliderCompComponent implements AfterViewInit {
   hoveredIndex1: number = -1
   hoveredIndex2: number = -1
   hoveredIndex3: number = -1
+
+  videoItems: VideoItem[] = []
 
   items1 = [
     './assets/img/pic0.jpg',
@@ -62,6 +66,27 @@ export class SliderCompComponent implements AfterViewInit {
     './assets/img/pic3.jpg',
   ];
 
+  constructor(private backService: BackendCommunicationService){}
+
+  ngOnInit() {
+    this.backService.fetchVideoItems().subscribe({
+      next: (resp) => {
+        //console.log('Hier die Video Items ', resp),
+        resp.forEach((video: VideoItem) => {
+          this.videoItems.push(new VideoItem(video))
+          //console.log(video)
+        });
+      },
+      error: (err) => {
+        console.error(err)
+      },
+      complete: () => {
+        //console.log("Videos geladen !")
+        //console.log("Videos geladen !", this.videoItems)
+      }
+    })
+  }
+
   ngAfterViewInit() {}
 
   scrollTo(leftValue: number, category: string) {
@@ -79,7 +104,5 @@ export class SliderCompComponent implements AfterViewInit {
         break;
     }
   }
-
-  
 
 }

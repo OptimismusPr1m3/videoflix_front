@@ -42,5 +42,25 @@ section {
             padding: 6px;
         }
     }
+    > .video-overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+       // background-color: red;
+        @include dFlex(row, center, flex-start);
+        padding-top: 124px;
+        > .v-overlay-container {
+            height: 600px;
+            width: 500px;
+            background-color: rgba($color: #040404, $alpha: 1.0);
+            border: #141414 1px solid;
+            border-radius: 6px;
+            box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.5),
+                        -15px 10px 10px -10px rgba(0, 0, 0, 0.5);
+            padding: 6px;
+        }
+    }
 
 }

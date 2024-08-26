@@ -22,10 +22,17 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
+
+  condition: boolean = false
+
   constructor(public globals: GlobalVariablesService) {}
 
-  first_name = new FormControl(this.globals.currentLoggedUser()?.first_name, [
+  first_name = new FormControl({ value: this.globals.currentLoggedUser()?.first_name, disabled: true}, [
     Validators.required,
   ])
+
+  testfunc() {
+    this.first_name.enable()
+  }
 
 }

@@ -1,13 +1,13 @@
-<div class="videoitem-cont">
+<div (click)="openVideoOverlay(videoItem.url)" class="videoitem-cont">
   <!-- <span class="title">Penis</span> -->
-  <img [ngSrc]="videoItem" width="350" height="200"/>
+  <img [ngSrc]="videoItem.cover_image" width="350" height="200"/>
   <div [ngClass]="isHovered ? 'vis' : 'invis'" class="info-cont">
     <div class="info-head">
-      <div><span>Titel</span></div>
-      <div><span>Genre</span></div>
+      <div><span>{{ videoItem.title }}</span></div>
+      <div><span>{{ videoItem.genre }}</span></div>
     </div>
     <div class="description-foot">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla, sed.</p>
+      <p>{{ videoItem.description }}</p>
     </div>
   </div>
 </div>

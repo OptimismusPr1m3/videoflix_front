@@ -68,4 +68,11 @@ export class BackendCommunicationService {
     })
   }
 
+  fetchVideoItems(): Observable<any> {
+    const token = localStorage.getItem('token')
+    return this.http.get(this.endPoints.VIDEO_ITEMS, {
+      headers: {Authorization: 'Token ' + token}
+    })
+  }
+
 }

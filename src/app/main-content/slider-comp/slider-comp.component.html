@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="content-container" #category1>
-        <div class="item" *ngFor="let item of items1; let i = index">
+        <div class="item" *ngFor="let item of videoItems; let i = index">
           <app-video-item
             (mouseover)="hoveredIndex1 = i"
             (mouseleave)="hoveredIndex1 = -1"
@@ -37,13 +37,13 @@
         </button>
       </div>
       <div class="content-container" #category2>
-        <div class="item" *ngFor="let item of items2; let i = index">
+        <div class="item" *ngFor="let item of videoItems; let i = index">
           <app-video-item
             (mouseover)="hoveredIndex2 = i"
             (mouseleave)="hoveredIndex2 = -1"
             class="grow-shadow"
             [videoItem]="item"
-            [isHovered]="hoveredIndex2 === i"
+            [isHovered]="hoveredIndex2 === i" 
           ></app-video-item>
         </div>
       </div>
@@ -65,7 +65,7 @@
         </button>
       </div>
       <div class="content-container" #category3>
-        <div class="item" *ngFor="let item of items3; let i = index">
+        <div class="item" *ngFor="let item of videoItems; let i = index">
           <app-video-item
             (mouseover)="hoveredIndex3 = i"
             (mouseleave)="hoveredIndex3 = -1"

@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { User } from '../models/user.class';
+import { VideoItem } from '../models/videoItem.class';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ export class GlobalVariablesService {
   isVidOpen = signal<boolean>(false);
 
   currentLoggedUser = signal<User | null>(null);
+  currentOpenedVideo = signal<string>('');
 
 
   constructor() { }

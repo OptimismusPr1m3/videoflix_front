@@ -15,7 +15,7 @@ export class GlobalVariablesService {
   isVidOpen = signal<boolean>(false);
 
   currentLoggedUser = signal<User | null>(null);
-  currentOpenedVideo = signal<string>('');
+  currentOpenedVideo = signal<VideoItem | null>(null);
 
 
   constructor() { }

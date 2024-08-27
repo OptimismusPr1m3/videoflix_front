@@ -17,9 +17,9 @@ export class VideoItemComponent {
   constructor(private globals: GlobalVariablesService){}
 
   openVideoOverlay(videoURL: string){
-    console.log(videoURL)
+    //console.log(videoURL)
     this.globals.isVidOpen.set(true)
-    this.globals.currentOpenedVideo.set(videoURL)
+    this.globals.currentOpenedVideo.set(this.videoItem)
   }
 
 }

@@ -1,3 +1,5 @@
 <div class="videoplayer-cont">
-    <video src="this.globals.currentOpenedVideo"></video>
+    <video autoplay controls width="600">
+        <source src="{{ globals.currentOpenedVideo()?.video_file}}" type="video/mp4">
+    </video>
 </div>

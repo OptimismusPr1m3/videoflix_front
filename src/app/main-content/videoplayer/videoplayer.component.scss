@@ -1,0 +1,36 @@
+@import "../../../styles.scss";
+
+.videoplayer-cont {
+    @include dFlex(column, center, flex-start);
+    gap: 24px;
+    > .vplayer-head{
+        @include dFlex(row, center, center);
+        width: 100%;
+        position: relative;
+        > .vplayer-b-btn {
+            position: absolute;
+            left: 0;
+            padding: 6px;
+            border-radius: 50%;
+            &:hover {
+                cursor: pointer;
+                background-color: rgba($color: #141414, $alpha: 0.8);
+            }
+        }
+        > .vplayer-title {
+            width: 100%;
+            @include dFlex(row, center, center);
+            > h3 {
+                color: #ffffff;
+                margin: 0;
+            };
+        }
+       
+    }
+    > .vplayer-foot {
+        padding: 6px;
+        > span {
+            color: #ffffff;
+        }
+    }
+}

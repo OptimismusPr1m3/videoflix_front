@@ -8,18 +8,17 @@ import { GlobalVariablesService } from '../../../services/global-variables.servi
   standalone: true,
   imports: [CommonModule, NgOptimizedImage],
   templateUrl: './video-item.component.html',
-  styleUrl: './video-item.component.scss'
+  styleUrl: './video-item.component.scss',
 })
 export class VideoItemComponent {
-  @Input() videoItem!: VideoItem 
-  @Input() isHovered: boolean = false
+  @Input() videoItem!: VideoItem;
+  @Input() isHovered: boolean = false;
 
-  constructor(private globals: GlobalVariablesService){}
+  constructor(private globals: GlobalVariablesService) {}
 
-  openVideoOverlay(videoURL: string){
-    //console.log(videoURL)
-    this.globals.isVidOpen.set(true)
-    this.globals.currentOpenedVideo.set(this.videoItem)
+  openVideoOverlay() {
+    this.globals.isVidOpen.set(true);
+    this.globals.currentOpenedVideo.set(this.videoItem);
   }
 
 }

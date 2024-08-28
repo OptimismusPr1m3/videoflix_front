@@ -1,5 +1,21 @@
 <div class="videoplayer-cont">
-    <video autoplay controls width="600">
-        <source src="{{ globals.currentOpenedVideo()?.video_file}}" type="video/mp4">
-    </video>
+  <div class="vplayer-head">
+    <div (click)="closePlayer()" class="vplayer-b-btn">
+      <mat-icon>arrow_back</mat-icon>
+    </div>
+    <div class="vplayer-title">
+        <h3> {{ globals.currentOpenedVideo()?.title }} </h3>
+    </div>
+  </div>
+  <video controls width="900">
+    <source
+      src="{{ globals.currentOpenedVideo()?.video_file }}"
+      type="video/mp4"
+    />
+    Dein Browser unterstuetzt das Format nicht 
+  </video>
+  <div class="vplayer-foot">
+    <span>{{ globals.currentOpenedVideo()?.description}}</span>
+    <span></span>
+  </div>
 </div>

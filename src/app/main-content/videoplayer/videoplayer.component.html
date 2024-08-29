@@ -1,21 +1,23 @@
 <div class="videoplayer-cont">
-  <div class="vplayer-head">
-    <div (click)="closePlayer()" class="vplayer-b-btn">
-      <mat-icon>arrow_back</mat-icon>
+  <div #videoWrapper class="player-cont">
+    <div class="vplayer-head">
+        <div (click)="closePlayer()" class="vplayer-b-btn">
+          <mat-icon>arrow_back</mat-icon>
+        </div>
     </div>
-    <div class="vplayer-title">
-        <h3> {{ globals.currentOpenedVideo()?.title }} </h3>
+    <video #videoFrame width="900" autoplay muted>
+      <source
+        src="{{ globals.currentOpenedVideo()?.video_file }}"
+        type="video/mp4"
+      />
+      Dein Browser unterstuetzt das Format nicht
+    </video>
+    <div class="vplayer-bottom-btn">
+      <button (click)="openFullscreen()">Abspielen</button>
     </div>
   </div>
-  <video controls width="900">
-    <source
-      src="{{ globals.currentOpenedVideo()?.video_file }}"
-      type="video/mp4"
-    />
-    Dein Browser unterstuetzt das Format nicht 
-  </video>
-  <div class="vplayer-foot">
-    <span>{{ globals.currentOpenedVideo()?.description}}</span>
+  <div (click)="openFullscreen()" class="vplayer-foot">
+    <span>{{ globals.currentOpenedVideo()?.description }}</span>
     <span></span>
   </div>
 </div>

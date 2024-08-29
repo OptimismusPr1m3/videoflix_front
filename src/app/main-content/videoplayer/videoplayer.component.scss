@@ -3,29 +3,42 @@
 .videoplayer-cont {
     @include dFlex(column, center, flex-start);
     gap: 24px;
-    > .vplayer-head{
-        @include dFlex(row, center, center);
-        width: 100%;
+    > .player-cont {
         position: relative;
-        > .vplayer-b-btn {
+        border-top-right-radius: 6px;
+        border-top-left-radius: 6px;
+        > .vplayer-head{
+            @include dFlex(row, flex-start, center);
+            width: 100%;
             position: absolute;
-            left: 0;
-            padding: 6px;
-            border-radius: 50%;
-            &:hover {
-                cursor: pointer;
-                background-color: rgba($color: #141414, $alpha: 0.8);
+            top: 4%;
+            left: 4%;
+            > .vplayer-b-btn {
+                @include dFlex(row, center,center);
+                padding: 6px;
+                border-radius: 50%;
+                &:hover {
+                    cursor: pointer;
+                    background-color: rgba($color: #141414, $alpha: 0.8);
+                }
+            }  
+        }
+        > video {
+            border-top-right-radius: 6px;
+            border-top-left-radius: 6px;
+        }
+        > .vplayer-bottom-btn{
+            position: absolute;
+            bottom: 3%;
+            left: 3%;
+            > button {
+                border: none;
+                border-radius: 6px;
+                outline: none;
+                background-color: red;
+                padding: 6px;
             }
         }
-        > .vplayer-title {
-            width: 100%;
-            @include dFlex(row, center, center);
-            > h3 {
-                color: #ffffff;
-                margin: 0;
-            };
-        }
-       
     }
     > .vplayer-foot {
         padding: 6px;

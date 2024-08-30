@@ -276,6 +276,16 @@ label {
   font-display: block; /* prevents FOUT (Flash of Unstyled Text) */
 }
 
+@font-face {
+  font-family: 'Material Icons Rounded';
+  src: local('Material Icons Rounded'),
+       url('./assets/fonts/material-outlined/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].woff2') format('woff2'),
+       url('./assets/fonts/material-outlined/MaterialSymbolsRounded[FILL,GRAD,opsz,wght].ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block; /* prevents FOUT (Flash of Unstyled Text) */
+}
+
 mat-icon {
   font-family: 'Material Icons Outlined', 'Material Icons', sans-serif;
   font-weight: normal;

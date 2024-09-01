@@ -21,7 +21,13 @@ export class VideoplayerComponent {
   currentTime: number = 0
   isVidFullScreen: boolean = false
   isPlaying: boolean = false
-  materialButtonString: string = 'pause'
+  materialPlayButtonString: string = 'pause'
+  materialVolumeButtonString: string = 'volume_up'
+
+  muteLabel: string = 'Stumm schalten'
+
+  standardVolume: number = 0
+
 
   constructor(public globals: GlobalVariablesService){}
 
@@ -37,9 +43,7 @@ export class VideoplayerComponent {
 
   prepareVideo(){
     const videoFrame = this.videoFrame.nativeElement
-    videoFrame.pause()
-    videoFrame.currentTime = 0
-    videoFrame.play()
+    this.restartVideo()
     this.isPlaying = true
     videoFrame.style.height = '100%'
     videoFrame.style.width = '100%'
@@ -53,6 +57,12 @@ export class VideoplayerComponent {
     video.currentTime = event.target.value;
   }
 
+  configVolume(event: any){
+    const video = this.videoFrame.nativeElement;
+    video.volume = event.target.value / 100;
+    //console.log(event.target.value / 100)
+  }
+
   updateProgressBar() {
     const video = this.videoFrame.nativeElement;
     this.currentTime = video.currentTime;
@@ -63,16 +73,39 @@ export class VideoplayerComponent {
     this.videoDuration = video.duration
   }
 
+  restartVideo() {
+    const videoFrame = this.videoFrame.nativeElement
+    videoFrame.pause()
+    videoFrame.currentTime = 0
+    videoFrame.play()
+  }
+
   toggleVideo() {
     const videoFrame = this.videoFrame.nativeElement
     if (this.isPlaying) {
       videoFrame.pause()
-      this.materialButtonString = 'play_arrow'
+      this.materialPlayButtonString = 'play_arrow'
       this.isPlaying = false
     } else {
       videoFrame.play()
       this.isPlaying = true
-      this.materialButtonString = 'pause'
+      this.materialPlayButtonString = 'pause'
+    }
+  }
+
+  skip10(direction: number) {
+    const videoFrame = this.videoFrame.nativeElement
+    videoFrame.currentTime += direction
+  }
+
+  toggleAudio() {
+    const videoFrame = this.videoFrame.nativeElement
+    if (videoFrame.muted) {
+      videoFrame.muted = false
+      this.materialVolumeButtonString = 'volume_up'
+    } else {
+      videoFrame.muted = true
+      this.materialVolumeButtonString = 'volume_off'
     }
   }
 

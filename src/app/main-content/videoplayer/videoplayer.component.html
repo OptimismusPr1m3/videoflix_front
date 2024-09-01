@@ -1,11 +1,13 @@
 <div class="videoplayer-cont">
   
   <div #videoWrapper class="player-cont">
+
     <div class="vplayer-head">
         <div (click)="closePlayer()" class="vplayer-b-btn">
           <mat-icon>arrow_back</mat-icon>
         </div>
     </div>
+
     <video #videoFrame width="900" autoplay [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
       <source
         src="{{ globals.currentOpenedVideo()?.video_file }}"
@@ -13,18 +15,49 @@
       />
       Dein Browser unterstuetzt das Format nicht
     </video>
+
     <div class="vplayer-bottom-btn">
       <div class="overlay play" *ngIf="!isVidFullScreen">
-        <button (click)="openFullscreen()">Abspielen</button>
+        <button (click)="openFullscreen()">
+          <mat-icon>play_arrow</mat-icon>
+          Abspielen
+        </button>
       </div>
       <div class="overlay full" *ngIf="isVidFullScreen">
-        <mat-icon (click)="toggleVideo()">{{ materialButtonString }}</mat-icon>
-        <input type="range" class="progres-bar" (input)="seek($event)" min="0" [max]="videoDuration" [value]="currentTime">
-        <div class="dot-menu">
-          <mat-icon>more_vert</mat-icon>
+        <div class="bar-cont">
+          <input type="range" class="progres-bar" (input)="seek($event)" min="0" [max]="videoDuration" [value]="currentTime">
+        </div>
+        <div class="btns-cont">
+
+          <div class="btns">
+            <mat-icon (click)="toggleVideo()">{{ materialPlayButtonString }}</mat-icon>
+            <mat-icon (click)="skip10(-10)">replay_10</mat-icon>      
+            <mat-icon (click)="skip10(10)">forward_10</mat-icon>      
+          </div>
+          <div class="btns">
+            <mat-icon (click)="restartVideo()">restart_alt</mat-icon>
+            <mat-icon (click)="toggleAudio()"> {{ materialVolumeButtonString }} </mat-icon>
+            <mat-icon></mat-icon>
+          </div>
+          <div>
+            <input type="range" (input)="configVolume($event)" max="100" min="0" [value]="standardVolume">
+          </div>
+
+          <!-- <div class="dot-menu">
+            <mat-icon>more_vert</mat-icon> 
+           <div class="dot-overlay">
+              <div class="options-menu">
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+              </div>
+            </div> 
+          </div>-->
+
         </div>
       </div>
     </div>
+
   </div>
   
   <div (click)="openFullscreen()" class="vplayer-foot">

@@ -26,7 +26,8 @@ export class VideoplayerComponent {
 
   muteLabel: string = 'Stumm schalten'
 
-  standardVolume: number = 0
+  standardVolume: number = 100
+  volumeBarIsOpen: boolean = false
 
 
   constructor(public globals: GlobalVariablesService){}
@@ -100,13 +101,10 @@ export class VideoplayerComponent {
 
   toggleAudio() {
     const videoFrame = this.videoFrame.nativeElement
-    if (videoFrame.muted) {
-      videoFrame.muted = false
-      this.materialVolumeButtonString = 'volume_up'
-    } else {
-      videoFrame.muted = true
-      this.materialVolumeButtonString = 'volume_off'
-    }
+    this.standardVolume = videoFrame.volume * 100
+    this.volumeBarIsOpen = !this.volumeBarIsOpen
   }
+
+
 
 }

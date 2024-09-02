@@ -68,7 +68,8 @@
                 }
             }
             > .full {
-                margin-bottom: 48px;
+                margin-bottom: 0px;
+                padding: 16px 16px;
                 flex-direction: column;
                 justify-content: center;
                 align-items: flex-start;
@@ -90,9 +91,21 @@
                             font-size: 32px;
                             height: 32px;
                             width: 32px;
+                            &:hover {
+                                cursor: pointer;
+                                color: rgba($color: #ffffff, $alpha: 0.5)
+                            }
                         }
                     }
-                    
+                    > .volume-bar {
+                        @include dFlex(row, center, center);
+                        background-color: #b3b3b3;
+                        border-radius: 4px;
+                        position: absolute;
+                        rotate: -90deg;
+                        top: -32px;
+                        right: -32px;
+                    }
 
 
 

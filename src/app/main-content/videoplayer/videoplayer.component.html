@@ -37,9 +37,8 @@
           <div class="btns">
             <mat-icon (click)="restartVideo()">restart_alt</mat-icon>
             <mat-icon (click)="toggleAudio()"> {{ materialVolumeButtonString }} </mat-icon>
-            <mat-icon></mat-icon>
           </div>
-          <div>
+          <div *ngIf="volumeBarIsOpen" class="volume-bar">
             <input type="range" (input)="configVolume($event)" max="100" min="0" [value]="standardVolume">
           </div>
 

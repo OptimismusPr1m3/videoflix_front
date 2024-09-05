@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileHeaderComponent } from "../../head/profile-header/profile-header.component";
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,10 @@ import { ProfileHeaderComponent } from "../../head/profile-header/profile-header
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
-    ProfileHeaderComponent
+    ProfileHeaderComponent,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive
 ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',

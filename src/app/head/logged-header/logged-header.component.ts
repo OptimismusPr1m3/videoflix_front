@@ -76,6 +76,7 @@ export class LoggedHeaderComponent {
   }
 
   openProfile() {
-    this.globals.isProfileOpen.set(!this.globals.isProfileOpen())
+    this.router.navigate(['/profile/'])
+    //this.globals.isProfileOpen.set(!this.globals.isProfileOpen())
   }
 }

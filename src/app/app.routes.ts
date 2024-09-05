@@ -4,6 +4,7 @@ import { RegistrationComponent } from './authentication/registration/registratio
 import { LandingpageComponent } from './authentication/landingpage/landingpage.component';
 import { MainComponent } from './main-content/main/main.component';
 import { PwResetComponent } from './authentication/pw-reset/pw-reset.component';
+import { ProfileComponent } from './main-content/profile/profile.component';
 
 export const routes: Routes = [
     { path: '', component: LandingpageComponent},
@@ -11,4 +12,5 @@ export const routes: Routes = [
     { path: 'registration', component: RegistrationComponent},
     { path: 'pw-reset', component: PwResetComponent},
     { path: 'main', component: MainComponent},
+    { path: 'profile', component: ProfileComponent},
 ];

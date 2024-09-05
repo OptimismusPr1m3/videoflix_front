@@ -1,0 +1,50 @@
+@import "../../../styles.scss";
+
+.header-cont {
+    width: 100%;
+    background-color: #141414;
+    height: 100px;
+    max-width: 1920px;
+    @media (max-width: 1920px) {
+      position: unset;
+      max-width: unset;
+      margin: 0px 32px;
+  }
+    @include dFlex(row, space-between, center);
+    > .left-cont {
+      @include dFlex(row, flex-start, center);
+      gap: 24px;
+      > .logo {
+        &:hover {
+          cursor: pointer;
+        }
+        @include dFlex(row, flex-start, center);
+        > span {
+          color: #e50815;
+          font-size: 32px;
+          font-weight: 700;
+        }
+        > .n-letter {
+          color: #ffffff;
+          padding: 0px 4px;
+        }
+      }
+    }
+    > .right-cont {
+      @include dFlex(row, flex-end, center);
+      > .drop-down-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        &:hover {
+          cursor: pointer;
+        }
+        > img {
+          height: 38px;
+          width: 38px;
+          margin-right: 8px;
+        }
+      }
+    }
+  }

@@ -1,16 +1,128 @@
 @import "../../../styles.scss";
-.profile {
-    color: #ffffff;
-    max-width: 1920px;
+
+
+section {
+    @include dFlex(row, center, center);
     width: 100%;
-    @include dFlex(column, flex-start, center);
-    margin: 0px 124px;
+    > .profile {
+        color: #ffffff;
+        width: 100%;
+        max-width: 1920px;
+        min-height: 100vh;
+        @include dFlex(row, flex-start, flex-start);
+        > .left-nav {
+            @include dFlex(column, flex-start, flex-start);
+            width: 30%;
+            > .back-to-main {
+                @include dFlex(row, center,center);
+                gap: 16px;
+                margin: 24px 0px;
+                margin-bottom: 34px;
+                padding-left: 8px;
+                &:hover {
+                    margin-bottom: 32px;
+                    cursor: pointer;
+                    > span {
+                        font-size: 19px;
+                        font-weight: 600;
+                    }
+                    > mat-icon {
+                        font-size: 28px;
+                        height: 28px;
+                        width: 28px;
+                    }
+                }
+                > span {
+                    font-size: 18px;
+                }
+                > mat-icon {
+                    font-size: 26px;
+                    height: 26px;
+                    width: 26px;
+                }
+            }
+
+            /*Mat-list customizing at bottom*/
+
+        }
+
+
+
+
+
+        > .right-nav {
+            width: 70%;
+            @include dFlex(column, flex-start, flex-start);
+            > h1 {
+                font-size: 40px;
+                margin-top: 12px
+            }
+        }
+    }
+
+    
 }
 
 
+/*Activeness*/
+
+.active{ 
+    background-color: rgba($color: #2f2f2f, $alpha: 1.0);
+    > mat-icon {
+        font-variation-settings: 'FILL' 1; 
+    }
+}
 
 app-profile-header{
     @include dFlex(row, center,center);
-    width: 100%; 
+    width: 100%;
     background-color: #141414;
+}
+
+
+.right-nav-placeholder {
+    @include dFlex(column, flex-start, flex-start);
+    > h3 {
+        font-size: 28px;
+        margin: 0;
+    }
+    > p {
+        margin-bottom: 0px;
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
+
+
+/*Mat List Customizing*/
+
+.custom-list {
+    //margin-left: 8px;
+    margin-right: 8px;
+    > mat-list-item {
+      padding-left: 8px;  
+      padding-right: 16px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+        &:hover {
+            background-color: rgba($color: #2f2f2f, $alpha: 1.0);
+            cursor: pointer;
+            > mat-icon {
+                font-variation-settings: 'FILL' 1;
+            }
+        }
+        > mat-icon {
+            color: #ffffff;
+        }
+    }
+}
+
+.mdc-list-item.mdc-list-item--with-one-line .mdc-list-item__start{
+    margin: 0px !important;
+    margin-right: 16px !important;
+}
+
+span {
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
 }

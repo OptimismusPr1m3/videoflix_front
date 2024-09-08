@@ -28,11 +28,11 @@ export class LoggedHeaderComponent {
   constructor(
     public backService: BackendCommunicationService,
     private router: Router,
-    private globals: GlobalVariablesService,
+    public globals: GlobalVariablesService,
   ) {}
 
   ngOnInit() {
-    this.getLoggedUserData();
+    this.backService.getLoggedUserData();
   }
 
   toggleArrow() {
@@ -53,23 +53,23 @@ export class LoggedHeaderComponent {
     });
   }
 
-  getLoggedUserData() {
-    this.backService.fetchLoggedUser().subscribe({
-      next: (resp) => {
-        //console.log(resp);
-        //this.currentUser = new User(resp)
-        this.globals.currentLoggedUser.set(new User(resp))
-      },
-      error: (err) => {
-        console.error(err);
-        this.router.navigate(['/login/']);
-      },
-      complete: () => {
-        console.log('Hier der User');
-        console.log(this.globals.currentLoggedUser());
-      },
-    });
-  }
+  // getLoggedUserData() {
+  //   this.backService.fetchLoggedUser().subscribe({
+  //     next: (resp) => {
+  //       //console.log(resp);
+  //       //this.currentUser = new User(resp)
+  //       this.globals.currentLoggedUser.set(new User(resp))
+  //     },
+  //     error: (err) => {
+  //       console.error(err);
+  //       this.router.navigate(['/login/']);
+  //     },
+  //     complete: () => {
+  //       console.log('Hier der User');
+  //       console.log(this.globals.currentLoggedUser());
+  //     },
+  //   });
+  // }
 
   menuOpened(isOpen: boolean) {
     this.menuIsOpen = isOpen;

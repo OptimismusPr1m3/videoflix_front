@@ -17,6 +17,8 @@ export class GlobalVariablesService {
   currentLoggedUser = signal<User | null>(null);
   currentOpenedVideo = signal<VideoItem | null>(null);
 
+  isActive = signal<string>('oversight');
+
 
   constructor() { }
 

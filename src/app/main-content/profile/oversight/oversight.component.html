@@ -1,0 +1,17 @@
+<h3> Guten Tag <b>{{ globals.currentLoggedUser()?.first_name }} 
+    {{ globals.currentLoggedUser()?.last_name }} </b></h3>
+<p>Hier kannst du deine Accounteinstellungen einsehen und überarbeiten, Videos hochladen </p>
+<p> und deine bereits hochgeladenen Videos ansehen und auch wieder löschen.</p>
+
+<div (click)="fastLinkTo('user_settings')" class="fast-links mt48">
+    <mat-icon>trending_flat</mat-icon>
+    <span>Zu den Accounteinstellungen</span>
+</div>
+<div (click)="fastLinkTo('my_videos')" class="fast-links">
+    <mat-icon>trending_flat</mat-icon>
+    <span>Sieh dir deine Videos an</span>
+</div>
+<div (click)="fastLinkTo('upload')" class="fast-links">
+    <mat-icon>trending_flat</mat-icon>
+    <span>Lade ein neues Video hoch</span>
+</div>

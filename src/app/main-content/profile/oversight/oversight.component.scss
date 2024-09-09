@@ -1,0 +1,106 @@
+@import "../../../../styles.scss";
+
+h3 {
+    font-size: 28px;
+    margin: 0;
+}
+p {
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+// .fast-links {
+//     @include dFlex(row, flex-start, center);
+//     position: relative;
+//     gap: 16px;
+//     margin-bottom: 16px;
+//     padding: 8px;
+//     //border: 2px solid #141414;
+//     > mat-icon {
+//         position: absolute;
+//         left: 0;
+//         height: 40px;
+//         width: 40px;
+//         font-size: 40px;
+//         transition: color 0.25s ease;
+//     }
+//     > span {
+//         font-size: 28px;
+//         margin-left: 48px;
+//     }
+//     &:hover {
+//         //border: 2px solid #E50815;
+//         //border-radius: 4px;
+//         cursor: pointer;
+//         > mat-icon {
+//             color: #E50815;
+//             animation: arrow 1250ms ease-out forwards;
+//         }
+//     }
+// }
+
+@import "../../../../styles.scss";
+
+h3 {
+    font-size: 28px;
+    margin: 0;
+}
+p {
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.fast-links {
+    @include dFlex(row, flex-start, center);
+    position: relative;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding: 8px;
+    //border: 2px solid #141414;
+
+    > mat-icon {
+        position: absolute;
+        left: 0;
+        height: 40px;
+        width: 40px;
+        font-size: 40px;
+        transition: color 0.25s ease, transform 1.25s ease-out; /* Smooth transition for color and movement */
+    }
+
+    > span {
+        font-size: 28px;
+        margin-left: 48px;
+        transition: all ease, transform 1.25s ease-out;
+    }
+
+    &:hover {
+        cursor: pointer;
+        > mat-icon {
+            color: #E50815;
+            transform: translateX(80px); /* Move the icon to the right when hovered */
+        }
+        > span {
+            transform: translateX(80px);
+        }
+    }
+}
+
+.mt48 {
+    margin-top: 48px;
+}
+
+
+// Animation
+
+@keyframes arrow {
+    from {left: 0;}
+    to {left: 540px;}
+}
+
+
+.mt48{
+    margin-top: 48px;
+}

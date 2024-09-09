@@ -8,19 +8,19 @@
         <span>Zurück zu Chill'N'Flix</span>
       </div>
       <mat-list class="custom-list">
-        <mat-list-item (click)="navigateTo('oversight', false)" [ngClass]="globals.isActive() === 'oversight' ? 'active' : 'inactive' ">
+        <mat-list-item (click)="navigateTo('oversight', false)" [ngClass]="globals.activePath() === 'oversight' ? 'active' : 'inactive' ">
           <mat-icon matListItemIcon>home</mat-icon>
           <span>Übersicht</span>
         </mat-list-item>
-        <mat-list-item (click)="navigateTo('user_settings', true)" [ngClass]="globals.isActive() === 'user_settings' ? 'active' : 'inactive' ">
+        <mat-list-item (click)="navigateTo('user_settings', true)" [ngClass]="globals.activePath() === 'user_settings' ? 'active' : 'inactive' ">
           <mat-icon matListItemIcon>settings</mat-icon>
           <span>Einstellungen</span>
         </mat-list-item>
-        <mat-list-item (click)="navigateTo('my_videos', true)" [ngClass]="globals.isActive() === 'my_videos' ? 'active' : 'inactive' ">
+        <mat-list-item (click)="navigateTo('my_videos', true)" [ngClass]="globals.activePath() === 'my_videos' ? 'active' : 'inactive' ">
           <mat-icon matListItemIcon>subscriptions</mat-icon>
           <span>Eigene Videos</span>
         </mat-list-item>
-        <mat-list-item (click)="navigateTo('upload', true)" [ngClass]="globals.isActive() === 'upload' ? 'active' : 'inactive' ">
+        <mat-list-item (click)="navigateTo('upload', true)" [ngClass]="globals.activePath() === 'upload' ? 'active' : 'inactive' ">
           <mat-icon matListItemIcon>upload</mat-icon>
           <span>Video hochladen</span>
         </mat-list-item>
@@ -28,11 +28,8 @@
     </div>
     <div class="right-nav">
       <h1>Konto</h1>
-      <div class="right-nav-placeholder" *ngIf="globals.isActive() === 'oversight' ">
-        <h3> Guten Tag <b>{{ globals.currentLoggedUser()?.first_name }} {{ globals.currentLoggedUser()?.last_name }} </b></h3>
-        <p>Hier kannst du deine Accounteinstellungen einsehen und überarbeiten, Videos hochladen <br> </p>
-        <p> und deine bereits hochgeladenen Videos ansehen und auch wieder löschen.</p>
-        
+      <div class="right-nav-placeholder" *ngIf="globals.activePath() === 'oversight' ">
+        <app-oversight></app-oversight>
       </div>
       <router-outlet />
     </div>

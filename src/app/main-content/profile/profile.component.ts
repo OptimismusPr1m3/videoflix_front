@@ -15,6 +15,7 @@ import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } fr
 import { MatListModule } from '@angular/material/list';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
 import { User } from '../../models/user.class';
+import { OversightComponent } from "./oversight/oversight.component";
 
 @Component({
   selector: 'app-profile',
@@ -32,13 +33,12 @@ import { User } from '../../models/user.class';
     RouterLink,
     RouterLinkActive,
     MatListModule,
-  ],
+    OversightComponent
+],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-  condition: boolean = false;
-  //currentUser: User | null;
 
   constructor(
     public backEnd: BackendCommunicationService,
@@ -71,7 +71,7 @@ export class ProfileComponent {
     const currentPath = this.router.url
     const lastSegment = currentPath.split('/').pop()
     if (lastSegment && lastSegment !== 'profile') {
-      this.globals.isActive.set(lastSegment)
+      this.globals.activePath.set(lastSegment)
     }
       //console.log(lastSegment)
   }
@@ -79,10 +79,10 @@ export class ProfileComponent {
   navigateTo(path: string, isPath: boolean) {
     if (isPath) {
       this.router.navigate(['/profile/' + path])
-      this.globals.isActive.set(path)
+      this.globals.activePath.set(path)
     } else {
       this.router.navigate(['/profile/'])
-      this.globals.isActive.set('oversight')
+      this.globals.activePath.set('oversight')
     }
   }
 

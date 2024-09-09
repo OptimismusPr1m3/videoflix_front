@@ -9,6 +9,9 @@ section {
         width: 100%;
         max-width: 1920px;
         min-height: 100vh;
+        @media (max-width: 1920px) {
+            margin: 0px 32px;
+        }
         @include dFlex(row, flex-start, flex-start);
         > .left-nav {
             @include dFlex(column, flex-start, flex-start);
@@ -82,15 +85,6 @@ app-profile-header{
 
 .right-nav-placeholder {
     @include dFlex(column, flex-start, flex-start);
-    > h3 {
-        font-size: 28px;
-        margin: 0;
-    }
-    > p {
-        margin-bottom: 0px;
-        font-size: 18px;
-        font-weight: 500;
-    }
 }
 
 

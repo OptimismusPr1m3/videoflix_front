@@ -73,7 +73,7 @@ export class BackendCommunicationService {
   getLoggedUserData() {
     this.fetchLoggedUser().subscribe({
       next: (resp) => {
-        //console.log(resp);
+        console.log(resp);
         //this.currentUser = new User(resp)
         this.globals.currentLoggedUser.set(new User(resp))
       },

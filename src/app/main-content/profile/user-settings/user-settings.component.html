@@ -1,1 +1,75 @@
-<p>user-settings works!</p>
+<!-- <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+    <div class="form-group">
+      <label for="firstName">Vorname:</label>
+      <input id="firstName" type="text" formControlName="first_name" />
+      <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
+        <small *ngIf="userForm.get('firstName')?.errors?.['required']">Vorname ist erforderlich.</small>
+        <small *ngIf="userForm.get('firstName')?.errors?.['minlength']">Mindestens 2 Zeichen.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="lastName">Nachname:</label>
+      <input id="lastName" type="text" formControlName="last_name" />
+      <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
+        <small *ngIf="userForm.get('lastName')?.errors?.['required']">Nachname ist erforderlich.</small>
+        <small *ngIf="userForm.get('lastName')?.errors?.['minlength']">Mindestens 2 Zeichen.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" />
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        <small *ngIf="userForm.get('email')?.errors?.['required']">Email ist erforderlich.</small>
+        <small *ngIf="userForm.get('email')?.errors?.['email']">Ungültige Email-Adresse.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="entryDate">Eintrittsdatum:</label>
+      <input id="entryDate" type="date" formControlName="entry_date" />
+      <div *ngIf="userForm.get('entryDate')?.invalid && userForm.get('entryDate')?.touched">
+        <small *ngIf="userForm.get('entryDate')?.errors?.['required']">Eintrittsdatum ist erforderlich.</small>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="birthDate">Geburtsdatum:</label>
+      <input id="birthDate" type="date" formControlName="date_of_birth" />
+      <div *ngIf="userForm.get('birthDate')?.invalid && userForm.get('birthDate')?.touched">
+        <small *ngIf="userForm.get('birthDate')?.errors?.['required']">Geburtsdatum ist erforderlich.</small>
+      </div>
+    </div>
+  
+    <button type="submit" [disabled]="userForm.invalid">Abschicken</button>
+  </form>
+   -->
+
+<form class="settings-form" [formGroup]="userForm" (ngSubmit)="saveSettings()">
+  <div class="form-group custom-input-settings">
+    <div class="name-cont">
+      <mat-form-field>
+        <mat-label>Vorname</mat-label>
+        <input matInput formControlName="first_name" type="text" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nachname</mat-label>
+        <input matInput formControlName="last_name" type="text" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="form-group custom-input-settings"></div>
+  <div class="form-group custom-input-settings">
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="text" />
+    </mat-form-field>
+  </div>
+  <div class="form-group custom-input-settings">
+    <mat-form-field>
+      <mat-label>Geburtstag</mat-label>
+      <input matInput formControlName="date_of_birth" type="text" />
+    </mat-form-field>
+  </div>
+</form>

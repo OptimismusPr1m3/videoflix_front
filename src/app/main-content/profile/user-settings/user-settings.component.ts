@@ -24,7 +24,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user-settings.component.html',
@@ -43,28 +43,56 @@ export class UserSettingsComponent {
         this.globals.currentLoggedUser()?.first_name,
         [Validators.required, Validators.minLength(2)]
       ),
-      last_name: new FormControl('', [
+      last_name: new FormControl(this.globals.currentLoggedUser()?.last_name, [
         Validators.required,
         Validators.minLength(2),
       ]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      date_of_birth: new FormControl('', [Validators.required]),
-      date_joined: new FormControl('', [Validators.required]),
-      password: new FormControl('', [
+      email: new FormControl(this.globals.currentLoggedUser()?.email, [
         Validators.required,
-        Validators.minLength(8),
+        Validators.email,
       ]),
-      confirm_password: new FormControl('', [
+      date_of_birth: new FormControl(
+        this.globals.currentLoggedUser()?.date_of_birth,
+        [Validators.required]
+      ),
+      date_joined: new FormControl(
+        this.globals.currentLoggedUser()?.date_joined,
+        [Validators.required]
+      ),
+      street: new FormControl(this.globals.currentLoggedUser()?.street, [
         Validators.required,
-        Validators.minLength(8),
       ]),
+      street_number: new FormControl(
+        this.globals.currentLoggedUser()?.street_number,
+        [Validators.required]
+      ),
+      zip_code: new FormControl(this.globals.currentLoggedUser()?.zip_code, [
+        Validators.required,
+      ]),
+      city: new FormControl(this.globals.currentLoggedUser()?.city, [
+        Validators.required,
+      ]),
+      country: new FormControl(this.globals.currentLoggedUser()?.country, [
+        Validators.required,
+      ]),
+      phone_number: new FormControl(
+        this.globals.currentLoggedUser()?.phone_number,
+        [Validators.required]
+      ),
     });
   }
 
   ngOnInit(): void {
-    if (this.globals.currentLoggedUser()?.first_name === undefined) {
+    if (this.globals.currentLoggedUser()?.last_name === undefined) {
       this.setUserSettingsInputs();
     }
+    this.userForm.get('date_of_birth')?.valueChanges.subscribe((date: Date) => {
+      if (this.isValidDate(date)) {
+        this.userForm
+          .get('date_of_birth')
+          ?.setValue(this.formatDateToYYYYMMDD(date), { emitEvent: false });
+      }
+    });
   }
 
   setUserSettingsInputs(): void {
@@ -77,10 +105,40 @@ export class UserSettingsComponent {
           email: this.currentUserData.email,
           date_of_birth: this.currentUserData.date_of_birth,
           date_joined: this.currentUserData.date_joined,
+          street: this.currentUserData.street,
+          street_number: this.currentUserData.street_number,
+          zip_code: this.currentUserData.zip_code,
+          city: this.currentUserData.city,
+          country: this.currentUserData.country,
+          phone_number: this.currentUserData.phone_number,
         });
       },
     });
   }
 
-  saveSettings() {}
+  saveSettings() {
+    console.log(this.userForm.value['date_of_birth']);
+    this.backService.changeLoggedUserSettings(this.userForm).subscribe({
+      next: (resp) => {
+        console.log('Das ist passiert', resp);
+      },
+      error: (err) => {
+        console.log('Fehlgeschalgen: ', err);
+      },
+      complete: () => {
+        console.log('Jetzt ist es fertig');
+      },
+    });
+  }
+
+  formatDateToYYYYMMDD(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Monate sind nullbasiert
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  isValidDate(date: any): date is Date {
+    return date instanceof Date && !isNaN(date.getTime());
+  }
 }

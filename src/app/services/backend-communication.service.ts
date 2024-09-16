@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiEndpointsService } from './api-endpoints.service';
 import { GlobalVariablesService } from './global-variables.service';
 import { User } from '../models/user.class';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -69,6 +70,30 @@ export class BackendCommunicationService {
       headers: {Authorization: 'Token ' + token}
     })
   }
+
+  changeLoggedUserSettings(form: FormGroup): Observable<any> {
+    const token = localStorage.getItem('token')
+    return this.http.post(
+      this.endPoints.CHANGE_USER_ME,
+      {
+        headers: {Authorization: 'Token ' + token},
+        first_name: form.value['first_name'],
+        last_name: form.value['last_name'],
+        date_of_birth: form.value['date_of_birth'],
+        street: form.value['street'],
+        street_number: form.value['street_number'],
+        zip_code: form.value['zip_code'],
+        city: form.value['city'],
+        country: form.value['country'],
+        phone_number: form.value['phone_number']
+      },
+      { headers: {Authorization: 'Token ' + token},
+        observe: 'response'
+      }
+    )
+  }
+
+
  //get and save current logged user
   getLoggedUserData() {
     this.fetchLoggedUser().subscribe({

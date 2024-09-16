@@ -6,6 +6,8 @@
   max-width: 1200px;
   > .form-group {
     width: 100%;
+    @include dFlex(row, center, center);
+    gap: 8px;
     > mat-form-field {
       width: 100%;
     }
@@ -15,6 +17,30 @@
       width: 50%;
     }
   }
+  > .address-cont {
+    > .street {
+      width: 70%;
+    }
+    > .number {
+      width: 30%
+    }
+  }
+  > .btns {
+    width: 100%;
+    @include dFlex(row, center, center);
+    gap: 48px;
+  }
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 

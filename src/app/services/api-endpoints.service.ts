@@ -20,6 +20,7 @@ export class ApiEndpointsService {
   RESET_PASSWORD = 'https://bepi.bastian-wolff.com/api/accounts/password/reset/';
   USER_ME = 'https://bepi.bastian-wolff.com/api/accounts/users/me/';
   VIDEO_ITEMS = 'https://bepi.bastian-wolff.com/api/videos/';
+  CHANGE_USER_ME = 'https://bepi.bastian-wolff.com/api/accounts/users/me/change/';
 
   /*local*/
   // USERS_API = 'http://127.0.0.1:8000/api/users/';

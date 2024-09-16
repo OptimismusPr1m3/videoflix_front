@@ -4,6 +4,12 @@ export class User {
   date_of_birth: number;
   email: string;
   date_joined: string;
+  street: string;
+  street_number: number;
+  zip_code: number;
+  city: string;
+  country: string;
+  phone_number: number;
 
   constructor(obj: any) {
     this.first_name = obj ? obj.first_name : '';
@@ -11,6 +17,12 @@ export class User {
     this.date_of_birth = obj ? obj.date_of_birth : null;
     this.email = obj ? obj.email : '';
     this.date_joined = obj ? this.convertedJoinDate(obj.date_joined) : '';
+    this.street = obj ? obj.street : '';
+    this.street_number = obj ? obj.street_number: null;
+    this.zip_code = obj ? obj.zip_code : null;
+    this.city = obj ? obj.city : '';
+    this.country = obj ? obj.country : '';
+    this.phone_number = obj ? obj.phone_number : null;
   }
 
   convertedJoinDate(isoDateString: string): string {

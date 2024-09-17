@@ -1,14 +1,32 @@
 <div class="header-cont">
-    <div class="left-cont">
-        <div class="logo">
-            <span>CHILL</span>
-            <span class="n-letter">'N'</span>
-            <span>FLIX</span>
-        </div>
+  <div class="left-cont">
+    <div class="logo">
+      <span>CHILL</span>
+      <span class="n-letter">'N'</span>
+      <span>FLIX</span>
     </div>
-    <div class="right-cont">
-        <div class="drop-down-btn">
-            <img src="../../../assets/avatare/avatar1.png" alt="">
-        </div>
+  </div>
+  <div class="right-cont">
+    <div class="drop-down-btn" (click)="toggleArrow()" [matMenuTriggerFor]="menu">
+      <img src="../../../assets/avatare/avatar1.png" alt="" />
+      <mat-icon [ngClass]="menuIsOpen ? 'arrow-drop-down' : 'arrow-drop-up'"
+        >arrow_drop_down</mat-icon
+      >
     </div>
+    <mat-menu #menu="matMenu" (closed)="menuOpened(false)" xPosition="before">
+      <button mat-menu-item>
+        <mat-icon class="outlined">lock</mat-icon>
+        <span class="menu-pnts">Datenschutz</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>description</mat-icon>
+        <span class="menu-pnts">Impressum</span>
+      </button>
+      <div style="height: 2px; background-color: black"></div>
+      <button (click)="backService.logOut()" mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span class="menu-pnts" style="text-align: center">Logout</span>
+      </button>
+    </mat-menu>
+  </div>
 </div>

@@ -19,6 +19,8 @@ export class GlobalVariablesService {
 
   activePath = signal<string>('oversight');
 
+  isSettingsEditing = signal<boolean>(false);
+
 
   constructor() { }
 

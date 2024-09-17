@@ -57,6 +57,20 @@ export class BackendCommunicationService {
     )
   }
 
+  logOut() {
+    this.userLogout().subscribe({
+      next: (resp) => {
+        console.log('Logout success !', resp);
+      },
+      error: (err) => {
+        console.error(err);
+      },
+      complete: () => {
+        this.router.navigate(['/']);
+      },
+    });
+  }
+
   userLogout(): Observable<any>{
     const token = localStorage.getItem('token') 
     return this.http.get(this.endPoints.LOGOUT, {

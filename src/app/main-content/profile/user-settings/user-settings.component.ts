@@ -127,8 +127,14 @@ export class UserSettingsComponent {
       },
       complete: () => {
         console.log('Jetzt ist es fertig');
+        this.backService.getLoggedUserData()
+        this.globals.isSettingsEditing.set(false)
       },
     });
+  }
+
+  setUserEditing() {
+    this.globals.isSettingsEditing.set(!this.globals.isSettingsEditing()) 
   }
 
   formatDateToYYYYMMDD(date: Date): string {

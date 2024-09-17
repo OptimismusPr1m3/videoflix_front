@@ -1,81 +1,83 @@
 
 <form class="settings-form" [formGroup]="userForm" (ngSubmit)="saveSettings()">
-
-  <div class="form-group custom-input-settings name-cont">
+<!--Fullname-->
+  <div class="form-group name-cont" [ngClass]="globals.isSettingsEditing() ? 'custom-input-settings' : 'custom-input-settings-none' ">
       <mat-form-field>
         <mat-label>Vorname</mat-label>
-        <input matInput formControlName="first_name" type="text" />
+        <input matInput formControlName="first_name" type="text" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()"/>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Nachname</mat-label>
-        <input matInput formControlName="last_name" type="text" />
+        <input matInput formControlName="last_name" type="text" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()"/>
       </mat-form-field>
   </div>
-
-  <div class="form-group custom-input-settings">
+<!--Mail-->
+  <div class="form-group custom-input-settings" [ngClass]="globals.isSettingsEditing() ? 'custom-input-settings' : 'custom-input-settings-none' ">
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email" type="text" />
+      <input matInput formControlName="email" type="text" class="c-color-none" [readonly]="true"/>
     </mat-form-field>
   </div>
-  <div class="form-group custom-input-settings">
+<!--Phonenumber-->
+  <div class="form-group custom-input-settings" [ngClass]="globals.isSettingsEditing() ? 'custom-input-settings' : 'custom-input-settings-none' ">
     <mat-form-field>
       <mat-label>Telefonnummer</mat-label>
-      <input matInput formControlName="phone_number" type="number" />
+      <input matInput formControlName="phone_number" type="number" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()"/>
     </mat-form-field>
   </div>
-  <div class="form-group custom-input-settings">
+<!--Birthday-->
+  <div class="form-group custom-input-settings" [ngClass]="globals.isSettingsEditing() ? 'custom-input-settings' : 'custom-input-settings-none' ">
     <mat-form-field>
       <mat-label>Geburtsdatum</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="date_of_birth">
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <input matInput [matDatepicker]="picker" formControlName="date_of_birth" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()">
+      <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+      <mat-datepicker #picker [disabled]="!globals.isSettingsEditing()"></mat-datepicker>
     </mat-form-field>
   </div>
-
-  <div class="form-group custom-input-settings">
+<!--Entry Date shall not be editabel !!!-->
+  <div class="form-group custom-input-settings" [ngClass]="globals.isSettingsEditing() ? 'custom-input-settings' : 'custom-input-settings-none' ">
     <mat-form-field>
       <mat-label>Eintrittsdatum</mat-label>
-      <input matInput formControlName="date_joined" type="text" [readonly]="true"/>
+      <input matInput formControlName="date_joined" type="text" class="c-color-none" [readonly]="true"/>
     </mat-form-field>
   </div>
 
   <!--hier die Adresse (-:-->
-  <div class="form-group custom-input-settings address-cont">
+  <div class="form-group custom-input-settings address-cont" [ngClass]="globals.isSettingsEditing() ? 'custom-input-settings' : 'custom-input-settings-none' ">
     <mat-form-field class="street">
       <mat-label>Straße</mat-label>
-      <input matInput formControlName="street" type="text" />
+      <input matInput formControlName="street" type="text" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()"/>
     </mat-form-field>
     <mat-form-field class="number">
       <mat-label>Hausnummer</mat-label>
-      <input matInput formControlName="street_number" type="number" />
+      <input matInput formControlName="street_number" type="number" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()"/>
     </mat-form-field>
   </div>
-
-  <div class="form-group custom-input-settings address-cont">
+<!--City and Zip Code-->
+  <div class="form-group custom-input-settings address-cont" [ngClass]="globals.isSettingsEditing() ? 'custom-input-settings' : 'custom-input-settings-none' ">
     <mat-form-field class="street">
       <mat-label>Stadt</mat-label>
-      <input matInput formControlName="city" type="text" />
+      <input matInput formControlName="city" type="text" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()"/>
     </mat-form-field>
     <mat-form-field class="number">
       <mat-label>Postleitzahl</mat-label>
-      <input matInput formControlName="zip_code" type="text" />
+      <input matInput formControlName="zip_code" type="text" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()"/>
     </mat-form-field>
   </div>
-
-  <div class="form-group custom-input-settings">
+<!--Country-->
+  <div class="form-group custom-input-settings" [ngClass]="globals.isSettingsEditing() ? 'custom-input-settings' : 'custom-input-settings-none' ">
     <mat-form-field>
       <mat-label>Land</mat-label>
-      <input matInput formControlName="country" type="text" />
+      <input matInput formControlName="country" type="text" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()"/>
     </mat-form-field>
   </div>
-  
-  <div class="btns edit">
-    <button>Abbrechen</button>
+  <!--Buttons for saving and make them editable-->
+  <div *ngIf="globals.isSettingsEditing()" class="btns edit">
+    <button (click)="setUserEditing()">Abbrechen</button>
     <button type="submit" [disabled]="userForm.invalid">Speichern</button>
   </div>
-  <div class="btns start-editing">
-    <button>Bearbeiten</button>
+  <div *ngIf="!globals.isSettingsEditing()" class="btns start-editing">
+    <button (click)="setUserEditing()">Bearbeiten</button>
   </div>
 
 

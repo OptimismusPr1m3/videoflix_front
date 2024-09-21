@@ -11,11 +11,17 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProfileHeaderComponent } from '../../head/profile-header/profile-header.component';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
 import { User } from '../../models/user.class';
-import { OversightComponent } from "./oversight/oversight.component";
+import { OversightComponent } from './oversight/oversight.component';
 
 @Component({
   selector: 'app-profile',
@@ -33,18 +39,17 @@ import { OversightComponent } from "./oversight/oversight.component";
     RouterLink,
     RouterLinkActive,
     MatListModule,
-    OversightComponent
-],
+    OversightComponent,
+  ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
-
   constructor(
     public backEnd: BackendCommunicationService,
     public globals: GlobalVariablesService,
     private renderer: Renderer2,
-    private router: Router,
+    private router: Router
   ) {}
 
   first_name = new FormControl(
@@ -57,10 +62,10 @@ export class ProfileComponent {
   }
 
   ngOnInit() {
-    this.backEnd.getLoggedUserData()
+    this.backEnd.getLoggedUserData();
     this.renderer.addClass(document.body, 'logged-in');
-    this.checkActivePath()
-    console.log(this.globals.currentLoggedUser())
+    this.checkActivePath();
+    console.log(this.globals.currentLoggedUser());
   }
 
   ngOnDestroy() {
@@ -68,22 +73,43 @@ export class ProfileComponent {
   }
 
   checkActivePath() {
-    const currentPath = this.router.url
-    const lastSegment = currentPath.split('/').pop()
+    const currentPath = this.router.url;
+    const lastSegment = currentPath.split('/').pop();
     if (lastSegment && lastSegment !== 'profile') {
-      this.globals.activePath.set(lastSegment)
+      this.globals.activePath.set(lastSegment);
+      this.setRightHeading(lastSegment)
     }
-      //console.log(lastSegment)
+    //console.log(lastSegment)
   }
 
   navigateTo(path: string, isPath: boolean) {
     if (isPath) {
-      this.router.navigate(['/profile/' + path])
-      this.globals.activePath.set(path)
+      this.router.navigate(['/profile/' + path]);
+      this.globals.activePath.set(path);
+      this.setRightHeading(path)
     } else {
-      this.router.navigate(['/profile/'])
-      this.globals.activePath.set('oversight')
+      this.router.navigate(['/profile/']);
+      this.globals.activePath.set(path)
+      this.setRightHeading('oversight')
     }
   }
 
+  setRightHeading(path: string) {
+    switch (path) {
+      case 'oversight':
+        this.globals.activeHeadingString.set('Übersicht');
+        break;
+      case 'user_settings':
+        this.globals.activeHeadingString.set('Konto');
+        break;
+      case 'my_videos':
+        this.globals.activeHeadingString.set('Deine Videos');
+        break;
+      case 'upload':
+        this.globals.activeHeadingString.set('Ein Video hochladen');
+        break;
+      default:
+        break;
+    }
+  }
 }

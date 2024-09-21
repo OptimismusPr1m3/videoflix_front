@@ -18,6 +18,7 @@ export class GlobalVariablesService {
   currentOpenedVideo = signal<VideoItem | null>(null);
 
   activePath = signal<string>('oversight');
+  activeHeadingString = signal<string>('Übersicht')
 
   isSettingsEditing = signal<boolean>(false);
 

@@ -27,7 +27,7 @@
       </mat-list>
     </div>
     <div class="right-nav">
-      <h1>Konto</h1>
+      <h1>{{ globals.activeHeadingString() }}</h1>
       <div class="right-nav-placeholder" *ngIf="globals.activePath() === 'oversight' ">
         <app-oversight></app-oversight>
       </div>

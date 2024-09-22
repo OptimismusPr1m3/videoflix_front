@@ -1,4 +1,5 @@
 export class User {
+
   first_name: string;
   last_name: string;
   date_of_birth: number;
@@ -10,6 +11,7 @@ export class User {
   city: string;
   country: string;
   phone_number: number;
+  my_videos;
 
   constructor(obj: any) {
     this.first_name = obj ? obj.first_name : '';
@@ -23,6 +25,7 @@ export class User {
     this.city = obj ? obj.city : '';
     this.country = obj ? obj.country : '';
     this.phone_number = obj ? obj.phone_number : null;
+    this.my_videos = obj ? obj.my_videos : null;
   }
 
   convertedJoinDate(isoDateString: string): string {
@@ -34,4 +37,5 @@ export class User {
 
     return `${day}.${month}.${year}`;
   }
+
 }

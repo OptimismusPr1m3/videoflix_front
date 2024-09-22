@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BackendCommunicationService } from '../../../services/backend-communication.service';
+import { GlobalVariablesService } from '../../../services/global-variables.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -33,8 +34,9 @@ export class FileUploadComponent {
   videoForm: FormGroup;
   selectedVideoFile: File | null = null
   videoPreview: any
+  currentUploadedVideoURL: any
 
-  constructor(public backEnd: BackendCommunicationService) {
+  constructor(public backEnd: BackendCommunicationService, private globals: GlobalVariablesService) {
     this.videoForm = new FormGroup({
       title: new FormControl('', [
         Validators.required,
@@ -109,6 +111,7 @@ export class FileUploadComponent {
 
 
   saveVideo() {
+
     const formData = new FormData();
     this.fillFormData(formData)
     if (this.videoPreview) {
@@ -116,6 +119,35 @@ export class FileUploadComponent {
       formData.append('cover_image', coverImageFile)
     }
     this.uploadSub(formData);
+  }
+
+  saveUploadedVideoURLToUser() {
+    //console.log(this.globals.currentLoggedUser()?.my_videos[0])
+    this.backEnd.addVideoURLToLoggedUser(this.addVideoToUserData(this.currentUploadedVideoURL)).subscribe({
+      next: (resp) => {
+        console.log(resp)
+      },
+      error: (err) => {
+        console.error(err)
+      },
+      complete: () => {
+        console.log('Nun sollte die VideoURL beim User angekommen sein !')
+      }
+    })
+  }
+
+  addVideoToUserData(videoURL: any){
+    let currentVideos = this.globals.currentLoggedUser()?.my_videos
+    if (currentVideos === null) {
+      console.log('jop')
+      console.log(currentVideos)
+      return currentVideos = [{ URL: videoURL }]
+    }else {
+      console.log('schon was drinnen !')
+      console.log(currentVideos)
+      currentVideos.push( {URL: videoURL} )
+      return currentVideos
+    }
   }
 
   fillFormData(formData: FormData) {
@@ -128,14 +160,16 @@ export class FileUploadComponent {
   uploadSub(formData: FormData) {
     this.backEnd.uploadVideo(formData).subscribe({
       next: (resp) => {
-        console.log(resp)
-        console.log(resp['url'])
+        //console.log(resp)
+        //console.log(resp['url'])
+        this.currentUploadedVideoURL = resp['url']
       },
       error: (err) => {
         console.error(err)
       },
       complete: () => {
         console.log('Jetzt fertig')
+        this.saveUploadedVideoURLToUser()
       }
     })
   }

@@ -100,6 +100,15 @@ export class BackendCommunicationService {
     });
   }
 
+  addVideoURLToLoggedUser(videoURL: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.patch(this.endPoints.CHANGE_USER_ME, {
+      my_videos: videoURL,
+    },{
+      headers: {Authorization: 'Token ' + token}
+    })
+  }
+
   //get and save current logged user
   getLoggedUserData() {
     this.fetchLoggedUser().subscribe({
@@ -133,3 +142,32 @@ export class BackendCommunicationService {
     });
   }
 }
+
+
+
+
+
+
+
+
+
+// changeLoggedUserSettings(form: FormGroup): Observable<any> {
+//   const token = localStorage.getItem('token')
+//   return this.http.post(
+//     this.endPoints.CHANGE_USER_ME,
+//     {
+//       first_name: form.value['first_name'],
+//       last_name: form.value['last_name'],
+//       date_of_birth: form.value['date_of_birth'],
+//       street: form.value['street'],
+//       street_number: form.value['street_number'],
+//       zip_code: form.value['zip_code'],
+//       city: form.value['city'],
+//       country: form.value['country'],
+//       phone_number: form.value['phone_number']
+//     },
+//     { headers: {Authorization: 'Token ' + token},
+//       observe: 'response'
+//     }
+//   )
+

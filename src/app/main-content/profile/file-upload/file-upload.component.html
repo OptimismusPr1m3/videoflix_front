@@ -4,6 +4,9 @@
     <mat-form-field>
       <mat-label>Titel</mat-label>
       <input matInput formControlName="title" type="text" />
+      <mat-error *ngIf="videoForm.get('title')?.invalid && videoForm.get('title')?.touched">
+        Der Titel muss zwischen 4 und 20 Zeichen lang sein 
+      </mat-error>
     </mat-form-field>
   </div>
 
@@ -11,6 +14,9 @@
     <mat-form-field>
       <mat-label>Genre</mat-label>
       <input matInput formControlName="genre" type="text" />
+      <mat-error *ngIf="videoForm.get('genre')?.invalid && videoForm.get('genre')?.touched">
+        Das Genre muss mind 4 Zeichen lang sein 
+      </mat-error>
     </mat-form-field>
   </div>
 
@@ -18,7 +24,10 @@
   <div class="form-group custom-input-settings">
     <mat-form-field>
       <mat-label>Beschreibung</mat-label>
-      <textarea matInput formControlName="description" type="text"></textarea>
+      <textarea minlength="10" matInput formControlName="description" type="text"></textarea>
+      <mat-error *ngIf="videoForm.get('description')?.invalid && videoForm.get('description')?.touched">
+        Bitte gib eine kurze Beschreibung, bestehend aus mindestens 10 Zeichen, zu deinem Video an
+      </mat-error>
     </mat-form-field>
   </div>
 
@@ -27,19 +36,40 @@
 
     <div class="input-preview-pair">
       <div class="file-input">
-        <input #videoInput name="videoInput" type="file" accept="video/*" (change)="onFileSelected($event)"/>
-        <button type="button" (click)="triggerFileUpload()">Video auswählen</button>
+        <input
+          #videoInput
+          name="videoInput"
+          type="file"
+          accept="video/*"
+          (change)="onFileSelected($event)"
+        />
+        <button type="button" (click)="triggerFileUpload()">
+          Video auswählen
+        </button>
       </div>
-      <div class="file-preview" [ngClass]="!selectedVideoFile ? 'flex-start' : 'flex-end' ">
+      <div
+        class="file-preview"
+        [ngClass]="!selectedVideoFile ? 'flex-start' : 'flex-end'"
+      >
         <div class="file-data">
           <span *ngIf="!selectedVideoFile">Kein Video ausgewählt</span>
-          <span *ngIf="selectedVideoFile">Name: {{ selectedVideoFile.name }} </span>
-          <span *ngIf="selectedVideoFile">Dateityp: {{ selectedVideoFile.type }} </span>
-          <span *ngIf="selectedVideoFile">Größe: {{ convertIntoMB(selectedVideoFile.size) | number:'1.2-2' }} MB</span>
+          <span *ngIf="selectedVideoFile"
+            >Name: {{ selectedVideoFile.name }}
+          </span>
+          <span *ngIf="selectedVideoFile"
+            >Dateityp: {{ selectedVideoFile.type }}
+          </span>
+          <span *ngIf="selectedVideoFile"
+            >Größe:
+            {{
+              convertIntoMB(selectedVideoFile.size) | number : "1.2-2"
+            }}
+            MB</span
+          >
         </div>
         <div class="file-image">
           <canvas style="display: none" #videoCanvas></canvas>
-          <img [src]="videoPreview">
+          <img style="width: 150px; height: 100px" *ngIf="videoPreview" [src]="videoPreview" />
         </div>
       </div>
     </div>
@@ -48,12 +78,20 @@
     <div>
       <input type="file" accept="image/*"/>
     </div> -->
-    
   </div>
 
   <!--Buttons for saving and make them editable-->
   <div class="btns edit">
-    <button>Abbrechen</button>
-    <button type="submit">Speichern</button>
+    <button type="button" class="enabled" (click)="emptyFileField()">Abbrechen</button>
+    <button [disabled]="videoForm.invalid || !selectedVideoFile" [ngClass]="videoForm.invalid || !selectedVideoFile ? 'disabled' : 'enabled' " type="submit">Speichern</button>
   </div>
 </form>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="fire"
+  [fullScreen]="true"
+  ><p style="color: white">Dein Video wird gerade hochgeladen...</p></ngx-spinner
+>

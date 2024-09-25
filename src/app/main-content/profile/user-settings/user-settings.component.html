@@ -71,6 +71,11 @@
       <input matInput formControlName="country" type="text" [ngClass]="!globals.isSettingsEditing() ? 'c-color-none' : 'c-color' " [readonly]="!globals.isSettingsEditing()"/>
     </mat-form-field>
   </div>
+
+  <div class="uploaded-vids-cont">
+    <span>Du hast bereits <b class="video-count">{{ globals.currentLoggedUser()?.my_videos.length }}</b> Videos hochgeladen</span>
+  </div>
+
   <!--Buttons for saving and make them editable-->
   <div *ngIf="globals.isSettingsEditing()" class="btns edit">
     <button (click)="setUserEditing()">Abbrechen</button>

@@ -30,8 +30,6 @@
     @include dFlex(row, center, center);
     gap: 48px;
     > button {
-      transition: all 250ms ease-in-out;
-      cursor: pointer;
       color: #ffffff;
       font-size: 18px;
       width: 50%;
@@ -39,9 +37,19 @@
       border-radius: 4px;
       border:1px solid #4f4e4e;
       background-color: #2F2F2F;
+    }
+    > .enabled {
+      transition: all 250ms ease-in-out;
+      cursor: pointer;
       &:hover {
         background-color: #4f4e4e;
       }
+    }
+    > .disabled {
+      color: #4f4e4e;
+      transition: all 250ms ease-in-out;
+      cursor: not-allowed;
+      background-color: #252525 !important;
     }
   }
 }
@@ -132,6 +140,22 @@ textarea {
       padding-left: 16px;
       > input {
         display: none;
+      }
+      > button {
+        width: 146px;
+        transition: all 250ms ease-in-out;
+        padding: 16px 0px;
+        font-size: 16px;
+        font-family: 'Raleway';
+        background-color: #B0101F;
+        border: none;
+        border-radius: 4px;
+        font-weight: 700;
+        color: #ffffff;
+        &:hover {
+          cursor: pointer;
+          background-color: #e50815;
+        }
       }
     }
     > .file-preview {

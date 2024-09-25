@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { BackendCommunicationService } from '../../../services/backend-communication.service';
 import { GlobalVariablesService } from '../../../services/global-variables.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-file-upload',
@@ -23,55 +24,71 @@ import { GlobalVariablesService } from '../../../services/global-variables.servi
     MatIconModule,
     ReactiveFormsModule,
     MatInputModule,
+    NgxSpinnerModule,
   ],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.scss',
 })
 export class FileUploadComponent {
-
-  @ViewChild('videoInput') videoInput!: ElementRef<HTMLInputElement>; 
+  @ViewChild('videoInput') videoInput!: ElementRef<HTMLInputElement>;
   @ViewChild('videoCanvas') videoCanvas!: ElementRef<HTMLCanvasElement>;
   videoForm: FormGroup;
-  selectedVideoFile: File | null = null
-  videoPreview: any
-  currentUploadedVideoURL: any
+  selectedVideoFile: File | null = null;
+  videoPreview: any;
+  currentUploadedVideoURL: any;
 
-  constructor(public backEnd: BackendCommunicationService, private globals: GlobalVariablesService) {
+  constructor(
+    public backEnd: BackendCommunicationService,
+    private globals: GlobalVariablesService,
+    private spinner: NgxSpinnerService
+  ) {
     this.videoForm = new FormGroup({
       title: new FormControl('', [
         Validators.required,
         Validators.minLength(4),
+        Validators.maxLength(20),
       ]),
       genre: new FormControl('', [
         Validators.required,
         Validators.minLength(2),
       ]),
-      description: new FormControl('Penis',[Validators.required])
+      description: new FormControl('', [Validators.required]),
     });
   }
 
   triggerFileUpload() {
-    this.videoInput.nativeElement.click()
+    this.videoInput.nativeElement.click();
   }
 
-  onFileSelected(event: any){
+  emptyFileField() {
+    this.selectedVideoFile = null
+    this.videoPreview = null
+    this.videoForm.patchValue({
+      title: '',
+      genre: '',
+      description: ''
+    })
+    this.videoForm.markAsUntouched()
+  }
+
+  onFileSelected(event: any) {
     const file: File = event.target.files[0];
     this.selectedVideoFile = file;
 
-    console.log(this.selectedVideoFile?.type)
-    console.log(this.selectedVideoFile)
+    console.log(this.selectedVideoFile?.type);
+    console.log(this.selectedVideoFile);
 
     if (file.type.startsWith('video')) {
       const video = document.createElement('video');
-      video.src = URL.createObjectURL(this.selectedVideoFile)
-      video.currentTime = 1
+      video.src = URL.createObjectURL(this.selectedVideoFile);
+      video.currentTime = 1;
 
       video.onloadeddata = () => {
         this.captureVideoFrame(video);
-        URL.revokeObjectURL(video.src)
+        URL.revokeObjectURL(video.src);
       };
     } else {
-      this.videoPreview = null
+      this.videoPreview = null;
     }
   }
 
@@ -80,18 +97,16 @@ export class FileUploadComponent {
     const ctx = canvas.getContext('2d');
 
     if (ctx) {
-      canvas.width = 150;
-      canvas.height = 100;
+      canvas.width = 720;
+      canvas.height = 480;
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      this.videoPreview = canvas.toDataURL('image/png')
+      this.videoPreview = canvas.toDataURL('image/png');
     }
   }
 
-  
   convertIntoMB(bytes: number): number {
-
-    return bytes / (1024 * 1024)
+    return bytes / (1024 * 1024);
   }
 
   dataURLtoFile(dataurl: string, filename: string): File {
@@ -104,49 +119,58 @@ export class FileUploadComponent {
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }
-    
+
     return new File([u8arr], filename, { type: mime });
   }
 
-
-
   saveVideo() {
-
-    const formData = new FormData();
-    this.fillFormData(formData)
-    if (this.videoPreview) {
-      const coverImageFile = this.dataURLtoFile(this.videoPreview, 'cover_image.png')
-      formData.append('cover_image', coverImageFile)
+    if (this.videoForm.valid && this.selectedVideoFile) {
+      const formData = new FormData();
+      this.fillFormData(formData);
+      if (this.videoPreview) {
+        const coverImageFile = this.dataURLtoFile(
+          this.videoPreview,
+          'cover_image.png'
+        );
+        formData.append('cover_image', coverImageFile);
+      }
+      this.uploadSub(formData);
     }
-    this.uploadSub(formData);
   }
 
   saveUploadedVideoURLToUser() {
     //console.log(this.globals.currentLoggedUser()?.my_videos[0])
-    this.backEnd.addVideoURLToLoggedUser(this.addVideoToUserData(this.currentUploadedVideoURL)).subscribe({
-      next: (resp) => {
-        console.log(resp)
-      },
-      error: (err) => {
-        console.error(err)
-      },
-      complete: () => {
-        console.log('Nun sollte die VideoURL beim User angekommen sein !')
-      }
-    })
+    this.backEnd
+      .addVideoURLToLoggedUser(
+        this.addVideoToUserData(this.currentUploadedVideoURL)
+      )
+      .subscribe({
+        next: (resp) => {
+          console.log(resp);
+        },
+        error: (err) => {
+          console.error(err);
+          this.spinner.hide();
+        },
+        complete: () => {
+          console.log('Nun sollte die VideoURL beim User angekommen sein !');
+          this.spinner.hide();
+          this.emptyFileField()
+        },
+      });
   }
 
-  addVideoToUserData(videoURL: any){
-    let currentVideos = this.globals.currentLoggedUser()?.my_videos
+  addVideoToUserData(videoURL: any) {
+    let currentVideos = this.globals.currentLoggedUser()?.my_videos;
     if (currentVideos === null) {
-      console.log('jop')
-      console.log(currentVideos)
-      return currentVideos = [{ URL: videoURL }]
-    }else {
-      console.log('schon was drinnen !')
-      console.log(currentVideos)
-      currentVideos.push( {URL: videoURL} )
-      return currentVideos
+      console.log('jop');
+      console.log(currentVideos);
+      return (currentVideos = [{ URL: videoURL }]);
+    } else {
+      console.log('schon was drinnen !');
+      console.log(currentVideos);
+      currentVideos.push({ URL: videoURL });
+      return currentVideos;
     }
   }
 
@@ -158,20 +182,21 @@ export class FileUploadComponent {
   }
 
   uploadSub(formData: FormData) {
+    this.spinner.show();
     this.backEnd.uploadVideo(formData).subscribe({
       next: (resp) => {
         //console.log(resp)
         //console.log(resp['url'])
-        this.currentUploadedVideoURL = resp['url']
+        this.currentUploadedVideoURL = resp['url'];
       },
       error: (err) => {
-        console.error(err)
+        console.error(err);
+        this.spinner.hide();
       },
       complete: () => {
-        console.log('Jetzt fertig')
-        this.saveUploadedVideoURLToUser()
-      }
-    })
+        console.log('Jetzt fertig');
+        this.saveUploadedVideoURLToUser();
+      },
+    });
   }
-
 }

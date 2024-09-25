@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # VideoflixBackend
 
-The corresponding backend can be found here: https://github.com/OptimismusPr1m3/Join_b_end_frontend
+The corresponding backend can be found here: [VideoFlixBackend](https://github.com/OptimismusPr1m3/videofix_back)
 
 ## Development server
 

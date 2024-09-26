@@ -108,6 +108,20 @@ app-footer {
   background-color: rgba($color: #000000, $alpha: 1.0);
 }
 
+//Profile Section 
+
+app-file-upload {
+  width: 70%;
+}
+
+app-user-settings {
+  width: 70%;
+}
+
+app-my-videos {
+  width: 100%;
+}
+
 label {
   color: rgba(255, 255, 255, 0.8) !important;
 }

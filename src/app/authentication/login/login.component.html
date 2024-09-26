@@ -3,16 +3,24 @@
 
   <div class="login-cont">
     <div class="login-form">
-      <span *ngIf="this.globals.accountNotExist()">Es konnte kein Konto gefunden werden</span>
+      <span *ngIf="this.globals.accountNotExist()"
+        >Es konnte kein Konto gefunden werden</span
+      >
       <span *ngIf="this.globals.tryAgain()">Versuch es noch einmal !</span>
       <h3>Einloggen</h3>
       <div>
         <div class="mail-container custom-input-login">
           <mat-form-field>
             <mat-label>Gib deine E-Mail ein</mat-label>
-            <input matInput placeholder="email@mail.com" [formControl]="email" (blur)="updateMailErrorMessage()" required />
-            @if (email.invalid) { 
-              <mat-error> {{ mailErrorMessage() }} </mat-error> 
+            <input
+              matInput
+              placeholder="email@mail.com"
+              [formControl]="email"
+              (blur)="updateMailErrorMessage()"
+              required
+            />
+            @if (email.invalid) {
+            <mat-error> {{ mailErrorMessage() }} </mat-error>
             }
           </mat-form-field>
         </div>
@@ -20,17 +28,35 @@
         <div class="password-container custom-input-login">
           <mat-form-field>
             <mat-label>Gib dein Passwort ein</mat-label>
-            <input matInput [formControl]="password" minlength="4" [type]="hide() ? 'password' : 'text'" />
-            @if (password.invalid) { 
-              <mat-error> Password muss aus 4 Zeichen bestehen </mat-error> 
+            <input
+              matInput
+              [formControl]="password"
+              minlength="4"
+              [type]="hide() ? 'password' : 'text'"
+            />
+            @if (password.invalid) {
+            <mat-error> Password muss aus 4 Zeichen bestehen </mat-error>
             }
-            <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
-              <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="clickEvent($event)"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide()"
+            >
+              <mat-icon>{{
+                hide() ? "visibility_off" : "visibility"
+              }}</mat-icon>
             </button>
           </mat-form-field>
         </div>
 
-        <button (click)="tryLogin()" type="button" [disabled]="email.invalid || email.value === '' " class="login-btn">
+        <button
+          (click)="tryLogin()"
+          type="button"
+          [disabled]="email.invalid || email.value === ''"
+          class="login-btn"
+        >
           Einloggen
         </button>
       </div>
@@ -42,7 +68,15 @@
       <div class="pw-reset">
         <a [routerLink]="['/pw-reset']">Passwort vergessen ?</a>
       </div>
-
     </div>
   </div>
 </section>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="pacman"
+  [fullScreen]="true"
+  ><p style="color: white">Mal gucken, ob es dich gibt...</p></ngx-spinner
+>

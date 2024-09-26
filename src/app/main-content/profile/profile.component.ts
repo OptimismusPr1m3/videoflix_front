@@ -22,6 +22,7 @@ import { MatListModule } from '@angular/material/list';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
 import { User } from '../../models/user.class';
 import { OversightComponent } from './oversight/oversight.component';
+import { VideoplayerComponent } from '../videoplayer/videoplayer.component';
 
 @Component({
   selector: 'app-profile',
@@ -40,6 +41,7 @@ import { OversightComponent } from './oversight/oversight.component';
     RouterLinkActive,
     MatListModule,
     OversightComponent,
+    VideoplayerComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',

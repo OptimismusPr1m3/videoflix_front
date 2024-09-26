@@ -15,7 +15,8 @@ import { BackendCommunicationService } from '../../services/backend-communicatio
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { GlobalVariablesService } from '../../services/global-variables.service';
-import { HeaderComponent } from "../../head/header/header.component";
+import { HeaderComponent } from '../../head/header/header.component';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -29,8 +30,9 @@ import { HeaderComponent } from "../../head/header/header.component";
     FormsModule,
     ReactiveFormsModule,
     RouterLink,
-    HeaderComponent
-],
+    HeaderComponent,
+    NgxSpinnerModule
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -47,7 +49,12 @@ export class LoginComponent {
   pwErrorMessage = signal('');
   hide = signal(true);
 
-  constructor(public backService: BackendCommunicationService, public router: Router, public globals: GlobalVariablesService) {
+  constructor(
+    public backService: BackendCommunicationService,
+    public router: Router,
+    public globals: GlobalVariablesService,
+    private spinner: NgxSpinnerService
+  ) {
     merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateMailErrorMessage());
@@ -58,7 +65,7 @@ export class LoginComponent {
       this.mailErrorMessage.set('Bitte gib deine E-Mail ein !');
     } else if (this.email.hasError('email')) {
       this.mailErrorMessage.set('E-Mailadresse ungueltig !');
-    }else if (this.email.hasError('pattern')) {
+    } else if (this.email.hasError('pattern')) {
       this.mailErrorMessage.set('Deine Email sollte ohne Sonderzeichen sein !');
     } else {
       this.mailErrorMessage.set('');
@@ -71,33 +78,36 @@ export class LoginComponent {
   }
 
   tryLogin() {
+    this.spinner.show()
     if (this.email.valid && this.password.valid) {
-      this.backService.userLogin(this.email.value!, this.password.value!).subscribe({
-        next: (resp) => {
-          console.log(resp.body.token)
-          localStorage.setItem("token",resp.body.token)
-        },
-        error: (err) => {
-            console.error('Ging so nicht durch ',err)
-            this.errorHandling()
-        },
-        complete: () => {
-          console.log('Jetzt fertig mit Antwort')
-          this.router.navigate(['/main/'])
-        }
-      } 
-      )
+      this.backService
+        .userLogin(this.email.value!, this.password.value!)
+        .subscribe({
+          next: (resp) => {
+            console.log(resp.body.token);
+            localStorage.setItem('token', resp.body.token);
+          },
+          error: (err) => {
+            this.spinner.hide()
+            console.error('Ging so nicht durch ', err);
+            this.errorHandling();
+          },
+          complete: () => {
+            this.spinner.hide()
+            console.log('Jetzt fertig mit Antwort');
+            this.router.navigate(['/main/']);
+          },
+        });
     }
   }
 
   errorHandling() {
-    this.globals.accountNotExist.set(true)
+    this.globals.accountNotExist.set(true);
     setTimeout(() => {
-      this.globals.accountNotExist.set(false)
-      this.globals.tryAgain.set(true)
-      this.password.setValue('')
+      this.globals.accountNotExist.set(false);
+      this.globals.tryAgain.set(true);
+      this.password.setValue('');
       //this.email.setValue('')
     }, 1500);
   }
-
 }

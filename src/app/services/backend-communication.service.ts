@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, from, Observable, of } from 'rxjs';
 import { ApiEndpointsService } from './api-endpoints.service';
 import { GlobalVariablesService } from './global-variables.service';
 import { User } from '../models/user.class';
 import { FormGroup } from '@angular/forms';
+import { VideoItem } from '../models/videoItem.class';
+import { mergeMap, catchError, toArray } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
@@ -133,6 +136,23 @@ export class BackendCommunicationService {
     return this.http.get(this.endPoints.VIDEO_ITEMS, {
       headers: { Authorization: 'Token ' + token },
     });
+  }
+  
+  fetchSingleVideoItems(urls: string[]): Observable<(VideoItem | null)[]> {
+    const token = localStorage.getItem('token');
+    const headers = { Authorization: 'Token ' + token };
+  
+    return from(urls).pipe( // from always needs string[] 
+      mergeMap(url =>
+        this.http.get<VideoItem>(url, { headers }).pipe(
+          catchError(err => {
+            console.error(`Fehler beim Laden von ${url}:`, err);
+            return of(null); // gives `null` or empty object back if error occurs
+          })
+        )
+      ),
+      toArray()
+    );
   }
 
   uploadVideo(form: FormData): Observable<any> {

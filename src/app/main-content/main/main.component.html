@@ -1,11 +1,11 @@
 <section style="position: relative;">
     <app-logged-header></app-logged-header>
     <app-slider-comp></app-slider-comp>
-    <div *ngIf="this.globals.isProfileOpen()" class="profile-overlay">
+    <!-- <div *ngIf="this.globals.isProfileOpen()" class="profile-overlay">
         <div class="overlay-container">
             <app-profile></app-profile>
         </div>
-    </div>
+    </div> -->
     <div *ngIf="this.globals.isVidOpen()" class="video-overlay">
         <div class="v-overlay-container">
             <app-videoplayer></app-videoplayer>

@@ -1,5 +1,14 @@
-<p>my-videos works!</p>
-
+<section class="my-videos-cont">
+  <div class="item" *ngFor="let video of videoItems; let i = index">
+    <app-video-item
+      class="grow-shadow"
+      [videoItem]="video"
+      (mouseover)="hoveredIndex = i"
+      (mouseleave)="hoveredIndex = -1"
+      [isHovered]="hoveredIndex === i"
+    ></app-video-item>
+  </div>
+</section>
 
 <ngx-spinner
   bdColor="rgba(0, 0, 0, 0.8)"
@@ -7,5 +16,5 @@
   color="#fff"
   type="square-jelly-box"
   [fullScreen]="true"
-  ><p style="color: white">Loading...</p></ngx-spinner
+  ><p style="color: white">Videos werden geladen...</p></ngx-spinner
 >

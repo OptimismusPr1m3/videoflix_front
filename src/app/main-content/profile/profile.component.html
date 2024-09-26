@@ -3,7 +3,7 @@
 <section>
   <div class="profile">
     <div class="left-nav">
-      <div class="back-to-main">
+      <div [routerLink]="['/main']" class="back-to-main">
         <mat-icon>keyboard_backspace</mat-icon>
         <span>Zurück zu Chill'N'Flix</span>
       </div>
@@ -35,3 +35,9 @@
     </div>
   </div>
 </section>
+
+<div *ngIf="this.globals.isVidOpen()" class="video-overlay">
+  <div class="v-overlay-container">
+      <app-videoplayer></app-videoplayer>
+  </div>
+</div>

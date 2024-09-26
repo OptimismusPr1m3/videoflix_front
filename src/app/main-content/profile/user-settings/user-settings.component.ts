@@ -14,6 +14,7 @@ import { BackendCommunicationService } from '../../../services/backend-communica
 import { User } from '../../../models/user.class';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-user-settings',
   standalone: true,
@@ -25,6 +26,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatInputModule,
     FormsModule,
     MatDatepickerModule,
+    NgxSpinnerModule
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './user-settings.component.html',
@@ -36,7 +38,8 @@ export class UserSettingsComponent {
 
   constructor(
     public globals: GlobalVariablesService,
-    public backService: BackendCommunicationService
+    public backService: BackendCommunicationService,
+    private spinner: NgxSpinnerService
   ) {
     this.userForm = new FormGroup({
       first_name: new FormControl(
@@ -117,6 +120,7 @@ export class UserSettingsComponent {
   }
 
   saveSettings() {
+    this.spinner.show()
     console.log(this.userForm.value['date_of_birth']);
     this.backService.changeLoggedUserSettings(this.userForm).subscribe({
       next: (resp) => {
@@ -129,6 +133,7 @@ export class UserSettingsComponent {
         console.log('Jetzt ist es fertig');
         this.backService.getLoggedUserData()
         this.globals.isSettingsEditing.set(false)
+        this.spinner.hide()
       },
     });
   }

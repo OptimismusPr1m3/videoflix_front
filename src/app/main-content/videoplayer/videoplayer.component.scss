@@ -31,7 +31,7 @@
             width: 100%;
             bottom: 0;
             > .overlay {
-                @include dFlex(row, flex-start, center);
+                @include dFlex(row, space-between, center);
                 gap: 60px;
                 padding: 4px 16px;
                 max-width: 100%;

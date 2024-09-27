@@ -1,6 +1,6 @@
 <div class="videoplayer-cont">
   
-  <div #videoWrapper class="player-cont">
+  <div #videoWrapper class="player-cont" *ngIf="!globals.isMyVideoEditing()">
 
     <div class="vplayer-head">
         <div (click)="closePlayer()" class="vplayer-b-btn">
@@ -21,6 +21,10 @@
         <button (click)="openFullscreen()">
           <mat-icon>play_arrow</mat-icon>
           Abspielen
+        </button>
+        <button *ngIf="isInMyVideos" (click)="openVideoEdit()">
+          <mat-icon>edit</mat-icon>
+          Bearbeiten
         </button>
       </div>
       <div class="overlay full" *ngIf="isVidFullScreen">
@@ -59,8 +63,12 @@
 
   </div>
   
-  <div (click)="openFullscreen()" class="vplayer-foot">
+  <div *ngIf="!globals.isMyVideoEditing()" class="vplayer-foot">
     <span>{{ globals.currentOpenedVideo()?.description }}</span>
     <span></span>
   </div>
+
+  <app-video-edit style="width: 100%" *ngIf="globals.isMyVideoEditing()"></app-video-edit>
+
+
 </div>

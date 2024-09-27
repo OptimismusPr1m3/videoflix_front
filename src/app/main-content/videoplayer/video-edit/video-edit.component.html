@@ -1,0 +1,65 @@
+<div class="edit-head">
+    <div (click)="getBack()" class="edit-head-btn">
+        <mat-icon>arrow_back</mat-icon>
+    </div>
+    <h2>Videoinformationen bearbeiten</h2>
+</div>
+
+<form class="settings-form" [formGroup]="videoEditForm" (ngSubmit)="saveEditedVideo()">
+    <!--Videotitle-->
+    <div class="form-group custom-input-settings">
+      <mat-form-field>
+        <mat-label>Titel</mat-label>
+        <input matInput formControlName="title" type="text" />
+        <mat-error *ngIf="videoEditForm.get('title')?.invalid && videoEditForm.get('title')?.touched">
+          Der Titel muss zwischen 4 und 20 Zeichen lang sein 
+        </mat-error>
+      </mat-form-field>
+    </div>
+  
+    <div class="form-group custom-input-settings">
+      <mat-form-field>
+        <mat-label>Genre</mat-label>
+        <input matInput formControlName="genre" type="text" />
+        <mat-error *ngIf="videoEditForm.get('genre')?.invalid && videoEditForm.get('genre')?.touched">
+          Das Genre muss mind 4 Zeichen lang sein 
+        </mat-error>
+      </mat-form-field>
+    </div>
+  
+    <!---->
+    <div class="form-group custom-input-settings">
+      <mat-form-field>
+        <mat-label>Beschreibung</mat-label>
+        <textarea minlength="10" matInput formControlName="description" type="text"></textarea>
+        <mat-error *ngIf="videoEditForm.get('description')?.invalid && videoEditForm.get('description')?.touched">
+          Bitte gib eine kurze Beschreibung, bestehend aus mindestens 10 Zeichen, zu deinem Video an
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--Buttons for saving and make them editable-->
+    <div class="btn-group">
+        <div class="btns">
+            <button type="button" class="enabled" (click)="getBack()">Abbrechen</button>
+            <button class="enabled" type="submit">Speichern</button>
+        </div>
+        <div class="delete-btn">
+            <div (click)="deleteCurrentVideo()" class="del-b">
+                <span>Löschen</span>
+                <mat-icon>delete</mat-icon>
+            </div>
+        </div>
+    </div>
+  </form>
+  
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="fire"
+    [fullScreen]="true"
+    name="editSpinner"
+    ><p style="color: white">Wir löschen gerade dein Video...</p></ngx-spinner
+  >
+  

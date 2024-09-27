@@ -1,0 +1,177 @@
+@import "../../../../styles.scss";
+
+.edit-head {
+  @include dFlex(row, flex-start, center);
+  width: 100%;
+  gap: 16px;
+  padding-left: 24px;
+  > h2 {
+    font-size: 40px;
+    color: #ffffff;
+  }
+  > .edit-head-btn {
+    @include dFlex(row, flex-start, center);
+    padding: 16px;
+    border-radius: 50%;
+    //margin-left: 8px;
+    &:hover {
+      cursor: pointer;
+      background-color: rgba($color: #141414, $alpha: 0.8);
+    }
+  }
+}
+
+.settings-form {
+  padding: 24px;
+  @include dFlex(column, center, flex-start);
+  min-width: 600px;
+  max-width: 1200px;
+  > .form-group {
+    width: 100%;
+    @include dFlex(row, center, center);
+    gap: 8px;
+    > mat-form-field {
+      width: 100%;
+    }
+  }
+  > .name-cont {
+    > mat-form-field {
+      width: 50%;
+    }
+  }
+  > .address-cont {
+    > .street {
+      width: 70%;
+    }
+    > .number {
+      width: 30%;
+    }
+  }
+  > .btn-group {
+    width: 100%;
+    @include dFlex(row, space-between, center);
+    > .btns {
+      width: 70%;
+      @include dFlex(row, flex-start, center);
+      gap: 48px;
+      > button {
+        color: #ffffff;
+        font-size: 18px;
+        width: 50%;
+        padding: 16px;
+        border-radius: 4px;
+        border: 1px solid #4f4e4e;
+        background-color: #2f2f2f;
+      }
+      > .enabled {
+        transition: all 250ms ease-in-out;
+        cursor: pointer;
+        &:hover {
+          background-color: #4f4e4e;
+        }
+      }
+    }
+    > .delete-btn {
+      width: 30%;
+      @include dFlex(row, flex-end, center);
+      > .del-b {
+        transition: all 250ms ease-in-out;
+        @include dFlex(row, center, center);
+        width: 60%;
+        color: #ffffff;
+        gap: 16px;
+        padding: 16px;
+        border-radius: 4px;
+        border: 1px solid #e50914;
+        background-color: #e50914;
+        &:hover {
+            background-color: #c11119;
+            border-color: #c11119;
+            color: #ffffff;
+            cursor: pointer;
+            > mat-icon {
+                color: #ffffff;
+            }
+        }
+        > mat-icon {
+            transition: all 250ms ease-in-out;
+        }
+        > span {
+            font-weight: 500;
+            font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input {
+  color: #ffffff !important;
+  &::placeholder {
+    color: #ffffff !important;
+  }
+}
+
+textarea {
+  color: #ffffff !important;
+  resize: none;
+  height: 180px !important;
+}
+
+.c-color {
+  color: #ffffff !important;
+  &::placeholder {
+    color: #ffffff !important;
+  }
+}
+
+.c-color-none {
+  color: #a4a4a4 !important;
+  &::placeholder {
+    color: #a4a4a4 !important;
+  }
+}
+
+::ng-deep
+  .custom-input-settings
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+::ng-deep
+  .custom-input-settings-none
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgba(255, 255, 255, 0.01) !important;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+::ng-deep .mdc-line-ripple::after {
+  display: none;
+}
+
+::ng-deep .mdc-line-ripple::before {
+  display: none;
+  border-bottom-style: none;
+}
+
+.flex-start {
+  @include dFlex(row, flex-start, center);
+}
+
+.flex-end {
+  @include dFlex(row, flex-end, center);
+}

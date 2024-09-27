@@ -72,8 +72,12 @@
     </mat-form-field>
   </div>
 
-  <div class="uploaded-vids-cont">
+  <div class="uploaded-vids-cont" *ngIf="globals.currentLoggedUser()?.my_videos.length > 0">
     <span>Du hast bereits <b class="video-count">{{ globals.currentLoggedUser()?.my_videos.length }}</b> Videos hochgeladen</span>
+  </div>
+
+  <div class="uploaded-vids-cont" *ngIf="globals.currentLoggedUser()?.my_videos.length < 1">
+    <span>Bis jetzt hast du noch <b class="video-count">keine</b> Videos hochgeladen</span>
   </div>
 
   <!--Buttons for saving and make them editable-->
@@ -88,4 +92,4 @@
 
 </form>
 
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Speichere Einstellungen... </p></ngx-spinner>

@@ -8,7 +8,7 @@
     </div> -->
     <div *ngIf="this.globals.isVidOpen()" class="video-overlay">
         <div class="v-overlay-container">
-            <app-videoplayer></app-videoplayer>
+            <app-videoplayer [isInMyVideos]="false"></app-videoplayer>
         </div>
     </div>
 </section>

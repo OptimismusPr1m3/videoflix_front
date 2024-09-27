@@ -8,6 +8,8 @@ import { User } from '../models/user.class';
 import { FormGroup } from '@angular/forms';
 import { VideoItem } from '../models/videoItem.class';
 import { mergeMap, catchError, toArray } from 'rxjs/operators';
+import { VideoURLInterface } from '../models/video-urlinterface';
+import { NgxSpinner } from 'ngx-spinner';
 
 
 @Injectable({
@@ -137,6 +139,18 @@ export class BackendCommunicationService {
       headers: { Authorization: 'Token ' + token },
     });
   }
+
+  changeVideoInfo(form: FormGroup, url:string): Observable<any> {
+    const token =  localStorage.getItem('token');
+    const headers = { Authorization: 'Token ' + token };
+    return this.http.patch(url, form.value ,{ headers, observe: 'response' })
+  }
+
+  deleteVideo(url: string){
+    const token =  localStorage.getItem('token');
+    const headers = { Authorization: 'Token ' + token };
+    return this.http.delete(url, { headers, observe: 'response' })
+  }
   
   fetchSingleVideoItems(urls: string[]): Observable<(VideoItem | null)[]> {
     const token = localStorage.getItem('token');
@@ -153,6 +167,42 @@ export class BackendCommunicationService {
       ),
       toArray()
     );
+  }
+
+  fetchVideosFromCurrentUserVar() {
+    const myVideos: VideoURLInterface[] = this.globals.currentLoggedUser()?.my_videos;
+      const videoURLS: string[] = myVideos.map(video => video.URL)
+      this.globals.userVideoItems.set([])
+      this.fetchSingleVideoItems(videoURLS).subscribe({
+        next: (resp) => {
+          resp.forEach(element => {
+            this.globals.userVideoItems().push(element!)
+          });
+          //console.log('Vor der Sortierung: ', this.videoItems)
+          this.sortVideos("up")
+        },
+        error: (err) => {
+          console.error(err)
+        },
+        complete: () => {
+          console.log('Nun sollten alle Videos fertig gefetcht sein !')
+          console.log('Nach der Sortierung: ', this.globals.userVideoItems())
+          this.globals.myVideosIsLoading.set(false)
+        }
+      })
+  }
+
+  sortVideos(direction: string){
+    this.globals.userVideoItems().sort((a, b) => {
+      const dateA = new Date(a.released_at);
+      const dateB = new Date(b.released_at);
+      if (direction === "up") {
+        return dateA.getTime() - dateB.getTime(); // aufsteigend
+      } else {
+        return dateB.getTime() - dateA.getTime(); // absteigend
+      }
+       
+    });
   }
 
   uploadVideo(form: FormData): Observable<any> {

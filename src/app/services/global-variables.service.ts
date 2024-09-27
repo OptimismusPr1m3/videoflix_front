@@ -13,6 +13,7 @@ export class GlobalVariablesService {
   tryAgain = signal<boolean>(false);
   isProfileOpen = signal<boolean>(false);
   isVidOpen = signal<boolean>(false);
+  userVideoItems = signal<VideoItem[]>([])
 
   currentLoggedUser = signal<User | null>(null);
   currentOpenedVideo = signal<VideoItem | null>(null);
@@ -21,6 +22,13 @@ export class GlobalVariablesService {
   activeHeadingString = signal<string>('Übersicht')
 
   isSettingsEditing = signal<boolean>(false);
+  isMyVideoEditing = signal<boolean>(false);
+
+
+  //For Spinners
+  // my-video-spinner
+  myVideosIsLoading = signal<boolean>(true)
+
 
 
   constructor() { }

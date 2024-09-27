@@ -1,5 +1,5 @@
 <section class="my-videos-cont">
-  <div class="item" *ngFor="let video of videoItems; let i = index">
+  <div class="item" *ngFor="let video of globals.userVideoItems(); let i = index">
     <app-video-item
       class="grow-shadow"
       [videoItem]="video"
@@ -16,5 +16,6 @@
   color="#fff"
   type="square-jelly-box"
   [fullScreen]="true"
+  [showSpinner]="globals.myVideosIsLoading()"
   ><p style="color: white">Videos werden geladen...</p></ngx-spinner
 >

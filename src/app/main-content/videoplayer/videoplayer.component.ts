@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, input, ViewChild } from '@angular/core';
 import { GlobalVariablesService } from '../../services/global-variables.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { VideoEditComponent } from "./video-edit/video-edit.component";
 
 @Component({
   selector: 'app-videoplayer',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, VideoEditComponent],
   templateUrl: './videoplayer.component.html',
   styleUrl: './videoplayer.component.scss'
 })
@@ -16,6 +17,7 @@ export class VideoplayerComponent {
 
   @ViewChild('videoFrame') videoFrame!: ElementRef<HTMLVideoElement>
   @ViewChild('videoWrapper') videoWrapper!: ElementRef<HTMLDivElement>
+  @Input() isInMyVideos: boolean = false;
 
   videoDuration: number = 0
   currentTime: number = 0
@@ -105,6 +107,10 @@ export class VideoplayerComponent {
     this.volumeBarIsOpen = !this.volumeBarIsOpen
   }
 
+  openVideoEdit() {
+    console.log(this.globals.currentOpenedVideo()?.url)
+    this.globals.isMyVideoEditing.set(true)
+  }
 
 
 }

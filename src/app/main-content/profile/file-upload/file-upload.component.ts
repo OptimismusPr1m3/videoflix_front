@@ -39,7 +39,7 @@ export class FileUploadComponent {
 
   constructor(
     public backEnd: BackendCommunicationService,
-    private globals: GlobalVariablesService,
+    public globals: GlobalVariablesService,
     private spinner: NgxSpinnerService
   ) {
     this.videoForm = new FormGroup({
@@ -139,7 +139,6 @@ export class FileUploadComponent {
   }
 
   saveUploadedVideoURLToUser() {
-    //console.log(this.globals.currentLoggedUser()?.my_videos[0])
     this.backEnd
       .addVideoURLToLoggedUser(
         this.addVideoToUserData(this.currentUploadedVideoURL)
@@ -163,12 +162,8 @@ export class FileUploadComponent {
   addVideoToUserData(videoURL: any) {
     let currentVideos = this.globals.currentLoggedUser()?.my_videos;
     if (currentVideos === null) {
-      console.log('jop');
-      console.log(currentVideos);
       return (currentVideos = [{ URL: videoURL }]);
     } else {
-      console.log('schon was drinnen !');
-      console.log(currentVideos);
       currentVideos.push({ URL: videoURL });
       return currentVideos;
     }
@@ -185,17 +180,18 @@ export class FileUploadComponent {
     this.spinner.show();
     this.backEnd.uploadVideo(formData).subscribe({
       next: (resp) => {
-        //console.log(resp)
-        //console.log(resp['url'])
         this.currentUploadedVideoURL = resp['url'];
+        this.globals.videoUploadText.set(this.globals.videoUploadStrings[1])
       },
       error: (err) => {
         console.error(err);
         this.spinner.hide();
+        this.globals.videoUploadText.set(this.globals.videoUploadStrings[0])
       },
       complete: () => {
         console.log('Jetzt fertig');
         this.saveUploadedVideoURLToUser();
+        this.globals.videoUploadText.set(this.globals.videoUploadStrings[0])
       },
     });
   }

@@ -33,15 +33,21 @@ export class MyVideosComponent {
   loadVideos() {
     this.spinner.show()
     this.globals.myVideosIsLoading.set(true)
-    if (this.globals.currentLoggedUser()?.my_videos.length >= 1) {
+    if (this.globals.currentLoggedUser()?.my_videos) {
       this.backEnd.fetchVideosFromCurrentUserVar()
     } else {
       this.backEnd.fetchLoggedUser().subscribe({
         next: (resp) => {this.globals.currentLoggedUser.set(new User(resp))},
         error: (err) => {console.error(err), this.spinner.hide()},
-        complete: () => {this.backEnd.fetchVideosFromCurrentUserVar()}
+        complete: () => {
+          if (this.globals.currentLoggedUser()?.my_videos) {
+            this.backEnd.fetchVideosFromCurrentUserVar()   
+          }
+          this.spinner.hide(),
+          this.globals.myVideosIsLoading.set(false)}
       })
     }
+   
   }
 
 

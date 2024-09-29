@@ -72,11 +72,11 @@
     </mat-form-field>
   </div>
 
-  <div class="uploaded-vids-cont" *ngIf="globals.currentLoggedUser()?.my_videos.length > 0">
+  <div class="uploaded-vids-cont" *ngIf="globals.currentLoggedUser()?.my_videos">
     <span>Du hast bereits <b class="video-count">{{ globals.currentLoggedUser()?.my_videos.length }}</b> Videos hochgeladen</span>
   </div>
 
-  <div class="uploaded-vids-cont" *ngIf="globals.currentLoggedUser()?.my_videos.length < 1">
+  <div class="uploaded-vids-cont" *ngIf="!globals.currentLoggedUser()?.my_videos">
     <span>Bis jetzt hast du noch <b class="video-count">keine</b> Videos hochgeladen</span>
   </div>
 

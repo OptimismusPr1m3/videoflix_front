@@ -30,8 +30,12 @@ export class GlobalVariablesService {
   myVideosIsLoading = signal<boolean>(true)
 
 
+  videoUploadStrings: string[] = ['Dein Video wird gerade hochgeladen...', 'Gleich fertig']
+  videoUploadText = signal<string>(this.videoUploadStrings[0])
+
 
   constructor() { }
+
 
 
 }

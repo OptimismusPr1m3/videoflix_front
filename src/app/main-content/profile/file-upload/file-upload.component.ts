@@ -155,6 +155,7 @@ export class FileUploadComponent {
           console.log('Nun sollte die VideoURL beim User angekommen sein !');
           this.spinner.hide();
           this.emptyFileField()
+          this.globals.videoUploadText.set(this.globals.videoUploadStrings[0])
         },
       });
   }
@@ -191,7 +192,6 @@ export class FileUploadComponent {
       complete: () => {
         console.log('Jetzt fertig');
         this.saveUploadedVideoURLToUser();
-        this.globals.videoUploadText.set(this.globals.videoUploadStrings[0])
       },
     });
   }

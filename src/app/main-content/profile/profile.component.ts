@@ -59,10 +59,6 @@ export class ProfileComponent {
     [Validators.required]
   );
 
-  testfunc() {
-    this.first_name.enable();
-  }
-
   ngOnInit() {
     this.backEnd.getLoggedUserData();
     this.renderer.addClass(document.body, 'logged-in');
@@ -94,6 +90,12 @@ export class ProfileComponent {
       this.globals.activePath.set(path)
       this.setRightHeading('oversight')
     }
+  }
+
+  backToMain() {
+    this.setRightHeading('oversight')
+    this.globals.activePath.set('oversight')
+    this.router.navigate(['/main/'])
   }
 
   setRightHeading(path: string) {

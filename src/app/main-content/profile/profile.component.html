@@ -3,7 +3,7 @@
 <section>
   <div class="profile">
     <div class="left-nav">
-      <div [routerLink]="['/main']" class="back-to-main">
+      <div (click)="backToMain()" class="back-to-main">
         <mat-icon>keyboard_backspace</mat-icon>
         <span>Zurück zu Chill'N'Flix</span>
       </div>

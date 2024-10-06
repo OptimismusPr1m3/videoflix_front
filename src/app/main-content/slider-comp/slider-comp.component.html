@@ -1,6 +1,6 @@
 <section class="slider-cont">
   <!--Filme-->
-  <div class="category-container">
+  <!-- <div class="category-container">
     <h2>Filme</h2>
     <div class="scroll-container">
       <div class="scroll-button left">
@@ -20,66 +20,71 @@
         </div>
       </div>
       <div class="scroll-button right">
-        <button (click)="scrollTo(200, 'category1')">
+        <button (click)="scrollTo(800, 'category1')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div> -->
+  <!--Serien bspw. lel-->
+
+  <div class="category-container">
+    <h2>Videos</h2>
+    <div class="scroll-container">
+      <div class="scroll-button left">
+        <button (click)="nextVideos('+', 'category1', 1)">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+      <div class="content-container" #category1>
+        <div class="video-container" *ngFor="let groupKey of numberOfPacks; let groupIndex = index">
+          <div class="item" *ngFor="let item of groupedSliderVids[groupKey]; let i = index">
+            <app-video-item
+              (mouseover)="hoveredIndex1 = i"
+              (mouseleave)="hoveredIndex1 = -1"
+              class="grow-shadow"
+              [videoItem]="item"
+              [isHovered]="hoveredIndex1 === i" 
+            ></app-video-item>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-button right">
+        <button (click)="nextVideos('-', 'category1',1)">
           <mat-icon>chevron_right</mat-icon>
         </button>
       </div>
     </div>
   </div>
-  <!--Serien bspw. lel-->
+
 
   <div class="category-container">
-    <h2>Platzhalter</h2>
+    <h2>Videos</h2>
     <div class="scroll-container">
       <div class="scroll-button left">
-        <button (click)="scrollTo(-200, 'category2')">
+        <button (click)="nextVideos('+', 'category2', 2)">
           <mat-icon>chevron_left</mat-icon>
         </button>
       </div>
       <div class="content-container" #category2>
-        <div class="item" *ngFor="let item of videoItems; let i = index">
-          <app-video-item
-            (mouseover)="hoveredIndex2 = i"
-            (mouseleave)="hoveredIndex2 = -1"
-            class="grow-shadow"
-            [videoItem]="item"
-            [isHovered]="hoveredIndex2 === i" 
-          ></app-video-item>
+        <div class="video-container" *ngFor="let groupKey of numberOfPacks; let groupIndex = index">
+          <div class="item" *ngFor="let item of groupedSliderVids[groupKey]; let i = index">
+            <app-video-item
+              (mouseover)="hoveredIndex2 = i"
+              (mouseleave)="hoveredIndex2 = -1"
+              class="grow-shadow"
+              [videoItem]="item"
+              [isHovered]="hoveredIndex2 === i" 
+            ></app-video-item>
+          </div>
         </div>
       </div>
       <div class="scroll-button right">
-        <button (click)="scrollTo(200, 'category2')">
+        <button (click)="nextVideos('-', 'category2', 2)">
           <mat-icon>chevron_right</mat-icon>
         </button>
       </div>
     </div>
   </div>
 
-  <!--Platzhalter-->
-  <div class="category-container">
-    <h2>Platzhalter</h2>
-    <div class="scroll-container">
-      <div class="scroll-button left">
-        <button (click)="scrollTo(-200, 'category3')">
-          <mat-icon>chevron_left</mat-icon>
-        </button>
-      </div>
-      <div class="content-container" #category3>
-        <div class="item" *ngFor="let item of videoItems; let i = index">
-          <app-video-item
-            (mouseover)="hoveredIndex3 = i"
-            (mouseleave)="hoveredIndex3 = -1"
-            class="grow-shadow"
-            [videoItem]="item"
-            [isHovered]="hoveredIndex3 === i"
-          ></app-video-item>
-        </div>
-      </div>
-      <div class="scroll-button right">
-        <button (click)="scrollTo(200, 'category3')">
-          <mat-icon>chevron_right</mat-icon>
-        </button>
-      </div>
-    </div>
-  </div>
 </section>

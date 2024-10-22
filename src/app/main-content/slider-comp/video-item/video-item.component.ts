@@ -21,4 +21,13 @@ export class VideoItemComponent {
     this.globals.currentOpenedVideo.set(this.videoItem);
   }
 
+  formatVideoDuration(durationInSeconds: number): string {
+    const minutes = Math.floor(durationInSeconds / 60);
+    const seconds = Math.floor(durationInSeconds % 60);
+  
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+  
+    return `${minutes}:${formattedSeconds}`;
+  }
+
 }

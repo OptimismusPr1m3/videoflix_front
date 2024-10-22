@@ -36,6 +36,7 @@ export class FileUploadComponent {
   selectedVideoFile: File | null = null;
   videoPreview: any;
   currentUploadedVideoURL: any;
+  selectedVideoDuration: number = 0
 
   constructor(
     public backEnd: BackendCommunicationService,
@@ -53,6 +54,7 @@ export class FileUploadComponent {
         Validators.minLength(2),
       ]),
       description: new FormControl('', [Validators.required]),
+      duration: new FormControl('', [Validators.required])
     });
   }
 
@@ -82,10 +84,16 @@ export class FileUploadComponent {
       const video = document.createElement('video');
       video.src = URL.createObjectURL(this.selectedVideoFile);
       video.currentTime = 1;
+      console.log(video.currentTime)
+      console.log(file.name)
+      
+
 
       video.onloadeddata = () => {
         this.captureVideoFrame(video);
         URL.revokeObjectURL(video.src);
+        this.videoForm.patchValue({duration: video.duration})
+        //console.log(video.duration)
       };
     } else {
       this.videoPreview = null;
@@ -175,6 +183,7 @@ export class FileUploadComponent {
     formData.append('title', this.videoForm.get('title')?.value);
     formData.append('genre', this.videoForm.get('genre')?.value);
     formData.append('description', this.videoForm.get('description')?.value);
+    formData.append('duration', this.videoForm.get('duration')?.value);
   }
 
   uploadSub(formData: FormData) {

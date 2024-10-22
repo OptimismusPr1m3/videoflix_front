@@ -7,6 +7,7 @@ export class VideoItem {
     cover_image: any ;
     rating: number;
     url: string;
+    duration: number;
 
     constructor(obj: any){
         this.title = obj ? obj.title : '';
@@ -17,6 +18,7 @@ export class VideoItem {
         this.cover_image = obj ? obj.cover_image : '';
         this.rating = obj ? obj.rating : 1;
         this.url = obj ? obj.url : '';
+        this.duration = obj ? obj.duration : 0;
     }
 
 }

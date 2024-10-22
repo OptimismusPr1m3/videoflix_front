@@ -37,6 +37,8 @@ export class SliderCompComponent {
   groupedSliderVids: { [key: string]: VideoItem[] } = {};
   numberOfPacks: string[] = [];
 
+  videoItemCardsAmount: number = 4 // amount of videocarditems in a row which should be displayed 
+
 
   windowSize: number = 0;
 
@@ -80,13 +82,14 @@ export class SliderCompComponent {
     console.log(this.windowSize)
     this.backService.fetchVideoItems().subscribe({
       next: (resp) => {
+        console.log('Hier die Videos: ', resp)
         this.groupVideoItems(resp);
       },
       error: (err) => {
         console.error(err);
       },
       complete: () => {
-        console.log(this.groupedSliderVids), console.log(this.numberOfPacks);
+        console.log('hier die groupedslidervids: ',this.groupedSliderVids), console.log('Hier die numberofPacks: ',this.numberOfPacks);
       },
     });
   }
@@ -96,7 +99,7 @@ export class SliderCompComponent {
     let tempPack: VideoItem[] = [];
     resp.forEach((video: VideoItem, index: number) => {
       tempPack.push(new VideoItem(video));
-      if (tempPack.length === 4 || index === resp.length - 1) {
+      if (tempPack.length === this.videoItemCardsAmount || index === resp.length - 1) {
         this.groupedSliderVids[`group${groupIndex}`] = [...tempPack];
         tempPack = [];
         groupIndex++;

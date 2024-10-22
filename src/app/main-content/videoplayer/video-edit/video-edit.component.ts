@@ -140,6 +140,7 @@ export class VideoEditComponent {
       cover_image: this.globals.currentOpenedVideo()?.cover_image || '',
       rating: this.globals.currentOpenedVideo()?.rating || 1,
       url: this.globals.currentOpenedVideo()?.url || '',
+      duration: this.globals.currentOpenedVideo()?.duration || 0,
     };
     console.log(updatedVideo);
     this.globals.currentOpenedVideo.set(updatedVideo);

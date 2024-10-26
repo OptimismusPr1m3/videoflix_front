@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <video #videoFrame width="900" autoplay [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
+    <video #videoFrame autoplay [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
       <source
         src="{{ globals.currentOpenedVideo()?.video_file }}"
         type="video/mp4"

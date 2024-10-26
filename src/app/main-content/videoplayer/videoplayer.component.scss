@@ -7,6 +7,7 @@
         position: relative;
         border-top-right-radius: 6px;
         border-top-left-radius: 6px;
+        height: 510px;
         > .vplayer-head{
             position: absolute;
             top: 0;
@@ -25,6 +26,8 @@
         > video {
             border-top-right-radius: 6px;
             border-top-left-radius: 6px;
+            width: 900px;
+            height: 509px;
         }
         > .vplayer-bottom-btn{
             position: absolute;

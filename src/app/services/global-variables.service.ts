@@ -17,6 +17,7 @@ export class GlobalVariablesService {
 
   currentLoggedUser = signal<User | null>(null);
   currentOpenedVideo = signal<VideoItem | null>(null);
+  currentOpened480Video = signal<string>('');
 
   activePath = signal<string>('oversight');
   activeHeadingString = signal<string>('Übersicht')

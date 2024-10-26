@@ -19,6 +19,16 @@ export class VideoItemComponent {
   openVideoOverlay() {
     this.globals.isVidOpen.set(true);
     this.globals.currentOpenedVideo.set(this.videoItem);
+    this.set480pVideoString()
+  }
+
+  set480pVideoString() {
+    if (this.videoItem.video_file.endsWith(".mp4")) {
+      console.log(this.videoItem.video_file)
+      let updatedString = this.videoItem.video_file.slice(0, -4) + "_480p.mp4";
+      console.log("Hier der 480p String: ", updatedString)
+      this.globals.currentOpened480Video.set(updatedString)
+    }
   }
 
   formatVideoDuration(durationInSeconds: number): string {

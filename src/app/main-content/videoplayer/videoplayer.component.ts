@@ -26,6 +26,9 @@ export class VideoplayerComponent {
   materialPlayButtonString: string = 'pause'
   materialVolumeButtonString: string = 'volume_up'
 
+  is480p: boolean = true
+  qualityPickerIsOpen: boolean = false
+
   muteLabel: string = 'Stumm schalten'
 
   standardVolume: number = 100
@@ -107,10 +110,23 @@ export class VideoplayerComponent {
     this.volumeBarIsOpen = !this.volumeBarIsOpen
   }
 
+  toggleQualiPicker() {
+    this.qualityPickerIsOpen = !this.qualityPickerIsOpen
+  }
+
   openVideoEdit() {
     console.log(this.globals.currentOpenedVideo()?.url)
     this.globals.isMyVideoEditing.set(true)
   }
 
+  setVideoQualitySource(quality: string) {
+    const videoFrame = this.videoFrame.nativeElement
+    videoFrame.pause()
+    const currentTime = videoFrame.currentTime
+    this.is480p = quality === '480' ? true : false
+    videoFrame.load()
+    videoFrame.currentTime = currentTime
+    videoFrame.play()
+  }
 
 }

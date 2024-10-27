@@ -9,10 +9,11 @@
     </div>
 
     <video #videoFrame autoplay [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
-      <source
+      <!-- <source
         src="{{ globals.currentOpenedVideo()?.video_file }}"
         type="video/mp4"
-      />
+      /> -->
+      <source [src]="is480p ? globals.currentOpened480Video() : globals.currentOpenedVideo()?.video_file" />
       Dein Browser unterstuetzt das Format nicht
     </video>
 
@@ -39,11 +40,19 @@
             <mat-icon (click)="skip10(10)">forward_10</mat-icon>      
           </div>
           <div class="btns">
+            <mat-icon (click)="toggleQualiPicker()">tune</mat-icon>
             <mat-icon (click)="restartVideo()">restart_alt</mat-icon>
             <mat-icon (click)="toggleAudio()"> {{ materialVolumeButtonString }} </mat-icon>
           </div>
+
           <div *ngIf="volumeBarIsOpen" class="volume-bar">
             <input type="range" (input)="configVolume($event)" max="100" min="0" [value]="standardVolume">
+          </div>
+          <div *ngIf="qualityPickerIsOpen" class="quality">
+            <div class="quality-picker">
+              <span (click)="setVideoQualitySource('1080')" [style]="is480p ? 'color: #ffffff' : 'color: #E5080E'">1080 p</span>
+              <span (click)="setVideoQualitySource('480')" [style]="!is480p ? 'color: #ffffff' : 'color: #E5080E'">480 p</span>
+            </div>
           </div>
 
           <!-- <div class="dot-menu">

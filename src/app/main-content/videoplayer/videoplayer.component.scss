@@ -109,7 +109,33 @@
                         top: -32px;
                         right: -32px;
                     }
-
+                    > .quality {
+                        position: absolute;
+                        top: -42px;
+                        background-color: #141414;
+                        border-top-left-radius: 6px;
+                        border-top-right-radius: 6px;
+                        border-bottom-left-radius: 6px;
+                        right: 118px;
+                        width: 88px;
+                        > .quality-picker {
+                            @include dFlex(column, center, center);
+                            gap: 6px;
+                            padding: 12px 0px 12px 0px;
+                            width: 100%;
+                            > span {
+                                width: 100%;
+                                padding: 4px 0px 4px 0px;
+                                cursor: pointer;
+                                font-size: 18px;
+                                color: #ffffff;
+                                text-align: center;
+                                &:hover {
+                                    background-color: #141414;
+                                }
+                            }
+                        }
+                    }
 
 
                     /*> .dot-menu {

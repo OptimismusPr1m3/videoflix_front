@@ -14,8 +14,8 @@ export class GlobalVariablesService {
   isProfileOpen = signal<boolean>(false);
   isVidOpen = signal<boolean>(false);
   userVideoItems = signal<VideoItem[]>([])
-
   currentLoggedUser = signal<User | null>(null);
+
   currentOpenedVideo = signal<VideoItem | null>(null);
   currentOpened480Video = signal<string>('');
 

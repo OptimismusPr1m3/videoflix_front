@@ -127,6 +127,7 @@ export class VideoplayerComponent {
     videoFrame.load()
     videoFrame.currentTime = currentTime
     videoFrame.play()
+    this.qualityPickerIsOpen = false
   }
 
 }

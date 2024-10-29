@@ -3,10 +3,10 @@
   <div [ngClass]="isHovered ? 'vis' : 'invis'" class="info-cont">
     <div class="info-head">
       <div><span>{{ videoItem.title }}</span></div>
-      <div class="end"><span>{{ videoItem.genre }}</span></div>
+      <div class="end"><span>{{ formatVideoDuration(videoItem.duration) }}</span></div>
     </div>
-    <div class="description-foot">
+    <!-- <div class="description-foot">
       <p>{{ formatVideoDuration(videoItem.duration) }}</p>
-    </div>
+    </div> -->
   </div>
 </div>

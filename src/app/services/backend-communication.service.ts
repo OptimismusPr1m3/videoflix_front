@@ -16,7 +16,7 @@ import { NgxSpinner } from 'ngx-spinner';
   providedIn: 'root',
 })
 export class BackendCommunicationService {
-  mails: any | null = [];
+  
   signaledMail = signal<string | null>('');
 
   constructor(
@@ -26,23 +26,27 @@ export class BackendCommunicationService {
     private globals: GlobalVariablesService
   ) {}
 
-  checkMailAndRedirect(enteredMail: string | null) {
-    this.http
-      .get(this.endPoints.USERS_API, { observe: 'response' })
-      .subscribe((res) => {
-        this.mails = res.body;
-        const foundMail = this.mails.find(
-          (mail: { email: string }) => mail.email === enteredMail
-        );
-        if (foundMail) {
-          this.signaledMail.set(foundMail.email);
-          this.router.navigate(['/login']);
-        } else {
-          this.signaledMail.set(enteredMail);
-          console.log('Nope');
-          this.router.navigate(['/registration']);
-        }
-      });
+  // checkMailAndRedirect(enteredMail: string | null) {
+  //   this.http
+  //     .get(this.endPoints.USERS_API, { observe: 'response' })
+  //     .subscribe((res) => {
+  //       this.mails = res.body;
+  //       const foundMail = this.mails.find(
+  //         (mail: { email: string }) => mail.email === enteredMail
+  //       );
+  //       if (foundMail) {
+  //         this.signaledMail.set(foundMail.email);
+  //         this.router.navigate(['/login']);
+  //       } else {
+  //         this.signaledMail.set(enteredMail);
+  //         console.log('Nope');
+  //         this.router.navigate(['/registration']);
+  //       }
+  //     });
+  // }
+
+  getUsedMails(): Observable<any> {
+    return this.http.get(this.endPoints.USERS_API, {observe: 'response'})
   }
 
   resetPassword(email: string): Observable<any> {

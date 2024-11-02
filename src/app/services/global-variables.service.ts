@@ -10,8 +10,10 @@ export class GlobalVariablesService {
 
   isProgressingData = signal<boolean>(false);
   accountNotExist = signal<boolean>(false);
+
   tryAgain = signal<boolean>(false);
   isProfileOpen = signal<boolean>(false);
+
   isVidOpen = signal<boolean>(false);
   userVideoItems = signal<VideoItem[]>([])
   currentLoggedUser = signal<User | null>(null);

@@ -1,32 +1,4 @@
 <section class="slider-cont">
-  <!--Filme-->
-  <!-- <div class="category-container">
-    <h2>Filme</h2>
-    <div class="scroll-container">
-      <div class="scroll-button left">
-        <button (click)="scrollTo(-200, 'category1')">
-          <mat-icon>chevron_left</mat-icon>
-        </button>
-      </div>
-      <div class="content-container" #category1>
-        <div class="item" *ngFor="let item of videoItems; let i = index">
-          <app-video-item
-            (mouseover)="hoveredIndex1 = i"
-            (mouseleave)="hoveredIndex1 = -1"
-            class="grow-shadow"
-            [videoItem]="item"
-            [isHovered]="hoveredIndex1 === i"
-          ></app-video-item>
-        </div>
-      </div>
-      <div class="scroll-button right">
-        <button (click)="scrollTo(800, 'category1')">
-          <mat-icon>chevron_right</mat-icon>
-        </button>
-      </div>
-    </div>
-  </div> -->
-  <!--Serien bspw. lel-->
 
   <div class="category-container">
     <h2>Videos</h2>
@@ -86,5 +58,14 @@
       </div>
     </div>
   </div>
+
+  <ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  ><p style="color: white">Bitte einen Moment Geduld...</p></ngx-spinner
+>
 
 </section>

@@ -71,6 +71,7 @@ export class FileUploadComponent {
       description: ''
     })
     this.videoForm.markAsUntouched()
+    this.globals.isUploadOpen.set(false)
   }
 
   onFileSelected(event: any) {

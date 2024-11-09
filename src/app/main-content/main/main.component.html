@@ -6,4 +6,9 @@
             <app-videoplayer [isInMyVideos]="false"></app-videoplayer>
         </div>
     </div>
+    <div *ngIf="this.globals.isUploadOpen()" class="video-overlay">
+        <div class="v-overlay-container">
+            <app-file-upload></app-file-upload>
+        </div>
+    </div>
 </section>

@@ -164,6 +164,9 @@ textarea {
       gap: 16px;
       > .file-data {
         @include dFlex(column, center, flex-start);
+        span {
+          color: #ffffff
+        }
       }
     }
   }

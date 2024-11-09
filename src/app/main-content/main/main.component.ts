@@ -6,18 +6,18 @@ import { GlobalVariablesService } from '../../services/global-variables.service'
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from '../profile/profile.component';
 import { VideoplayerComponent } from '../videoplayer/videoplayer.component';
+import { FileUploadComponent } from "../profile/file-upload/file-upload.component";
 
 @Component({
   selector: 'app-main',
   standalone: true,
   imports: [
     CommonModule,
-    HeaderComponent,
     LoggedHeaderComponent,
     SliderCompComponent,
-    ProfileComponent,
     VideoplayerComponent,
-  ],
+    FileUploadComponent
+],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',
 })

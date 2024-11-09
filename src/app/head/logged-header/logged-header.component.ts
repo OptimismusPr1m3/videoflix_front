@@ -53,6 +53,10 @@ export class LoggedHeaderComponent {
     });
   }
 
+  openUploadVideoComp() {
+    this.globals.isUploadOpen.set(!this.globals.isUploadOpen())
+  }
+
   // getLoggedUserData() {
   //   this.backService.fetchLoggedUser().subscribe({
   //     next: (resp) => {

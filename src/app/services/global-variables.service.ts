@@ -8,12 +8,13 @@ import { VideoItem } from '../models/videoItem.class';
 })
 export class GlobalVariablesService {
 
+  //Registration
   isProgressingData = signal<boolean>(false);
   accountNotExist = signal<boolean>(false);
-
+  //Login
   tryAgain = signal<boolean>(false);
   isProfileOpen = signal<boolean>(false);
-
+  
   isVidOpen = signal<boolean>(false);
   userVideoItems = signal<VideoItem[]>([])
   currentLoggedUser = signal<User | null>(null);
@@ -21,11 +22,16 @@ export class GlobalVariablesService {
   currentOpenedVideo = signal<VideoItem | null>(null);
   currentOpened480Video = signal<string>('');
 
+  //Profil Section with its Paths
   activePath = signal<string>('oversight');
   activeHeadingString = signal<string>('Übersicht')
 
+  //Video Editing
   isSettingsEditing = signal<boolean>(false);
   isMyVideoEditing = signal<boolean>(false);
+
+  //Upload Overlay at Main
+  isUploadOpen = signal<boolean>(false);
 
 
   //For Spinners

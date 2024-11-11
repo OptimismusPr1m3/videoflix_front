@@ -45,9 +45,11 @@ export class Step1Component {
     Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
   ]);
   password = new FormControl('', [Validators.required]);
+  password2 = new FormControl('', [Validators.required]);
 
   mailErrorMessage = signal('');
   hide = signal(true);
+  hide2 = signal(true);
 
   constructor(public backService: BackendCommunicationService, public globals: GlobalVariablesService) {
     merge(this.email.statusChanges, this.email.valueChanges)
@@ -69,6 +71,11 @@ export class Step1Component {
 
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
+    event.stopPropagation();
+  }
+
+  clickEvent2(event: MouseEvent) {
+    this.hide2.set(!this.hide2());
     event.stopPropagation();
   }
 

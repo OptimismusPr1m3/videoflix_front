@@ -34,22 +34,23 @@
       font-size: 18px;
       width: 50%;
       padding: 16px;
-      border-radius: 4px;
-      border:1px solid #4f4e4e;
-      background-color: #2F2F2F;
+      border-radius: 12px;
+      outline: none;
+      border: none;
+      background-color: #2e3edf;
     }
     > .enabled {
       transition: all 250ms ease-in-out;
       cursor: pointer;
       &:hover {
-        background-color: #4f4e4e;
+        background-color: #2e3edf;
       }
     }
     > .disabled {
-      color: #4f4e4e;
+      color: rgba($color: #ffffff, $alpha: 0.4);
       transition: all 250ms ease-in-out;
       cursor: not-allowed;
-      background-color: #252525 !important;
+      background-color: rgba($color: #2e3edf, $alpha: 0.4);
     }
   }
 }
@@ -96,17 +97,17 @@ textarea {
 ::ng-deep
   .custom-input-settings
   .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: rgba(255, 255, 255, 0.08) !important;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px;
+  border: 2px solid rgba($color: #2e3edf, $alpha: 1.0);
 }
 
 ::ng-deep
   .custom-input-settings-none
   .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: rgba(255, 255, 255, 0.01) !important;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  border-radius: 12px;
+  border: 2px solid rgba($color: #2e3edf, $alpha: 0.3);
 }
 
 ::ng-deep .mdc-line-ripple::after {
@@ -132,10 +133,10 @@ textarea {
     gap: 40px;
     min-height: 80px;
     margin-bottom: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.5); ;
-    border-radius: 4px;
+    border: 2px solid rgba($color: #2e3edf, $alpha: 1.0);
+    border-radius: 12px;
     padding-top: 4px;
-    background-color: #252525;
+    background-color: rgba(255, 255, 255, 0.1);
     > .file-input {
       padding-left: 16px;
       > input {
@@ -147,14 +148,15 @@ textarea {
         padding: 16px 0px;
         font-size: 16px;
         font-family: 'Raleway';
-        background-color: #B0101F;
+        background-color: #2e3edf;
         border: none;
-        border-radius: 4px;
+        outline: none;
+        border-radius: 12px;
         font-weight: 700;
         color: #ffffff;
         &:hover {
           cursor: pointer;
-          background-color: #e50815;
+          background-color: rgba($color: #2e3edf, $alpha: 0.8);
         }
       }
     }

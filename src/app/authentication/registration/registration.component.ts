@@ -6,11 +6,12 @@ import { Step2Component } from './step-2/step-2.component';
 import { Step0Component } from "./step-0/step-0.component";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { GlobalVariablesService } from '../../services/global-variables.service';
+import { FooterComponent } from '../../foot/footer/footer.component';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [CommonModule, RouterModule, Step1Component, Step1Component, Step2Component, Step0Component, MatProgressSpinnerModule],
+  imports: [CommonModule, RouterModule, Step1Component, Step1Component, Step2Component, Step0Component, MatProgressSpinnerModule, FooterComponent],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss'
 })
@@ -24,7 +25,6 @@ export class RegistrationComponent {
   constructor(private renderer: Renderer2, public globals: GlobalVariablesService){}
 
   ngOnInit(){
-    this.renderer.addClass(document.body, 'registration-page');
     this.isProgressing = this.globals.isProgressingData()
   }
 

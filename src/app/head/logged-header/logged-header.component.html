@@ -1,14 +1,15 @@
 <div class="header-cont">
   <div class="left-cont">
-    <div [routerLink]="['/']" class="logo">
+    <!-- <div [routerLink]="['/']" class="logo">
       <span>CHILL</span>
       <span class="n-letter">'N'</span>
       <span>FLIX</span>
-    </div>
-    <div class="menu">
+    </div> -->
+    <img src="./../../../assets/logos/Symbol.png" alt="logo">
+    <!-- <div class="menu">
       <span>Startseite</span>
       <span (click)="openUploadVideoComp()">Video hochladen</span>
-    </div>
+    </div> -->
   </div>
 
 
@@ -20,20 +21,24 @@
     </div>
     <mat-menu #menu="matMenu" (closed)="menuOpened(false)" xPosition="before">
       <button (click)="openProfile()" mat-menu-item>
-        <mat-icon class="outlined">manage_accounts</mat-icon>
+        <mat-icon class="blue">manage_accounts</mat-icon>
         <span class="menu-pnts">Konto</span>
       </button>
       <button mat-menu-item>
-        <mat-icon class="outlined">lock</mat-icon>
+        <mat-icon class="blue">upload_file</mat-icon>
+        <span class="menu-pnts">Video hochladen</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="blue">lock</mat-icon>
         <span class="menu-pnts">Datenschutz</span>
       </button>
       <button mat-menu-item>
-        <mat-icon>description</mat-icon>
+        <mat-icon class="blue">description</mat-icon>
         <span class="menu-pnts">Impressum</span>
       </button>
-      <div style="height: 2px; background-color:black"></div>
+      <!-- <div style="height: 2px; background-color:black"></div> -->
       <button (click)="logOut()" mat-menu-item>
-        <mat-icon>logout</mat-icon>
+        <mat-icon class="blue">logout</mat-icon>
         <span class="menu-pnts" style="text-align: center;">Logout</span>
       </button>
     </mat-menu>

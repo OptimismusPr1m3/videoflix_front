@@ -6,9 +6,9 @@
     <span>SCHRITT 2 VON 3</span>
   </div>
 
-  <h2>Vergeben Sie ein Passwort, um Ihr Konto zu erstellen.</h2>
+  <h2>Vergib ein Passwort, um dein Konto zu erstellen.</h2>
   <p>
-    Nur noch ein paar Schritte und Sie haben es geschafft! <br />
+    Nur noch ein paar Schritte und Du hast es geschafft! <br />
     Wir finden Papierkram auch nervig.
   </p>
   <div>
@@ -46,7 +46,29 @@
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide()"
         >
-          <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+          <mat-icon class="blue-color">{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Gib dein Passwort ein</mat-label>
+        <input
+          matInput
+          [formControl]="password2"
+          [type]="hide2() ? 'password' : 'text'"
+          [minlength]="8"
+        />
+        @if (password.invalid) {
+          <mat-error> Das Passwort sollte mind. 8 Zeichen beinhalten </mat-error>
+          }
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="clickEvent2($event)"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide2()"
+        >
+          <mat-icon class="blue-color">{{ hide2() ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
     </div>

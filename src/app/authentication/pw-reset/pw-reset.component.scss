@@ -4,7 +4,7 @@
   max-width: 1920px;
   height: 100vh;
   width: 100%;
-  @include dFlex(column, flex-start, center);
+  @include dFlex(column, space-between, center);
   margin: 0px 124px;
   > .header-cont {
     width: 100%;
@@ -48,7 +48,6 @@
   }
 
   > .mail-cont {
-    margin-top: 256px;
     @include dFlex(column, center, center);
     > span {
       color: #ffffff;
@@ -63,60 +62,31 @@
       }
     }
 
-    > .mail-input {
-      @include dFlex(row, center, center);
-      gap: 8px;
-      > .mail-input-cont {
-        padding: 12px 18px;
-        border-radius: 4px;
-        border: 1px solid #ffffff;
-        > input {
-          width: 100%;
-          max-width: 100%;
-          overflow: hidden;
-          background-color: transparent;
-          border: none;
-          outline: none;
-          color: #ffffff;
-          font-size: 20px;
-          &::placeholder {
-            color: #ffffff;
-          }
-        }
+    > .mail-container {
+      @include dFlex(row, flex-start, flex-start);
+      gap: 32px;
+      width: 100%;
+      margin-bottom: 16px;
+      > mat-form-field {
+        width: 63%;
+        font-family: "Raleway", sans-serif;
       }
-      > .go-btn {
-        @include dFlex(row, center, center);
-        gap: 16px;
-        padding: 12px 24px;
-        border-radius: 4px;
-        transition: all 150ms;
-        border: none;
-        > span {
+      > .login-btn {
+        @include dFlex(row, flex-start, center);
+        > div {
+          @include dFlex(row, center, center);
+          gap: 8px;
+          padding: 18px 30px;
+          background-color: #2e3edf;
+          border-radius: 40px;
           color: #ffffff;
-          font-size: 24px;
-          font-weight: 500;
-        }
-        > mat-icon {
-          color: #ffffff;
-        }
-      }
-      > .back-btn {
-        transition: all 0.3s ease-in-out;
-        padding: 12px 24px;
-        font-size: 24px;
-        font-weight: 700;
-        border-radius: 4px;
-        border: none;
-        background-color: #e50815;
-        color: #ffffff;
-        > span {
-            color: #ffffff;
-            font-size: 24px;
-            font-weight: 500;
-        }
-        &:hover {
+          font-weight: 700;
+          font-size: 18px;
+          &:hover {
+            transition: all 0.3s ease-in-out;
             cursor: pointer;
-            background-color: #ac040f;
+            background-color: #5460e5;
+          }
         }
       }
     }
@@ -135,4 +105,37 @@
     cursor: pointer;
     background-color: #ac040f;
   }
+}
+
+:host
+  ::ng-deep
+  .custom-input-login
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #ffffff !important;
+  border-radius: 40px;
+  border: 1px solid #2e3edf !important;
+}
+
+
+
+input {
+  color: #2e3edf !important;
+  font-size: 18px;
+  font-weight: 400;
+  &::placeholder {
+    color: #2e3edf !important;
+  }
+}
+
+::ng-deep .mdc-line-ripple::after {
+  display: none;
+}
+
+::ng-deep .mdc-line-ripple::before {
+  display: none;
+  border-bottom-style: none;
+}
+
+mat-label {
+  color: #5460e5;
 }

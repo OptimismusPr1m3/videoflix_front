@@ -24,16 +24,15 @@
     > .login-btn {
       transition: all 0.3s ease-in-out;
       text-decoration: none;
-      width: 98px;
-      height: 32px;
-      border-radius: 4px;
-      background-color: #e50815;
+      padding: 12px 24px;
+      border-radius: 40px;
+      background-color: #2E3EDF;
       @include dFlex(row, center, center);
       &:hover {
-        background-color: #ac040f;
+        background-color: #5460e5;
       }
       > span {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 700;
         color: #ffffff;
       }

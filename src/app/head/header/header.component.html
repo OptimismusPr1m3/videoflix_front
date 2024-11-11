@@ -1,10 +1,11 @@
 <div class="header-cont">
     <div [routerLink]="['/']" class="logo">
-        <span>CHILL</span>
+        <!-- <span>CHILL</span>
         <span class="n-letter">'N'</span>
-        <span>FLIX</span>
+        <span>FLIX</span> -->
+        <img src="./../../../assets/logos/Logo.png" alt="logo">
     </div>
-    <div class="right-cont">
+    <div *ngIf="!isLoginScreen" class="right-cont">
         <a [routerLink]="['/login']" class="login-btn">
             <span>Login</span>
         </a>

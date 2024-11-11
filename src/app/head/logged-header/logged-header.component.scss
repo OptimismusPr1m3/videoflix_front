@@ -8,7 +8,6 @@
   }
   z-index: 1000;
   position: fixed;
-  background-color: #141414;
   height: 100px;
   @media (max-width: 1920px) {
     position: unset;
@@ -65,11 +64,19 @@
         margin-right: 8px;
       }
       .arrow-drop-up {
+        transition: all 150ms ease-in-out;
         color: #ffffffff;
         rotate: -90deg;
+        height: 32px;
+        width: 32px;
+        font-size: 32px;
       }
       .arrow-drop-down {
-        color: #ffffff;
+        transition: all 150ms ease-in-out;
+        height: 32px;
+        width: 32px;
+        font-size: 32px;
+        color: #2e3edf !important;
       }
     }
 
@@ -78,18 +85,21 @@
 
 .menu-pnts {
   font-family: 'Raleway';
-  color: #ffffff;
+  color: #2e3edf;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 ::ng-deep .mat-mdc-menu-content {
   padding: 0 !important;
-  background-color: rgba($color: #000000, $alpha: 0.8);
+  background-color: rgba($color: #ffffff, $alpha: 1.0);
+  border-radius: 12px !important;
 }
 
 ::ng-deep .mat-mdc-menu-item {
   transition: all 150ms ease-in-out !important;
   &:hover {
-    background-color: rgba($color: #ffffff, $alpha: 0.05) !important;
+    background-color: rgba($color: #2e3edf, $alpha: 0.3) !important;
   }
 }
 
@@ -100,6 +110,6 @@
   background-color: rgba($color: #000000, $alpha: 0.0001) !important;
 }
 
-mat-icon {
-  color: #ffffff !important;
+.blue {
+  color: #2e3edf !important;
 }

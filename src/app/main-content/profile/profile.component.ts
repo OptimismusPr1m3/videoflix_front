@@ -23,6 +23,7 @@ import { BackendCommunicationService } from '../../services/backend-communicatio
 import { User } from '../../models/user.class';
 import { OversightComponent } from './oversight/oversight.component';
 import { VideoplayerComponent } from '../videoplayer/videoplayer.component';
+import { FooterComponent } from '../../foot/footer/footer.component';
 
 @Component({
   selector: 'app-profile',
@@ -37,11 +38,10 @@ import { VideoplayerComponent } from '../videoplayer/videoplayer.component';
     FormsModule,
     ProfileHeaderComponent,
     RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
     MatListModule,
     OversightComponent,
-    VideoplayerComponent
+    VideoplayerComponent,
+    FooterComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',

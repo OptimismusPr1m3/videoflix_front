@@ -82,7 +82,7 @@ export class BackendCommunicationService {
         console.error(err);
       },
       complete: () => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
       },
     });
   }

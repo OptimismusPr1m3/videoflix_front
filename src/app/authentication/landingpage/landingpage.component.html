@@ -1,31 +1,38 @@
 <section class="landing-cont">
-    <app-header></app-header>
+  <app-header></app-header>
 
-    <div class="mail-cont">
-        <span>Unbegrenzt Filme, Serien und mehr.</span>
-        <p>Geniessen Sie Chill'n'Flix wo immer sie moechten.</p>
-        <p>Sind Sie startklar? Geben Sie Ihre E-Mailadresse ein, um loszulegen!</p>
+  <div class="mail-cont">
+    <span>Unbegrenzt Filme, Serien und mehr.</span>
+    <p>Geniessen Sie Videoflix wo immer sie möchten.</p>
+    <p>Sind Sie startklar? Geben Sie Ihre E-Mailadresse ein, um loszulegen!</p>
 
-        <div class="mail-input">
-            <div class="mail-input-cont">
-                <input type="email" name="mail" placeholder="E-Mailadresse" [formControl]="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>  
-            </div>
-            <div (click)="checkMail()" class="go-btn">
-                <span>Loslegen </span> <mat-icon>arrow_forward</mat-icon>
-            </div>
-        </div>
-        @if (mail.invalid && mail.touched) {
-            <span>Email Adresse ungueltig!</span>
+    <div class="mail-container custom-input-login">
+      <mat-form-field>
+        <mat-label>Gib deine E-Mail ein</mat-label>
+        <input
+          matInput
+          placeholder="email@mail.com"
+          [formControl]="mail"
+          (blur)="updateMailErrorMessage()"
+          required
+        />
+        @if (mail.invalid) {
+        <mat-error> {{ mailErrorMessage() }} </mat-error>
         }
+      </mat-form-field>
+      <div (click)="checkMail()" type="button" class="login-btn">
+        <div>Einloggen</div>
+      </div>
     </div>
+  </div>
 
-    <ngx-spinner
-  bdColor="rgba(0, 0, 0, 0.8)"
-  size="medium"
-  color="#fff"
-  type="square-jelly-box"
-  [fullScreen]="true"
-  ><p style="color: white">Bitte einen Moment Geduld...</p></ngx-spinner
->
-
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="square-jelly-box"
+    [fullScreen]="true"
+    ><p style="color: white">Bitte einen Moment Geduld...</p></ngx-spinner
+  >
+  <app-footer></app-footer>
 </section>

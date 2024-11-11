@@ -26,7 +26,7 @@ export class ApiEndpointsService {
   /*local*/
   // USERS_API = 'http://127.0.0.1:8000/api/users/';
   // REGISTER = 'http://127.0.0.1:8000/api/accounts/signup/';
-  // LOGIN = 'http://127.0.0.1:8000/api/accounts/login/';
+  // LOGIN = 'http://127.0.0.1:8000/api/accounts/auth/login/';
   // LOGOUT = 'http://127.0.0.1:8000/api/accounts/logout/'
   // RESET_PASSWORD = 'http://127.0.0.1:8000/api/accounts/password/reset/'
   // VIDEO_ITEMS = 'http://127.0.0.1:8000/api/videos/'

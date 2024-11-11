@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from '../profile/profile.component';
 import { VideoplayerComponent } from '../videoplayer/videoplayer.component';
 import { FileUploadComponent } from "../profile/file-upload/file-upload.component";
+import { FooterComponent } from '../../foot/footer/footer.component';
 
 @Component({
   selector: 'app-main',
@@ -16,7 +17,7 @@ import { FileUploadComponent } from "../profile/file-upload/file-upload.componen
     LoggedHeaderComponent,
     SliderCompComponent,
     VideoplayerComponent,
-    FileUploadComponent
+    FileUploadComponent,
 ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',

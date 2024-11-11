@@ -1,4 +1,4 @@
 
 <router-outlet />
-<div class="separator"></div>
-<app-footer></app-footer>
+<!-- <div class="separator"></div> -->
+<app-footer [isMain]="true" *ngIf="globals.isMainSiteActive()"></app-footer>

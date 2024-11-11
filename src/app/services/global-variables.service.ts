@@ -38,6 +38,9 @@ export class GlobalVariablesService {
   // my-video-spinner
   myVideosIsLoading = signal<boolean>(true)
 
+  //footer at main
+  isMainSiteActive = signal<boolean>(false)
+
 
   videoUploadStrings: string[] = ['Dein Video wird gerade hochgeladen...', 'Gleich fertig']
   videoUploadText = signal<string>(this.videoUploadStrings[0])

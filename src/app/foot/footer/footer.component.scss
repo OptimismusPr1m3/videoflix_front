@@ -7,9 +7,19 @@
     height: 104px;
     margin: 32px 0px;
     color: #ffffffff;
-    @include dFlex(row, space-between, center);
+    @include dFlex(row, center, center);
+    gap: 48px;
     @media (max-width: 1920px) {
         margin: 32px 32px;
+    }
+    > .foot-txt {
+        font-weight: 500;
+        font-size: 18px;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+            //font-size: 20px
+        }
     }
     > .middle-cont {
         @include dFlex(row, center, center);
@@ -17,3 +27,6 @@
     }
 }
 
+.main {
+    justify-content: flex-end !important;
+}

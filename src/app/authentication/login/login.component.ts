@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Renderer2, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { GlobalVariablesService } from '../../services/global-variables.service';
 import { HeaderComponent } from '../../head/header/header.component';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { FooterComponent } from "../../foot/footer/footer.component";
 
 @Component({
   selector: 'app-login',
@@ -31,8 +32,9 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
     ReactiveFormsModule,
     RouterLink,
     HeaderComponent,
-    NgxSpinnerModule
-  ],
+    NgxSpinnerModule,
+    FooterComponent
+],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -53,11 +55,16 @@ export class LoginComponent {
     public backService: BackendCommunicationService,
     public router: Router,
     public globals: GlobalVariablesService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private renderer: Renderer2
   ) {
     merge(this.email.statusChanges, this.email.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateMailErrorMessage());
+  }
+
+  ngOnInit() {
+    this.renderer.addClass(document.body, 'login-page');
   }
 
   updateMailErrorMessage() {
@@ -78,8 +85,8 @@ export class LoginComponent {
   }
 
   tryLogin() {
-    this.spinner.show()
     if (this.email.valid && this.password.valid) {
+      this.spinner.show()
       this.backService
         .userLogin(this.email.value!, this.password.value!)
         .subscribe({

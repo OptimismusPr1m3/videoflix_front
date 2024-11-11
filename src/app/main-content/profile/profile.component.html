@@ -1,11 +1,12 @@
-<app-profile-header></app-profile-header>
+
 
 <section>
+  <app-profile-header></app-profile-header>
   <div class="profile">
     <div class="left-nav">
       <div (click)="backToMain()" class="back-to-main">
         <mat-icon>keyboard_backspace</mat-icon>
-        <span>Zurück zu Chill'N'Flix</span>
+        <span>Zurück zu VideoFlix</span>
       </div>
       <mat-list class="custom-list">
         <mat-list-item (click)="navigateTo('oversight', false)" [ngClass]="globals.activePath() === 'oversight' ? 'active' : 'inactive' ">
@@ -34,6 +35,9 @@
       <router-outlet />
     </div>
   </div>
+
+  <app-footer></app-footer>
+
 </section>
 
 <div *ngIf="this.globals.isVidOpen()" class="video-overlay">

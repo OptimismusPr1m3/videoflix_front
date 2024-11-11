@@ -4,7 +4,7 @@
   max-width: 1920px;
   height: 100vh;
   width: 100%;
-  @include dFlex(column, flex-start, center);
+  @include dFlex(column, space-between, center);
   margin: 0px 124px;
   > .header-cont {
     width: 100%;
@@ -30,18 +30,23 @@
   > .login-cont {
     @include dFlex(row, center, center);
     width: 100%;
+    gap: 32px;
     > .login-form {
       min-width: 400px;
-      padding: 48px 64px;
-      background-color: rgba($color: #000000, $alpha: 0.6);
+      padding: 43px 56px;
+      background-color: #ffffff;
+      border-radius: 48px;
       > span {
         color: #ee2222;
         font-size: 24px;
       }
       > h3 {
-        font-size: 32px;
-        color: #ffffff;
+        font-size: 48px;
+        color: #2e3edf;
         font-weight: 600;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 32px;
       }
       > div {
         > .mail-container {
@@ -59,21 +64,21 @@
         }
         > .login-btn {
           margin-top: 14px;
-          max-width: 100%;
           width: 100%;
-          padding: 8px 4px;
-          background-color: #e50914;
           @include dFlex(row, center, center);
-          border-radius: 4px;
-          color: #ffffff;
-            font-weight: 500;
-            font-size: 20px;
-          &:hover {
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-            background-color: #c11119;
+          > div {
+            padding: 12px 24px;
+            background-color: #2e3edf;
+            border-radius: 40px;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 18px;
+            &:hover {
+              transition: all 0.3s ease-in-out;
+              cursor: pointer;
+              background-color: #5460e5;
+            }
           }
-          
         }
       }
       > .or {
@@ -86,26 +91,55 @@
         }
       }
       > .pw-reset {
-        margin-top: 18px;
+        margin-top: 16px;
         max-width: 100%;
+        margin-bottom: 16px;
         @include dFlex(row, center, center);
+        > a {
+          text-decoration: none;
+          color: #2e3edf;
+          font-size: 18px;
+          font-weight: 700;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      > .register-cont {
+        @include dFlex(row, center, center);
+        gap: 24px;
+        > .new-cont {
+          font-size: 18px;
+          font-weight: 500;
+          color: #000000;
+        }
+        > .register-btn {
+          font-size: 18px;
+          font-weight: 700;
+          color: #2e3edf;
+          text-decoration: none;
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
 }
 
 input {
-  color: #ffffff !important;
+  color: #2e3edf !important;
+  font-size: 18px;
+  font-weight: 400;
   &::placeholder {
-    color: #ffffff !important;
+    color: #2e3edf !important;
   }
 }
-
 mat-icon {
   //font-family: 'Material Icons Outlined';
   color: #ffffff !important;
 }
-
 
 a {
   text-decoration: none;
@@ -117,8 +151,28 @@ a {
   }
 }
 
-:host ::ng-deep .custom-input-login .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: rgba(255, 255, 255, 0.08) !important;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+:host
+  ::ng-deep
+  .custom-input-login
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: #ffffff !important;
+  border-radius: 12px;
+  border: 1px solid #2e3edf !important;
+}
+
+::ng-deep .mdc-line-ripple::after {
+  display: none;
+}
+
+::ng-deep .mdc-line-ripple::before {
+  display: none;
+  border-bottom-style: none;
+}
+
+mat-label {
+  color: #5460e5;
+}
+
+.blue-color {
+  color: #2e3edf !important;
 }

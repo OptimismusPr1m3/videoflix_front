@@ -1,9 +1,10 @@
 <section class="register-cont">
   <div class="header-cont">
     <div class="logo">
-      <span>CHILL</span>
+      <!-- <span>CHILL</span>
       <span class="n-letter">'N'</span>
-      <span>FLIX</span>
+      <span>FLIX</span> -->
+      <img src="./../../../assets/logos/Logo.png" alt="videoflix-logo">
     </div>
     <div class="right-cont">
       <a [routerLink]="['/login']" class="login-btn">
@@ -11,8 +12,6 @@
       </a>
     </div>
   </div>
-  <div class="divider"></div>
-
 
   <div class="steps"> 
     <app-step-0 *ngIf="!isStep1 && !isStep2" (stepChange)="changeStep($event)"></app-step-0>
@@ -23,8 +22,9 @@
   <div class="spinner" *ngIf="this.globals.isProgressingData()">
     <div class="spinner-cont">
       <mat-spinner></mat-spinner>
-    </div>
-    
+    </div>  
   </div>
   
+  <app-footer></app-footer>
+
 </section>

@@ -1,5 +1,5 @@
 <section class="landing-cont">
-  <app-header></app-header>
+  <app-header [isLoginScreen]="true" ></app-header>
 
   <div class="login-cont">
     <div class="login-form">
@@ -44,32 +44,37 @@
               [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hide()"
             >
-              <mat-icon>{{
+              <mat-icon class="blue-color">{{
                 hide() ? "visibility_off" : "visibility"
               }}</mat-icon>
             </button>
           </mat-form-field>
         </div>
 
-        <button
+        <div
           (click)="tryLogin()"
           type="button"
-          [disabled]="email.invalid || email.value === ''"
           class="login-btn"
-        >
-          Einloggen
-        </button>
-      </div>
-
-      <div class="or">
-        <span>oder</span>
+        > <div>
+            Einloggen
+          </div>
+        </div>
+      
       </div>
 
       <div class="pw-reset">
         <a [routerLink]="['/pw-reset']">Passwort vergessen ?</a>
       </div>
+
+      <div class="register-cont">
+        <span class="new-cont">Neu bei VideoFlix ?</span>
+        <a [routerLink]="['/registration']" class="register-btn">Jetzt registrieren !</a>
+      </div>
     </div>
   </div>
+
+  <app-footer></app-footer>
+
 </section>
 
 <ngx-spinner

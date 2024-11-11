@@ -1,5 +1,10 @@
-<section class="footer">
-    <div class="left-cont">Impressum</div>
-    <div class="middle-cont"><mat-icon>copyright</mat-icon>Sebastian Wolff</div>
-    <div class="right-cont">Datenschutzerklärung</div>
+<section *ngIf="!isMain" class="footer">
+    <div class="foot-txt">Datenschutz</div>
+    <div class="foot-txt">Impressum</div>
+    <!-- <div class="middle-cont"><mat-icon>copyright</mat-icon>Sebastian Wolff</div> -->
+</section>
+
+<section *ngIf="isMain" class="footer main">
+    <div class="foot-txt">Datenschutz</div>
+    <div class="foot-txt">Impressum</div>
 </section>

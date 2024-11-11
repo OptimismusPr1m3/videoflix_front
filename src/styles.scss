@@ -43,21 +43,50 @@ body {
   box-sizing: border-box;
   background-color: #000000;
   font-family: "Raleway", sans-serif;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)),
-    url("./assets/img/flix-bg.jpg") no-repeat center center;
+  background: linear-gradient(rgba(0, 0, 0, 1.0), rgba(0, 0, 0, 0.55), rgba(0,0,0, 1.0)),
+    url("./assets/img/flix-bg-n.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+body.landing-page {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #000000;
+  font-family: "Raleway", sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 1.0), rgba(0, 0, 0, 0.55), rgba(0,0,0, 1.0)),
+    url("./assets/img/flix-bg-n.jpg") no-repeat center center;
   background-size: cover;
 }
 
 body.registration-page {
+  background-color: #000000;
   font-family: "Raleway", sans-serif;
-  background-color: #ffffff;
-  background-image: none;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.44), rgba(0,0,0, 0.8)),
+    url("./assets/img/registration-page.jpg") no-repeat center center;
+  background-size: cover;
 }
 
 body.logged-in {
   font-family: "Raleway", sans-serif;
-  background-color: #141414;
-  background-image: none;
+  background-color: rgba($color: #141414, $alpha: 1.0) !important;
+  background-image: none !important;
+}
+
+body.login-page {
+  background-color: #000000;
+  font-family: "Raleway", sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.44), rgba(0,0,0, 0.8)),
+    url("./assets/img/login-page.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+body.profile-page {
+  background-color: #000000;
+  font-family: "Raleway", sans-serif;
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), rgba(0,0,0, 0.9)),
+    url("./assets/img/login-page.jpg") no-repeat center center;
+  background-size: cover;
 }
 
 @mixin dFlex($direction, $justify, $align) {
@@ -105,7 +134,7 @@ app-footer {
   display: flex;
   width: 100%;
   justify-content: center;
-  background-color: rgba($color: #000000, $alpha: 1.0);
+  // background-color: rgba($color: #000000, $alpha: 1.0);
 }
 
 //Profile Section 

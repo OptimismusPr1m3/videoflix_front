@@ -1,14 +1,34 @@
-<section style="position: relative;">
-    <app-logged-header></app-logged-header>
-    <app-slider-comp></app-slider-comp>
-    <div *ngIf="this.globals.isVidOpen()" class="video-overlay">
-        <div class="v-overlay-container">
-            <app-videoplayer [isInMyVideos]="false"></app-videoplayer>
-        </div>
+<section style="position: relative">
+  <app-logged-header></app-logged-header>
+
+  <div class="preview-description">
+    <h1>Breakout</h1>
+    <span>
+      In a high-security prison, a wrongly convicted man formulates a meticulous <br>
+      plan to break out and prove his innocence. He must navigate a web of <br>
+      alliances and betrayals to reclaim his freedom and expose the truth. <br>
+    </span>
+    <div class="play-btn">
+        <mat-icon>play_arrow</mat-icon>
+        <span>Abspielen</span>
     </div>
-    <div *ngIf="this.globals.isUploadOpen()" class="video-overlay">
-        <div class="v-overlay-container">
-            <app-file-upload></app-file-upload>
-        </div>
+  </div>
+
+  <app-slider-comp></app-slider-comp>
+
+  <div *ngIf="this.globals.isVidOpen()" class="video-overlay">
+    <div class="v-overlay-container">
+      <app-videoplayer [isInMyVideos]="false"></app-videoplayer>
     </div>
+  </div>
+
+  <div *ngIf="this.globals.isUploadOpen()" class="video-overlay">
+    <div class="v-overlay-container">
+      <app-file-upload></app-file-upload>
+    </div>
+  </div>
+
+  <app-footer [isMain]="true"></app-footer>
 </section>
+
+<app-preview-comp></app-preview-comp>

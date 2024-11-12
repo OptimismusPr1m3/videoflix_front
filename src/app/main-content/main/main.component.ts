@@ -8,6 +8,8 @@ import { ProfileComponent } from '../profile/profile.component';
 import { VideoplayerComponent } from '../videoplayer/videoplayer.component';
 import { FileUploadComponent } from "../profile/file-upload/file-upload.component";
 import { FooterComponent } from '../../foot/footer/footer.component';
+import { PreviewCompComponent } from "../preview-comp/preview-comp.component";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-main',
@@ -18,6 +20,9 @@ import { FooterComponent } from '../../foot/footer/footer.component';
     SliderCompComponent,
     VideoplayerComponent,
     FileUploadComponent,
+    FooterComponent,
+    PreviewCompComponent,
+    MatIconModule
 ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss',

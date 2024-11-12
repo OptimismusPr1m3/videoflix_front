@@ -6,7 +6,9 @@ section {
   .category-container {
     margin-bottom: 20px;
     > h2 {
-      font-size: 32px;
+      margin-bottom: -64px;
+      font-size: 22px;
+      font-weight: 700;
       color: #ffffff;
     }
     > .scroll-container {
@@ -22,7 +24,7 @@ section {
           display: none;
         }
         > .video-container {
-          @include dFlex(row, space-around, center);
+          @include dFlex(row, space-between, center);
           width: 100%;
           display: flex;
           flex-shrink: 0;
@@ -30,7 +32,7 @@ section {
             //width: 450px;
             min-width: 200px;
             max-width: 25%;
-            height: 450px;
+            height: 332px;
             margin: 10px;
             @include dFlex(row, center, center);
             > .grow-shadow {

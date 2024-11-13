@@ -30,8 +30,8 @@
   </div>
 
 
-  <!-- <div class="category-container">
-    <h2>Videos</h2>
+  <div class="category-container">
+    <h2>Documentation</h2>
     <div class="scroll-container">
       <div class="scroll-button left">
         <button (click)="nextVideos('+', 'category2', 2)">
@@ -39,8 +39,8 @@
         </button>
       </div>
       <div class="content-container" #category2>
-        <div class="video-container" *ngFor="let groupKey of numberOfPacks; let groupIndex = index">
-          <div class="item" *ngFor="let item of groupedSliderVids[groupKey]; let i = index">
+        <div class="video-container" *ngFor="let groupKey of numberOfPacksDocumentation; let groupIndex = index">
+          <div class="item" *ngFor="let item of groupedSliderVidsDocumentation[groupKey]; let i = index">
             <app-video-item
               (mouseover)="hoveredIndex2 = i"
               (mouseleave)="hoveredIndex2 = -1"
@@ -57,7 +57,37 @@
         </button>
       </div>
     </div>
-  </div> -->
+  </div>
+
+
+  <div class="category-container">
+    <h2>Drama</h2>
+    <div class="scroll-container">
+      <div class="scroll-button left">
+        <button (click)="nextVideos('+', 'category3', 3)">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+      <div class="content-container" #category3>
+        <div class="video-container" *ngFor="let groupKey of numberOfPacksDrama; let groupIndex = index">
+          <div class="item" *ngFor="let item of groupedSliderVidsDrama[groupKey]; let i = index">
+            <app-video-item
+              (mouseover)="hoveredIndex3 = i"
+              (mouseleave)="hoveredIndex3 = -1"
+              class="grow-shadow"
+              [videoItem]="item"
+              [isHovered]="hoveredIndex3 === i" 
+            ></app-video-item>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-button right">
+        <button (click)="nextVideos('-', 'category3', 3)">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <ngx-spinner
   bdColor="rgba(0, 0, 0, 0.8)"

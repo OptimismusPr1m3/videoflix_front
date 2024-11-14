@@ -41,7 +41,7 @@
 </section>
 
 <div *ngIf="this.globals.isVidOpen()" class="video-overlay">
-  <div class="v-overlay-container">
+  <div [ngClass]="globals.isMyVideoEditing() ? 'v-overlay-container-edit' : 'v-overlay-container'">
       <app-videoplayer [isInMyVideos]="true"></app-videoplayer>
   </div>
 </div>

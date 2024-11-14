@@ -15,6 +15,7 @@ import { BackendCommunicationService } from '../../../services/backend-communica
 import { VideoURLInterface } from '../../../models/video-urlinterface';
 import { VideoItem } from '../../../models/videoItem.class';
 import { Router } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-video-edit',
@@ -26,6 +27,7 @@ import { Router } from '@angular/router';
     MatIconModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatSelectModule
   ],
   templateUrl: './video-edit.component.html',
   styleUrl: './video-edit.component.scss',
@@ -34,6 +36,7 @@ export class VideoEditComponent {
   videoEditForm: FormGroup;
   videoURLS: string[] = [];
   videoItems: VideoItem[] = [];
+  genres: string[] = ['Dokumentation','Drama','Action','Drohne']
 
   constructor(
     private editSpinner: NgxSpinnerService,

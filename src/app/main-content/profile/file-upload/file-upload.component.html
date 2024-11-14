@@ -8,9 +8,19 @@
         Der Titel muss zwischen 4 und 20 Zeichen lang sein 
       </mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Genre</mat-label>
+      <mat-select formControlName="genre" required>
+        <mat-option>--</mat-option>
+        @for (genre of genres; track genre) {
+          <mat-option [value]="genre">{{ genre }}</mat-option>
+        }
+      </mat-select>
+      <mat-error *ngIf="videoForm.get('genre')?.hasError">Bitte wähle ein Genre</mat-error>
+    </mat-form-field>
   </div>
 
-  <div class="form-group custom-input-settings">
+  <!-- <div class="form-group custom-input-settings">
     <mat-form-field>
       <mat-label>Genre</mat-label>
       <input matInput formControlName="genre" type="text" />
@@ -18,7 +28,7 @@
         Das Genre muss mind 4 Zeichen lang sein 
       </mat-error>
     </mat-form-field>
-  </div>
+  </div> -->
 
   <!---->
   <div class="form-group custom-input-settings">

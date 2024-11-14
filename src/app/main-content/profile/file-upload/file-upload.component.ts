@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { BackendCommunicationService } from '../../../services/backend-communication.service';
 import { GlobalVariablesService } from '../../../services/global-variables.service';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-file-upload',
@@ -25,6 +26,7 @@ import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
     ReactiveFormsModule,
     MatInputModule,
     NgxSpinnerModule,
+    MatSelectModule
   ],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.scss',
@@ -37,6 +39,7 @@ export class FileUploadComponent {
   videoPreview: any;
   currentUploadedVideoURL: any;
   selectedVideoDuration: number = 0
+  genres: string[] = ['Dokumentation','Drama','Action','Drohne']
 
   constructor(
     public backEnd: BackendCommunicationService,

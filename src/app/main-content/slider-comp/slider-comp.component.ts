@@ -114,7 +114,7 @@ export class SliderCompComponent {
         this.sortVideosByGenre(resp);
         this.groupVideoItems(resp) // Neu auf VideoFlix Slider
         this.groupVideoItemsByGenre('Drama'); // Drama-Slider
-        this.groupVideoItemsByGenre('Documentation'); // Doku Slider
+        this.groupVideoItemsByGenre('Dokumentation'); // Doku Slider
       },
       error: (err) => {
         console.error(err);
@@ -192,7 +192,7 @@ export class SliderCompComponent {
         }
       });
       this.numberOfPacksDrama = Object.keys(this.groupedSliderVidsDrama);
-    } else if (genre === 'Documentation') {
+    } else if (genre === 'Dokumentation') {
       genreVideos.forEach((video: VideoItem, index: number) => {
         tempPack.push(new VideoItem(video));
         if (

@@ -16,6 +16,7 @@ import { VideoURLInterface } from '../../../models/video-urlinterface';
 import { VideoItem } from '../../../models/videoItem.class';
 import { Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
+import { timestamp } from 'rxjs';
 
 @Component({
   selector: 'app-video-edit',
@@ -144,6 +145,7 @@ export class VideoEditComponent {
       rating: this.globals.currentOpenedVideo()?.rating || 1,
       url: this.globals.currentOpenedVideo()?.url || '',
       duration: this.globals.currentOpenedVideo()?.duration || 0,
+      timestamp: null
     };
     console.log(updatedVideo);
     this.globals.currentOpenedVideo.set(updatedVideo);

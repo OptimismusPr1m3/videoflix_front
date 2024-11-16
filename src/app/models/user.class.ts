@@ -12,6 +12,7 @@ export class User {
   country: string;
   phone_number: number;
   my_videos;
+  video_timestamps;
 
   constructor(obj: any) {
     this.first_name = obj ? obj.first_name : '';
@@ -26,6 +27,7 @@ export class User {
     this.country = obj ? obj.country : '';
     this.phone_number = obj ? obj.phone_number : null;
     this.my_videos = obj ? obj.my_videos : null;
+    this.video_timestamps = obj ? obj.video_timestamps : null;
   }
 
   convertedJoinDate(isoDateString: string): string {

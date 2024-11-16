@@ -17,8 +17,12 @@ export class GlobalVariablesService {
   
   isVidOpen = signal<boolean>(false);
   userVideoItems = signal<VideoItem[]>([])
+  //the user which is logged in
   currentLoggedUser = signal<User | null>(null);
+  // response from all videos @ slider-comp
+  currentVideoResponse = signal<VideoItem[] | null>([])
 
+  //for video sources -> urls for different qualities
   currentOpenedVideo = signal<VideoItem | null>(null);
   currentOpened480Video = signal<string>('');
 
@@ -33,18 +37,18 @@ export class GlobalVariablesService {
   //Upload Overlay at Main
   isUploadOpen = signal<boolean>(false);
 
+  // variable for video_timestamps
+  currentWatchedVideoTimeStamp = signal<Number | null>(null)
 
   //For Spinners
   // my-video-spinner
   myVideosIsLoading = signal<boolean>(true)
 
-  //footer at main
-  isMainSiteActive = signal<boolean>(false)
-
-
   videoUploadStrings: string[] = ['Dein Video wird gerade hochgeladen...', 'Gleich fertig']
   videoUploadText = signal<string>(this.videoUploadStrings[0])
 
+  //footer at main
+  isMainSiteActive = signal<boolean>(false)
 
   constructor() { }
 

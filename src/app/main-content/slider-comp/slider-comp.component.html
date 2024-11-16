@@ -4,7 +4,7 @@
     <h2>Neu auf VideoFlix</h2>
     <div class="scroll-container">
       <div class="scroll-button left">
-        <button (click)="nextVideos('+', 'category1', 1)">
+        <button (click)="nextVideos('+', 'category1')">
           <mat-icon>chevron_left</mat-icon>
         </button>
       </div>
@@ -22,7 +22,37 @@
         </div>
       </div>
       <div class="scroll-button right">
-        <button (click)="nextVideos('-', 'category1',1)">
+        <button (click)="nextVideos('-', 'category1')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="globals.currentLoggedUser()?.video_timestamps" class="category-container">
+    <h2>Weiterschauen</h2>
+    <div class="scroll-container">
+      <div class="scroll-button left">
+        <button (click)="nextVideos('+', 'category4')">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+      <div class="content-container" #category4>
+        <div class="video-container" *ngFor="let groupKey of numberOfPacksWatched; let groupIndex = index">
+          <div class="item" *ngFor="let item of groupedSliderVidsWatched[groupKey]; let i = index">
+            <app-video-item
+              (mouseover)="hoveredIndex4 = i"
+              (mouseleave)="hoveredIndex4 = -1"
+              class="grow-shadow"
+              [videoItem]="item"
+              [isHovered]="hoveredIndex4 === i" 
+            ></app-video-item>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-button right">
+        <button (click)="nextVideos('-', 'category4')">
           <mat-icon>chevron_right</mat-icon>
         </button>
       </div>
@@ -34,7 +64,7 @@
     <h2>Dokumentation</h2>
     <div class="scroll-container">
       <div class="scroll-button left">
-        <button (click)="nextVideos('+', 'category2', 2)">
+        <button (click)="nextVideos('+', 'category2')">
           <mat-icon>chevron_left</mat-icon>
         </button>
       </div>
@@ -52,7 +82,7 @@
         </div>
       </div>
       <div class="scroll-button right">
-        <button (click)="nextVideos('-', 'category2', 2)">
+        <button (click)="nextVideos('-', 'category2')">
           <mat-icon>chevron_right</mat-icon>
         </button>
       </div>
@@ -64,7 +94,7 @@
     <h2>Drama</h2>
     <div class="scroll-container">
       <div class="scroll-button left">
-        <button (click)="nextVideos('+', 'category3', 3)">
+        <button (click)="nextVideos('+', 'category3')">
           <mat-icon>chevron_left</mat-icon>
         </button>
       </div>
@@ -82,7 +112,7 @@
         </div>
       </div>
       <div class="scroll-button right">
-        <button (click)="nextVideos('-', 'category3', 3)">
+        <button (click)="nextVideos('-', 'category3')">
           <mat-icon>chevron_right</mat-icon>
         </button>
       </div>

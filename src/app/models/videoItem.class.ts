@@ -8,6 +8,7 @@ export class VideoItem {
     rating: number;
     url: string;
     duration: number;
+    timestamp;
 
     constructor(obj: any){
         this.title = obj ? obj.title : '';
@@ -19,6 +20,7 @@ export class VideoItem {
         this.rating = obj ? obj.rating : 1;
         this.url = obj ? obj.url : '';
         this.duration = obj ? obj.duration : 0;
+        this.timestamp = obj ? obj.timestamp : null;
     }
 
 }

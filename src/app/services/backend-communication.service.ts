@@ -11,12 +11,10 @@ import { mergeMap, catchError, toArray } from 'rxjs/operators';
 import { VideoURLInterface } from '../models/video-urlinterface';
 import { NgxSpinner } from 'ngx-spinner';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class BackendCommunicationService {
-  
   signaledMail = signal<string | null>('');
 
   constructor(
@@ -46,7 +44,7 @@ export class BackendCommunicationService {
   // }
 
   getUsedMails(): Observable<any> {
-    return this.http.get(this.endPoints.USERS_API, {observe: 'response'})
+    return this.http.get(this.endPoints.USERS_API, { observe: 'response' });
   }
 
   resetPassword(email: string): Observable<any> {
@@ -111,11 +109,15 @@ export class BackendCommunicationService {
 
   addVideoURLToLoggedUser(videoURL: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.patch(this.endPoints.CHANGE_USER_ME, {
-      my_videos: videoURL,
-    },{
-      headers: {Authorization: 'Token ' + token}
-    })
+    return this.http.patch(
+      this.endPoints.CHANGE_USER_ME,
+      {
+        my_videos: videoURL,
+      },
+      {
+        headers: { Authorization: 'Token ' + token },
+      }
+    );
   }
 
   //get and save current logged user
@@ -144,26 +146,27 @@ export class BackendCommunicationService {
     });
   }
 
-  changeVideoInfo(form: FormGroup, url:string): Observable<any> {
-    const token =  localStorage.getItem('token');
+  changeVideoInfo(form: FormGroup, url: string): Observable<any> {
+    const token = localStorage.getItem('token');
     const headers = { Authorization: 'Token ' + token };
-    return this.http.patch(url, form.value ,{ headers, observe: 'response' })
+    return this.http.patch(url, form.value, { headers, observe: 'response' });
   }
 
-  deleteVideo(url: string){
-    const token =  localStorage.getItem('token');
+  deleteVideo(url: string) {
+    const token = localStorage.getItem('token');
     const headers = { Authorization: 'Token ' + token };
-    return this.http.delete(url, { headers, observe: 'response' })
+    return this.http.delete(url, { headers, observe: 'response' });
   }
-  
+
   fetchSingleVideoItems(urls: string[]): Observable<(VideoItem | null)[]> {
     const token = localStorage.getItem('token');
     const headers = { Authorization: 'Token ' + token };
-  
-    return from(urls).pipe( // from always needs string[] 
-      mergeMap(url =>
+
+    return from(urls).pipe(
+      // from always needs string[]
+      mergeMap((url) =>
         this.http.get<VideoItem>(url, { headers }).pipe(
-          catchError(err => {
+          catchError((err) => {
             console.error(`Fehler beim Laden von ${url}:`, err);
             return of(null); // gives `null` or empty object back if error occurs
           })
@@ -174,38 +177,38 @@ export class BackendCommunicationService {
   }
 
   fetchVideosFromCurrentUserVar() {
-    const myVideos: VideoURLInterface[] = this.globals.currentLoggedUser()?.my_videos;
-      const videoURLS: string[] = myVideos.map(video => video.URL)
-      this.globals.userVideoItems.set([])
-      this.fetchSingleVideoItems(videoURLS).subscribe({
-        next: (resp) => {
-          resp.forEach(element => {
-            this.globals.userVideoItems().push(element!)
-          });
-          //console.log('Vor der Sortierung: ', this.videoItems)
-          this.sortVideos("up")
-        },
-        error: (err) => {
-          console.error(err)
-        },
-        complete: () => {
-          console.log('Nun sollten alle Videos fertig gefetcht sein !')
-          console.log('Nach der Sortierung: ', this.globals.userVideoItems())
-          this.globals.myVideosIsLoading.set(false)
-        }
-      })
+    const myVideos: VideoURLInterface[] =
+      this.globals.currentLoggedUser()?.my_videos;
+    const videoURLS: string[] = myVideos.map((video) => video.URL);
+    this.globals.userVideoItems.set([]);
+    this.fetchSingleVideoItems(videoURLS).subscribe({
+      next: (resp) => {
+        resp.forEach((element) => {
+          this.globals.userVideoItems().push(element!);
+        });
+        //console.log('Vor der Sortierung: ', this.videoItems)
+        this.sortVideos('up');
+      },
+      error: (err) => {
+        console.error(err);
+      },
+      complete: () => {
+        console.log('Nun sollten alle Videos fertig gefetcht sein !');
+        console.log('Nach der Sortierung: ', this.globals.userVideoItems());
+        this.globals.myVideosIsLoading.set(false);
+      },
+    });
   }
 
-  sortVideos(direction: string){
+  sortVideos(direction: string) {
     this.globals.userVideoItems().sort((a, b) => {
       const dateA = new Date(a.released_at);
       const dateB = new Date(b.released_at);
-      if (direction === "up") {
+      if (direction === 'up') {
         return dateA.getTime() - dateB.getTime(); // aufsteigend
       } else {
         return dateB.getTime() - dateA.getTime(); // absteigend
       }
-       
     });
   }
 
@@ -215,15 +218,14 @@ export class BackendCommunicationService {
       headers: { Authorization: 'Token ' + token },
     });
   }
+
+  uploadTimeStamp(timeStamps: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.patch(this.endPoints.CHANGE_USER_ME, {
+      video_timestamps: timeStamps,
+    }, { headers: { Authorization: 'Token ' + token }});
+  }
 }
-
-
-
-
-
-
-
-
 
 // changeLoggedUserSettings(form: FormGroup): Observable<any> {
 //   const token = localStorage.getItem('token')
@@ -244,4 +246,3 @@ export class BackendCommunicationService {
 //       observe: 'response'
 //     }
 //   )
-

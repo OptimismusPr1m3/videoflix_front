@@ -1,12 +1,13 @@
 <div (click)="openVideoOverlay()" class="videoitem-cont">
-  <img [ngSrc]="videoItem.cover_image" width="350" height="200"/>
-  <div [ngClass]="isHovered ? 'vis' : 'invis'" class="info-cont">
-    <div class="info-head">
+  <img [ngSrc]="videoItem.cover_image" width="270" height="160"/>
+  <div class="info-cont">
+    <div [ngClass]="isHovered ? 'info-head-vis' : 'info-head-invis'">
       <div><span>{{ videoItem.title }}</span></div>
       <div class="end"><span>{{ formatVideoDuration(videoItem.duration) }}</span></div>
     </div>
-    <!-- <div class="description-foot">
-      <p>{{ formatVideoDuration(videoItem.duration) }}</p>
-    </div> -->
+    <div *ngIf="isVideosWatched" class="watched-cont">
+      <progress [ngClass]="{'completed' : completenessState()}" [value]="videoItem.timestamp" [max]="videoItem.duration"></progress>
+    </div>
   </div>
+  
 </div>

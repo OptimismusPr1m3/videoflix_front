@@ -34,9 +34,12 @@ export class VideoplayerComponent {
   standardVolume: number = 100;
   volumeBarIsOpen: boolean = false;
 
-  constructor(public globals: GlobalVariablesService, private backend: BackendCommunicationService) {}
+  constructor(
+    public globals: GlobalVariablesService,
+    private backend: BackendCommunicationService
+  ) {}
 
-  closePlayer() {
+  closeFullscreen() {
     this.globals.isVidOpen.set(!this.globals.isVidOpen());
     this.globals.currentWatchedVideoTimeStamp.set(this.currentTime);
     console.log(
@@ -51,20 +54,26 @@ export class VideoplayerComponent {
     this.setTimeStampsForUser();
   }
 
+  closePlayer() {
+    this.globals.isVidOpen.set(!this.globals.isVidOpen());
+  }
+
   setTimeStampsForUser() {
     let previousStamps = this.globals.currentLoggedUser()?.video_timestamps;
-    const newStamps = this.createStampsJSON(previousStamps)
-    console.log('Hier die Zeitstempel vor dem hochladen: ', newStamps)
+    const newStamps = this.createStampsJSON(previousStamps);
+    console.log('Hier die Zeitstempel vor dem hochladen: ', newStamps);
     this.backend.uploadTimeStamp(newStamps).subscribe({
-      next: (resp) => console.log('Zeitstempel erfolgreich aktualisiert: ', resp),
-      error: (err) => console.log('Fehler beim Aktualisieren der Zeitstempel:', err),
-      complete: () => this.backend.getLoggedUserData()
-    })
+      next: (resp) =>
+        console.log('Zeitstempel erfolgreich aktualisiert: ', resp),
+      error: (err) =>
+        console.log('Fehler beim Aktualisieren der Zeitstempel:', err),
+      complete: () => this.backend.getLoggedUserData(),
+    });
   }
-  
+
   // setting up new JSON for upload timestamps
-  createStampsJSON(currentStamps: any):any {
-    let previousStamps = currentStamps
+  createStampsJSON(currentStamps: any): any {
+    let previousStamps = currentStamps;
     if (previousStamps === null) {
       previousStamps = [
         {
@@ -86,7 +95,7 @@ export class VideoplayerComponent {
         });
       }
     }
-    return previousStamps
+    return previousStamps;
   }
 
   // get index if video was already watched but is now getting only a new timestamp
@@ -96,8 +105,6 @@ export class VideoplayerComponent {
         watchedVideo.URL === this.globals.currentOpenedVideo()?.url
     );
   }
-
-
 
   openFullscreen() {
     const videoWrapper = this.videoWrapper.nativeElement;
@@ -140,7 +147,9 @@ export class VideoplayerComponent {
   restartVideo() {
     const videoFrame = this.videoFrame.nativeElement;
     videoFrame.pause();
-    videoFrame.currentTime = 0;
+    videoFrame.currentTime =
+      this.globals.currentOpenedVideo()?.timestamp != null
+        ? this.globals.currentOpenedVideo()?.timestamp : 0;
     videoFrame.play();
   }
 

@@ -297,20 +297,6 @@ export class SliderCompComponent {
     return this.currentIndexes[category] || 0;
   }
 
-  setCategoryIndex1(
-    category: keyof typeof this.currentIndexes,
-    direction: string
-  ) {
-    const maxIndex = this.numberOfPacks.length - 1; // Maximaler Index für die Kategorien
-    const currentIndex = this.getIndex(category);
-
-    if (direction === '-') {
-      this.setIndex(category, Math.min(currentIndex + 1, maxIndex));
-    } else {
-      this.setIndex(category, Math.max(currentIndex - 1, 0));
-    }
-  }
-
   getRightCategory(category: keyof typeof this.currentIndexes) {
     switch (category) {
       case 'category1':

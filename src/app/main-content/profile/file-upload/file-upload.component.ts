@@ -109,8 +109,8 @@ export class FileUploadComponent {
     const ctx = canvas.getContext('2d');
 
     if (ctx) {
-      canvas.width = 720;
-      canvas.height = 480;
+      canvas.width = 720; // image width
+      canvas.height = 426; // image height
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
       this.videoPreview = canvas.toDataURL('image/png');

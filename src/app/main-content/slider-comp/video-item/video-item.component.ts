@@ -13,6 +13,7 @@ import { GlobalVariablesService } from '../../../services/global-variables.servi
 export class VideoItemComponent {
   @Input() videoItem!: VideoItem;
   @Input() isHovered: boolean = false;
+  @Input() isVideosWatched:boolean = false;
 
   constructor(private globals: GlobalVariablesService) {}
 
@@ -38,6 +39,14 @@ export class VideoItemComponent {
     const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
   
     return `${minutes}:${formattedSeconds}`;
+  }
+
+  roundedTime(time: number): number{
+    return Math.floor(time) 
+  }
+
+  completenessState():boolean {
+    return this.roundedTime(this.videoItem.duration) === this.roundedTime(this.videoItem.timestamp)
   }
 
 }

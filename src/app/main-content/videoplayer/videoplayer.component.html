@@ -2,17 +2,16 @@
   
   <div #videoWrapper class="player-cont" *ngIf="!globals.isMyVideoEditing()">
 
-    <div class="vplayer-head">
-        <div (click)="closePlayer()" class="vplayer-b-btn">
+    <div  class="vplayer-head">
+        <div *ngIf="!isVidFullScreen" (click)="closePlayer()" class="vplayer-b-btn">
+          <mat-icon>arrow_back</mat-icon>
+        </div>
+        <div *ngIf="isVidFullScreen" (click)="closeFullscreen()" class="vplayer-b-btn">
           <mat-icon>arrow_back</mat-icon>
         </div>
     </div>
 
-    <video #videoFrame autoplay [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
-      <!-- <source
-        src="{{ globals.currentOpenedVideo()?.video_file }}"
-        type="video/mp4"
-      /> -->
+    <video #videoFrame [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
       <source [src]="is480p ? globals.currentOpened480Video() : globals.currentOpenedVideo()?.video_file" />
       Dein Browser unterstuetzt das Format nicht
     </video>

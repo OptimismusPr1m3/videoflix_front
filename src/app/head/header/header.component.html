@@ -10,4 +10,7 @@
             <span>Login</span>
         </a>
     </div>
+    <div *ngIf="isImprint" class="right-imprint-cont" (click)="stepBack()">
+        <mat-icon>arrow_back</mat-icon>
+    </div>
 </div>

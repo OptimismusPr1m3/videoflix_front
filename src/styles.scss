@@ -134,7 +134,18 @@ app-footer {
   display: flex;
   width: 100%;
   justify-content: center;
-  // background-color: rgba($color: #000000, $alpha: 1.0);
+}
+
+app-imprint {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+app-ppolicy {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 //Profile Section 

@@ -35,7 +35,21 @@
         font-size: 18px;
         font-weight: 700;
         color: #ffffff;
+      } 
+    }
+  }
+  > .right-imprint-cont {
+    @include dFlex(row, flex-end, center);
+    &:hover {
+      > mat-icon {
+        color: #2E3EDF;
+        cursor: pointer;
       }
+    }
+    > mat-icon {
+      font-size: 48px !important;
+      height: 48px !important;
+      width: 48px !important;
     }
   }
 }

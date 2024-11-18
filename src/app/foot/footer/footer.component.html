@@ -1,10 +1,10 @@
 <section *ngIf="!isMain" class="footer">
-    <div class="foot-txt">Datenschutz</div>
-    <div class="foot-txt">Impressum</div>
+    <a [routerLink]="['/policy']" class="foot-txt">Datenschutz</a>
+    <a [routerLink]="['/imprint']" class="foot-txt">Impressum</a>
     <!-- <div class="middle-cont"><mat-icon>copyright</mat-icon>Sebastian Wolff</div> -->
 </section>
 
 <section *ngIf="isMain" class="footer main">
-    <div class="foot-txt">Datenschutz</div>
-    <div class="foot-txt">Impressum</div>
+    <a [routerLink]="['/policy']" class="foot-txt">Datenschutz</a>
+    <a [routerLink]="['/imprint']" class="foot-txt">Impressum</a>
 </section>

@@ -35,16 +35,15 @@ export class ApiEndpointsService {
 
 
   /*PI 5 */
-
-  USERS_API = 'http://storage.bastian-wolff.com:81/api/users/';
-  REGISTER = 'http://storage.bastian-wolff.com:81/api/accounts/signup/';
+  USERS_API = 'https://storage.bastian-wolff.com/api/users/';
+  REGISTER = 'https://storage.bastian-wolff.com/api/accounts/signup/';
   // LOGIN = 'https://bepi.bastian-wolff.com/api/accounts/login/';
-  LOGIN = 'http://storage.bastian-wolff.com:81/api/accounts/auth/login/';
-  LOGOUT = 'http://storage.bastian-wolff.com:81/api/accounts/logout/';
-  RESET_PASSWORD = 'https://storage.bastian-wolff.com:81/api/accounts/password/reset/';
-  USER_ME = 'http://storage.bastian-wolff.com:81/api/accounts/users/me/';
-  VIDEO_ITEMS = 'http://storage.bastian-wolff.com:81/api/videos/';
-  CHANGE_USER_ME = 'http://storage.bastian-wolff.com:81/api/accounts/users/me/change/';
+  LOGIN = 'https://storage.bastian-wolff.com/api/accounts/auth/login/';
+  LOGOUT = 'https://storage.bastian-wolff.com/api/accounts/logout/';
+  RESET_PASSWORD = 'https://storage.bastian-wolff.com/api/accounts/password/reset/';
+  USER_ME = 'https://storage.bastian-wolff.com/api/accounts/users/me/';
+  VIDEO_ITEMS = 'https://storage.bastian-wolff.com/api/videos/';
+  CHANGE_USER_ME = 'https://storage.bastian-wolff.com/api/accounts/users/me/change/';
 
   constructor() { }
 }

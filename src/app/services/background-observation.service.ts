@@ -41,6 +41,12 @@ export class BackgroundObservationService {
       case url.includes('/pw-reset'):
         this.renderer.addClass(document.body, 'login-page');
         break;
+      case url.includes('/policy'):
+        this.renderer.addClass(document.body, 'logged-in');
+        break;
+      case url.includes('/imprint'):
+        this.renderer.addClass(document.body, 'logged-in');
+        break;
       case url.includes('/profile'):
         this.renderer.addClass(document.body, 'profile-page');
         break;

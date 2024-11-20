@@ -6,9 +6,7 @@
         <div *ngIf="!isVidFullScreen" (click)="closePlayer()" class="vplayer-b-btn">
           <mat-icon>arrow_back</mat-icon>
         </div>
-        <div *ngIf="isVidFullScreen" (click)="closeFullscreen()" class="vplayer-b-btn">
-          <mat-icon>arrow_back</mat-icon>
-        </div>
+        
     </div>
 
     <video #videoFrame [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
@@ -16,7 +14,10 @@
       Dein Browser unterstuetzt das Format nicht
     </video>
 
-    <div class="vplayer-bottom-btn">
+    <div  [ngClass]="{
+    'vplayer-bottom-btn': true,
+    'vplayer-fullscreen': isVidFullScreen,
+    'fade-out': isMouseInactive }">
       <div class="overlay play" *ngIf="!isVidFullScreen">
         <button (click)="openFullscreen()">
           <mat-icon>play_arrow</mat-icon>
@@ -27,21 +28,33 @@
           Bearbeiten
         </button>
       </div>
-      <div class="overlay full" *ngIf="isVidFullScreen">
-        <div class="bar-cont">
-          <input type="range" class="progres-bar" (input)="seek($event)" min="0" [max]="videoDuration" [value]="currentTime">
-        </div>
-        <div class="btns-cont">
 
+      <div *ngIf="isVidFullScreen" (click)="closeFullscreen()" class="overlay-b-btn">
+        <mat-icon>arrow_back</mat-icon>
+        <img src="./assets/logos/Symbol.png" alt="FlixLogo">
+      </div>
+
+      <div class="overlay full" *ngIf="isVidFullScreen">
+        
+        <div class="bar-cont progressbar">
+          <input type="range" class="progres-bar" (input)="seek($event)" min="0" [max]="videoDuration * 1000" [value]="currentTime * 1000">
+          <span>{{ formatVideoDuration(videoDuration - currentTime) }}</span>
+        </div>
+
+        <div class="btns-cont">
           <div class="btns">
             <mat-icon (click)="toggleVideo()">{{ materialPlayButtonString }}</mat-icon>
             <mat-icon (click)="skip10(-10)">replay_10</mat-icon>      
-            <mat-icon (click)="skip10(10)">forward_10</mat-icon>      
+            <mat-icon (click)="skip10(10)">forward_10</mat-icon>    
+            <mat-icon (click)="toggleAudio()"> {{ materialVolumeButtonString }} </mat-icon>  
           </div>
+
+          <span class="title-txt"> {{ globals.currentOpenedVideo()?.title }}</span>
+
           <div class="btns">
             <mat-icon (click)="toggleQualiPicker()">tune</mat-icon>
             <mat-icon (click)="restartVideo()">restart_alt</mat-icon>
-            <mat-icon (click)="toggleAudio()"> {{ materialVolumeButtonString }} </mat-icon>
+            <mat-icon (click)="toggleFullscreen()">fullscreen</mat-icon>
           </div>
 
           <div *ngIf="volumeBarIsOpen" class="volume-bar">
@@ -49,13 +62,15 @@
           </div>
           <div *ngIf="qualityPickerIsOpen" class="quality">
             <div class="quality-picker">
-              <span (click)="setVideoQualitySource('1080')" [style]="is480p ? 'color: #ffffff' : 'color: #E5080E'">1080 p</span>
-              <span (click)="setVideoQualitySource('480')" [style]="!is480p ? 'color: #ffffff' : 'color: #E5080E'">480 p</span>
+              <span (click)="setVideoQualitySource('1080')" [style]="is480p ? 'color: #ffffff' : 'color: #2e3edf'">1080 p</span>
+              <span (click)="setVideoQualitySource('480')" [style]="!is480p ? 'color: #ffffff' : 'color: #2e3edf'">480 p</span>
             </div>
           </div>
 
         </div>
+
       </div>
+
     </div>
 
   </div>

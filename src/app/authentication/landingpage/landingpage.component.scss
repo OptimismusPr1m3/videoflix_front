@@ -25,7 +25,7 @@
 
     > .mail-container {
       @include dFlex(row, flex-start, flex-start);
-      gap: 32px;
+      gap: 16px;
       width: 100%;
       margin-bottom: 16px;
       > mat-form-field {
@@ -35,12 +35,14 @@
       > .login-btn {
         @include dFlex(row, flex-start, center);
         > div {
+          @include dFlex(row, center, center);
           padding: 18px 30px;
           background-color: #2e3edf;
           border-radius: 40px;
           color: #ffffff;
           font-weight: 700;
           font-size: 18px;
+          gap: 4px;
           &:hover {
             transition: all 0.3s ease-in-out;
             cursor: pointer;
@@ -58,19 +60,19 @@
   ::ng-deep
   .custom-input-login
   .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: #ffffff !important;
+  background-color: unset !important;
   border-radius: 40px;
-  border: 1px solid #2e3edf !important;
+  border: 1px solid #ffffff !important;
 }
 
 
 
 input {
-  color: #2e3edf !important;
+  color: #ffffff !important;
   font-size: 18px;
   font-weight: 400;
   &::placeholder {
-    color: #2e3edf !important;
+    color: #ffffff !important;
   }
 }
 
@@ -83,6 +85,11 @@ input {
   border-bottom-style: none;
 }
 
+::ng-deep .mat-mdc-form-field-infix {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
 mat-label {
-  color: #5460e5;
+  color: #ffffff;
 }

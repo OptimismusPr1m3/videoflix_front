@@ -37,18 +37,11 @@ export class PwResetComponent {
   constructor(private http: BackendCommunicationService) {}
 
   checkMail() {
-    this.http.resetPassword(this.mail.value!).subscribe({
-      next: (resp) => {
-        console.log('Email gefunden', resp);
-      },
-      error: (err) => {
-        this.resetWasSent = true;
-      },
-      complete: () => {
-        console.log('fertig');
-        this.resetWasSent = true;
-      },
-    });
+    if (this.mail.valid) {
+      this.http.resetPassword(this.mail.value!).subscribe({
+        next: (resp) => {this.resetWasSent = true},
+        error: (err) => {this.resetWasSent = true}});
+    }
   }
 
   resetSignal() {

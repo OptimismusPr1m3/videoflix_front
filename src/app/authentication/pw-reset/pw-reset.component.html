@@ -1,35 +1,36 @@
 <section class="pw-cont">
-    <app-header></app-header>
+  <app-header></app-header>
 
-    <div class="mail-cont" *ngIf="!resetWasSent">
-        <span>Passwort zurücksetzen</span>
-        <p>Geben Sie ihre E-Mailadresse ein um das Passwort zurückzusetzen !</p>
-        <div class="mail-container custom-input-login">
-            <mat-form-field>
-              <mat-label>Gib deine E-Mail ein</mat-label>
-              <input
-                matInput
-                placeholder="email@mail.com"
-                [formControl]="mail"
-                required
-              />
-            </mat-form-field>
-            <div (click)="checkMail()" type="button" class="login-btn">
-              <div>Passwort zurücksetzen <mat-icon>arrow_forward</mat-icon></div>
-            </div>
-          </div>
-    </div>
-
-    <div *ngIf="resetWasSent" class="mail-cont">
-        <span>Eine Email wurde an die angegebene Adresse gesendet !</span>
-        <p>Folgen Sie den Anweisungen in der Email, um Ihr Passwort zurückzusetzen !</p>
-        <div class="mail-input">
-            <button class="back-btn" [routerLink]="['/login/']">
-                <span>Zurück zum Login</span>
-            </button>
+  <div class="mail-cont" *ngIf="!resetWasSent">
+    <span>Passwort zurücksetzen</span>
+    <p>Geben Sie ihre E-Mailadresse ein um das Passwort zurückzusetzen !</p>
+    <div class="mail-container custom-input-login">
+      <mat-form-field>
+        <mat-label>Gib deine E-Mail ein</mat-label>
+        <input
+          matInput
+          placeholder="email@mail.com"
+          [formControl]="mail"
+          required
+        />
+      </mat-form-field>
+      <div (click)="checkMail()" type="button" class="login-btn">
+        <div [ngClass]="mail.valid ? 'enabled' : 'disabled'">
+          Passwort zurücksetzen <mat-icon>arrow_forward</mat-icon>
         </div>
+      </div>
     </div>
+  </div>
 
-    <app-footer></app-footer>
+  <div *ngIf="resetWasSent" class="mail-cont">
+    <span>Eine Email wurde an die angegebene Adresse gesendet !</span>
+    <p>Folge den Anweisungen in der Email, um dein Passwort zurückzusetzen !</p>
+    <div class="mail-container centered">
+      <div class="login-btn">
+        <div [routerLink]="['/login/']">Zurück zum Login</div>
+      </div>
+    </div>
+  </div>
 
+  <app-footer></app-footer>
 </section>

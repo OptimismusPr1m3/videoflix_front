@@ -1,174 +1,393 @@
 @import "../../../styles.scss";
 
 .videoplayer-cont {
-    @include dFlex(column, center, flex-start);
-    gap: 24px;
-    > .player-cont {
-        position: relative;
-        border-top-right-radius: 6px;
-        border-top-left-radius: 6px;
-        height: 510px;
-        > .vplayer-head{
-            position: absolute;
-            top: 0;
-            z-index: 10;
-            > .vplayer-b-btn {
-                @include dFlex(row, flex-start, center);
-                padding: 16px;
-                border-radius: 50%;
-                margin-left: 8px;
-                margin-top: 8px;
-                &:hover {
-                    cursor: pointer;
-                    background-color: rgba($color: #141414, $alpha: 0.8);
-                }
-            }  
+  @include dFlex(column, center, flex-start);
+  gap: 24px;
+  > .player-cont {
+    position: relative;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    height: 510px;
+    > .vplayer-head {
+      position: absolute;
+      top: 0;
+      z-index: 10;
+      > .vplayer-b-btn {
+        @include dFlex(row, flex-start, center);
+        padding: 16px;
+        border-radius: 50%;
+        margin-left: 8px;
+        margin-top: 8px;
+        &:hover {
+          cursor: pointer;
+          background-color: rgba($color: #141414, $alpha: 0.8);
         }
-        > video {
-            border-top-right-radius: 6px;
-            border-top-left-radius: 6px;
-            width: 900px;
-            height: 509px;
-        }
-        > .vplayer-bottom-btn{
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-            > .overlay {
-                @include dFlex(row, space-between, center);
-                gap: 60px;
-                padding: 4px 16px;
-                max-width: 100%;
-                margin-bottom: 4px;
-            }
-            > .play {
-                > button {
-                    transition: all 250ms ease-in-out;
-                    @include dFlex(row,center,center);
-                    gap: 8px;
-                    border: none;
-                    border-radius: 40px;
-                    outline: none;
-                    background-color: #2e3edf;
-                    padding: 12px 24px;
-                    font-family: 'Raleway';
-                    font-weight: 700;
-                    font-size: 28px;
-                    color: #ffffff;
-                    > mat-icon {
-                        font-family: 'Material Icons Rounded';
-                        font-size: 32px;
-                        height: 32px;
-                        width: 32px;
-                        color: #ffffff;
-                        font-variation-settings: 'FILL' 1, 'wght' 700;
-                    }
-                    &:hover {
-                        cursor: pointer;
-                        background-color: #5460e5;
-                    }
-                }
-            }
-            > .full {
-                margin-bottom: 0px;
-                padding: 16px 16px;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
-                gap: 16px;
-                > .bar-cont {
-                    width: 100%;
-                    > input {
-                        width: 100%;
-                    }
-                }
-                > .btns-cont {
-                    width: 100%;
-                    @include dFlex(row, space-between, center);
-                    >.btns {
-                        @include dFlex(row, center, center);
-                        gap: 16px;
-                        > mat-icon {
-                            font-family: 'Material Icons Rounded';
-                            font-size: 32px;
-                            height: 32px;
-                            width: 32px;
-                            &:hover {
-                                cursor: pointer;
-                                color: rgba($color: #ffffff, $alpha: 0.5)
-                            }
-                        }
-                    }
-                    > .volume-bar {
-                        @include dFlex(row, center, center);
-                        background-color: #b3b3b3;
-                        border-radius: 4px;
-                        position: absolute;
-                        rotate: -90deg;
-                        top: -32px;
-                        right: -32px;
-                    }
-                    > .quality {
-                        position: absolute;
-                        top: -42px;
-                        background-color: #141414;
-                        border-top-left-radius: 6px;
-                        border-top-right-radius: 6px;
-                        border-bottom-left-radius: 6px;
-                        right: 118px;
-                        width: 88px;
-                        > .quality-picker {
-                            @include dFlex(column, center, center);
-                            gap: 6px;
-                            padding: 12px 0px 12px 0px;
-                            width: 100%;
-                            > span {
-                                width: 100%;
-                                padding: 4px 0px 4px 0px;
-                                cursor: pointer;
-                                font-size: 18px;
-                                color: #ffffff;
-                                text-align: center;
-                                &:hover {
-                                    background-color: #141414;
-                                }
-                            }
-                        }
-                    }
-
-
-                    /*> .dot-menu {
-                        position: relative;
-                        @include dFlex(row,center,center);
-                        > mat-icon {
-                            font-family: 'Material Icons Rounded';
-                            font-size: 32px;
-                            height: 32px;
-                            width: 32px;
-                        }
-                        > .dot-overlay{
-                            position: absolute;
-                            top: -90px;
-                            border-radius: 4px;
-                            left: -56px;
-                            > .options-menu {
-                                height: 90px;
-                                width: 70px;
-                                border-radius: 4px;
-                                background-color: #b3b3b3;
-                            }
-                        }
-                    }*/
-                }
-               
-                
-            }
-        }
+      }
     }
-    > .vplayer-foot {
-        padding: 6px;
-        > span {
+    > video {
+      border-top-right-radius: 6px;
+      border-top-left-radius: 6px;
+      width: 900px;
+      height: 509px;
+    }
+    > .vplayer-bottom-btn {
+      opacity: 1;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      > .overlay {
+        @include dFlex(row, space-between, center);
+        gap: 60px;
+        padding: 4px 16px;
+        max-width: 100%;
+        margin-bottom: 4px;
+      }
+      > .play {
+        > button {
+          transition: all 250ms ease-in-out;
+          @include dFlex(row, center, center);
+          gap: 8px;
+          border: none;
+          border-radius: 40px;
+          outline: none;
+          background-color: #2e3edf;
+          padding: 12px 24px;
+          font-family: "Raleway";
+          font-weight: 700;
+          font-size: 28px;
+          color: #ffffff;
+          > mat-icon {
+            font-family: "Material Icons Rounded";
+            font-size: 32px;
+            height: 32px;
+            width: 32px;
             color: #ffffff;
+            font-variation-settings: "FILL" 1, "wght" 700;
+          }
+          &:hover {
+            cursor: pointer;
+            background-color: #5460e5;
+          }
         }
+      }
+      > .full {
+        margin-bottom: 0px;
+        padding: 0px 32px 10px 32px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 16px;
+        > .bar-cont {
+          width: 100%;
+          @include dFlex(row, center, center);
+          gap: 12px;
+          > span {
+            color: #ffffff;
+          }
+        }
+        > .btns-cont {
+          width: 100%;
+          @include dFlex(row, space-between, center);
+          > .btns {
+            @include dFlex(row, center, center);
+            gap: 16px;
+            > mat-icon {
+              font-family: "Material Icons Rounded";
+              font-variation-settings: "FILL" 1, "wght" 700;
+              font-size: 48px;
+              height: 48px;
+              width: 48px;
+              &:hover {
+                cursor: pointer;
+                color: rgba($color: #ffffff, $alpha: 0.5);
+              }
+            }
+          }
+          > .volume-bar {
+            @include dFlex(row, center, center);
+            position: absolute;
+            bottom: 25px;
+            left: 280px;
+          }
+          > .quality {
+            position: absolute;
+            bottom: 60px;
+            background-color: #141414;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            border-bottom-left-radius: 6px;
+            right: 164px;
+            width: 88px;
+            > .quality-picker {
+              @include dFlex(column, center, center);
+              gap: 6px;
+              padding: 12px 0px 12px 0px;
+              width: 100%;
+              > span {
+                width: 100%;
+                padding: 4px 0px 4px 0px;
+                cursor: pointer;
+                font-size: 18px;
+                color: #ffffff;
+                text-align: center;
+                &:hover {
+                  background-color: #141414;
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
+  > .vplayer-foot {
+    padding: 6px;
+    > span {
+      color: #ffffff;
+    }
+  }
 }
+
+.overlay-b-btn {
+  @include dFlex(row, space-between, center);
+  padding: 20px 32px 0px 32px;
+  > mat-icon {
+    height: 48px;
+    width: 48px;
+    font-size: 48px;
+    color: #ffffff;
+    &:hover {
+      color: #2e3edf;
+      cursor: pointer;
+    }
+  }
+  > img {
+    height: 48px;
+  }
+}
+
+.title-txt {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.fade-out {
+  opacity: 1 !important;
+  transition: opacity 1s ease-in-out;
+}
+
+.vplayer-fullscreen {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.8) -27.44%,
+    rgba(0, 0, 0, 0.44) 44.23%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+// .progressbar { //video progression range input
+//   > input[type="range"] {
+//     -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+//     width: 100%; /* Specific width is required for Firefox. */
+//     background: transparent; /* Otherwise white in Chrome */
+
+//   }
+
+//   > input[type="range"]::-webkit-slider-thumb {
+//     -webkit-appearance: none;
+//   }
+
+//   > input[type="range"]:focus {
+//     outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+//   }
+
+//   > input[type="range"]::-ms-track {
+//     width: 100%;
+//     cursor: pointer;
+//     /* Hides the slider so custom styles can be added */
+//     background: transparent;
+//     border-color: transparent;
+//     color: transparent;
+//   }
+//   //
+
+//   // Start custom-thumb styling
+//   > input[type="range"]::-webkit-slider-thumb {
+//     -webkit-appearance: none;
+//     height: 12px;
+//     width: 12px;
+//     border-radius: 50%;
+//     background: #2e3edf;
+//     cursor: pointer;
+//     margin-top: -4px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+//     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+//   }
+
+//   /* All the same stuff for Firefox */
+//   > input[type="range"]::-moz-range-thumb {
+//     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+//     height: 12px;
+//     width: 12px;
+//     border-radius: 50%;
+//     background: #2e3edf;
+//     cursor: pointer;
+//   }
+
+//   /* All the same stuff for IE */
+//   > input[type="range"]::-ms-thumb {
+//     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+//     border: 1px solid #000000;
+//     height: 12px;
+//     width: 12px;
+//     border-radius: 50%;
+//     background: #ffffff;
+//     cursor: pointer;
+//   }
+
+//   //
+
+//   // Start custom-track-styling
+
+//   > input[type="range"]::-webkit-slider-runnable-track {
+//     width: 100%;
+//     height: 4px;
+//     cursor: pointer;
+//     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+//     background: #b5b5b5;
+//     //border-radius: 1.3px;
+//     //border: 0.2px solid #010101;
+//   }
+
+//   > input[type="range"]:focus::-webkit-slider-runnable-track {
+//     background: #ececec;
+//   }
+
+//   > input[type="range"]::-moz-range-track {
+//     width: 100%;
+//     height: 4px;
+//     cursor: pointer;
+//     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+//     background: #3071a9;
+//     border-radius: 1.3px;
+//     border: 0.2px solid #010101;
+//   }
+
+//   > input[type="range"]::-ms-track {
+//     width: 100%;
+//     height: 8.4px;
+//     cursor: pointer;
+//     background: transparent;
+//     border-color: transparent;
+//     border-width: 16px 0;
+//     color: transparent;
+//   }
+//   > input[type="range"]::-ms-fill-lower {
+//     background: #2a6495;
+//     border: 0.2px solid #010101;
+//     border-radius: 2.6px;
+//     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+//   }
+//   > input[type="range"]:focus::-ms-fill-lower {
+//     background: #3071a9;
+//   }
+//   > input[type="range"]::-ms-fill-upper {
+//     background: #3071a9;
+//     border: 0.2px solid #010101;
+//     border-radius: 2.6px;
+//     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+//   }
+//   > input[type="range"]:focus::-ms-fill-upper {
+//     background: #367ebd;
+//   }
+// }
+.progressbar {
+  input[type="range"] {
+    -webkit-appearance: none; /* Entfernt Standarddesign */
+    width: 100%;
+    height: 4px;
+
+    /* Fortschrittsfarbe mit linear-gradient */
+    background: linear-gradient(
+      to right,
+      #2e3edf 0%, /* Fortschrittsfarbe */
+      #2e3edf calc(var(--value, 0) * 1%), /* Dynamischer Fortschritt */
+      #b5b5b5 calc(var(--value, 0) * 1%), /* Rest der Leiste */
+      #b5b5b5 100%
+    );
+
+    border-radius: 5px;
+    outline: none;
+    transition: all 0.250ms ease;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      background: #2e3edf;
+      cursor: pointer;
+      margin-top: -2px; /* Chrome benötigt dies */
+      transition: transform 0.1s linear, background 0.2s ease-in-out;
+    }
+
+    &::-moz-range-thumb {
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      background: #2e3edf;
+      cursor: pointer;
+      transition: transform 0.1s linear, background 0.2s ease-in-out;
+    }
+  }
+}
+
+// input range bar volume
+
+// .volume-bar {
+//   // input[type="range"] {
+//   //   -webkit-appearance: none; /* Entfernt Standarddesign */
+//   //   width: 100%;
+//   //   height: 4px;
+
+//   //   /* Fortschrittsfarbe mit linear-gradient */
+//   //   background: linear-gradient(
+//   //     to right,
+//   //     #2e3edf 0%, /* Fortschrittsfarbe */
+//   //     #2e3edf 50%, /* Dynamischer Fortschritt */
+//   //    /* #b5b5b5 calc(var(--volumeValue, 0) * 1%), /* Rest der Leiste */
+//   //     #b5b5b5 100%
+//   //   );
+
+//   //   border-radius: 5px;
+//   //   outline: none;
+//   //   transition: all 0.250ms ease;
+
+//     // &::-webkit-slider-thumb {
+//     //   //-webkit-appearance: none;
+//     //   height: 18px;
+//     //   width: 18px;
+//     //   border-radius: 50%;
+//     //   background: #2e3edf;
+//     //   cursor: pointer;
+//     //   margin-top: -2px; /* Chrome benötigt dies */
+//     //   transition: transform 0.1s linear, background 0.2s ease-in-out;
+//     // }
+
+//     // &::-moz-range-thumb {
+//     //   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+//     //   height: 12px;
+//     //   width: 12px;
+//     //   border-radius: 50%;
+//     //   background: #2e3edf;
+//     //   cursor: pointer;
+//     //   transition: transform 0.1s linear, background 0.2s ease-in-out;
+//     // }
+//   // }
+// }

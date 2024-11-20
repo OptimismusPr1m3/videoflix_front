@@ -1,9 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, input, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  input,
+  ViewChild,
+} from '@angular/core';
 import { GlobalVariablesService } from '../../services/global-variables.service';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
 import { VideoEditComponent } from './video-edit/video-edit.component';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
 
@@ -22,6 +27,8 @@ export class VideoplayerComponent {
   videoDuration: number = 0;
   currentTime: number = 0;
   isVidFullScreen: boolean = false;
+  isMouseInactive: boolean = false;
+  mouseTimeout: any;
   isPlaying: boolean = false;
   materialPlayButtonString: string = 'pause';
   materialVolumeButtonString: string = 'volume_up';
@@ -38,6 +45,30 @@ export class VideoplayerComponent {
     public globals: GlobalVariablesService,
     private backend: BackendCommunicationService
   ) {}
+
+  @HostListener('mousemove')
+  onMouseMove() {
+    this.isMouseInactive = false;
+    clearTimeout(this.mouseTimeout);
+    this.mouseTimeout = setTimeout(() => {
+      this.isMouseInactive = true;
+    }, 2000);
+  }
+
+  ngOnInit() {
+    try {
+      const video = this.videoFrame.nativeElement;
+      video.addEventListener('timeupdate', () => {
+        this.updateProgressBar();
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  roundNumbers(number: number) {
+    return Math.round(number);
+  }
 
   closeFullscreen() {
     this.globals.isVidOpen.set(!this.globals.isVidOpen());
@@ -112,6 +143,15 @@ export class VideoplayerComponent {
     this.prepareVideo();
   }
 
+  toggleFullscreen() {
+    const videoWrapper = this.videoWrapper.nativeElement;
+    if (!document.fullscreenElement) {
+      videoWrapper.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
   prepareVideo() {
     const videoFrame = this.videoFrame.nativeElement;
     this.restartVideo();
@@ -125,7 +165,8 @@ export class VideoplayerComponent {
 
   seek(event: any) {
     const video = this.videoFrame.nativeElement;
-    video.currentTime = event.target.value;
+    console.log(event.target.value);
+    video.currentTime = event.target.value / 1000;
   }
 
   configVolume(event: any) {
@@ -136,7 +177,14 @@ export class VideoplayerComponent {
 
   updateProgressBar() {
     const video = this.videoFrame.nativeElement;
+    const rangeInput = document.querySelector(
+      '.progres-bar'
+    ) as HTMLInputElement;
+
     this.currentTime = video.currentTime;
+    const value = (this.currentTime / this.videoDuration) * 100; // progress in %
+
+    rangeInput.style.setProperty('--value', value.toString());
   }
 
   initializeVideo() {
@@ -147,10 +195,23 @@ export class VideoplayerComponent {
   restartVideo() {
     const videoFrame = this.videoFrame.nativeElement;
     videoFrame.pause();
-    videoFrame.currentTime =
-      this.globals.currentOpenedVideo()?.timestamp != null
-        ? this.globals.currentOpenedVideo()?.timestamp : 0;
+    this.lookForTimestamp();
+    videoFrame.currentTime = this.lookForTimestamp();
+    // this.globals.currentOpenedVideo()?.timestamp != null
+    //   ? this.globals.currentOpenedVideo()?.timestamp
+    //   : 0;
     videoFrame.play();
+  }
+
+  lookForTimestamp() {
+    const foundTimestamp = this.globals
+      .currentLoggedUser()
+      ?.video_timestamps.find(
+        (stamp: { URL: string | undefined }) =>
+          stamp.URL === this.globals.currentOpenedVideo()?.url
+      );
+    console.log(foundTimestamp);
+    return foundTimestamp?.STAMP ?? 0;
   }
 
   toggleVideo() {
@@ -168,7 +229,7 @@ export class VideoplayerComponent {
 
   skip10(direction: number) {
     const videoFrame = this.videoFrame.nativeElement;
-    videoFrame.currentTime += direction;
+    videoFrame.currentTime += direction; 
   }
 
   toggleAudio() {
@@ -195,5 +256,12 @@ export class VideoplayerComponent {
     videoFrame.currentTime = currentTime;
     videoFrame.play();
     this.qualityPickerIsOpen = false;
+  }
+
+  formatVideoDuration(durationInSeconds: number): string {
+    const minutes = Math.floor(durationInSeconds / 60);
+    const seconds = Math.floor(durationInSeconds % 60);
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+    return `${minutes}:${formattedSeconds}`;
   }
 }

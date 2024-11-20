@@ -5,7 +5,7 @@
       <span class="n-letter">'N'</span>
       <span>FLIX</span>
     </div> -->
-    <img src="./../../../assets/logos/Symbol.png" alt="logo">
+    <img src="./assets/logos/Symbol.png" alt="logo">
     <!-- <div class="menu">
       <span>Startseite</span>
       <span (click)="openUploadVideoComp()">Video hochladen</span>
@@ -16,7 +16,7 @@
   <div class="right-cont">
     <!-- <h2>{{ globals.currentLoggedUser()?.first_name}}</h2> -->
     <div class="drop-down-btn" (click)="toggleArrow()" [matMenuTriggerFor]="menu">
-      <img src="../../../assets/avatare/avatar1.png" alt="">
+      <img src="./assets/avatare/avatar1.png" alt="">
       <mat-icon [ngClass]="menuIsOpen ? 'arrow-drop-down' : 'arrow-drop-up'">arrow_drop_down</mat-icon>
     </div>
     <mat-menu #menu="matMenu" (closed)="menuOpened(false)" xPosition="before">
@@ -24,10 +24,10 @@
         <mat-icon class="blue">manage_accounts</mat-icon>
         <span class="menu-pnts">Konto</span>
       </button>
-      <button mat-menu-item>
+      <!-- <button mat-menu-item>
         <mat-icon class="blue">upload_file</mat-icon>
         <span class="menu-pnts">Video hochladen</span>
-      </button>
+      </button> -->
       <button mat-menu-item>
         <mat-icon class="blue">lock</mat-icon>
         <span class="menu-pnts">Datenschutz</span>

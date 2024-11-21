@@ -5,8 +5,9 @@
   height: 100vh;
   width: 100%;
   @include dFlex(column, space-between, center);
-  margin: 0px 124px;
-
+  @media (max-width: 1920px) {
+    margin: 0 32px;
+  }
   > .mail-cont {
     height: 400px;
     @include dFlex(column, center, center);
@@ -55,6 +56,17 @@
   }
 }
 
+.disabled {
+  background-color: grey !important;
+  cursor: not-allowed !important;
+}
+
+.enabled {
+    transition: all 0.3s ease-in-out;
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 :host
   ::ng-deep

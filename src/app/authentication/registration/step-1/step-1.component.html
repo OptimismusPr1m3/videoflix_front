@@ -11,35 +11,32 @@
     Nur noch ein paar Schritte und Du hast es geschafft! <br />
     Wir finden Papierkram auch nervig.
   </p>
-  <div>
+  <form [formGroup]="form" (ngSubmit)="nextStep()">
     <div class="mail-container custom-input-register">
       <mat-form-field>
         <mat-label>Gib deine E-Mail ein</mat-label>
         <input
           matInput
           placeholder="email@mail.com"
-          [formControl]="email"
-          (blur)="updateMailErrorMessage()"
+          formControlName="email"
+        
           required
         />
-        @if (email.invalid) {
-        <mat-error> {{ mailErrorMessage() }} </mat-error>
-        }
       </mat-form-field>
+      <div class="error">
+        <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched">{{ updateMailErrorMessage() }} </span> 
+      </div>
     </div>
     <div class="password-container custom-input-register">
       <mat-form-field>
         <mat-label>Gib dein Passwort ein</mat-label>
         <input
           matInput
-          [formControl]="password"
+          formControlName="password"
           [type]="hide() ? 'password' : 'text'"
-          [minlength]="8"
         />
-        @if (password.invalid) {
-          <mat-error> Das Passwort sollte mind. 8 Zeichen beinhalten </mat-error>
-          }
         <button
+          type="button"
           mat-icon-button
           matSuffix
           (click)="clickEvent($event)"
@@ -50,30 +47,37 @@
         </button>
       </mat-form-field>
 
+      <div class="error"> 
+        <span *ngIf="form.get('password')?.hasError('minlength')">Das Passwort sollte mind. 8 Zeichen beinhalten</span> 
+      </div>
+      
       <mat-form-field>
         <mat-label>Gib dein Passwort ein</mat-label>
         <input
           matInput
-          [formControl]="password2"
+          formControlName="password2"
           [type]="hide2() ? 'password' : 'text'"
-          [minlength]="8"
         />
-        @if (password.invalid) {
-          <mat-error> Das Passwort sollte mind. 8 Zeichen beinhalten </mat-error>
-          }
         <button
           mat-icon-button
+          type="button"
           matSuffix
           (click)="clickEvent2($event)"
           [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide2()"
-        >
+          [attr.aria-pressed]="hide2()">
           <mat-icon class="blue-color">{{ hide2() ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
+      <div class="error">
+        <span *ngIf="form.hasError('passwordsMismatch') && form.get('password2')?.touched && !form.get('password2')?.hasError('minlength')">Passwörter stimmen nicht überein</span>
+        <span *ngIf="form.get('password2')?.hasError('minlength') && form.get('password2')?.touched">Das Passwort sollte mind. 8 Zeichen beinhalten</span>
+      </div>
     </div>
-  </div>
-  <div (click)="nextStep()" class="continue-btn">
-    <span>Weiter</span>
-  </div>
+
+    <div  class="continue-btn" >
+      <button type="submit" [ngClass]="form.valid ? 'enabled' : 'disabled'">Weiter</button>
+    </div>
+
+  </form>
+  
 </div>

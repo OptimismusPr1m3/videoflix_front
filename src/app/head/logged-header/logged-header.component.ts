@@ -57,30 +57,12 @@ export class LoggedHeaderComponent {
     this.globals.isUploadOpen.set(!this.globals.isUploadOpen())
   }
 
-  // getLoggedUserData() {
-  //   this.backService.fetchLoggedUser().subscribe({
-  //     next: (resp) => {
-  //       //console.log(resp);
-  //       //this.currentUser = new User(resp)
-  //       this.globals.currentLoggedUser.set(new User(resp))
-  //     },
-  //     error: (err) => {
-  //       console.error(err);
-  //       this.router.navigate(['/login/']);
-  //     },
-  //     complete: () => {
-  //       console.log('Hier der User');
-  //       console.log(this.globals.currentLoggedUser());
-  //     },
-  //   });
-  // }
-
   menuOpened(isOpen: boolean) {
     this.menuIsOpen = isOpen;
   }
 
-  openProfile() {
-    this.router.navigate(['/profile/'])
-    //this.globals.isProfileOpen.set(!this.globals.isProfileOpen())
+  openLink(url: string) {
+    this.router.navigate([url])
   }
+
 }

@@ -44,43 +44,39 @@ export class UserSettingsComponent {
     this.userForm = new FormGroup({
       first_name: new FormControl(
         this.globals.currentLoggedUser()?.first_name,
-        [Validators.required, Validators.minLength(2)]
+        []
       ),
       last_name: new FormControl(this.globals.currentLoggedUser()?.last_name, [
-        Validators.required,
-        Validators.minLength(2),
       ]),
       email: new FormControl(this.globals.currentLoggedUser()?.email, [
-        Validators.required,
-        Validators.email,
       ]),
       date_of_birth: new FormControl(
         this.globals.currentLoggedUser()?.date_of_birth,
-        [Validators.required]
+        []
       ),
       date_joined: new FormControl(
         this.globals.currentLoggedUser()?.date_joined,
         [Validators.required]
       ),
       street: new FormControl(this.globals.currentLoggedUser()?.street, [
-        Validators.required,
+        
       ]),
       street_number: new FormControl(
         this.globals.currentLoggedUser()?.street_number,
-        [Validators.required]
+        []
       ),
       zip_code: new FormControl(this.globals.currentLoggedUser()?.zip_code, [
-        Validators.required,
+        
       ]),
       city: new FormControl(this.globals.currentLoggedUser()?.city, [
-        Validators.required,
+        
       ]),
       country: new FormControl(this.globals.currentLoggedUser()?.country, [
-        Validators.required,
+        
       ]),
       phone_number: new FormControl(
         this.globals.currentLoggedUser()?.phone_number,
-        [Validators.required]
+        []
       ),
     });
   }

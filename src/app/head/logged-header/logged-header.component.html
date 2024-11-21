@@ -20,7 +20,7 @@
       <mat-icon [ngClass]="menuIsOpen ? 'arrow-drop-down' : 'arrow-drop-up'">arrow_drop_down</mat-icon>
     </div>
     <mat-menu #menu="matMenu" (closed)="menuOpened(false)" xPosition="before">
-      <button (click)="openProfile()" mat-menu-item>
+      <button (click)="openLink('/profile/')" mat-menu-item>
         <mat-icon class="blue">manage_accounts</mat-icon>
         <span class="menu-pnts">Konto</span>
       </button>
@@ -28,11 +28,11 @@
         <mat-icon class="blue">upload_file</mat-icon>
         <span class="menu-pnts">Video hochladen</span>
       </button> -->
-      <button mat-menu-item>
+      <button (click)="openLink('/policy/')" mat-menu-item>
         <mat-icon class="blue">lock</mat-icon>
         <span class="menu-pnts">Datenschutz</span>
       </button>
-      <button mat-menu-item>
+      <button (click)="openLink('/imprint/')" mat-menu-item>
         <mat-icon class="blue">description</mat-icon>
         <span class="menu-pnts">Impressum</span>
       </button>

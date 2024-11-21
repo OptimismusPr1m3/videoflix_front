@@ -1,16 +1,15 @@
 import { ChangeDetectionStrategy, Component, Renderer2, signal } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {
   FormControl,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { merge } from 'rxjs';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -18,6 +17,7 @@ import { GlobalVariablesService } from '../../services/global-variables.service'
 import { HeaderComponent } from '../../head/header/header.component';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { FooterComponent } from "../../foot/footer/footer.component";
+import { ErrorToastComponent } from "../../toasts/error-toast/error-toast.component";
 
 @Component({
   selector: 'app-login',
@@ -33,22 +33,18 @@ import { FooterComponent } from "../../foot/footer/footer.component";
     RouterLink,
     HeaderComponent,
     NgxSpinnerModule,
-    FooterComponent
+    FooterComponent,
+    ErrorToastComponent
 ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  email = new FormControl(this.backService.signaledMail(), [
-    Validators.required,
-    Validators.email,
-    Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
-  ]);
-  password = new FormControl('', [Validators.required]);
+  form: FormGroup;
 
   mailErrorMessage = signal('');
-  pwErrorMessage = signal('');
+  isErrorToast: boolean = false; 
   hide = signal(true);
 
   constructor(
@@ -58,9 +54,18 @@ export class LoginComponent {
     private spinner: NgxSpinnerService,
     private renderer: Renderer2
   ) {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateMailErrorMessage());
+    this.form = new FormGroup({
+      email: new FormControl(this.backService.signaledMail(), [
+        Validators.required,
+        Validators.email,
+        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+      ]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    })
+  }
+
+  closeErrorToast(wasCLicked: boolean) {
+    this.globals.errorToastClass.set(wasCLicked ? 'fade-out-animation' : '');
   }
 
   ngOnInit() {
@@ -68,14 +73,14 @@ export class LoginComponent {
   }
 
   updateMailErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.mailErrorMessage.set('Bitte gib deine E-Mail ein !');
-    } else if (this.email.hasError('email')) {
-      this.mailErrorMessage.set('E-Mailadresse ungueltig !');
-    } else if (this.email.hasError('pattern')) {
-      this.mailErrorMessage.set('Deine Email sollte ohne Sonderzeichen sein !');
+    if (this.form.get('email')?.hasError('required')) {
+      return('Bitte gib deine E-Mail ein !');
+    } else if (this.form.get('email')?.hasError('email')) {
+      return('E-Mailadresse ungültig !');
+    } else if (this.form.get('email')?.hasError('pattern')) {
+      return('Deine Email sollte ohne Sonderzeichen sein !');
     } else {
-      this.mailErrorMessage.set('');
+      return('');
     }
   }
 
@@ -85,10 +90,10 @@ export class LoginComponent {
   }
 
   tryLogin() {
-    if (this.email.valid && this.password.valid) {
+    if (this.form.get('email')?.valid && this.form.get('password')?.valid) {
       this.spinner.show()
       this.backService
-        .userLogin(this.email.value!, this.password.value!)
+        .userLogin(this.form.get('email')?.value!, this.form.get('password')?.value!)
         .subscribe({
           next: (resp) => {
             console.log(resp.body.token);
@@ -96,8 +101,8 @@ export class LoginComponent {
           },
           error: (err) => {
             this.spinner.hide()
+            this.errorHandling()
             console.error('Ging so nicht durch ', err);
-            this.errorHandling();
           },
           complete: () => {
             this.spinner.hide()
@@ -108,13 +113,14 @@ export class LoginComponent {
     }
   }
 
+  testfunc() {
+    
+  }
+
   errorHandling() {
-    this.globals.accountNotExist.set(true);
+    this.globals.errorToastClass.set('fade-in-animation');
     setTimeout(() => {
-      this.globals.accountNotExist.set(false);
-      this.globals.tryAgain.set(true);
-      this.password.setValue('');
-      //this.email.setValue('')
+      this.form.get('password')?.setValue('');
     }, 1500);
   }
 }

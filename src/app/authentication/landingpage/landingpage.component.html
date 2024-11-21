@@ -20,8 +20,8 @@
         <mat-error> {{ mailErrorMessage() }} </mat-error>
         }
       </mat-form-field>
-      <div (click)="checkMail()" type="button" class="login-btn">
-        <div>Loslegen <mat-icon>chevron_right</mat-icon> </div>
+      <div (click)="checkMail()" type="button" class="login-btn" >
+        <div [ngClass]="mail.valid ? 'enabled' : 'disabled'">Loslegen <mat-icon>chevron_right</mat-icon> </div>
       </div>
     </div>
   </div>

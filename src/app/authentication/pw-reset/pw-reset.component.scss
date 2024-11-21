@@ -5,7 +5,9 @@
   height: 100vh;
   width: 100%;
   @include dFlex(column, space-between, center);
-  margin: 0px 124px;
+  @media (max-width: 1920px) {
+    margin: 0 32px;
+  }
   > .header-cont {
     width: 100%;
     height: 100px;
@@ -104,10 +106,8 @@
 
 .enabled {
     transition: all 0.3s ease-in-out;
-    background-color: #e50815;
   &:hover {
     cursor: pointer;
-    background-color: #ac040f;
   }
 }
 

@@ -3,26 +3,28 @@
 
   <div class="login-cont">
     <div class="login-form">
-      <span *ngIf="this.globals.accountNotExist()"
+      <!-- <span *ngIf="this.globals.accountNotExist()"
         >Es konnte kein Konto gefunden werden</span
-      >
-      <span *ngIf="this.globals.tryAgain()">Versuch es noch einmal !</span>
-      <h3>Einloggen</h3>
-      <div>
+      > -->
+      <!-- <span *ngIf="this.globals.tryAgain()">Versuch es noch einmal !</span> -->
+      <h3>Login</h3>
+      <form [formGroup]="form" (ngSubmit)="tryLogin()">
         <div class="mail-container custom-input-login">
           <mat-form-field>
             <mat-label>Gib deine E-Mail ein</mat-label>
             <input
               matInput
               placeholder="email@mail.com"
-              [formControl]="email"
+              formControlName="email"
               (blur)="updateMailErrorMessage()"
-              required
             />
-            @if (email.invalid) {
+            <!-- @if (email.invalid) {
             <mat-error> {{ mailErrorMessage() }} </mat-error>
-            }
+            } -->
           </mat-form-field>
+          <div class="error">
+            <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched">{{ updateMailErrorMessage() }} </span> 
+          </div>
         </div>
 
         <div class="password-container custom-input-login">
@@ -30,15 +32,15 @@
             <mat-label>Gib dein Passwort ein</mat-label>
             <input
               matInput
-              [formControl]="password"
-              minlength="4"
+              formControlName="password"
               [type]="hide() ? 'password' : 'text'"
             />
-            @if (password.invalid) {
-            <mat-error> Passwort muss aus 4 Zeichen bestehen </mat-error>
-            }
+            <!-- @if (password.invalid) {
+            <mat-error> Passwort muss aus mind. 8 Zeichen bestehen </mat-error>
+            } -->
             <button
               mat-icon-button
+              type="button"
               matSuffix
               (click)="clickEvent($event)"
               [attr.aria-label]="'Hide password'"
@@ -49,25 +51,27 @@
               }}</mat-icon>
             </button>
           </mat-form-field>
+          <div class="error"> 
+            <span *ngIf="form.get('password')?.hasError('minlength')">Das Passwort sollte mind. 8 Zeichen beinhalten</span> 
+          </div>
         </div>
 
         <div
           (click)="tryLogin()"
-          type="button"
-          class="login-btn"
-        > <div>
+          class="login-btn"> 
+          <button type="submit">
             Login
-          </div>
+          </button>
         </div>
       
-      </div>
+      </form>
 
       <div class="pw-reset">
         <a [routerLink]="['/pw-reset']">Passwort vergessen ?</a>
       </div>
 
       <div class="register-cont">
-        <span class="new-cont">Neu bei VideoFlix ?</span>
+        <span (click)="testfunc()" class="new-cont">Neu bei VideoFlix ?</span>
         <a [routerLink]="['/registration']" class="register-btn">Jetzt registrieren !</a>
       </div>
     </div>
@@ -85,3 +89,7 @@
   [fullScreen]="true"
   ><p style="color: white">Mal gucken, ob es dich gibt...</p></ngx-spinner
 >
+
+<div class="toast" [ngClass]="globals.errorToastClass()">
+  <app-error-toast (closeError)="closeErrorToast($event)" [errorTxt]="'Die eingegebene E-Mail, oder das eingegebene Passwort ist falsch. Versuch es noch ein mal!'"></app-error-toast>
+</div>

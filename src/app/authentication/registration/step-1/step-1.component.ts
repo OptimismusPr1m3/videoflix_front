@@ -6,9 +6,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,11 +24,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { GlobalVariablesService } from '../../../services/global-variables.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-step-1',
   standalone: true,
   imports: [
+    CommonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
@@ -38,34 +44,38 @@ import { GlobalVariablesService } from '../../../services/global-variables.servi
 })
 export class Step1Component {
   stepChange = output<string>();
-
-  email = new FormControl(this.backService.signaledMail(), [
-    Validators.required,
-    Validators.email,
-    Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
-  ]);
-  password = new FormControl('', [Validators.required]);
-  password2 = new FormControl('', [Validators.required]);
-
-  mailErrorMessage = signal('');
+  form: FormGroup;
   hide = signal(true);
   hide2 = signal(true);
 
   constructor(public backService: BackendCommunicationService, public globals: GlobalVariablesService) {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateMailErrorMessage());
+    this.form = new FormGroup({
+      email: new FormControl(this.backService.signaledMail(), [
+        Validators.required,
+        Validators.email,
+        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+      ]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password2: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    }, { validators: this.passwordsMatchValidator });
+
   }
 
+  passwordsMatchValidator: ValidatorFn = (group: AbstractControl): ValidationErrors | null => {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('password2')?.value;
+    return password === confirmPassword ? null : { passwordsMismatch: true };
+  };
+
   updateMailErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.mailErrorMessage.set('Bitte gib deine E-Mail ein !');
-    } else if (this.email.hasError('email')) {
-      this.mailErrorMessage.set('E-Mailadresse ungueltig !');
-    } else if (this.email.hasError('pattern')) {
-      this.mailErrorMessage.set('Deine Email sollte ohne Sonderzeichen sein !');
+    if (this.form.get('email')?.hasError('required')) {
+      return('Bitte gib deine E-Mail ein !');
+    } else if (this.form.get('email')?.hasError('email')) {
+      return('E-Mailadresse ungültig !');
+    } else if (this.form.get('email')?.hasError('pattern')) {
+      return('Deine Email sollte ohne Sonderzeichen sein !');
     } else {
-      this.mailErrorMessage.set('');
+      return('');
     }
   }
 
@@ -84,9 +94,13 @@ export class Step1Component {
   }
 
   nextStep() {
-    if (this.email.valid && this.password.valid) {
+    if (this.form.get('email')?.valid &&
+      this.form.get('password')?.valid &&
+      this.form.get('password2')?.valid &&
+      this.form.get('password')?.value === this.form.get('password2')?.value
+    ) {
       this.globals.isProgressingData.set(true)
-      this.backService.registerUser(this.email.value!, this.password.value!).subscribe({
+      this.backService.registerUser(this.form.get('email')?.value!, this.form.get('password')?.value!).subscribe({
         next: (resp) => {
           console.log('User registration succ.', resp)
         },
@@ -97,8 +111,7 @@ export class Step1Component {
         complete: () => {
           this.stepChange.emit('step2')
           this.globals.isProgressingData.set(false)
-        }
-        
+        }  
     })
     }
   }

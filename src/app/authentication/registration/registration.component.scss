@@ -4,7 +4,9 @@
   max-width: 1920px;
   width:100%;
   height: 100vh;
-  margin: 0 124px;
+  @media (max-width: 1920px) {
+    margin: 0 32px;
+  }
   @include dFlex(column, space-between, center);
   > .header-cont {
     width: 100%;
@@ -26,6 +28,7 @@
       > a {
         text-decoration: none;
         font-size: 18px;
+        font-weight: 700;
         color: #ffffff;
         background-color: #2E3EDF;
         padding: 12px 24px;

@@ -11,6 +11,7 @@ export class GlobalVariablesService {
   //Registration
   isProgressingData = signal<boolean>(false);
   accountNotExist = signal<boolean>(false);
+  errorToastClass = signal<string>(''); 
   //Login
   tryAgain = signal<boolean>(false);
   isProfileOpen = signal<boolean>(false);

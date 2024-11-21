@@ -1,32 +1,33 @@
 @import "../../../styles.scss";
 
 .imprint-cont {
-    max-width: 1920px;
-    height: 100vh;
-    width: 100%;
-    @include dFlex(column, space-between, flex-start);
-    margin: 0px 124px;
-    color: #ffffffff;
-
-    > h1 {
-        font-size: 48px;
-    }
-    > h2 {
-        font-size: 40px;
-    }
-    > h3 {
-        font-size: 32px;
-    }
-    > p {
-        font-size: 24px;
-    }
+  max-width: 1920px;
+  height: 100vh;
+  width: 100%;
+  @include dFlex(column, space-between, flex-start);
+  @media (max-width: 1920px) {
+    margin: 0 32px;
   }
-  
+  color: #ffffffff;
+
+  > h1 {
+    font-size: 48px;
+  }
+  > h2 {
+    font-size: 40px;
+  }
+  > h3 {
+    font-size: 32px;
+  }
+  > p {
+    font-size: 24px;
+  }
+}
 
 a {
-    text-decoration: none;
-    color: #ffffffff;
-    &:hover {
-        text-decoration: underline;
-    }
+  text-decoration: none;
+  color: #ffffffff;
+  &:hover {
+    text-decoration: underline;
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, output, Output } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-step-0',

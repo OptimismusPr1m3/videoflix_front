@@ -204,14 +204,18 @@ export class VideoplayerComponent {
   }
 
   lookForTimestamp() {
-    const foundTimestamp = this.globals
+    if (this.globals.currentLoggedUser()?.video_timestamps) {
+      const foundTimestamp = this.globals
       .currentLoggedUser()
       ?.video_timestamps.find(
         (stamp: { URL: string | undefined }) =>
           stamp.URL === this.globals.currentOpenedVideo()?.url
       );
-    console.log(foundTimestamp);
+    //console.log(foundTimestamp);
     return foundTimestamp?.STAMP ?? 0;
+    } else {
+      return 0
+    }
   }
 
   toggleVideo() {

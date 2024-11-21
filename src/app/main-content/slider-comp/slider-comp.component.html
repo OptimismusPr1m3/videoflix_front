@@ -3,13 +3,14 @@
   <div class="category-container">
     <h2>Neu auf VideoFlix</h2>
     <div class="scroll-container">
-      <div class="scroll-button left">
+      <div class="scroll-button left" [ngClass]="numberOfPacks.length > 1 ? 'slider-btn-opacity' : 'invis'">
         <button (click)="nextVideos('+', 'category1')">
           <mat-icon>chevron_left</mat-icon>
         </button>
       </div>
       <div class="content-container" #category1>
-        <div class="video-container" *ngFor="let groupKey of numberOfPacks; let groupIndex = index">
+        <div class="video-container" *ngFor="let groupKey of numberOfPacks; let groupIndex = index" 
+        [ngClass]="groupedSliderVids[groupKey].length === videoItemCardsAmount ? 'evenly-spacing' : 'start-spacing'">
           <div class="item" *ngFor="let item of groupedSliderVids[groupKey]; let i = index">
             <app-video-item
               (mouseover)="hoveredIndex1 = i"
@@ -21,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div class="scroll-button right">
+      <div class="scroll-button right" [ngClass]="numberOfPacks.length > 1 ? 'slider-btn-opacity' : 'invis'">
         <button (click)="nextVideos('-', 'category1')">
           <mat-icon>chevron_right</mat-icon>
         </button>
@@ -33,13 +34,14 @@
   <div *ngIf="globals.currentLoggedUser()?.video_timestamps" class="category-container">
     <h2>Weiterschauen</h2>
     <div class="scroll-container">
-      <div class="scroll-button left">
+      <div class="scroll-button left" [ngClass]="numberOfPacksWatched.length > 1 ? 'slider-btn-opacity' : 'invis'">
         <button (click)="nextVideos('+', 'category4')">
           <mat-icon>chevron_left</mat-icon>
         </button>
       </div>
       <div class="content-container" #category4>
-        <div class="video-container" *ngFor="let groupKey of numberOfPacksWatched; let groupIndex = index">
+        <div class="video-container" *ngFor="let groupKey of numberOfPacksWatched; let groupIndex = index" 
+        [ngClass]="groupedSliderVidsWatched[groupKey].length === videoItemCardsAmount ? 'evenly-spacing' : 'start-spacing'">
           <div class="item" *ngFor="let item of groupedSliderVidsWatched[groupKey]; let i = index">
             <app-video-item
               (mouseover)="hoveredIndex4 = i"
@@ -52,7 +54,7 @@
           </div>
         </div>
       </div>
-      <div class="scroll-button right">
+      <div class="scroll-button right" [ngClass]="numberOfPacksWatched.length > 1 ? 'slider-btn-opacity' : 'invis'">
         <button (click)="nextVideos('-', 'category4')">
           <mat-icon>chevron_right</mat-icon>
         </button>
@@ -64,13 +66,14 @@
   <div class="category-container">
     <h2>Dokumentation</h2>
     <div class="scroll-container">
-      <div class="scroll-button left">
+      <div class="scroll-button left" [ngClass]="numberOfPacksDocumentation.length > 1 ? 'slider-btn-opacity' : 'invis'">
         <button (click)="nextVideos('+', 'category2')">
           <mat-icon>chevron_left</mat-icon>
         </button>
       </div>
       <div class="content-container" #category2>
-        <div class="video-container" *ngFor="let groupKey of numberOfPacksDocumentation; let groupIndex = index">
+        <div class="video-container" *ngFor="let groupKey of numberOfPacksDocumentation; let groupIndex = index"
+        [ngClass]="groupedSliderVidsDocumentation[groupKey].length === videoItemCardsAmount ? 'evenly-spacing' : 'start-spacing'">
           <div class="item" *ngFor="let item of groupedSliderVidsDocumentation[groupKey]; let i = index">
             <app-video-item
               (mouseover)="hoveredIndex2 = i"
@@ -82,7 +85,7 @@
           </div>
         </div>
       </div>
-      <div class="scroll-button right">
+      <div class="scroll-button right" [ngClass]="numberOfPacksDocumentation.length > 1 ? 'slider-btn-opacity' : 'invis'">
         <button (click)="nextVideos('-', 'category2')">
           <mat-icon>chevron_right</mat-icon>
         </button>
@@ -94,13 +97,14 @@
   <div class="category-container">
     <h2>Drama</h2>
     <div class="scroll-container">
-      <div class="scroll-button left">
+      <div class="scroll-button left" [ngClass]="numberOfPacksDrama.length > 1 ? 'slider-btn-opacity' : 'invis'">
         <button (click)="nextVideos('+', 'category3')">
           <mat-icon>chevron_left</mat-icon>
         </button>
       </div>
       <div class="content-container" #category3>
-        <div class="video-container" *ngFor="let groupKey of numberOfPacksDrama; let groupIndex = index">
+        <div class="video-container" *ngFor="let groupKey of numberOfPacksDrama; let groupIndex = index"
+        [ngClass]="groupedSliderVidsDrama[groupKey].length === videoItemCardsAmount ? 'evenly-spacing' : 'start-spacing'">
           <div class="item" *ngFor="let item of groupedSliderVidsDrama[groupKey]; let i = index">
             <app-video-item
               (mouseover)="hoveredIndex3 = i"
@@ -112,7 +116,7 @@
           </div>
         </div>
       </div>
-      <div class="scroll-button right">
+      <div class="scroll-button right" [ngClass]="numberOfPacksDrama.length > 1 ? 'slider-btn-opacity' : 'invis'">
         <button (click)="nextVideos('-', 'category3')">
           <mat-icon>chevron_right</mat-icon>
         </button>
@@ -126,7 +130,6 @@
   color="#fff"
   type="square-jelly-box"
   [fullScreen]="true"
-  ><p style="color: white">Bitte einen Moment Geduld...</p></ngx-spinner
->
+  ><p style="color: white">Bitte einen Moment Geduld...</p></ngx-spinner>
 
 </section>

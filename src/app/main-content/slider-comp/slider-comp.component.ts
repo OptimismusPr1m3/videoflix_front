@@ -71,7 +71,7 @@ export class SliderCompComponent {
   numberOfPacksWatched: string[] = [];
   numberOfPacks: string[] = [];
 
-  videoItemCardsAmount: number = 5; // amount of videocarditems in a row which should be displayed
+  videoItemCardsAmount: number = 7; // amount of videocarditems in a row which should be displayed
 
   windowSize: number = 0;
   currentUser: User | null = null;
@@ -97,15 +97,50 @@ export class SliderCompComponent {
     this.resizeCategory('category2', 2);
     this.resizeCategory('category3', 3);
     this.resizeCategory('category4', 4);
+    this.customizeCardsAmount()
   }
 
   ngOnInit() {
+    this.customizeCardsAmount()
     this.spinner.show();
-    this.loadSliders();
+    //this.loadSliders();
   }
 
   synchronizeWatchedSlider() {
     this.groupWatchedVideos(this.response, this.currentUser?.video_timestamps); //Fortsetzen Slider
+  }
+
+  customizeCardsAmount() {
+    const wasAmount = this.videoItemCardsAmount;
+  
+    if (window.innerWidth < 1450) {
+      this.videoItemCardsAmount = 4;
+    } else if (window.innerWidth < 1730) {
+      this.videoItemCardsAmount = 5;
+    } else if (window.innerWidth < 1920) {
+      this.videoItemCardsAmount = 6;
+    } else {
+      this.videoItemCardsAmount = 7;
+    }
+  
+    if (this.videoItemCardsAmount !== wasAmount) {
+      this.cacheClear();
+      this.loadSliders();
+    }
+  }
+
+  cacheClear() {
+    this.groupedSliderVids = {}
+    this.groupedSliderVidsWatched = {}
+    this.groupedSliderVidsDrama = {}
+    this.groupedSliderVidsDocumentation = {}
+    this.groupedVideosByGenre = {}
+
+    this.numberOfPacksDocumentation = []
+    this.numberOfPacksDrama = []
+    this.numberOfPacksWatched = []
+    this.numberOfPacks = []
+    this.videoItems = []
   }
 
   loadSliders() {

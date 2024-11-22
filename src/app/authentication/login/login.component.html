@@ -3,10 +3,6 @@
 
   <div class="login-cont">
     <div class="login-form">
-      <!-- <span *ngIf="this.globals.accountNotExist()"
-        >Es konnte kein Konto gefunden werden</span
-      > -->
-      <!-- <span *ngIf="this.globals.tryAgain()">Versuch es noch einmal !</span> -->
       <h3>Login</h3>
       <form [formGroup]="form" (ngSubmit)="tryLogin()">
         <div class="mail-container custom-input-login">
@@ -18,9 +14,6 @@
               formControlName="email"
               (blur)="updateMailErrorMessage()"
             />
-            <!-- @if (email.invalid) {
-            <mat-error> {{ mailErrorMessage() }} </mat-error>
-            } -->
           </mat-form-field>
           <div class="error">
             <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched">{{ updateMailErrorMessage() }} </span> 
@@ -35,9 +28,6 @@
               formControlName="password"
               [type]="hide() ? 'password' : 'text'"
             />
-            <!-- @if (password.invalid) {
-            <mat-error> Passwort muss aus mind. 8 Zeichen bestehen </mat-error>
-            } -->
             <button
               mat-icon-button
               type="button"

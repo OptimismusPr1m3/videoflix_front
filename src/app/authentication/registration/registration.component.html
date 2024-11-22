@@ -1,14 +1,5 @@
 <section class="register-cont">
-  <div class="header-cont">
-    <div class="logo">
-      <img src="./assets/logos/Logo.png" alt="videoflix-logo">
-    </div>
-    <div class="right-cont">
-      <a [routerLink]="['/login']" class="login-btn">
-       Login
-      </a>
-    </div>
-  </div>
+  <app-header></app-header>
 
   <div class="steps"> 
     <app-step-0 *ngIf="!isStep1 && !isStep2" (stepChange)="changeStep($event)"></app-step-0>

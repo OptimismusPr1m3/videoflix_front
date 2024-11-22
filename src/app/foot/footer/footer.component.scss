@@ -10,7 +10,7 @@
     @include dFlex(row, center, center);
     gap: 48px;
     @media (max-width: 1920px) {
-        margin: 32px 32px;
+        margin: 0px 32px;
     }
     > .foot-txt {
         font-weight: 500;

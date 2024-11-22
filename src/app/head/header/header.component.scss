@@ -9,14 +9,25 @@
       cursor: pointer;
     }
     @include dFlex(row, flex-start, center);
-    > span {
-      color: #e50815;
-      font-size: 32px;
-      font-weight: 700;
+    // > span {
+    //   color: #e50815;
+    //   font-size: 32px;
+    //   font-weight: 700;
+    // }
+    // > .n-letter {
+    //   color: #ffffff;
+    //   padding: 0px 4px;
+    // }
+    > .mobile-logo {
+     display: none;   
     }
-    > .n-letter {
-      color: #ffffff;
-      padding: 0px 4px;
+    @media (max-width: 500px) {
+      > .mobile-logo {
+        display: block
+      }
+      > .no-mobile-logo {
+        display: none
+      }
     }
   }
   > .right-cont {

@@ -29,11 +29,26 @@
     font-size: 32px;
     margin-bottom: 0px;
     color: #2e3edf;
+    @media (max-width: 480px) {
+      font-size: 30px;
+    }
+    @media (max-width: 375px) and (max-height: 667px) and (orientation: portrait) {
+      //iPhone SE
+      font-size: 26px;
+      margin: 12px 0;
+    }
   }
   > p {
     font-size: 22px;
     font-weight: 500;
     color: #2e3edf;
+    @media (max-width: 480px) {
+      font-size: 18px;
+    }
+    @media (max-width: 375px) and (max-height: 667px) and (orientation: portrait) {
+      //iPhone SE
+      margin: 8px 0;
+    }
   }
   > form {
     width: 100%;
@@ -62,13 +77,27 @@
         border: none;
         color: #ffffff;
         font-size: 24px;
+        @media (max-width: 480px) {
+          width: 224px;
+        }
+        @media (max-width: 375px) and (max-height: 667px) and (orientation: portrait) {
+          //iPhone SE
+          margin-top: 0px;
+          padding: 12px 24px;
+        }
         &:hover {
           cursor: pointer;
           background-color: #5460e5;
         }
       }
-      
     }
+  }
+}
+
+.SE {
+  @media (max-width: 375px) and (max-height: 667px) and (orientation: portrait) {
+    //iPhone SE
+   display: none;
   }
 }
 
@@ -86,7 +115,7 @@
 }
 
 .enabled {
-    transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   &:hover {
     cursor: pointer;
   }
@@ -130,7 +159,10 @@ mat-label {
   border-bottom-style: none;
 }
 
-::ng-deep .mdc-floating-label--required:not(.mdc-floating-label--hide-required-marker)::after {
+::ng-deep
+  .mdc-floating-label--required:not(
+    .mdc-floating-label--hide-required-marker
+  )::after {
   color: #2e3edf !important;
 }
 

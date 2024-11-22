@@ -8,6 +8,9 @@
   @media (max-width: 1920px) {
     margin: 0 32px;
   }
+  @media (max-width: 500px) {
+    margin: 0 16px;
+  }
   > .mail-cont {
     height: 400px;
     @include dFlex(column, center, center);
@@ -15,15 +18,33 @@
       color: #ffffff;
       font-size: 48px;
       font-weight: 700;
+      margin-bottom: 28px;
     }
     > p {
       color: #ffffff;
       font-size: 28px;
-      &:nth-child(3) {
-        margin-top: 0px;
+      margin-top: 0px;
+    }
+    @media (max-width: 900px) {
+      > span {
+        font-size: 48px;
+        text-align: center;
+      }
+      > p {
+        font-size: 20px;
+        text-align: center;
       }
     }
-
+    @media (max-width: 400px) {
+      > span {
+        font-size: 32px;
+        text-align: center;
+      }
+      > p {
+        font-size: 18px;
+        text-align: center;
+      }
+    }
     > .mail-container {
       @include dFlex(row, flex-start, flex-start);
       gap: 16px;
@@ -32,6 +53,10 @@
       > mat-form-field {
         width: 100%;
         font-family: "Raleway", sans-serif;
+      }
+      @media (max-width: 900px) {
+        flex-direction: column;
+        align-items: center;
       }
       > .login-btn {
         @include dFlex(row, flex-start, center);

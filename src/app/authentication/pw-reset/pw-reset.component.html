@@ -12,6 +12,9 @@
           placeholder="email@mail.com"
           [formControl]="mail"
           required
+          autocomplete="email"
+          autocapitalize="none"
+          inputmode="email"
         />
       </mat-form-field>
       <div (click)="checkMail()" type="button" class="login-btn">

@@ -9,9 +9,11 @@ section {
   > app-logged-header {
     width: 100%;
     display: flex;
-    position: fixed;
+    //position: fixed;
     z-index: 1000;
     max-width: 1920px;
+    margin-top: 32px;
+    transition: all 150ms ease-in-out;
   }
 
   > .preview-description {
@@ -23,6 +25,12 @@ section {
     @media (max-width: 1920px) {
       max-width: 1920px;
     }
+    @media (max-width: 890px) {
+      gap: 16px;
+    }
+    @media (max-width: 860px) {
+      display: none;
+    }
     > h1 {
       margin: 0;
       font-size: 88px;
@@ -31,6 +39,13 @@ section {
       @media (max-width: 1920px) {
         margin-left: 32px;
       }
+      @media (max-width: 890px) {
+        margin-left: 16px;
+        font-size: 64px;
+      }
+      @media (max-width: 450px) {
+        font-size: 48px;
+      }
     }
     > span {
       font-weight: 400;
@@ -38,6 +53,12 @@ section {
       color: #ffffff;
       @media (max-width: 1920px) {
         margin-left: 32px;
+      }
+      @media (max-width: 890px) {
+        margin-left: 16px;
+      }
+      @media (max-width: 450px) {
+        font-size: 14px;
       }
     }
     > .play-btn {
@@ -48,11 +69,20 @@ section {
       @media (max-width: 1920px) {
         margin-left: 32px;
       }
+      @media (max-width: 890px) {
+        margin-left: 16px;
+      }
+      @media (max-width: 450px) {
+        padding: 6px 12px;
+      }
       @include dFlex(row, center, center);
       > span {
         color: #ffffff;
         font-size: 18px;
         font-weight: 700;
+      }
+      @media (max-width: 450px) {
+        font-size: 16px;
       }
       > mat-icon {
         font-family: "Material Icons Rounded";
@@ -61,6 +91,16 @@ section {
         width: 32px;
         color: #ffffff;
         font-variation-settings: "FILL" 1, "wght" 700;
+        @media (max-width: 890px) {
+          font-size: 28px;
+          height: 28px;
+          width: 28px;
+        }
+        @media (max-width: 450px) {
+          font-size: 24px;
+          height: 24px;
+          width: 24px;
+        }
       }
     }
   }
@@ -69,6 +109,9 @@ section {
     width: 100%;
     margin-top: 56px;
     z-index: 5;
+    @media (max-width: 860px) {
+      margin-top: 64px;
+    }
   }
 
   > .profile-overlay {
@@ -100,17 +143,37 @@ section {
     z-index: 20;
     @include dFlex(row, center, flex-start);
     padding-top: 124px;
+    @media (max-width: 860px) {
+      position: fixed;
+      z-index: 1001;
+      padding-top: 0px;
+    }
     > .v-overlay-container {
       height: 700px;
       width: 900px;
-      background-color: rgba($color: #040404, $alpha: 1);
+      background-color: rgba($color: #141414, $alpha: 1);
       border: #141414 1px solid;
       border-radius: 6px;
       box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.5),
         -15px 10px 10px -10px rgba(0, 0, 0, 0.5);
       //padding: 12px;
+      @media (max-width: 860px) {
+        height: 100%;
+        width: 100%;
+        border: none;
+        border-radius: 0px;
+        box-shadow: none;
+      }
     }
   }
+}
+
+app-logged-header.sticky {
+  position: fixed;
+  top: 0;
+  //background-color: rgba($color: #141414, $alpha: 1);
+  margin-top: 0px !important;
+  opacity: 0 !important;
 }
 
 app-footer {
@@ -119,4 +182,10 @@ app-footer {
   margin-top: -120px !important;
   background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
   z-index: 5;
+}
+
+app-preview-comp {
+  @media (max-width: 860px) {
+    display: none;
+  }
 }

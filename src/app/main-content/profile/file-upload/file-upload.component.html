@@ -5,7 +5,7 @@
       <mat-label>Titel</mat-label>
       <input matInput formControlName="title" type="text" />
       <mat-error *ngIf="videoForm.get('title')?.invalid && videoForm.get('title')?.touched">
-        Der Titel muss zwischen 4 und 20 Zeichen lang sein 
+        Mindestens 4 Zeichen
       </mat-error>
     </mat-form-field>
     <mat-form-field>
@@ -16,19 +16,9 @@
           <mat-option [value]="genre">{{ genre }}</mat-option>
         }
       </mat-select>
-      <mat-error *ngIf="videoForm.get('genre')?.hasError">Bitte wähle ein Genre</mat-error>
+      <mat-error *ngIf="videoForm.get('genre')?.hasError">Bitte wählen</mat-error>
     </mat-form-field>
   </div>
-
-  <!-- <div class="form-group custom-input-settings">
-    <mat-form-field>
-      <mat-label>Genre</mat-label>
-      <input matInput formControlName="genre" type="text" />
-      <mat-error *ngIf="videoForm.get('genre')?.invalid && videoForm.get('genre')?.touched">
-        Das Genre muss mind 4 Zeichen lang sein 
-      </mat-error>
-    </mat-form-field>
-  </div> -->
 
   <!---->
   <div class="form-group custom-input-settings">
@@ -36,7 +26,7 @@
       <mat-label>Beschreibung</mat-label>
       <textarea minlength="10" matInput formControlName="description" type="text"></textarea>
       <mat-error *ngIf="videoForm.get('description')?.invalid && videoForm.get('description')?.touched">
-        Bitte gib eine kurze Beschreibung, bestehend aus mindestens 10 Zeichen, zu deinem Video an
+        Mindestens 10 Zeichen
       </mat-error>
     </mat-form-field>
   </div>
@@ -74,12 +64,11 @@
             {{
               convertIntoMB(selectedVideoFile.size) | number : "1.2-2"
             }}
-            MB</span
-          >
+            MB</span>
         </div>
         <div class="file-image">
           <canvas style="display: none" #videoCanvas></canvas>
-          <img style="width: 150px; height: 100px" *ngIf="videoPreview" [src]="videoPreview" />
+          <img *ngIf="videoPreview" [src]="videoPreview" />
         </div>
       </div>
     </div>

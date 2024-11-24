@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, HostListener, Renderer2 } from '@angular/core';
 import { HeaderComponent } from '../../head/header/header.component';
 import { LoggedHeaderComponent } from '../../head/logged-header/logged-header.component';
 import { SliderCompComponent } from '../slider-comp/slider-comp.component';
@@ -28,6 +28,9 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './main.component.scss',
 })
 export class MainComponent {
+
+  stickyScrollPoint = 28
+  isSticky = false
   constructor(
     private renderer: Renderer2,
     public globals: GlobalVariablesService
@@ -40,4 +43,16 @@ export class MainComponent {
   ngOnDestroy() {
     this.renderer.removeClass(document.body, 'logged-in');
   }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(): void {
+    const scrollPosition = window.scrollY || window.pageYOffset;
+    console.log(scrollPosition)
+    if (scrollPosition > this.stickyScrollPoint) {
+      this.isSticky = true;
+    } else {
+      this.isSticky = false;
+    }
+  }
+
 }

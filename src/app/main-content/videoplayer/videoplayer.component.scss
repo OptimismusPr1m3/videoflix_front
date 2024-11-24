@@ -8,6 +8,10 @@
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
     height: 510px;
+    @media (max-width: 860px) {
+      border: none;
+      border-radius: 0px;
+    }
     > .vplayer-head {
       position: absolute;
       top: 0;
@@ -29,6 +33,12 @@
       border-top-left-radius: 6px;
       width: 900px;
       height: 509px;
+      @media (max-width: 860px) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0px;
+      }
     }
     > .vplayer-bottom-btn {
       opacity: 1;
@@ -37,7 +47,6 @@
       bottom: 0;
       > .overlay {
         @include dFlex(row, space-between, center);
-        gap: 60px;
         padding: 4px 16px;
         max-width: 100%;
         margin-bottom: 4px;
@@ -56,6 +65,17 @@
           font-weight: 700;
           font-size: 28px;
           color: #ffffff;
+          @media (max-width: 860px) {
+            font-size: 24px;
+            padding: 6px 12px;
+          }
+          @media (max-width: 420px) {
+            padding: 12px 12px;
+            border-radius: 50%;
+            > b {
+              display: none;
+            }
+          }
           > mat-icon {
             font-family: "Material Icons Rounded";
             font-size: 32px;
@@ -63,6 +83,11 @@
             width: 32px;
             color: #ffffff;
             font-variation-settings: "FILL" 1, "wght" 700;
+            @media (max-width: 860px) {
+              font-size: 24px;
+              height: 24px;
+              width: 24px;
+            }
           }
           &:hover {
             cursor: pointer;
@@ -77,6 +102,8 @@
         justify-content: center;
         align-items: flex-start;
         gap: 16px;
+        opacity: 1;
+        transition: opacity 1s ease-in-out;
         > .bar-cont {
           width: 100%;
           @include dFlex(row, center, center);
@@ -141,9 +168,28 @@
     }
   }
   > .vplayer-foot {
-    padding: 6px;
+    @include dFlex(column, center, flex-start);
+    width: 100%;
+    > div {
+      @include dFlex(row, space-between, center);
+      width: 100%;
+      margin-bottom: 64px;
+      > span {
+        color: #ffffff;
+        margin: 0px 16px;
+        font-size: 24px;
+        font-weight: 700;
+      }
+      > .vid-title {
+        font-size: 36px;
+      }
+    }
     > span {
+      font-size: 22px;
+      margin-left: 16px;
+      margin-right: 16px;
       color: #ffffff;
+      font-weight: 500;
     }
   }
 }
@@ -151,6 +197,8 @@
 .overlay-b-btn {
   @include dFlex(row, space-between, center);
   padding: 20px 32px 0px 32px;
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
   > mat-icon {
     height: 48px;
     width: 48px;
@@ -191,6 +239,19 @@
   );
 }
 
+.video-gradient-mobile {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(
+    rgba(20, 20, 20, 0.6),
+    rgba(20, 20, 20, 0),
+    rgba(20, 20, 20, 1)
+  );
+}
+
 .progressbar {
   input[type="range"] {
     /*-webkit-appearance: none; /* Entfernt Standarddesign */
@@ -201,15 +262,15 @@
     /* Fortschrittsfarbe mit linear-gradient */
     background: linear-gradient(
       to right,
-      #2e3edf 0%, /* Fortschrittsfarbe */
-      #2e3edf calc(var(--value, 0) * 1%), /* Dynamischer Fortschritt */
-      #b5b5b5 calc(var(--value, 0) * 1%), /* Rest der Leiste */
-      #b5b5b5 100%
+      #2e3edf 0%,
+      /* Fortschrittsfarbe */ #2e3edf calc(var(--value, 0) * 1%),
+      /* Dynamischer Fortschritt */ #b5b5b5 calc(var(--value, 0) * 1%),
+      /* Rest der Leiste */ #b5b5b5 100%
     );
 
     border-radius: 5px;
     outline: none;
-    transition: all 0.250ms ease;
+    transition: all 0.25ms ease;
 
     &::-webkit-slider-thumb {
       -webkit-appearance: none;

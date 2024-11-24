@@ -171,6 +171,29 @@ label {
   height: 12px;
 }
 
+/* Scrollbar Styling*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2e3edf;
+  border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #5460e5;
+}
+
 /*RALEWAY*/
 
 /* raleway-100 - latin */

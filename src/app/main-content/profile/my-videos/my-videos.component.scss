@@ -5,7 +5,12 @@
     @include dFlex(row, flex-start, center);
     flex-wrap: wrap;
     gap: 16px;
-
+    @media (max-width: 950px) {
+      justify-content: center;
+      max-height: 600px;
+      height: 100%;
+      overflow-y: scroll;
+    }
     > .item {
         // width: 450px;
         // height: 450px;
@@ -30,6 +35,56 @@
             transform: scale(1.5);
             z-index: 10;
             cursor: pointer;
+            @media (max-width: 950px) {
+              -webkit-transform: scale(1.3);
+            transform: scale(1.3);
+            }
+            @media (max-width: 560px) {
+              -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            }
+          }
+        }
+        @media (max-width: 950px) {
+          &:first-child {
+            .grow-shadow {
+              &:hover {
+                box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.5),
+                  -15px 10px 10px -10px rgba(0, 0, 0, 0.5);
+                -webkit-transform: scale(1.3) translateY(30px);
+                transform: scale(1.3) translateY(30px);
+                z-index: 10;
+              }
+            }
+          }
+          &:last-child {
+            .grow-shadow {
+              &:hover {
+                box-shadow: 15px 10px 10px -10px rgba(0, 0, 0, 0.5),
+                  -15px 10px 10px -10px rgba(0, 0, 0, 0.5);
+                -webkit-transform: scale(1.3) translateY(-30px);
+                transform: scale(1.3) translateY(-30px);
+                z-index: 10;
+              }
+            }
+          }
+        }
+        @media (max-width: 560px) {
+          &:first-child {
+            .grow-shadow {
+              &:hover {
+                -webkit-transform: scale(1.1) translateY(30px);
+                transform: scale(1.1) translateY(30px);
+              }
+            }
+          }
+          &:last-child {
+            .grow-shadow {
+              &:hover {
+                -webkit-transform: scale(1.1) translateY(-30px);
+                transform: scale(1.1) translateY(-30px);
+              }
+            }
           }
         }
         

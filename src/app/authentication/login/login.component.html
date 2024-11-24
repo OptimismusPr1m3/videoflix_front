@@ -1,5 +1,5 @@
 <section class="landing-cont">
-  <app-header [isLoginScreen]="true" ></app-header>
+  <app-header [isLoginScreen]="true"></app-header>
 
   <div class="login-cont">
     <div class="login-form">
@@ -13,10 +13,16 @@
               placeholder="email@mail.com"
               formControlName="email"
               (blur)="updateMailErrorMessage()"
+              autocomplete="email"
+              autocapitalize="none"
+              inputmode="email"
             />
           </mat-form-field>
           <div class="error">
-            <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched">{{ updateMailErrorMessage() }} </span> 
+            <span
+              *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+              >{{ updateMailErrorMessage() }}
+            </span>
           </div>
         </div>
 
@@ -27,6 +33,7 @@
               matInput
               formControlName="password"
               [type]="hide() ? 'password' : 'text'"
+              autocomplete="current-password"
             />
             <button
               mat-icon-button
@@ -41,19 +48,16 @@
               }}</mat-icon>
             </button>
           </mat-form-field>
-          <div class="error"> 
-            <span *ngIf="form.get('password')?.hasError('minlength')">Das Passwort sollte mind. 8 Zeichen beinhalten</span> 
+          <div class="error">
+            <span *ngIf="form.get('password')?.hasError('minlength')"
+              >Das Passwort sollte mind. 8 Zeichen beinhalten</span
+            >
           </div>
         </div>
 
-        <div
-          (click)="tryLogin()"
-          class="login-btn"> 
-          <button type="submit">
-            Login
-          </button>
+        <div (click)="tryLogin()" class="login-btn">
+          <button type="submit">Login</button>
         </div>
-      
       </form>
 
       <div class="pw-reset">
@@ -62,13 +66,14 @@
 
       <div class="register-cont">
         <span (click)="testfunc()" class="new-cont">Neu bei VideoFlix ?</span>
-        <a [routerLink]="['/registration']" class="register-btn">Jetzt registrieren !</a>
+        <a [routerLink]="['/registration']" class="register-btn"
+          >Jetzt registrieren !</a
+        >
       </div>
     </div>
   </div>
 
   <app-footer></app-footer>
-
 </section>
 
 <ngx-spinner
@@ -81,5 +86,18 @@
 >
 
 <div class="toast" [ngClass]="globals.errorToastClass()">
-  <app-error-toast (closeError)="closeErrorToast($event)" [errorTxt]="'Die eingegebene E-Mail, oder das eingegebene Passwort ist falsch. Versuch es noch ein mal!'"></app-error-toast>
+  <app-error-toast
+    (closeError)="closeErrorToast($event)"
+    [errorTxt]="
+      'Die eingegebene E-Mail, oder das eingegebene Passwort ist falsch. Versuch es noch ein mal!'
+    "
+  ></app-error-toast>
+</div>
+
+<div class="toast-mobile" [ngClass]="globals.mobileErrorToastClass()">
+  <app-error-toast-mobile
+    (closeError)="closeMobileErrorToast($event)"
+    [errorTxt]="
+      'Die eingegebene E-Mail, oder das eingegebene Passwort ist falsch. Versuch es noch ein mal!'">
+</app-error-toast-mobile>
 </div>

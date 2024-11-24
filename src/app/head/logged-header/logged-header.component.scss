@@ -7,13 +7,18 @@
     max-width: 1850px;
   }
   z-index: 1000;
-  position: fixed;
+  // position: fixed;
+  // top: 100px;
   height: 100px;
   @media (max-width: 1920px) {
     position: unset;
     max-width: unset;
     margin: 0px 32px;
-}
+  }
+  @media (max-width: 890px) {
+    margin: 0px 16px;
+    height: 72px;
+  }
   @include dFlex(row, space-between, center);
   > .left-cont {
     @include dFlex(row, flex-start, center);
@@ -79,12 +84,11 @@
         color: #2e3edf !important;
       }
     }
-
   }
 }
 
 .menu-pnts {
-  font-family: 'Raleway';
+  font-family: "Raleway";
   color: #2e3edf;
   font-size: 18px;
   font-weight: 700;
@@ -92,7 +96,7 @@
 
 ::ng-deep .mat-mdc-menu-content {
   padding: 0 !important;
-  background-color: rgba($color: #ffffff, $alpha: 1.0);
+  background-color: rgba($color: #ffffff, $alpha: 1);
   border-radius: 12px !important;
 }
 

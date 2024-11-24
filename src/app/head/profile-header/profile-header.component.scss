@@ -9,6 +9,9 @@
     max-width: unset;
     margin: 0px 32px;
   }
+  @media (max-width: 760px) {
+    margin: 0px 16px;
+  }
   @include dFlex(row, space-between, center);
   > .left-cont {
     @include dFlex(row, flex-start, center);

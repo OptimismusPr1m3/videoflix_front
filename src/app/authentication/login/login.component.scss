@@ -172,7 +172,21 @@
     right: 16px;
   }
   @media (max-width: 560px) {
+    display: none;
+  }
+}
+
+.toast-mobile {
+  display: none;
+  @media (max-width: 560px) {
+    position: absolute;
+    display: block;
+    height: 232px;
     right: 0px;
+    left: 0px;
+    bottom: 0px;
+    opacity: 0;
+    animation: mobileplopIn 1s ease-in; 
   }
 }
 
@@ -181,6 +195,43 @@
 }
 .fade-out-animation {
   animation: plopOut 1s forwards;
+}
+
+.fade-in-mobile-animation {
+  animation: mobilePlopIn 1s forwards;
+}
+.fade-out-mobile-animation {
+  animation: mobilePlopOut 1s forwards;
+}
+
+@keyframes mobilePlopIn {
+  from {
+    right: 0;
+    left: 0;
+    bottom: 0px;
+    opacity: 0;
+  }
+  to {
+    left: 0;
+    right: 0px;
+    bottom: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes mobilePlopOut {
+  from {
+    right: 0px;
+    left: 0;
+    bottom: 0px;
+    opacity: 1;
+  }
+  to {
+    right: 0px;
+    left: 0;
+    bottom: 0px;
+    opacity: 0;
+  }
 }
 
 @keyframes plopIn {
@@ -195,6 +246,7 @@
     opacity: 1;
   }
 }
+
 @keyframes plopOut {
   from {
     right: 50px;

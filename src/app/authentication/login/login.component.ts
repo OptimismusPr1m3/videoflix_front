@@ -18,6 +18,7 @@ import { HeaderComponent } from '../../head/header/header.component';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { FooterComponent } from "../../foot/footer/footer.component";
 import { ErrorToastComponent } from "../../toasts/error-toast/error-toast.component";
+import { ErrorToastMobileComponent } from '../../toasts/error-toast-mobile/error-toast-mobile.component';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,8 @@ import { ErrorToastComponent } from "../../toasts/error-toast/error-toast.compon
     HeaderComponent,
     NgxSpinnerModule,
     FooterComponent,
-    ErrorToastComponent
+    ErrorToastComponent,
+    ErrorToastMobileComponent
 ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
@@ -66,6 +68,10 @@ export class LoginComponent {
 
   closeErrorToast(wasCLicked: boolean) {
     this.globals.errorToastClass.set(wasCLicked ? 'fade-out-animation' : '');
+  }
+
+  closeMobileErrorToast(wasCLicked: boolean) {
+    this.globals.mobileErrorToastClass.set(wasCLicked ? 'fade-out-mobile-animation' : '');
   }
 
   ngOnInit() {
@@ -119,6 +125,7 @@ export class LoginComponent {
 
   errorHandling() {
     this.globals.errorToastClass.set('fade-in-animation');
+    this.globals.mobileErrorToastClass.set('fade-in-mobile-animation');
     setTimeout(() => {
       this.form.get('password')?.setValue('');
     }, 1500);

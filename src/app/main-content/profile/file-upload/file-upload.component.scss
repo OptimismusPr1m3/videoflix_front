@@ -4,6 +4,27 @@
   @include dFlex(column, center, flex-start);
   min-width: 600px;
   max-width: 1200px;
+  @media (max-width: 880px) {
+    min-width: 480px;
+  }
+  @media (max-width: 580px) {
+    min-width: 450px;
+  }
+  @media (max-width: 490px) {
+    min-width: 420px;
+  }
+  @media (max-width: 450px) {
+    min-width: 390px;
+  }
+  @media (max-width: 410px) {
+    min-width: 370px;
+  }
+  @media (max-width: 400px) {
+    min-width: 340px;
+  }
+  @media (max-width: 380px) {
+    min-width: 300px;
+  }
   > .form-group {
     width: 100%;
     @include dFlex(row, center, center);
@@ -168,6 +189,10 @@ textarea {
     border-radius: 12px;
     padding-top: 4px;
     background-color: rgba(255, 255, 255, 0.1);
+    @media (max-width: 400px) {
+      gap: 16px;
+      justify-content: center;
+    }
     > .file-input {
       padding-left: 16px;
       > input {
@@ -197,8 +222,21 @@ textarea {
       gap: 16px;
       > .file-data {
         @include dFlex(column, center, flex-start);
+        @media (max-width: 880px) {
+          display: none;
+        }
         span {
           color: #ffffff;
+        }
+      }
+      > .file-image {
+        > img {
+          width: 150px;
+          height: 100px;
+          @media (max-width: 400px) {
+            width: 100px;
+            height: 60px;
+          }
         }
       }
     }

@@ -71,7 +71,7 @@ export class SliderCompComponent {
   numberOfPacksWatched: string[] = [];
   numberOfPacks: string[] = [];
 
-  videoItemCardsAmount: number = 7; // amount of videocarditems in a row which should be displayed
+  videoItemCardsAmount: number = 8; // amount of videocarditems in a row which should be displayed
 
   windowSize: number = 0;
   currentUser: User | null = null;
@@ -113,7 +113,11 @@ export class SliderCompComponent {
   customizeCardsAmount() {
     const wasAmount = this.videoItemCardsAmount;
   
-    if (window.innerWidth < 1450) {
+    if (window.innerWidth < 690) {
+      this.videoItemCardsAmount = 2;
+    } else if (window.innerWidth < 1160) {
+      this.videoItemCardsAmount = 3;
+    } else if (window.innerWidth < 1450) {
       this.videoItemCardsAmount = 4;
     } else if (window.innerWidth < 1730) {
       this.videoItemCardsAmount = 5;

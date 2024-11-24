@@ -15,6 +15,9 @@
           [formControl]="mail"
           (blur)="updateMailErrorMessage()"
           required
+          autocomplete="email"
+          autocapitalize="none"
+          inputmode="email"
         />
         @if (mail.invalid) {
         <mat-error> {{ mailErrorMessage() }} </mat-error>

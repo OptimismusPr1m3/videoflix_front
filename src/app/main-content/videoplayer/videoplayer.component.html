@@ -14,26 +14,28 @@
       Dein Browser unterstuetzt das Format nicht
     </video>
 
+    <div class="video-gradient-mobile"></div>
+
     <div  [ngClass]="{
     'vplayer-bottom-btn': true,
     'vplayer-fullscreen': isVidFullScreen,
-    'fade-out': isMouseInactive }">
+    'fade-out': isMouseInactive && isVidFullScreen}">
       <div class="overlay play" *ngIf="!isVidFullScreen">
         <button (click)="openFullscreen()">
           <mat-icon>play_arrow</mat-icon>
-          Abspielen
+          <b>Abspielen</b>
         </button>
         <button *ngIf="isInMyVideos" (click)="openVideoEdit()">
           <mat-icon>edit</mat-icon>
-          Bearbeiten
+          <b>Bearbeiten</b>
         </button>
       </div>
-
+      <!-- player overlay back btn -->
       <div *ngIf="isVidFullScreen" (click)="closeFullscreen()" class="overlay-b-btn">
         <mat-icon>arrow_back</mat-icon>
         <img src="./assets/logos/Symbol.png" alt="FlixLogo">
       </div>
-
+      <!-- videoplayer overlay -->
       <div class="overlay full" *ngIf="isVidFullScreen">
         
         <div class="bar-cont progressbar">
@@ -76,8 +78,11 @@
   </div>
   
   <div *ngIf="!globals.isMyVideoEditing()" class="vplayer-foot">
+    <div>
+      <span class="vid-title">{{ globals.currentOpenedVideo()?.title }}</span>
+      <span class="vid-duration"> {{ formatVideoDuration(videoDuration) }}</span>
+    </div>
     <span>{{ globals.currentOpenedVideo()?.description }}</span>
-    <span></span>
   </div>
 
   <app-video-edit style="width: 100%" *ngIf="globals.isMyVideoEditing()"></app-video-edit>

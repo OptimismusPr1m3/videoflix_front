@@ -1,47 +1,95 @@
-
-
 <section>
   <app-profile-header></app-profile-header>
   <div class="profile">
     <div class="left-nav">
       <div (click)="backToMain()" class="back-to-main">
         <mat-icon>keyboard_backspace</mat-icon>
-        <span>Zurück zu VideoFlix</span>
+        <span class="list-txt">Zurück zu VideoFlix</span>
       </div>
       <mat-list class="custom-list">
-        <mat-list-item (click)="navigateTo('oversight', false)" [ngClass]="globals.activePath() === 'oversight' ? 'active' : 'inactive' ">
+        <mat-list-item
+          (click)="navigateTo('oversight', false)"
+          [ngClass]="
+            globals.activePath() === 'oversight' ? 'active' : 'inactive'
+          "
+        >
           <mat-icon matListItemIcon>home</mat-icon>
-          <span>Übersicht</span>
+          <span class="list-txt">Übersicht</span>
         </mat-list-item>
-        <mat-list-item (click)="navigateTo('user_settings', true)" [ngClass]="globals.activePath() === 'user_settings' ? 'active' : 'inactive' ">
+        <mat-list-item
+          (click)="navigateTo('user_settings', true)"
+          [ngClass]="
+            globals.activePath() === 'user_settings' ? 'active' : 'inactive'
+          "
+        >
           <mat-icon matListItemIcon>settings</mat-icon>
-          <span>Einstellungen</span>
+          <span class="list-txt">Einstellungen</span>
         </mat-list-item>
-        <mat-list-item (click)="navigateTo('my_videos', true)" [ngClass]="globals.activePath() === 'my_videos' ? 'active' : 'inactive' ">
+        <mat-list-item
+          (click)="navigateTo('my_videos', true)"
+          [ngClass]="
+            globals.activePath() === 'my_videos' ? 'active' : 'inactive'
+          "
+        >
           <mat-icon matListItemIcon>subscriptions</mat-icon>
-          <span>Eigene Videos</span>
+          <span class="list-txt">Eigene Videos</span>
         </mat-list-item>
-        <mat-list-item (click)="navigateTo('upload', true)" [ngClass]="globals.activePath() === 'upload' ? 'active' : 'inactive' ">
+        <mat-list-item
+          (click)="navigateTo('upload', true)"
+          [ngClass]="globals.activePath() === 'upload' ? 'active' : 'inactive'"
+        >
           <mat-icon matListItemIcon>upload</mat-icon>
-          <span>Video hochladen</span>
+          <span class="list-txt">Video hochladen</span>
         </mat-list-item>
       </mat-list>
     </div>
     <div class="right-nav">
       <h1>{{ globals.activeHeadingString() }}</h1>
-      <div class="right-nav-placeholder" *ngIf="globals.activePath() === 'oversight' ">
+      <div
+        class="right-nav-placeholder"
+        *ngIf="globals.activePath() === 'oversight'"
+      >
         <app-oversight></app-oversight>
       </div>
       <router-outlet />
     </div>
   </div>
+  
+  <!-- nav for mobile screens -->
+  <div class="mobile-nav">
+    <div class="mobile-cont">
+      <div (click)="backToMain()"><mat-icon>keyboard_backspace</mat-icon></div>
+      <div (click)="navigateTo('oversight', false)"
+      [ngClass]="globals.activePath() === 'oversight' ? 'active' : 'inactive'">
+        <mat-icon>home</mat-icon></div>
+      <div (click)="navigateTo('user_settings', true)"
+      [ngClass]="globals.activePath() === 'user_settings' ? 'active' : 'inactive'">
+        <mat-icon>settings</mat-icon></div>
+      <div
+        (click)="navigateTo('my_videos', true)"
+        [ngClass]="globals.activePath() === 'my_videos' ? 'active' : 'inactive'">
+        <mat-icon>subscriptions</mat-icon>
+      </div>
+      <div
+        (click)="navigateTo('upload', true)"
+        [ngClass]="globals.activePath() === 'upload' ? 'active' : 'inactive'"
+      >
+        <mat-icon>upload</mat-icon>
+      </div>
+    </div>
+  </div>
 
   <app-footer></app-footer>
-
 </section>
 
 <div *ngIf="this.globals.isVidOpen()" class="video-overlay">
-  <div [ngClass]="globals.isMyVideoEditing() ? 'v-overlay-container-edit' : 'v-overlay-container'">
-      <app-videoplayer [isInMyVideos]="true"></app-videoplayer>
+  <div
+    [ngClass]="
+      globals.isMyVideoEditing()
+        ? 'v-overlay-container-edit'
+        : 'v-overlay-container'
+    "
+  >
+    <app-videoplayer [isInMyVideos]="true"></app-videoplayer>
   </div>
 </div>

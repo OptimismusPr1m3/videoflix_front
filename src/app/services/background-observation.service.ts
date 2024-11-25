@@ -21,6 +21,7 @@ export class BackgroundObservationService {
     .pipe(filter(event => event instanceof NavigationEnd)) // events werden gefiltert nach navigationend events
     .subscribe((event) => { //navigationend events werden subscribed
       this.updateBackground((event as NavigationEnd).urlAfterRedirects); //url wird uebergeben
+      this.globals.isVidOpen.set(false);
     })
   }
 

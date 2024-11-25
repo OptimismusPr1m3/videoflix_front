@@ -8,28 +8,46 @@
   @media (max-width: 1920px) {
     margin: 0 32px;
   }
+  @media (max-width: 860px) {
+    margin: 0 16px;
+  }
   > .content{
     @include dFlex(column, center, flex-start);
     gap: 40px;
     width: 100%;
     color: #ffffff;
+    @media (max-width: 860px) {
+      gap: 16px;
+    }
     > .first {
         @include dFlex(column, center, flex-start);
         gap: 8px;
         > h1 {
-           font-size: 56px 
+           font-size: 56px;
+           @media (max-width: 860px) {
+            font-size: 36px;
+          } 
         }
         >span {
             font-size: 24px;
+            @media (max-width: 860px) {
+              font-size: 18px;
+            }
         }
         > h4 {
             font-size: 40px;
             margin-bottom: 40px;
+            @media (max-width: 860px) {
+              font-size: 22px;
+            }
         }
         > a {
             font-size: 24px;
             text-decoration: none;
             color: #ffffff;
+            @media (max-width: 860px) {
+              font-size: 18px;
+            }
             &:hover {
                 cursor: pointer;
                 text-decoration: underline;

@@ -9,21 +9,13 @@
       cursor: pointer;
     }
     @include dFlex(row, flex-start, center);
-    // > span {
-    //   color: #e50815;
-    //   font-size: 32px;
-    //   font-weight: 700;
-    // }
-    // > .n-letter {
-    //   color: #ffffff;
-    //   padding: 0px 4px;
-    // }
     > .mobile-logo {
      display: none;   
     }
     @media (max-width: 500px) {
       > .mobile-logo {
-        display: block
+        display: block;
+        height: 32px;
       }
       > .no-mobile-logo {
         display: none
@@ -61,6 +53,11 @@
       font-size: 48px !important;
       height: 48px !important;
       width: 48px !important;
+      @media (max-width: 860px) {
+        font-size: 32px !important;
+        height: 32px !important;
+        width: 32px !important;
+      }
     }
   }
 }

@@ -68,10 +68,18 @@ export class LoginComponent {
 
   closeErrorToast(wasCLicked: boolean) {
     this.globals.errorToastClass.set(wasCLicked ? 'fade-out-animation' : '');
+    setTimeout(() => {
+      this.globals.errorToastClass.set('')
+    }, 2000);
+    this.globals.mobileErrorToastClass.set('');
   }
 
   closeMobileErrorToast(wasCLicked: boolean) {
     this.globals.mobileErrorToastClass.set(wasCLicked ? 'fade-out-mobile-animation' : '');
+    setTimeout(() => {
+      this.globals.mobileErrorToastClass.set('')
+    }, 2000);
+    this.globals.errorToastClass.set('');
   }
 
   ngOnInit() {

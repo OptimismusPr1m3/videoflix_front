@@ -107,10 +107,10 @@ section {
 
   > app-slider-comp {
     width: 100%;
-    margin-top: 56px;
+    margin: 56px 0px;
     z-index: 5;
     @media (max-width: 860px) {
-      margin-top: 64px;
+      margin: 64px 0px;
     }
   }
 
@@ -135,21 +135,23 @@ section {
     }
   }
   > .video-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     z-index: 20;
-    @include dFlex(row, center, flex-start);
-    padding-top: 124px;
+    @include dFlex(row, center, center);
+    //padding-top: 124px;
+    overflow: hidden;
+    background-color: rgba($color: #141414, $alpha: 0.4);
     @media (max-width: 860px) {
       position: fixed;
       z-index: 1001;
       padding-top: 0px;
     }
     > .v-overlay-container {
-      height: 700px;
+      height: auto;
       width: 900px;
       background-color: rgba($color: #141414, $alpha: 1);
       border: #141414 1px solid;
@@ -158,6 +160,7 @@ section {
         -15px 10px 10px -10px rgba(0, 0, 0, 0.5);
       //padding: 12px;
       @media (max-width: 860px) {
+        overflow: hidden;
         height: 100%;
         width: 100%;
         border: none;

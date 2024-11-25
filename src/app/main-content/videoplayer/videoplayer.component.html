@@ -9,8 +9,8 @@
         
     </div>
 
-    <video #videoFrame [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
-      <source [src]="is480p ? globals.currentOpened480Video() : globals.currentOpenedVideo()?.video_file" />
+    <video [ngStyle]="isVidFullScreen ? { 'object-fit': 'contain' } : { }" #videoFrame [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
+      <source [src]="is480p && globals.currentOpened480Video() ? globals.currentOpened480Video() : globals.currentOpenedVideo()?.video_file" />
       Dein Browser unterstuetzt das Format nicht
     </video>
 
@@ -33,6 +33,7 @@
       <!-- player overlay back btn -->
       <div *ngIf="isVidFullScreen" (click)="closeFullscreen()" class="overlay-b-btn">
         <mat-icon>arrow_back</mat-icon>
+        <span class="mobile-title-txt"> {{ globals.currentOpenedVideo()?.title }} </span>
         <img src="./assets/logos/Symbol.png" alt="FlixLogo">
       </div>
       <!-- videoplayer overlay -->
@@ -48,7 +49,7 @@
             <mat-icon (click)="toggleVideo()">{{ materialPlayButtonString }}</mat-icon>
             <mat-icon (click)="skip10(-10)">replay_10</mat-icon>      
             <mat-icon (click)="skip10(10)">forward_10</mat-icon>    
-            <mat-icon (click)="toggleAudio()"> {{ materialVolumeButtonString }} </mat-icon>  
+            <mat-icon class="mobile-none" (click)="toggleAudio()"> {{ materialVolumeButtonString }} </mat-icon>  
           </div>
 
           <span class="title-txt"> {{ globals.currentOpenedVideo()?.title }}</span>

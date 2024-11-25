@@ -1,6 +1,7 @@
 @import "../../../styles.scss";
 
 .landing-cont {
+  z-index: 10;
   max-width: 1920px;
   height: 100vh;
   width: 100%;
@@ -164,6 +165,7 @@
   right: 50px;
   bottom: 50%;
   opacity: 0;
+  z-index: 1;
   // animation: plopIn 2s ease-in;
   @media (max-width: 1700px) {
     bottom: 20%;
@@ -178,6 +180,7 @@
 
 .toast-mobile {
   display: none;
+  z-index: 1;
   @media (max-width: 560px) {
     position: absolute;
     display: block;
@@ -206,12 +209,14 @@
 
 @keyframes mobilePlopIn {
   from {
+    z-index: 1;
     right: 0;
     left: 0;
     bottom: 0px;
     opacity: 0;
   }
   to {
+    z-index: 20;
     left: 0;
     right: 0px;
     bottom: 0px;
@@ -221,12 +226,14 @@
 
 @keyframes mobilePlopOut {
   from {
+    z-index: 20;
     right: 0px;
     left: 0;
     bottom: 0px;
     opacity: 1;
   }
   to {
+    z-index: 1;
     right: 0px;
     left: 0;
     bottom: 0px;
@@ -236,11 +243,13 @@
 
 @keyframes plopIn {
   from {
+    z-index: 1;
     right: 0;
     bottom: 50%;
     opacity: 0;
   }
   to {
+    z-index: 20;
     right: 50px;
     bottom: 50%;
     opacity: 1;
@@ -249,11 +258,13 @@
 
 @keyframes plopOut {
   from {
+    z-index: 20;
     right: 50px;
     bottom: 50%;
     opacity: 1;
   }
   to {
+    z-index: 1;
     right: 0px;
     bottom: 50%;
     opacity: 0;

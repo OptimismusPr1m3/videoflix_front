@@ -16,19 +16,9 @@
   > .left-cont {
     @include dFlex(row, flex-start, center);
     gap: 24px;
-    > .logo {
-      &:hover {
-        cursor: pointer;
-      }
-      @include dFlex(row, flex-start, center);
-      > span {
-        color: #e50815;
-        font-size: 32px;
-        font-weight: 700;
-      }
-      > .n-letter {
-        color: #ffffff;
-        padding: 0px 4px;
+    > img {
+      @media (max-width: 560px) {
+        height: 28px;
       }
     }
   }
@@ -46,6 +36,11 @@
         height: 38px;
         width: 38px;
         margin-right: 8px;
+        @media (max-width: 560px) {
+          height: 28px;
+          width: 28px;
+          font-size: 28px;
+        }
       }
       .arrow-drop-up {
         transition: all 150ms ease-in-out;
@@ -54,6 +49,11 @@
         height: 32px;
         width: 32px;
         font-size: 32px;
+        @media (max-width: 560px) {
+          height: 28px;
+          width: 28px;
+          font-size: 28px;
+        }
       }
       .arrow-drop-down {
         transition: all 150ms ease-in-out;
@@ -61,6 +61,11 @@
         width: 32px;
         font-size: 32px;
         color: #2e3edf !important;
+        @media (max-width: 560px) {
+          height: 28px;
+          width: 28px;
+          font-size: 28px;
+        }
       }
     }
   }
@@ -96,4 +101,9 @@
 
 .blue {
   color: #2e3edf !important;
+  @media (max-width: 560px) {
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+  }
 }

@@ -4,7 +4,11 @@
     <mat-form-field>
       <mat-label>Titel</mat-label>
       <input matInput formControlName="title" type="text" />
-      <mat-error *ngIf="videoForm.get('title')?.invalid && videoForm.get('title')?.touched">
+      <mat-error
+        *ngIf="
+          videoForm.get('title')?.invalid && videoForm.get('title')?.touched
+        "
+      >
         Mindestens 4 Zeichen
       </mat-error>
     </mat-form-field>
@@ -13,10 +17,12 @@
       <mat-select formControlName="genre" required>
         <mat-option>--</mat-option>
         @for (genre of genres; track genre) {
-          <mat-option [value]="genre">{{ genre }}</mat-option>
+        <mat-option [value]="genre">{{ genre }}</mat-option>
         }
       </mat-select>
-      <mat-error *ngIf="videoForm.get('genre')?.hasError">Bitte wählen</mat-error>
+      <mat-error *ngIf="videoForm.get('genre')?.hasError"
+        >Bitte wählen</mat-error
+      >
     </mat-form-field>
   </div>
 
@@ -24,8 +30,18 @@
   <div class="form-group custom-input-settings">
     <mat-form-field>
       <mat-label>Beschreibung</mat-label>
-      <textarea minlength="10" matInput formControlName="description" type="text"></textarea>
-      <mat-error *ngIf="videoForm.get('description')?.invalid && videoForm.get('description')?.touched">
+      <textarea
+        minlength="10"
+        matInput
+        formControlName="description"
+        type="text"
+      ></textarea>
+      <mat-error
+        *ngIf="
+          videoForm.get('description')?.invalid &&
+          videoForm.get('description')?.touched
+        "
+      >
         Mindestens 10 Zeichen
       </mat-error>
     </mat-form-field>
@@ -49,7 +65,7 @@
       </div>
       <div
         class="file-preview"
-        [ngClass]="!selectedVideoFile ? 'flex-start' : 'flex-end'"
+        [ngClass]="!selectedVideoFile ? 'flex-start' : 'center'"
       >
         <div class="file-data">
           <span *ngIf="!selectedVideoFile">Kein Video ausgewählt</span>
@@ -61,14 +77,15 @@
           </span>
           <span *ngIf="selectedVideoFile"
             >Größe:
-            {{
-              convertIntoMB(selectedVideoFile.size) | number : "1.2-2"
-            }}
-            MB</span>
+            {{ convertIntoMB(selectedVideoFile.size) | number : "1.2-2" }}
+            MB</span
+          >
         </div>
         <div class="file-image">
-          <canvas style="display: none" #videoCanvas></canvas>
-          <img *ngIf="videoPreview" [src]="videoPreview" />
+          <span *ngIf="!selectedVideoFile">Kein Video ausgewählt</span>
+          <!-- <canvas style="display: none" #videoCanvas></canvas>
+          <img *ngIf="videoPreview" [src]="videoPreview" /> -->
+          <mat-icon *ngIf="selectedVideoFile">video_file</mat-icon>
         </div>
       </div>
     </div>
@@ -76,10 +93,37 @@
 
   <!--Buttons for saving and make them editable-->
   <div class="btns edit">
-    <button type="button" class="enabled" (click)="emptyFileField()">Abbrechen</button>
-    <button [disabled]="videoForm.invalid || !selectedVideoFile" [ngClass]="videoForm.invalid || !selectedVideoFile ? 'disabled' : 'enabled' " type="submit">Speichern</button>
+    <button type="button" class="enabled" (click)="emptyFileField()">
+      Abbrechen
+    </button>
+    <button
+      [disabled]="videoForm.invalid || !selectedVideoFile"
+      [ngClass]="
+        videoForm.invalid || !selectedVideoFile ? 'disabled' : 'enabled'
+      "
+      type="submit"
+    >
+      Speichern
+    </button>
   </div>
 </form>
+
+<div class="upload-hints">
+  <p class="terms">
+    Mit dem Hochladen bestätigst du, dass du die <a href="/videoflix/terms">Nutzungsbedingungen</a> und die <a href="/videoflix/policy">Datenschutzbestimmungen</a> gelesen und akzeptiert hast.
+  </p>
+  <h3>Hinweise zum Upload</h3>
+  <ul>
+    <li>Die maximale Dateigröße für Videos beträgt <b>800 MB</b>.</li>
+    <li>Es können nur MP4-Videodateien hochgeladen werden.</li>
+    <li>Ein Thumbnail wird automatisch im Backend generiert.</li>
+    <li>Die Datenbank läuft auf einem <b>Raspberry Pi 5</b>.</li>
+    <li>Videos werden nach dem Upload automatisch auf 480p konvertiert.</li>
+    <li>Die Dauer der Konvertierung variiert, je nach Größe des Videos.</li>
+    <li><b>Bitte lade keine anstößigen Inhalte hoch!</b></li>
+  </ul>
+</div>
+
 
 <ngx-spinner
   bdColor="rgba(0, 0, 0, 0.8)"
@@ -87,5 +131,5 @@
   color="#fff"
   type="fire"
   [fullScreen]="true"
-  ><p style="color: white">{{globals.videoUploadText()}}</p></ngx-spinner
+  ><p style="color: white">{{ globals.videoUploadText() }}</p></ngx-spinner
 >

@@ -1,18 +1,17 @@
 @import "../../../styles.scss";
 
-.imprint-cont {
+.terms-cont {
   max-width: 1920px;
   padding-bottom: 34px;
   width: 100%;
-  @include dFlex(column, space-between, flex-start);
+  color: #ffffffff;
+  @include dFlex(column, flex-start, flex-start);
   @media (max-width: 1920px) {
     margin: 0 32px;
   }
   @media (max-width: 860px) {
     margin: 0 16px;
   }
-  color: #ffffffff;
-
   > h1 {
     font-size: 48px;
     @media (max-width: 860px) {
@@ -33,16 +32,18 @@
   }
   > p {
     font-size: 24px;
+    margin-bottom: 0px;
     @media (max-width: 860px) {
       font-size: 18px;
     }
   }
+  
 }
 
 a {
-  text-decoration: none;
-  color: #ffffffff;
-  &:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #ffffffff;
+    &:hover {
+      text-decoration: underline;
+    }
   }
-}

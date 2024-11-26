@@ -10,7 +10,7 @@ import { FileUploadComponent } from './main-content/profile/file-upload/file-upl
 import { MyVideosComponent } from './main-content/profile/my-videos/my-videos.component';
 import { ImprintComponent } from './foot/imprint/imprint.component';
 import { PpolicyComponent } from './foot/ppolicy/ppolicy.component';
-import { ErrorToastComponent } from './toasts/error-toast/error-toast.component';
+import { TermsOfUseComponent } from './foot/terms-of-use/terms-of-use.component';
 
 export const routes: Routes = [
   { path: '', component: LandingpageComponent },
@@ -20,7 +20,7 @@ export const routes: Routes = [
   { path: 'main', component: MainComponent },
   { path: 'imprint', component: ImprintComponent },
   { path: 'policy', component: PpolicyComponent },
-  { path: 'toast', component: ErrorToastComponent },
+  { path: 'terms', component: TermsOfUseComponent },
   {
     path: 'profile',
     component: ProfileComponent,

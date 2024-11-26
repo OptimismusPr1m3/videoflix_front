@@ -230,15 +230,61 @@ textarea {
         }
       }
       > .file-image {
-        > img {
-          width: 150px;
-          height: 100px;
-          @media (max-width: 400px) {
-            width: 100px;
-            height: 60px;
+        > span {
+          display: none;
+          @media (max-width: 880px) {
+            display: block;
           }
         }
+        > mat-icon {
+          font-size: 48px;
+          height: 48px;
+          width: 48px;
+        }
       }
+    }
+  }
+}
+
+
+.upload-hints {
+  @include dFlex(column, center, flex-start);
+  min-width: 600px;
+  max-width: 1200px;
+  @media (max-width: 880px) {
+    min-width: 480px;
+  }
+  @media (max-width: 580px) {
+    min-width: 450px;
+  }
+  @media (max-width: 490px) {
+    min-width: 420px;
+  }
+  @media (max-width: 450px) {
+    min-width: 390px;
+  }
+  @media (max-width: 410px) {
+    min-width: 370px;
+  }
+  @media (max-width: 400px) {
+    min-width: 340px;
+  }
+  @media (max-width: 380px) {
+    min-width: 300px;
+  }
+  > h3 {
+    margin-bottom: 8px;
+  }
+  > ul {
+    > li::marker{
+      color: rgba($color: #2e3edf, $alpha: 0.7)
+    }
+  }
+  > .terms {
+    > a {
+      text-decoration: none;
+      color: #2e3edf;
+      font-weight: 700;
     }
   }
 }
@@ -247,6 +293,7 @@ textarea {
   @include dFlex(row, flex-start, center);
 }
 
-.flex-end {
-  @include dFlex(row, flex-end, center);
+.center {
+  @include dFlex(row, center, center);
+  gap: 32px;
 }

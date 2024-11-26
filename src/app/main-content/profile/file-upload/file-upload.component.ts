@@ -33,10 +33,9 @@ import { MatSelectModule } from '@angular/material/select';
 })
 export class FileUploadComponent {
   @ViewChild('videoInput') videoInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('videoCanvas') videoCanvas!: ElementRef<HTMLCanvasElement>;
+  // @ViewChild('videoCanvas') videoCanvas!: ElementRef<HTMLCanvasElement>;
   videoForm: FormGroup;
   selectedVideoFile: File | null = null;
-  videoPreview: any;
   currentUploadedVideoURL: any;
   selectedVideoDuration: number = 0
   genres: string[] = ['Dokumentation','Drama','Action','Drohne']
@@ -67,7 +66,6 @@ export class FileUploadComponent {
 
   emptyFileField() {
     this.selectedVideoFile = null
-    this.videoPreview = null
     this.videoForm.patchValue({
       title: '',
       genre: '',
@@ -89,33 +87,31 @@ export class FileUploadComponent {
       video.src = URL.createObjectURL(this.selectedVideoFile);
       video.currentTime = 1;
       console.log(video.currentTime)
-      console.log(file.name)
+     console.log(file.name)
       
 
 
       video.onloadeddata = () => {
-        this.captureVideoFrame(video);
+        //this.captureVideoFrame(video);
         URL.revokeObjectURL(video.src);
         this.videoForm.patchValue({duration: video.duration})
-        //console.log(video.duration)
+        console.log(video.duration)
       };
-    } else {
-      this.videoPreview = null;
     }
   }
 
-  captureVideoFrame(video: HTMLVideoElement) {
-    const canvas = this.videoCanvas.nativeElement;
-    const ctx = canvas.getContext('2d');
+  // captureVideoFrame(video: HTMLVideoElement) {
+  //   const canvas = this.videoCanvas.nativeElement;
+  //   const ctx = canvas.getContext('2d');
 
-    if (ctx) {
-      canvas.width = 720; // image width
-      canvas.height = 426; // image height
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  //   if (ctx) {
+  //     canvas.width = video.videoWidth || 720; // image width
+  //     canvas.height = video.videoHeight || 426; // image height
+  //     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      this.videoPreview = canvas.toDataURL('image/png');
-    }
-  }
+  //     this.videoPreview = canvas.toDataURL('image/png');
+  //   }
+  // }
 
   convertIntoMB(bytes: number): number {
     return bytes / (1024 * 1024);
@@ -139,13 +135,13 @@ export class FileUploadComponent {
     if (this.videoForm.valid && this.selectedVideoFile) {
       const formData = new FormData();
       this.fillFormData(formData);
-      if (this.videoPreview) {
-        const coverImageFile = this.dataURLtoFile(
-          this.videoPreview,
-          'cover_image.png'
-        );
-        formData.append('cover_image', coverImageFile);
-      }
+      // if (this.videoPreview) {
+      //   const coverImageFile = this.dataURLtoFile(
+      //     this.videoPreview,
+      //     'cover_image.png'
+      //   );
+      //   //formData.append('cover_image', coverImageFile);
+      // }
       this.uploadSub(formData);
     }
   }

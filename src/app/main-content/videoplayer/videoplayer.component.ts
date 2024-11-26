@@ -200,7 +200,18 @@ export class VideoplayerComponent {
     // this.globals.currentOpenedVideo()?.timestamp != null
     //   ? this.globals.currentOpenedVideo()?.timestamp
     //   : 0;
+    this.isPlaying = true;
+    this.materialPlayButtonString = 'pause';
     videoFrame.play();
+  }
+
+  forceRestart() {
+    const videoFrame = this.videoFrame.nativeElement;
+    videoFrame.pause();
+    videoFrame.currentTime = 0;
+    this.isPlaying = true;
+    this.materialPlayButtonString = 'pause';
+    videoFrame.play()
   }
 
   lookForTimestamp() {
@@ -259,6 +270,8 @@ export class VideoplayerComponent {
     videoFrame.load();
     videoFrame.currentTime = currentTime;
     videoFrame.play();
+    this.isPlaying = true;
+    this.materialPlayButtonString = 'pause';
     this.qualityPickerIsOpen = false;
   }
 

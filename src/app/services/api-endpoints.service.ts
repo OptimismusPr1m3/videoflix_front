@@ -12,7 +12,7 @@ export class ApiEndpointsService {
   // RESET_PASSWORD = 'http://storage.bastian-wolff.com/api/accounts/password/reset/';
   // USER_ME = 'http://storage.bastian-wolff.com/api/accounts/users/me/';
 
-/*raspberry pie */
+/*raspberry pi zero 2w */
   // USERS_API = 'https://bepi.bastian-wolff.com/api/users/';
   // REGISTER = 'https://bepi.bastian-wolff.com/api/accounts/signup/';
   // // LOGIN = 'https://bepi.bastian-wolff.com/api/accounts/login/';

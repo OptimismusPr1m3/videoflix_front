@@ -10,11 +10,11 @@
       >
     </div>
     <mat-menu #menu="matMenu" (closed)="menuOpened(false)" xPosition="before">
-      <button mat-menu-item>
+      <button mat-menu-item [routerLink]="['/policy']">
         <mat-icon class="blue">lock</mat-icon>
         <span class="menu-pnts">Datenschutz</span>
       </button>
-      <button mat-menu-item>
+      <button mat-menu-item [routerLink]="['/imprint']">
         <mat-icon class="blue">description</mat-icon>
         <span class="menu-pnts">Impressum</span>
       </button>

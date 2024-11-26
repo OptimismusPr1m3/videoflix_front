@@ -15,6 +15,7 @@ import { BackendCommunicationService } from '../../../services/backend-communica
 import { GlobalVariablesService } from '../../../services/global-variables.service';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-file-upload',
@@ -26,7 +27,8 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatInputModule,
     NgxSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    RouterLink
   ],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.scss',

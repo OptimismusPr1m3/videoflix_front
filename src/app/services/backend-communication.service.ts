@@ -146,6 +146,13 @@ export class BackendCommunicationService {
     });
   }
 
+  fetchVideo(url:string): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(url, {
+      headers: { Authorization: 'Token ' + token }
+    })
+  }
+
   changeVideoInfo(form: FormGroup, url: string): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = { Authorization: 'Token ' + token };

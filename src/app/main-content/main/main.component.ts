@@ -19,7 +19,6 @@ import { MatIconModule } from '@angular/material/icon';
     LoggedHeaderComponent,
     SliderCompComponent,
     VideoplayerComponent,
-    FileUploadComponent,
     FooterComponent,
     PreviewCompComponent,
     MatIconModule
@@ -52,6 +51,23 @@ export class MainComponent {
       this.isSticky = true;
     } else {
       this.isSticky = false;
+    }
+  }
+
+  openPreviewVideo() {
+
+    this.globals.isVidOpen.set(true);
+    this.globals.currentOpenedVideo.set(this.globals.currentPreviewVideo())
+    this.set480pPreviewVideoString()
+  }
+
+  set480pPreviewVideoString() {
+    let videoItem = this.globals.currentPreviewVideo()
+    if (videoItem?.video_file.endsWith(".mp4")) {
+      console.log(videoItem.video_file)
+      let updatedString = videoItem.video_file.slice(0, -4) + "_480p.mp4";
+      console.log("Hier der 480p String: ", updatedString)
+      this.globals.currentOpened480Video.set(updatedString)
     }
   }
 

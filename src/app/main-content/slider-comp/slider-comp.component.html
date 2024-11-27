@@ -15,7 +15,7 @@
             <app-video-item
               (mouseover)="hoveredIndex1 = i"
               (mouseleave)="hoveredIndex1 = -1"
-              class="grow-shadow"
+              [ngClass]="groupedSliderVids[groupKey].length === 1 ? 'grow-shadow-single' : 'grow-shadow'"
               [videoItem]="item"
               [isHovered]="hoveredIndex1 === i" 
             ></app-video-item>
@@ -46,7 +46,7 @@
             <app-video-item
               (mouseover)="hoveredIndex4 = i"
               (mouseleave)="hoveredIndex4 = -1"
-              class="grow-shadow"
+              [ngClass]="groupedSliderVidsWatched[groupKey].length === 1 ? 'grow-shadow-single' : 'grow-shadow'"
               [videoItem]="item"
               [isVideosWatched]="true"
               [isHovered]="hoveredIndex4 === i" 
@@ -63,7 +63,7 @@
   </div>
 
 
-  <div class="category-container">
+  <div class="category-container" *ngIf="numberOfPacksDocumentation.length > 0">
     <h2>Dokumentation</h2>
     <div class="scroll-container">
       <div class="scroll-button left" [ngClass]="numberOfPacksDocumentation.length > 1 ? 'slider-btn-opacity' : 'invis'">
@@ -78,7 +78,7 @@
             <app-video-item
               (mouseover)="hoveredIndex2 = i"
               (mouseleave)="hoveredIndex2 = -1"
-              class="grow-shadow"
+              [ngClass]="groupedSliderVidsDocumentation[groupKey].length === 1 ? 'grow-shadow-single' : 'grow-shadow'"
               [videoItem]="item"
               [isHovered]="hoveredIndex2 === i" 
             ></app-video-item>
@@ -94,7 +94,7 @@
   </div>
 
 
-  <div class="category-container">
+  <div class="category-container" *ngIf="numberOfPacksDrama.length > 0">
     <h2>Drama</h2>
     <div class="scroll-container">
       <div class="scroll-button left" [ngClass]="numberOfPacksDrama.length > 1 ? 'slider-btn-opacity' : 'invis'">
@@ -109,7 +109,7 @@
             <app-video-item
               (mouseover)="hoveredIndex3 = i"
               (mouseleave)="hoveredIndex3 = -1"
-              class="grow-shadow"
+              [ngClass]="groupedSliderVidsDrama[groupKey].length === 1 ? 'grow-shadow-single' : 'grow-shadow'"
               [videoItem]="item"
               [isHovered]="hoveredIndex3 === i" 
             ></app-video-item>
@@ -118,6 +118,66 @@
       </div>
       <div class="scroll-button right" [ngClass]="numberOfPacksDrama.length > 1 ? 'slider-btn-opacity' : 'invis'">
         <button (click)="nextVideos('-', 'category3')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-container" *ngIf="numberOfPacksAction.length > 0">
+    <h2>Action</h2>
+    <div class="scroll-container">
+      <div class="scroll-button left" [ngClass]="numberOfPacksAction.length > 1 ? 'slider-btn-opacity' : 'invis'">
+        <button (click)="nextVideos('+', 'category5')">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+      <div class="content-container" #category3>
+        <div class="video-container" *ngFor="let groupKey of numberOfPacksAction; let groupIndex = index"
+        [ngClass]="groupedSliderVidsAction[groupKey].length === videoItemCardsAmount ? 'evenly-spacing' : 'start-spacing'">
+          <div class="item" *ngFor="let item of groupedSliderVidsAction[groupKey]; let i = index">
+            <app-video-item
+              (mouseover)="hoveredIndex5 = i"
+              (mouseleave)="hoveredIndex5 = -1"
+              [ngClass]="groupedSliderVidsAction[groupKey].length === 1 ? 'grow-shadow-single' : 'grow-shadow'"
+              [videoItem]="item"
+              [isHovered]="hoveredIndex5 === i" 
+            ></app-video-item>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-button right" [ngClass]="numberOfPacksAction.length > 1 ? 'slider-btn-opacity' : 'invis'">
+        <button (click)="nextVideos('-', 'category5')">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="category-container" *ngIf="numberOfPacksDrone.length > 0">
+    <h2>Drohne</h2>
+    <div class="scroll-container">
+      <div class="scroll-button left" [ngClass]="numberOfPacksDrone.length > 1 ? 'slider-btn-opacity' : 'invis'">
+        <button (click)="nextVideos('+', 'category6')">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+      <div class="content-container" #category3>
+        <div class="video-container" *ngFor="let groupKey of numberOfPacksDrone; let groupIndex = index"
+        [ngClass]="groupedSliderVidsDrone[groupKey].length === videoItemCardsAmount ? 'evenly-spacing' : 'start-spacing'">
+          <div class="item" *ngFor="let item of groupedSliderVidsDrone[groupKey]; let i = index">
+            <app-video-item
+              (mouseover)="hoveredIndex6 = i"
+              (mouseleave)="hoveredIndex6 = -1"
+              [ngClass]="groupedSliderVidsDrone[groupKey].length === 1 ? 'grow-shadow-single' : 'grow-shadow'"
+              [videoItem]="item"
+              [isHovered]="hoveredIndex6 === i" 
+            ></app-video-item>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-button right" [ngClass]="numberOfPacksDrone.length > 1 ? 'slider-btn-opacity' : 'invis'">
+        <button (click)="nextVideos('-', 'category6')">
           <mat-icon>chevron_right</mat-icon>
         </button>
       </div>

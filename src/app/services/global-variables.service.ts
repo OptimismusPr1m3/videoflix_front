@@ -27,6 +27,7 @@ export class GlobalVariablesService {
   //for video sources -> urls for different qualities
   currentOpenedVideo = signal<VideoItem | null>(null);
   currentOpened480Video = signal<string>('');
+  currentPreviewVideo = signal<VideoItem | null>(null)
 
   //Profil Section with its Paths
   activePath = signal<string>('oversight');

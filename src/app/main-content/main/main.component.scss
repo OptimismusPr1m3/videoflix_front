@@ -66,6 +66,7 @@ section {
       border-radius: 40px;
       gap: 4px;
       background-color: #2e3edf;
+      cursor: pointer;
       @media (max-width: 1920px) {
         margin-left: 32px;
       }
@@ -172,10 +173,6 @@ section {
 }
 
 app-logged-header.sticky {
-  position: fixed;
-  top: 0;
-  //background-color: rgba($color: #141414, $alpha: 1);
-  margin-top: 0px !important;
   opacity: 0 !important;
 }
 

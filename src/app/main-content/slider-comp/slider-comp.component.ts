@@ -32,6 +32,8 @@ export class SliderCompComponent {
   @ViewChild('category2', { read: ElementRef }) category2: ElementRef | any;
   @ViewChild('category3', { read: ElementRef }) category3: ElementRef | any;
   @ViewChild('category4', { read: ElementRef }) category4: ElementRef | any;
+  @ViewChild('category5', { read: ElementRef }) category5: ElementRef | any;
+  @ViewChild('category6', { read: ElementRef }) category6: ElementRef | any;
 
   groupedVideosByGenre: { [key: string]: VideoItem[] } = {};
 
@@ -39,22 +41,30 @@ export class SliderCompComponent {
   hoveredIndex2: number = -1; // Doku
   hoveredIndex3: number = -1; // Drama
   hoveredIndex4: number = -1; // Drama
+  hoveredIndex5: number = -1; // Drama
+  hoveredIndex6: number = -1; // Drama
 
   currentPosition1: number = 0; //neu auf VideoFlix
   currentPosition2: number = 0; // Doku
   currentPosition3: number = 0; // Drama
   currentPosition4: number = 0; // Drama
+  currentPosition5: number = 0; // Drama
+  currentPosition6: number = 0; // Drama
 
   currentIndex1: number = 0; //neu auf VideoFlix
   currentIndex2: number = 0; // Doku
   currentIndex3: number = 0; // Drama
   currentIndex4: number = 0; // Drama
+  currentIndex5: number = 0; // Drama
+  currentIndex6: number = 0; // Drama
 
   currentIndexes = {
     category1: 0,
     category2: 0,
     category3: 0,
     category4: 0,
+    category5: 0,
+    category6: 0,
   };
 
   scrollAmount = 1700;
@@ -63,11 +73,15 @@ export class SliderCompComponent {
   videoItems: VideoItem[] = [];
   groupedSliderVidsDocumentation: { [key: string]: VideoItem[] } = {};
   groupedSliderVidsDrama: { [key: string]: VideoItem[] } = {};
+  groupedSliderVidsAction: { [key: string]: VideoItem[] } = {};
+  groupedSliderVidsDrone: { [key: string]: VideoItem[] } = {};
   groupedSliderVidsWatched: { [key: string]: VideoItem[] } = {};
   groupedSliderVids: { [key: string]: VideoItem[] } = {};
 
   numberOfPacksDocumentation: string[] = [];
   numberOfPacksDrama: string[] = [];
+  numberOfPacksAction: string[] = [];
+  numberOfPacksDrone: string[] = [];
   numberOfPacksWatched: string[] = [];
   numberOfPacks: string[] = [];
 
@@ -97,11 +111,13 @@ export class SliderCompComponent {
     this.resizeCategory('category2', 2);
     this.resizeCategory('category3', 3);
     this.resizeCategory('category4', 4);
-    this.customizeCardsAmount()
+    this.resizeCategory('category5', 5);
+    this.resizeCategory('category6', 6);
+    this.customizeCardsAmount();
   }
 
   ngOnInit() {
-    this.customizeCardsAmount()
+    this.customizeCardsAmount();
     this.spinner.show();
     //this.loadSliders();
   }
@@ -112,7 +128,7 @@ export class SliderCompComponent {
 
   customizeCardsAmount() {
     const wasAmount = this.videoItemCardsAmount;
-  
+
     if (window.innerWidth < 690) {
       this.videoItemCardsAmount = 2;
     } else if (window.innerWidth < 1160) {
@@ -126,7 +142,7 @@ export class SliderCompComponent {
     } else {
       this.videoItemCardsAmount = 7;
     }
-  
+
     if (this.videoItemCardsAmount !== wasAmount) {
       this.cacheClear();
       this.loadSliders();
@@ -134,17 +150,21 @@ export class SliderCompComponent {
   }
 
   cacheClear() {
-    this.groupedSliderVids = {}
-    this.groupedSliderVidsWatched = {}
-    this.groupedSliderVidsDrama = {}
-    this.groupedSliderVidsDocumentation = {}
-    this.groupedVideosByGenre = {}
+    this.groupedSliderVids = {};
+    this.groupedSliderVidsWatched = {};
+    this.groupedSliderVidsDrama = {};
+    this.groupedSliderVidsAction = {};
+    this.groupedSliderVidsDrone = {};
+    this.groupedSliderVidsDocumentation = {};
+    this.groupedVideosByGenre = {};
 
-    this.numberOfPacksDocumentation = []
-    this.numberOfPacksDrama = []
-    this.numberOfPacksWatched = []
-    this.numberOfPacks = []
-    this.videoItems = []
+    this.numberOfPacksDocumentation = [];
+    this.numberOfPacksDrama = [];
+    this.numberOfPacksAction = [];
+    this.numberOfPacksDrone = [];
+    this.numberOfPacksWatched = [];
+    this.numberOfPacks = [];
+    this.videoItems = [];
   }
 
   loadSliders() {
@@ -158,6 +178,8 @@ export class SliderCompComponent {
         this.groupVideoItems(resp); // Neu Slider
         this.groupVideoItemsByGenre('Drama'); // Drama-Slider
         this.groupVideoItemsByGenre('Dokumentation'); // Doku Slider
+        this.groupVideoItemsByGenre('Action'); // Action Slider
+        this.groupVideoItemsByGenre('Drohne'); // Drone Slider
       },
       error: (err) => {
         console.error(err);
@@ -211,10 +233,11 @@ export class SliderCompComponent {
     let tempPack: VideoItem[] = [];
 
     const watchedVideoItems = videos
-      .filter((video) => 
-        watchedVideos.some((watched) => watched.URL === video.url) // compares url from watched user vids and all available videos
+      .filter(
+        (video) => watchedVideos.some((watched) => watched.URL === video.url) // compares url from watched user vids and all available videos
       )
-      .map((video) => { // creates the new video[] with timestamps
+      .map((video) => {
+        // creates the new video[] with timestamps
         const timestamp =
           watchedVideos.find((watched) => watched.URL === video.url)?.STAMP ||
           null;
@@ -224,7 +247,8 @@ export class SliderCompComponent {
 
     watchedVideoItems.forEach((video: VideoItem, index: number) => {
       tempPack.push(new VideoItem(video));
-      if ( // creation of packs 
+      if (
+        // creation of packs
         tempPack.length === this.videoItemCardsAmount ||
         index === watchedVideoItems.length - 1
       ) {
@@ -274,6 +298,40 @@ export class SliderCompComponent {
       this.numberOfPacksDocumentation = Object.keys(
         this.groupedSliderVidsDocumentation
       );
+    } else if (genre === 'Action') {
+      genreVideos.forEach((video: VideoItem, index: number) => {
+        tempPack.push(new VideoItem(video));
+        if (
+          tempPack.length === this.videoItemCardsAmount ||
+          index === genreVideos.length - 1
+        ) {
+          this.groupedSliderVidsAction[`group${groupIndex}`] = [
+            ...tempPack,
+          ];
+          tempPack = [];
+          groupIndex++;
+        }
+      });
+      this.numberOfPacksAction = Object.keys(
+        this.groupedSliderVidsAction
+      );
+    } else if (genre === 'Drohne') {
+      genreVideos.forEach((video: VideoItem, index: number) => {
+        tempPack.push(new VideoItem(video));
+        if (
+          tempPack.length === this.videoItemCardsAmount ||
+          index === genreVideos.length - 1
+        ) {
+          this.groupedSliderVidsDrone[`group${groupIndex}`] = [
+            ...tempPack,
+          ];
+          tempPack = [];
+          groupIndex++;
+        }
+      });
+      this.numberOfPacksDrone = Object.keys(
+        this.groupedSliderVidsDrone
+      );
     }
   }
 
@@ -299,10 +357,7 @@ export class SliderCompComponent {
     sliderCategory.style.transform = `translateX(${newPosition}px)`;
   }
 
-  resizeCategory(
-    category: keyof typeof this.currentIndexes,
-    numbX: number
-  ) {
+  resizeCategory(category: keyof typeof this.currentIndexes, numbX: number) {
     //numb is the currentPosition 1, 2, 3, 4 etc..
     const sliderCategory = this.getRightCategory(category);
     if (!sliderCategory) {
@@ -325,6 +380,10 @@ export class SliderCompComponent {
       this.currentPosition3 = newcPosition;
     } else if (numbX == 4) {
       this.currentPosition4 = newcPosition;
+    } else if (numbX == 5) {
+      this.currentPosition5 = newcPosition;
+    } else if (numbX == 6) {
+      this.currentPosition6 = newcPosition;
     }
   }
 
@@ -346,6 +405,10 @@ export class SliderCompComponent {
         return this.category3.nativeElement;
       case 'category4':
         return this.category4.nativeElement;
+      case 'category5':
+        return this.category4.nativeElement;
+      case 'category6':
+        return this.category4.nativeElement;
       default:
         console.warn(`Kategorie ${category} existiert nicht.`);
         return null;
@@ -359,6 +422,10 @@ export class SliderCompComponent {
       ? this.numberOfPacksDocumentation.length - 1
       : category === 'category3'
       ? this.numberOfPacksDrama.length - 1
-      : this.numberOfPacksWatched.length - 1;
+      : category === 'category4'
+      ? this.numberOfPacksWatched.length - 1
+      : category === 'category5'
+      ? this.numberOfPacksAction.length - 1
+      : this.numberOfPacksDrone.length - 1;
   }
 }

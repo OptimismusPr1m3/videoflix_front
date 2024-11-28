@@ -40,11 +40,6 @@ $videoflix_frontend-theme: mat.define-theme(
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  background-color: #000000;
-  font-family: "Raleway", sans-serif;
-  background: linear-gradient(rgba(0, 0, 0, 1.0), rgba(0, 0, 0, 0.55), rgba(0,0,0, 1.0)),
-    url("./assets/img/flix-bg-n.jpg") no-repeat center center;
   background-size: cover;
 }
 
@@ -70,7 +65,7 @@ body.registration-page {
 body.logged-in {
   font-family: "Raleway", sans-serif;
   background-color: rgba($color: #141414, $alpha: 1.0) !important;
-  background-image: none !important;
+  background-image: none;
 }
 
 body.login-page {

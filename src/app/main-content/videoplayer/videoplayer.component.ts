@@ -151,13 +151,8 @@ export class VideoplayerComponent {
     // true if the video should start at timestamp, false for restart
     const videoWrapper = this.videoWrapper.nativeElement;
     const videoFrame = this.videoFrame.nativeElement;
-    if (this.windoWidth > 860) {
-      videoWrapper.requestFullscreen();
-      this.prepareVideo(withTimestamp);
-    } else {
-      videoFrame.requestFullscreen();
-      this.prepareVideo(withTimestamp);
-    }
+    videoWrapper.requestFullscreen();
+    this.prepareVideo(withTimestamp);
   }
 
   toggleFullscreen() {

@@ -48,7 +48,7 @@
       transition: all 0.3s ease-in-out;
       @include dFlex(row, space-between, center);
       padding: 4px 6px;
-      opacity: 0;
+      opacity: 1;
       border-radius: 12px;
       > div {
         width: 50%;

@@ -40,23 +40,23 @@ export class SliderCompComponent {
   hoveredIndex1: number = -1; //neu auf VideoFlix
   hoveredIndex2: number = -1; // Doku
   hoveredIndex3: number = -1; // Drama
-  hoveredIndex4: number = -1; // Drama
-  hoveredIndex5: number = -1; // Drama
-  hoveredIndex6: number = -1; // Drama
+  hoveredIndex4: number = -1; // Watched
+  hoveredIndex5: number = -1; // Action
+  hoveredIndex6: number = -1; // Drohne
 
   currentPosition1: number = 0; //neu auf VideoFlix
   currentPosition2: number = 0; // Doku
   currentPosition3: number = 0; // Drama
-  currentPosition4: number = 0; // Drama
-  currentPosition5: number = 0; // Drama
-  currentPosition6: number = 0; // Drama
+  currentPosition4: number = 0; // Watched
+  currentPosition5: number = 0; // Action
+  currentPosition6: number = 0; // Drohne
 
   currentIndex1: number = 0; //neu auf VideoFlix
   currentIndex2: number = 0; // Doku
   currentIndex3: number = 0; // Drama
-  currentIndex4: number = 0; // Drama
-  currentIndex5: number = 0; // Drama
-  currentIndex6: number = 0; // Drama
+  currentIndex4: number = 0; // Watched
+  currentIndex5: number = 0; // Action
+  currentIndex6: number = 0; // Drohne
 
   currentIndexes = {
     category1: 0,

@@ -46,7 +46,6 @@ export class MainComponent {
   @HostListener('window:scroll', ['$event'])
   onScroll(): void {
     const scrollPosition = window.scrollY || window.pageYOffset;
-    console.log(scrollPosition)
     if (scrollPosition > this.stickyScrollPoint) {
       this.isSticky = true;
     } else {

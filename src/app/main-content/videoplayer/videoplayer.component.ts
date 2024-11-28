@@ -32,8 +32,10 @@ export class VideoplayerComponent {
   isPlaying: boolean = false;
   materialPlayButtonString: string = 'pause';
   materialVolumeButtonString: string = 'volume_up';
+  hasTimestamp: number = 0;
+  windoWidth: number = 0;
 
-  is480p: boolean = true;
+  is480p: boolean = true; // initial quali
   qualityPickerIsOpen: boolean = false;
 
   muteLabel: string = 'Stumm schalten';
@@ -55,7 +57,15 @@ export class VideoplayerComponent {
     }, 2000);
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.windoWidth = window.innerWidth;
+    console.log(this.windoWidth);
+  }
+
   ngOnInit() {
+    this.windoWidth = window.innerWidth;
+    this.hasTimestamp = this.lookForTimestamp();
     try {
       const video = this.videoFrame.nativeElement;
       video.addEventListener('timeupdate', () => {
@@ -137,10 +147,17 @@ export class VideoplayerComponent {
     );
   }
 
-  openFullscreen() {
+  openFullscreen(withTimestamp: boolean) {
+    // true if the video should start at timestamp, false for restart
     const videoWrapper = this.videoWrapper.nativeElement;
-    videoWrapper.requestFullscreen();
-    this.prepareVideo();
+    const videoFrame = this.videoFrame.nativeElement;
+    if (this.windoWidth > 860) {
+      videoWrapper.requestFullscreen();
+      this.prepareVideo(withTimestamp);
+    } else {
+      videoFrame.requestFullscreen();
+      this.prepareVideo(withTimestamp);
+    }
   }
 
   toggleFullscreen() {
@@ -152,9 +169,10 @@ export class VideoplayerComponent {
     }
   }
 
-  prepareVideo() {
+  prepareVideo(withTimestamp: boolean) {
+    // true if the video should start at timestamp, false for restart
     const videoFrame = this.videoFrame.nativeElement;
-    this.restartVideo();
+    this.restartVideo(withTimestamp);
     this.isPlaying = true;
     videoFrame.style.height = '100%';
     videoFrame.style.width = '100%';
@@ -192,14 +210,15 @@ export class VideoplayerComponent {
     this.videoDuration = video.duration;
   }
 
-  restartVideo() {
+  restartVideo(withTimestamp: boolean) {
+    // true if the video should start at timestamp, false for restart
     const videoFrame = this.videoFrame.nativeElement;
     videoFrame.pause();
-    this.lookForTimestamp();
-    videoFrame.currentTime = this.lookForTimestamp();
-    // this.globals.currentOpenedVideo()?.timestamp != null
-    //   ? this.globals.currentOpenedVideo()?.timestamp
-    //   : 0;
+    if (withTimestamp) {
+      videoFrame.currentTime = this.lookForTimestamp();
+    } else {
+      videoFrame.currentTime = 0;
+    }
     this.isPlaying = true;
     this.materialPlayButtonString = 'pause';
     videoFrame.play();
@@ -211,21 +230,21 @@ export class VideoplayerComponent {
     videoFrame.currentTime = 0;
     this.isPlaying = true;
     this.materialPlayButtonString = 'pause';
-    videoFrame.play()
+    videoFrame.play();
   }
 
   lookForTimestamp() {
     if (this.globals.currentLoggedUser()?.video_timestamps) {
       const foundTimestamp = this.globals
-      .currentLoggedUser()
-      ?.video_timestamps.find(
-        (stamp: { URL: string | undefined }) =>
-          stamp.URL === this.globals.currentOpenedVideo()?.url
-      );
-    //console.log(foundTimestamp);
-    return foundTimestamp?.STAMP ?? 0;
+        .currentLoggedUser()
+        ?.video_timestamps.find(
+          (stamp: { URL: string | undefined }) =>
+            stamp.URL === this.globals.currentOpenedVideo()?.url
+        );
+      console.log(foundTimestamp);
+      return foundTimestamp?.STAMP ?? 0;
     } else {
-      return 0
+      return 0;
     }
   }
 
@@ -244,7 +263,7 @@ export class VideoplayerComponent {
 
   skip10(direction: number) {
     const videoFrame = this.videoFrame.nativeElement;
-    videoFrame.currentTime += direction; 
+    videoFrame.currentTime += direction;
   }
 
   toggleAudio() {

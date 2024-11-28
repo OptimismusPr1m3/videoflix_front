@@ -9,7 +9,7 @@
         
     </div>
 
-    <video [ngStyle]="isVidFullScreen ? { 'object-fit': 'contain' } : { }" #videoFrame [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
+    <video [ngStyle]="isVidFullScreen ? { 'object-fit': 'contain', 'max-height':'none' } : { }" #videoFrame [muted]="true" (timeupdate)="updateProgressBar()" (loadedmetadata)="initializeVideo()">
       <source [src]="is480p && globals.currentOpened480Video() ? globals.currentOpened480Video() : globals.currentOpenedVideo()?.video_file" />
       Dein Browser unterstuetzt das Format nicht
     </video>
@@ -27,9 +27,13 @@
     'vplayer-fullscreen': isVidFullScreen,
     'fade-out': isMouseInactive && isVidFullScreen}">
       <div class="overlay play" *ngIf="!isVidFullScreen">
-        <button (click)="openFullscreen()">
-          <mat-icon>play_arrow</mat-icon>
-          <b>Abspielen</b>
+        <button (click)="openFullscreen(true)">
+          <mat-icon>{{ hasTimestamp ? 'resume' : 'play_arrow' }}</mat-icon>
+          <b>{{ hasTimestamp ? 'Fortsetzen' : 'Play' }}</b>
+        </button>
+        <button *ngIf="hasTimestamp && !isInMyVideos" (click)="openFullscreen(false)">
+          <mat-icon>restart_alt</mat-icon>
+          <b>Neustarten</b>
         </button>
         <button *ngIf="isInMyVideos" (click)="openVideoEdit()">
           <mat-icon>edit</mat-icon>

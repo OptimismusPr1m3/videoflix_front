@@ -231,6 +231,7 @@ app-footer {
     display: block;
     width: 100%;
     margin: 0px 16px;
+    z-index: 10;
     > .mobile-cont {
       @include dFlex(row, space-between, center);
       width: 100%;

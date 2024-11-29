@@ -297,3 +297,117 @@ textarea {
   @include dFlex(row, center, center);
   gap: 32px;
 }
+
+
+.toast {
+  position: absolute;
+  right: 36%;
+  top: 100px;
+  opacity: 0;
+  z-index: 1;
+  // animation: plopIn 2s ease-in;
+  @media (max-width: 1000px) {
+    right: 20%;
+  }
+  @media (max-width: 760px) {
+    right: 16px;
+  }
+  @media (max-width: 560px) {
+    display: none;
+  }
+}
+
+.toast-mobile {
+  display: none;
+  z-index: -1;
+  @media (max-width: 560px) {
+    position: absolute;
+    display: flex;
+    height: 232px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    opacity: 0;
+    z-index: -1;
+    animation: mobileplopIn 1s ease-in; 
+  }
+}
+
+
+.fade-in-animation {
+  animation: plopIn 1s forwards;
+}
+.fade-out-animation {
+  animation: plopOut 1s forwards;
+}
+
+.fade-in-mobile-animation {
+  animation: mobilePlopIn 1s forwards;
+}
+.fade-out-mobile-animation {
+  animation: mobilePlopOut 1s forwards;
+}
+
+@keyframes plopIn {
+  from {
+    z-index: 1;
+    right: 10%;
+    top: 0px;
+    opacity: 0;
+  }
+  to {
+    z-index: 20;
+    right: 36%;
+    top: 100px;
+    opacity: 1;
+  }
+}
+
+@keyframes plopOut {
+  from {
+    z-index: 20;
+    right: 36%;
+    top: 100px;
+    opacity: 1;
+  }
+  to {
+    z-index: 1;
+    right: 10%;
+    top: 100px;
+    opacity: 0;
+  }
+}
+
+@keyframes mobilePlopIn {
+  from {
+    z-index: -1;
+    right: 0;
+    left: 0;
+    bottom: 0px;
+    opacity: 0;
+  }
+  to {
+    z-index: 20;
+    left: 0;
+    right: 0px;
+    bottom: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes mobilePlopOut {
+  from {
+    z-index: 20;
+    right: 0px;
+    left: 0;
+    bottom: 0px;
+    opacity: 1;
+  }
+  to {
+    z-index: -1;
+    right: 0px;
+    left: 0;
+    bottom: 0px;
+    opacity: 0;
+  }
+}

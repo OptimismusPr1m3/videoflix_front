@@ -133,3 +133,11 @@
   [fullScreen]="true"
   ><p style="color: white">{{ globals.videoUploadText() }}</p></ngx-spinner
 >
+
+<div class="toast" [ngClass]="globals.errorToastClass()">
+  <app-succ-toast (closeError)="closeErrorToast($event)"></app-succ-toast>
+</div>
+
+<div class="toast-mobile" [ngClass]="globals.mobileErrorToastClass()">
+  <app-succ-toast-mobile (closeError)="closeMobileErrorToast($event)" style="width: 100%;"></app-succ-toast-mobile>
+</div>

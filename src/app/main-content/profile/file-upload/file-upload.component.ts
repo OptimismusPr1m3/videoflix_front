@@ -16,6 +16,8 @@ import { GlobalVariablesService } from '../../../services/global-variables.servi
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
+import { SuccToastComponent } from '../../../toasts/succ-toast/succ-toast.component';
+import { SuccToastMobileComponent } from '../../../toasts/succ-toast-mobile/succ-toast-mobile.component';
 
 @Component({
   selector: 'app-file-upload',
@@ -28,7 +30,9 @@ import { RouterLink } from '@angular/router';
     MatInputModule,
     NgxSpinnerModule,
     MatSelectModule,
-    RouterLink
+    RouterLink,
+    SuccToastComponent,
+    SuccToastMobileComponent,
   ],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.scss',
@@ -39,8 +43,8 @@ export class FileUploadComponent {
   videoForm: FormGroup;
   selectedVideoFile: File | null = null;
   currentUploadedVideoURL: any;
-  selectedVideoDuration: number = 0
-  genres: string[] = ['Dokumentation','Drama','Action','Drohne']
+  selectedVideoDuration: number = 0;
+  genres: string[] = ['Dokumentation', 'Drama', 'Action', 'Drohne'];
 
   constructor(
     public backEnd: BackendCommunicationService,
@@ -58,8 +62,26 @@ export class FileUploadComponent {
         Validators.minLength(2),
       ]),
       description: new FormControl('', [Validators.required]),
-      duration: new FormControl('', [Validators.required])
+      duration: new FormControl('', [Validators.required]),
     });
+  }
+
+  closeErrorToast(wasCLicked: boolean) {
+    this.globals.errorToastClass.set(wasCLicked ? 'fade-out-animation' : '');
+    setTimeout(() => {
+      this.globals.errorToastClass.set('');
+    }, 2000);
+    this.globals.mobileErrorToastClass.set('');
+  }
+
+  closeMobileErrorToast(wasCLicked: boolean) {
+    this.globals.mobileErrorToastClass.set(
+      wasCLicked ? 'fade-out-mobile-animation' : ''
+    );
+    setTimeout(() => {
+      this.globals.mobileErrorToastClass.set('');
+    }, 2000);
+    this.globals.errorToastClass.set('');
   }
 
   triggerFileUpload() {
@@ -67,14 +89,14 @@ export class FileUploadComponent {
   }
 
   emptyFileField() {
-    this.selectedVideoFile = null
+    this.selectedVideoFile = null;
     this.videoForm.patchValue({
       title: '',
       genre: '',
-      description: ''
-    })
-    this.videoForm.markAsUntouched()
-    this.globals.isUploadOpen.set(false)
+      description: '',
+    });
+    this.videoForm.markAsUntouched();
+    this.globals.isUploadOpen.set(false);
   }
 
   onFileSelected(event: any) {
@@ -90,13 +112,11 @@ export class FileUploadComponent {
       video.currentTime = 1;
       // console.log(video.currentTime)
       // console.log(file.name)
-      
-
 
       video.onloadeddata = () => {
         //this.captureVideoFrame(video);
         URL.revokeObjectURL(video.src);
-        this.videoForm.patchValue({duration: video.duration})
+        this.videoForm.patchValue({ duration: video.duration });
         //console.log(video.duration)
       };
     }
@@ -164,8 +184,10 @@ export class FileUploadComponent {
         complete: () => {
           //console.log('Nun sollte die VideoURL beim User angekommen sein !');
           this.spinner.hide();
-          this.emptyFileField()
-          this.globals.videoUploadText.set(this.globals.videoUploadStrings[0])
+          this.emptyFileField();
+          this.globals.videoUploadText.set(this.globals.videoUploadStrings[0]);
+          this.globals.errorToastClass.set('fade-in-animation');
+          this.globals.mobileErrorToastClass.set('fade-in-mobile-animation');
         },
       });
   }
@@ -193,12 +215,12 @@ export class FileUploadComponent {
     this.backEnd.uploadVideo(formData).subscribe({
       next: (resp) => {
         this.currentUploadedVideoURL = resp['url'];
-        this.globals.videoUploadText.set(this.globals.videoUploadStrings[1])
+        this.globals.videoUploadText.set(this.globals.videoUploadStrings[1]);
       },
       error: (err) => {
         console.error(err);
         this.spinner.hide();
-        this.globals.videoUploadText.set(this.globals.videoUploadStrings[0])
+        this.globals.videoUploadText.set(this.globals.videoUploadStrings[0]);
       },
       complete: () => {
         //console.log('Jetzt fertig');

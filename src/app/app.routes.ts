@@ -11,6 +11,7 @@ import { MyVideosComponent } from './main-content/profile/my-videos/my-videos.co
 import { ImprintComponent } from './foot/imprint/imprint.component';
 import { PpolicyComponent } from './foot/ppolicy/ppolicy.component';
 import { TermsOfUseComponent } from './foot/terms-of-use/terms-of-use.component';
+import { SuccToastComponent } from './toasts/succ-toast/succ-toast.component';
 
 export const routes: Routes = [
   { path: '', component: LandingpageComponent },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'imprint', component: ImprintComponent },
   { path: 'policy', component: PpolicyComponent },
   { path: 'terms', component: TermsOfUseComponent },
+  { path: 'toast', component: SuccToastComponent },
   {
     path: 'profile',
     component: ProfileComponent,

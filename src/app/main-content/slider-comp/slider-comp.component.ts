@@ -172,7 +172,7 @@ export class SliderCompComponent {
     //console.log(this.windowSize);
     this.backService.fetchVideoItems().subscribe({
       next: (resp) => {
-        console.log('Hier die Videos: ', resp);
+        //console.log('Hier die Videos: ', resp);
         this.globals.currentVideoResponse.set(resp);
         this.sortVideosByGenre(resp);
         this.groupVideoItems(resp); // Neu Slider
@@ -186,8 +186,8 @@ export class SliderCompComponent {
         this.spinner.hide();
       },
       complete: () => {
-        console.log('hier die groupedslidervids: ', this.groupedSliderVids);
-        console.log('Hier die numberofPacks: ', this.numberOfPacks);
+        //console.log('hier die groupedslidervids: ', this.groupedSliderVids);
+        //console.log('Hier die numberofPacks: ', this.numberOfPacks);
         this.spinner.hide();
       },
     });
@@ -197,14 +197,11 @@ export class SliderCompComponent {
     videos.forEach((video) => {
       if (!this.groupedVideosByGenre[video.genre]) {
         this.groupedVideosByGenre[video.genre] = [];
-        console.log(
-          `Hier das ${video.genre} Genre`,
-          this.groupedVideosByGenre[video.genre]
-        );
+        //console.log(`Hier das ${video.genre} Genre`,this.groupedVideosByGenre[video.genre]);
       }
       this.groupedVideosByGenre[video.genre].push(video);
     });
-    console.log(this.groupedVideosByGenre);
+    //console.log(this.groupedVideosByGenre);
   }
 
   groupVideoItems(resp: any) {
@@ -228,7 +225,7 @@ export class SliderCompComponent {
     videos: VideoItem[],
     watchedVideos: { URL: string; STAMP: number }[]
   ) {
-    console.log(videos);
+    //console.log(videos);
     let groupIndex = 0;
     let tempPack: VideoItem[] = [];
 
@@ -243,7 +240,7 @@ export class SliderCompComponent {
           null;
         return { ...video, timestamp };
       });
-    console.log('Hier die gefundenen Videos: ', watchedVideoItems);
+    //console.log('Hier die gefundenen Videos: ', watchedVideoItems);
 
     watchedVideoItems.forEach((video: VideoItem, index: number) => {
       tempPack.push(new VideoItem(video));
@@ -257,10 +254,7 @@ export class SliderCompComponent {
         groupIndex++;
       }
     });
-    console.log(
-      'Hier die gefundenen und fertig gruppierten Videos: ',
-      this.groupedSliderVidsWatched
-    );
+    //console.log('Hier die gefundenen und fertig gruppierten Videos: ',this.groupedSliderVidsWatched);
     this.numberOfPacksWatched = Object.keys(this.groupedSliderVidsWatched);
   }
 

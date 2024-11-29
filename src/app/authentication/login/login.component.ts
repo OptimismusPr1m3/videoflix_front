@@ -110,17 +110,17 @@ export class LoginComponent {
         .userLogin(this.form.get('email')?.value!, this.form.get('password')?.value!)
         .subscribe({
           next: (resp) => {
-            console.log(resp.body.token);
+            //console.log(resp.body.token);
             localStorage.setItem('token', resp.body.token);
           },
           error: (err) => {
             this.spinner.hide()
             this.errorHandling()
-            console.error('Ging so nicht durch ', err);
+            //console.error('Ging so nicht durch ', err);
           },
           complete: () => {
             this.spinner.hide()
-            console.log('Jetzt fertig mit Antwort');
+            //console.log('Jetzt fertig mit Antwort');
             this.router.navigate(['/main/']);
           },
         });

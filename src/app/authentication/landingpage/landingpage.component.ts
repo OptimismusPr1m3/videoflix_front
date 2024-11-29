@@ -65,7 +65,7 @@ export class LandingpageComponent {
   checkMail() {
     if (this.mail.valid) {
       this.spinner.show();
-      console.log(this.mail.value);
+      //console.log(this.mail.value);
       this.backend.getUsedMails().subscribe({
         next: (resp) => {
           this.compareKnownMailsWithEntered(resp);
@@ -76,7 +76,7 @@ export class LandingpageComponent {
         },
       });
     } else {
-      console.log('invalid');
+      //console.log('invalid');
     }
   }
 

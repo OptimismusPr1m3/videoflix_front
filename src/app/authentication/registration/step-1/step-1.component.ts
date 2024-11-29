@@ -102,7 +102,7 @@ export class Step1Component {
       this.globals.isProgressingData.set(true)
       this.backService.registerUser(this.form.get('email')?.value!, this.form.get('password')?.value!).subscribe({
         next: (resp) => {
-          console.log('User registration succ.', resp)
+          //console.log('User registration succ.', resp)
         },
         error: (err) => {
           console.error('Error registering', err)

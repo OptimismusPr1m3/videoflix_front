@@ -124,17 +124,17 @@ export class BackendCommunicationService {
   getLoggedUserData() {
     this.fetchLoggedUser().subscribe({
       next: (resp) => {
-        console.log(resp);
+        //console.log(resp);
         //this.currentUser = new User(resp)
         this.globals.currentLoggedUser.set(new User(resp));
       },
       error: (err) => {
-        console.error(err);
+        //console.error(err);
         this.router.navigate(['/login/']);
       },
       complete: () => {
-        console.log('Hier der User');
-        console.log(this.globals.currentLoggedUser());
+        //console.log('Hier der User');
+        //console.log(this.globals.currentLoggedUser());
       },
     });
   }
@@ -200,8 +200,8 @@ export class BackendCommunicationService {
         console.error(err);
       },
       complete: () => {
-        console.log('Nun sollten alle Videos fertig gefetcht sein !');
-        console.log('Nach der Sortierung: ', this.globals.userVideoItems());
+        //console.log('Nun sollten alle Videos fertig gefetcht sein !');
+        //console.log('Nach der Sortierung: ', this.globals.userVideoItems());
         this.globals.myVideosIsLoading.set(false);
       },
     });

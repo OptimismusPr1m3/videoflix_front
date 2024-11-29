@@ -42,7 +42,7 @@ export class LoggedHeaderComponent {
   logOut() {
     this.backService.userLogout().subscribe({
       next: (resp) => {
-        console.log('Logout success !', resp);
+        //console.log('Logout success !', resp);
       },
       error: (err) => {
         console.error(err);

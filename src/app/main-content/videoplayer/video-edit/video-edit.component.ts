@@ -68,14 +68,14 @@ export class VideoEditComponent {
     if (url) {
       this.backEnd.changeVideoInfo(this.videoEditForm, url).subscribe({
         next: (resp) => {
-          console.log('Antowrt: ', resp),
-            this.changeGlobalsCurrentVideo(this.videoEditForm);
+          //console.log('Antowrt: ', resp),
+          this.changeGlobalsCurrentVideo(this.videoEditForm);
         },
         error: (err) => {
           console.log('Error: ', err);
         },
         complete: () => {
-          console.log('Jetzt fertig !'),
+          //console.log('Jetzt fertig !'),
             setTimeout(() => {
               this.editSpinner.hide('editSpinner'),
                 this.getBack(),
@@ -112,9 +112,9 @@ export class VideoEditComponent {
 
   deleteVidFromBE(url: string){
     this.backEnd.deleteVideo(url).subscribe({
-      next: (resp) => {console.log(resp)},
+      // next: (resp) => {console.log(resp)},
       error: (err) => {console.error(err);},
-      complete: () => {console.log('Video nun fertig geloescht')},
+      // complete: () => {console.log('Video nun fertig geloescht')},
     });
   }
 
@@ -127,13 +127,13 @@ export class VideoEditComponent {
         console.error(err);
       },
       complete: () => {
-        console.log('Jetzt wurde die eine Video URL vom Nutzer entfernt');
+        // console.log('Jetzt wurde die eine Video URL vom Nutzer entfernt');
       },
     });
   }
 
   changeGlobalsCurrentVideo(form: FormGroup) {
-    console.log(this.globals.currentOpenedVideo());
+    //console.log(this.globals.currentOpenedVideo());
     const updatedVideo = {
       ...this.globals.currentOpenedVideo(),
       title: form.value['title'],
@@ -147,7 +147,7 @@ export class VideoEditComponent {
       duration: this.globals.currentOpenedVideo()?.duration || 0,
       timestamp: null
     };
-    console.log(updatedVideo);
+    //console.log(updatedVideo);
     this.globals.currentOpenedVideo.set(updatedVideo);
   }
 

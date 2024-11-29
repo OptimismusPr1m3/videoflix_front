@@ -63,7 +63,7 @@ export class ProfileComponent {
     this.backEnd.getLoggedUserData();
     this.renderer.addClass(document.body, 'logged-in');
     this.checkActivePath();
-    console.log(this.globals.currentLoggedUser());
+    //console.log(this.globals.currentLoggedUser());
   }
 
   ngOnDestroy() {

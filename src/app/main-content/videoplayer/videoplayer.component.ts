@@ -60,7 +60,7 @@ export class VideoplayerComponent {
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.windoWidth = window.innerWidth;
-    console.log(this.windoWidth);
+    //console.log(this.windoWidth);
   }
 
   ngOnInit() {
@@ -83,15 +83,9 @@ export class VideoplayerComponent {
   closeFullscreen() {
     this.globals.isVidOpen.set(!this.globals.isVidOpen());
     this.globals.currentWatchedVideoTimeStamp.set(this.currentTime);
-    console.log(
-      'Zeitstempel vom Video: ',
-      this.globals.currentWatchedVideoTimeStamp()
-    );
-    console.log('der currentuser: ', this.globals.currentLoggedUser());
-    console.log(
-      'hier die akutelle videoURL: ',
-      this.globals.currentOpenedVideo()?.url
-    );
+    // console.log('Zeitstempel vom Video: ',this.globals.currentWatchedVideoTimeStamp());
+    // console.log('der currentuser: ', this.globals.currentLoggedUser());
+    // console.log('hier die akutelle videoURL: ',this.globals.currentOpenedVideo()?.url);
     this.setTimeStampsForUser();
   }
 
@@ -102,10 +96,10 @@ export class VideoplayerComponent {
   setTimeStampsForUser() {
     let previousStamps = this.globals.currentLoggedUser()?.video_timestamps;
     const newStamps = this.createStampsJSON(previousStamps);
-    console.log('Hier die Zeitstempel vor dem hochladen: ', newStamps);
+    //console.log('Hier die Zeitstempel vor dem hochladen: ', newStamps);
     this.backend.uploadTimeStamp(newStamps).subscribe({
-      next: (resp) =>
-        console.log('Zeitstempel erfolgreich aktualisiert: ', resp),
+      // next: (resp) =>
+      //   console.log('Zeitstempel erfolgreich aktualisiert: ', resp),
       error: (err) =>
         console.log('Fehler beim Aktualisieren der Zeitstempel:', err),
       complete: () => this.backend.getLoggedUserData(),
@@ -236,7 +230,7 @@ export class VideoplayerComponent {
           (stamp: { URL: string | undefined }) =>
             stamp.URL === this.globals.currentOpenedVideo()?.url
         );
-      console.log(foundTimestamp);
+      //console.log(foundTimestamp);
       return foundTimestamp?.STAMP ?? 0;
     } else {
       return 0;
@@ -272,7 +266,7 @@ export class VideoplayerComponent {
   }
 
   openVideoEdit() {
-    console.log(this.globals.currentOpenedVideo()?.url);
+    //console.log(this.globals.currentOpenedVideo()?.url);
     this.globals.isMyVideoEditing.set(true);
   }
 

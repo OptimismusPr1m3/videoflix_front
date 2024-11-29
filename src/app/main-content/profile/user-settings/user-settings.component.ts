@@ -117,16 +117,16 @@ export class UserSettingsComponent {
 
   saveSettings() {
     this.spinner.show()
-    console.log(this.userForm.value['date_of_birth']);
+    //console.log(this.userForm.value['date_of_birth']);
     this.backService.changeLoggedUserSettings(this.userForm).subscribe({
       next: (resp) => {
-        console.log('Das ist passiert', resp);
+        //console.log('Das ist passiert', resp);
       },
       error: (err) => {
         console.log('Fehlgeschalgen: ', err);
       },
       complete: () => {
-        console.log('Jetzt ist es fertig');
+        //console.log('Jetzt ist es fertig');
         this.backService.getLoggedUserData()
         this.globals.isSettingsEditing.set(false)
         this.spinner.hide()

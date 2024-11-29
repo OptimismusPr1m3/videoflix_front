@@ -81,15 +81,15 @@ export class FileUploadComponent {
     const file: File = event.target.files[0];
     this.selectedVideoFile = file;
 
-    console.log(this.selectedVideoFile?.type);
-    console.log(this.selectedVideoFile);
+    // console.log(this.selectedVideoFile?.type);
+    // console.log(this.selectedVideoFile);
 
     if (file.type.startsWith('video')) {
       const video = document.createElement('video');
       video.src = URL.createObjectURL(this.selectedVideoFile);
       video.currentTime = 1;
-      console.log(video.currentTime)
-     console.log(file.name)
+      // console.log(video.currentTime)
+      // console.log(file.name)
       
 
 
@@ -97,7 +97,7 @@ export class FileUploadComponent {
         //this.captureVideoFrame(video);
         URL.revokeObjectURL(video.src);
         this.videoForm.patchValue({duration: video.duration})
-        console.log(video.duration)
+        //console.log(video.duration)
       };
     }
   }
@@ -155,14 +155,14 @@ export class FileUploadComponent {
       )
       .subscribe({
         next: (resp) => {
-          console.log('hier der urlvideo to user response: !!!!!: ',resp);
+          //console.log('hier der urlvideo to user response: !!!!!: ',resp);
         },
         error: (err) => {
           console.error(err);
           this.spinner.hide();
         },
         complete: () => {
-          console.log('Nun sollte die VideoURL beim User angekommen sein !');
+          //console.log('Nun sollte die VideoURL beim User angekommen sein !');
           this.spinner.hide();
           this.emptyFileField()
           this.globals.videoUploadText.set(this.globals.videoUploadStrings[0])
@@ -201,7 +201,7 @@ export class FileUploadComponent {
         this.globals.videoUploadText.set(this.globals.videoUploadStrings[0])
       },
       complete: () => {
-        console.log('Jetzt fertig');
+        //console.log('Jetzt fertig');
         this.saveUploadedVideoURLToUser();
       },
     });

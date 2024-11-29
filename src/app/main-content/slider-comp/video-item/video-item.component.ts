@@ -25,9 +25,9 @@ export class VideoItemComponent {
 
   set480pVideoString() {
     if (this.videoItem.video_file.endsWith(".mp4")) {
-      console.log(this.videoItem.video_file)
+      //console.log(this.videoItem.video_file)
       let updatedString = this.videoItem.video_file.slice(0, -4) + "_480p.mp4";
-      console.log("Hier der 480p String: ", updatedString)
+      //console.log("Hier der 480p String: ", updatedString)
       this.globals.currentOpened480Video.set(updatedString)
     }
   }

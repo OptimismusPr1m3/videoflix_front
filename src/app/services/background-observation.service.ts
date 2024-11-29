@@ -30,7 +30,7 @@ export class BackgroundObservationService {
 
   private updateBackground(url: string) {
     this.removeBodyClasses();
-    console.log(url);
+    //console.log(url);
     switch (true) {
       case url.includes('/login'):
         this.renderer.addClass(document.body, 'login-page');

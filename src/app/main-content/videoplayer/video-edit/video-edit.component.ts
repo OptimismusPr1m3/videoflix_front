@@ -38,7 +38,8 @@ export class VideoEditComponent {
   videoURLS: string[] = [];
   videoItems: VideoItem[] = [];
   genres: string[] = ['Dokumentation','Drama','Action','Drohne']
-
+  spinnerTexts: string[] = ['Wir löschen gerade dein Video...','Wir speichern dein Video...']
+  spinnerText: string = ''
   constructor(
     private editSpinner: NgxSpinnerService,
     public globals: GlobalVariablesService,
@@ -63,6 +64,7 @@ export class VideoEditComponent {
   }
 
   saveEditedVideo() {
+    this.spinnerText = this.spinnerTexts[1]
     this.editSpinner.show('editSpinner');
     const url = this.globals.currentOpenedVideo()?.url;
     if (url) {
@@ -87,6 +89,7 @@ export class VideoEditComponent {
   }
 
   deleteCurrentVideo() {
+    this.spinnerText = this.spinnerTexts[0]
     this.editSpinner.show('editSpinner');
     const url = this.globals.currentOpenedVideo()?.url;
     const updatedURLS = this.globals.currentLoggedUser()

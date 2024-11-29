@@ -21,7 +21,7 @@
           videoEditForm.get('title')?.touched
         "
       >
-        Der Titel muss zwischen 4 und 20 Zeichen lang sein
+        Min. 4, max. 20 Zeichen
       </mat-error>
     </mat-form-field>
     <mat-form-field>
@@ -64,8 +64,7 @@
           videoEditForm.get('description')?.touched
         "
       >
-        Bitte gib eine kurze Beschreibung, bestehend aus mindestens 10 Zeichen,
-        zu deinem Video an
+        Min. 10 Zeichen
       </mat-error>
     </mat-form-field>
   </div>
@@ -96,5 +95,5 @@
   type="fire"
   [fullScreen]="true"
   name="editSpinner"
-  ><p style="color: white">Wir löschen gerade dein Video...</p></ngx-spinner
+  ><p style="color: white">{{ spinnerText }}</p></ngx-spinner
 >

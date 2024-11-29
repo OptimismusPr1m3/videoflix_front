@@ -1,5 +1,5 @@
 <div (click)="openVideoOverlay()" class="videoitem-cont">
-  <img [ngSrc]="videoItem.cover_image" width="270" height="160"/>
+  <img [ngSrc]="videoItem.cover_image != null ? videoItem.cover_image : './assets/img/no_thumb2.png' " width="270" height="160"/>
   <div class="info-cont">
     <div [ngClass]="isHovered ? 'info-head-vis' : 'info-head-invis'">
       <div><span>{{ videoItem.title }}</span></div>

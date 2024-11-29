@@ -107,13 +107,28 @@ export class SliderCompComponent {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.resizeCategory('category1', 1);
-    this.resizeCategory('category2', 2);
-    this.resizeCategory('category3', 3);
-    this.resizeCategory('category4', 4);
-    this.resizeCategory('category5', 5);
-    this.resizeCategory('category6', 6);
-    this.customizeCardsAmount();
+    try {
+      [
+        'category1',
+        'category2',
+        'category3',
+        'category4',
+        'category5',
+        'category6',
+      ].forEach((category, index) => {
+        try {
+          this.resizeCategory(
+            category as keyof typeof this.currentIndexes,
+            index + 1
+          );
+        } catch (err) {
+          //console.warn(`Fehler beim Resizing der Kategorie ${category}:`, err);
+        }
+      });
+      this.customizeCardsAmount();
+    } catch (err) {
+      //console.error('Allgemeiner Fehler beim Resizing:', err);
+    }
   }
 
   ngOnInit() {
@@ -262,70 +277,48 @@ export class SliderCompComponent {
     let groupIndex = 0;
     let tempPack: VideoItem[] = [];
     const genreVideos = this.groupedVideosByGenre[genre] || [];
-    if (genre === 'Drama') {
-      genreVideos.forEach((video: VideoItem, index: number) => {
-        tempPack.push(new VideoItem(video));
-        if (
-          tempPack.length === this.videoItemCardsAmount ||
-          index === genreVideos.length - 1
-        ) {
-          this.groupedSliderVidsDrama[`group${groupIndex}`] = [...tempPack];
-          tempPack = [];
-          groupIndex++;
-        }
-      });
-      this.numberOfPacksDrama = Object.keys(this.groupedSliderVidsDrama);
-    } else if (genre === 'Dokumentation') {
-      genreVideos.forEach((video: VideoItem, index: number) => {
-        tempPack.push(new VideoItem(video));
-        if (
-          tempPack.length === this.videoItemCardsAmount ||
-          index === genreVideos.length - 1
-        ) {
-          this.groupedSliderVidsDocumentation[`group${groupIndex}`] = [
-            ...tempPack,
-          ];
-          tempPack = [];
-          groupIndex++;
-        }
-      });
-      this.numberOfPacksDocumentation = Object.keys(
-        this.groupedSliderVidsDocumentation
-      );
-    } else if (genre === 'Action') {
-      genreVideos.forEach((video: VideoItem, index: number) => {
-        tempPack.push(new VideoItem(video));
-        if (
-          tempPack.length === this.videoItemCardsAmount ||
-          index === genreVideos.length - 1
-        ) {
-          this.groupedSliderVidsAction[`group${groupIndex}`] = [
-            ...tempPack,
-          ];
-          tempPack = [];
-          groupIndex++;
-        }
-      });
-      this.numberOfPacksAction = Object.keys(
-        this.groupedSliderVidsAction
-      );
-    } else if (genre === 'Drohne') {
-      genreVideos.forEach((video: VideoItem, index: number) => {
-        tempPack.push(new VideoItem(video));
-        if (
-          tempPack.length === this.videoItemCardsAmount ||
-          index === genreVideos.length - 1
-        ) {
-          this.groupedSliderVidsDrone[`group${groupIndex}`] = [
-            ...tempPack,
-          ];
-          tempPack = [];
-          groupIndex++;
-        }
-      });
-      this.numberOfPacksDrone = Object.keys(
-        this.groupedSliderVidsDrone
-      );
+
+    let groupedVids: { [key: string]: VideoItem[] } = {};
+    let numberOfPacks: string[] = [];
+
+    genreVideos.forEach((video: VideoItem, index: number) => {
+      tempPack.push(new VideoItem(video));
+      if (
+        tempPack.length === this.videoItemCardsAmount ||
+        index === genreVideos.length - 1
+      ) {
+        groupedVids[`group${groupIndex}`] = [...tempPack];
+        tempPack = [];
+        groupIndex++;
+      }
+    });
+    numberOfPacks = Object.keys(groupedVids);
+
+    this.assignSliderGroupsByGenre(genre, groupedVids, numberOfPacks)
+    
+  }
+
+  assignSliderGroupsByGenre(genre: string, groupedVids: { [key: string]: VideoItem[] }, numberOfPacks: string[] = []) {
+    switch (genre) {
+      case 'Drama':
+        this.groupedSliderVidsDrama = groupedVids;
+        this.numberOfPacksDrama = numberOfPacks;
+        break;
+      case 'Dokumentation':
+        this.groupedSliderVidsDocumentation = groupedVids;
+        this.numberOfPacksDocumentation = numberOfPacks;
+        break;
+      case 'Action':
+        this.groupedSliderVidsAction = groupedVids;
+        this.numberOfPacksAction = numberOfPacks;
+        break;
+      case 'Drohne':
+        this.groupedSliderVidsDrone = groupedVids;
+        this.numberOfPacksDrone = numberOfPacks;
+        break;
+      default:
+        console.warn(`Genre ${genre} existiert nicht.`);
+        return;
     }
   }
 
@@ -333,7 +326,7 @@ export class SliderCompComponent {
     const sliderCategory = this.getRightCategory(category);
 
     if (!sliderCategory) {
-      console.warn(`Kategorie ${category} existiert nicht.`);
+      //console.warn(`Kategorie ${category} existiert nicht.`);
       return;
     }
 
@@ -355,7 +348,7 @@ export class SliderCompComponent {
     //numb is the currentPosition 1, 2, 3, 4 etc..
     const sliderCategory = this.getRightCategory(category);
     if (!sliderCategory) {
-      console.warn(`Kategorie ${category} existiert nicht.`);
+      //console.warn(`Kategorie ${category} existiert nicht.`);
       return;
     }
     const itemWidth = sliderCategory.offsetWidth;
@@ -389,20 +382,20 @@ export class SliderCompComponent {
     return this.currentIndexes[category] || 0;
   }
 
-  getRightCategory(category: keyof typeof this.currentIndexes) {
+  getRightCategory(category: keyof typeof this.currentIndexes | undefined) {
     switch (category) {
       case 'category1':
-        return this.category1.nativeElement;
+        return this.category1 ? this.category1.nativeElement : null;
       case 'category2':
-        return this.category2.nativeElement;
+        return this.category2 ? this.category2.nativeElement : null;
       case 'category3':
-        return this.category3.nativeElement;
+        return this.category3 ? this.category3.nativeElement : null;
       case 'category4':
-        return this.category4.nativeElement;
+        return this.category4 ? this.category4.nativeElement : null;
       case 'category5':
-        return this.category4.nativeElement;
+        return this.category5 ? this.category5.nativeElement : null;
       case 'category6':
-        return this.category4.nativeElement;
+        return this.category6 ? this.category6.nativeElement : null;
       default:
         console.warn(`Kategorie ${category} existiert nicht.`);
         return null;

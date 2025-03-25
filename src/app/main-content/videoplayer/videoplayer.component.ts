@@ -35,7 +35,7 @@ export class VideoplayerComponent {
   hasTimestamp: number = 0;
   windoWidth: number = 0;
 
-  is480p: boolean = true; // initial quali
+  is480p: boolean = false; // initial quali
   qualityPickerIsOpen: boolean = false;
 
   muteLabel: string = 'Stumm schalten';

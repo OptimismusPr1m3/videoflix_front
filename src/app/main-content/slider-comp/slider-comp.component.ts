@@ -5,7 +5,9 @@ import {
   effect,
   ElementRef,
   HostListener,
+  QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { VideoItemComponent } from './video-item/video-item.component';
@@ -15,147 +17,197 @@ import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { GlobalVariablesService } from '../../services/global-variables.service';
 import { User } from '../../models/user.class';
 
+interface Category {
+  name: string;
+  ref: ElementRef<HTMLElement> | null;
+  currentPosition: number;
+  currentIndex: number;
+  hoveredIndex: number;
+  groupedVideos: { [key: string]: VideoItem[] };
+  numberOfPacks: string[];
+}
+
 @Component({
-    selector: 'app-slider-comp',
-    imports: [
-        CommonModule,
-        MatIconModule,
-        VideoItemComponent,
-        NgxSpinnerComponent,
-    ],
-    templateUrl: './slider-comp.component.html',
-    styleUrl: './slider-comp.component.scss'
+  selector: 'app-slider-comp',
+  templateUrl: './slider-comp.component.html',
+  imports: [CommonModule, MatIconModule, VideoItemComponent, NgxSpinnerComponent],
+  styleUrls: ['./slider-comp.component.scss'],
 })
-export class SliderCompComponent {
-  @ViewChild('category1', { read: ElementRef }) category1: ElementRef | any;
-  @ViewChild('category2', { read: ElementRef }) category2: ElementRef | any;
-  @ViewChild('category3', { read: ElementRef }) category3: ElementRef | any;
-  @ViewChild('category4', { read: ElementRef }) category4: ElementRef | any;
-  @ViewChild('category5', { read: ElementRef }) category5: ElementRef | any;
-  @ViewChild('category6', { read: ElementRef }) category6: ElementRef | any;
+export class SliderCompComponent implements AfterViewInit {
+  categories: Category[] = [
+    {
+      name: 'Neu auf VideoFlix',
+      ref: null,
+      currentPosition: 0,
+      currentIndex: 0,
+      hoveredIndex: -1,
+      groupedVideos: {},
+      numberOfPacks: [],
+    },
+    {
+      name: 'Watched',
+      ref: null,
+      currentPosition: 0,
+      currentIndex: 0,
+      hoveredIndex: -1,
+      groupedVideos: {},
+      numberOfPacks: [],
+    },
+    {
+      name: 'Dokumentation',
+      ref: null,
+      currentPosition: 0,
+      currentIndex: 0,
+      hoveredIndex: -1,
+      groupedVideos: {},
+      numberOfPacks: [],
+    },
+    {
+      name: 'Drama',
+      ref: null,
+      currentPosition: 0,
+      currentIndex: 0,
+      hoveredIndex: -1,
+      groupedVideos: {},
+      numberOfPacks: [],
+    },
+    {
+      name: 'Action',
+      ref: null,
+      currentPosition: 0,
+      currentIndex: 0,
+      hoveredIndex: -1,
+      groupedVideos: {},
+      numberOfPacks: [],
+    },
+    {
+      name: 'Drohne',
+      ref: null,
+      currentPosition: 0,
+      currentIndex: 0,
+      hoveredIndex: -1,
+      groupedVideos: {},
+      numberOfPacks: [],
+    },
+  ];
 
+  @ViewChildren('categoryRef', { read: ElementRef }) categoryRefs!: QueryList<ElementRef<HTMLElement>>;
+  videoItemCardsAmount: number = 7;
   groupedVideosByGenre: { [key: string]: VideoItem[] } = {};
-
-  hoveredIndex1: number = -1; //neu auf VideoFlix
-  hoveredIndex2: number = -1; // Doku
-  hoveredIndex3: number = -1; // Drama
-  hoveredIndex4: number = -1; // Watched
-  hoveredIndex5: number = -1; // Action
-  hoveredIndex6: number = -1; // Drohne
-
-  currentPosition1: number = 0; //neu auf VideoFlix
-  currentPosition2: number = 0; // Doku
-  currentPosition3: number = 0; // Drama
-  currentPosition4: number = 0; // Watched
-  currentPosition5: number = 0; // Action
-  currentPosition6: number = 0; // Drohne
-
-  currentIndex1: number = 0; //neu auf VideoFlix
-  currentIndex2: number = 0; // Doku
-  currentIndex3: number = 0; // Drama
-  currentIndex4: number = 0; // Watched
-  currentIndex5: number = 0; // Action
-  currentIndex6: number = 0; // Drohne
-
-  currentIndexes = {
-    category1: 0,
-    category2: 0,
-    category3: 0,
-    category4: 0,
-    category5: 0,
-    category6: 0,
-  };
-
-  scrollAmount = 1700;
-  activeGroup = 'group0';
-
-  videoItems: VideoItem[] = [];
-  groupedSliderVidsDocumentation: { [key: string]: VideoItem[] } = {};
-  groupedSliderVidsDrama: { [key: string]: VideoItem[] } = {};
-  groupedSliderVidsAction: { [key: string]: VideoItem[] } = {};
-  groupedSliderVidsDrone: { [key: string]: VideoItem[] } = {};
-  groupedSliderVidsWatched: { [key: string]: VideoItem[] } = {};
-  groupedSliderVids: { [key: string]: VideoItem[] } = {};
-
-  numberOfPacksDocumentation: string[] = [];
-  numberOfPacksDrama: string[] = [];
-  numberOfPacksAction: string[] = [];
-  numberOfPacksDrone: string[] = [];
-  numberOfPacksWatched: string[] = [];
-  numberOfPacks: string[] = [];
-
-  videoItemCardsAmount: number = 8; // amount of videocarditems in a row which should be displayed
-
-  windowSize: number = 0;
   currentUser: User | null = null;
-  response: any;
+  response: VideoItem[] | null = null;
+  private previousTimestamps: { URL: string; STAMP: number }[] | null = null;
+
   constructor(
     private backService: BackendCommunicationService,
     public globals: GlobalVariablesService,
     private spinner: NgxSpinnerService
   ) {
     effect(() => {
-      // watches continously at the global var currentloggedUser() , if smth changes, effect gets called!
       this.currentUser = this.globals.currentLoggedUser();
       this.response = this.globals.currentVideoResponse();
-      if (this.currentUser && this.response) {
+      const isDataLoaded = this.globals.isDataLoaded();
+      console.log('Effect triggered:', {
+        isDataLoaded,
+        user: this.currentUser,
+        response: this.response,
+      });
+
+      if (!isDataLoaded && (this.currentUser || !this.response)) {
+        console.log('Initial load');
+        this.loadSliders();
+      } else if (this.currentUser && this.response) {
+        console.log('Timestamps changed, synchronizing Watched slider');
+        this.previousTimestamps = this.currentUser.video_timestamps ? [...this.currentUser.video_timestamps] : null;
         this.synchronizeWatchedSlider();
       }
     });
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    try {
-      [
-        'category1',
-        'category2',
-        'category3',
-        'category4',
-        'category5',
-        'category6',
-      ].forEach((category, index) => {
-        try {
-          this.resizeCategory(
-            category as keyof typeof this.currentIndexes,
-            index + 1
-          );
-        } catch (err) {
-          //console.warn(`Fehler beim Resizing der Kategorie ${category}:`, err);
-        }
-      });
-      this.customizeCardsAmount();
-    } catch (err) {
-      //console.error('Allgemeiner Fehler beim Resizing:', err);
+  private hasTimestampsChanged(currentTimestamps: { URL: string; STAMP: number }[] | null | undefined): boolean {
+    if (!this.previousTimestamps && !currentTimestamps) return false;
+    if (!this.previousTimestamps || !currentTimestamps) return true;
+
+    if (this.previousTimestamps.length !== currentTimestamps.length) return true;
+
+    return this.previousTimestamps.some((prev, index) => {
+      const curr = currentTimestamps[index];
+      return !curr || prev.URL !== curr.URL || prev.STAMP !== curr.STAMP;
+    });
+  }
+
+  synchronizeWatchedSlider() {
+    if (this.response && this.currentUser?.video_timestamps) {
+      const watchedCategory = this.categories.find((category) => category.name === 'Watched');
+      if (watchedCategory) {
+        this.groupWatchedVideos(this.response, this.currentUser.video_timestamps, watchedCategory);
+      }
     }
+  }
+
+  groupWatchedVideos(videos: VideoItem[], watchedVideos: { URL: string; STAMP: number }[], category: Category) {
+    let groupIndex = 0;
+    let tempPack: VideoItem[] = [];
+
+    const watchedVideoItems = videos
+      .filter((video) => watchedVideos.some((watched) => watched.URL === video.url))
+      .map((video) => {
+        const timestamp = watchedVideos.find((watched) => watched.URL === video.url)?.STAMP || 0;
+        return { ...video, timestamp, duration: video.duration || 1 };
+      });
+
+    // Lösche vorherige Daten der Kategorie
+    category.groupedVideos = {};
+    category.numberOfPacks = [];
+
+    watchedVideoItems.forEach((video: VideoItem, index: number) => {
+      tempPack.push(new VideoItem(video));
+      if (tempPack.length === this.videoItemCardsAmount || index === watchedVideoItems.length - 1) {
+        category.groupedVideos[`group${groupIndex}`] = [...tempPack];
+        tempPack = [];
+        groupIndex++;
+      }
+    });
+
+    category.numberOfPacks = Object.keys(category.groupedVideos);
+  }
+
+  ngAfterViewInit() {
+    this.categoryRefs.forEach((ref, index) => {
+      this.categories[index].ref = ref;
+    });
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.customizeCardsAmount();
+    this.categories.forEach((category, index) => {
+      if (category.ref) {
+        const itemWidth = category.ref.nativeElement.offsetWidth;
+        category.currentPosition = -category.currentIndex * itemWidth;
+        category.ref.nativeElement.style.transform = `translateX(${category.currentPosition}px)`;
+      }
+    });
   }
 
   ngOnInit() {
     this.customizeCardsAmount();
     this.spinner.show();
-    //this.loadSliders();
-  }
-
-  synchronizeWatchedSlider() {
-    this.groupWatchedVideos(this.response, this.currentUser?.video_timestamps); //Fortsetzen Slider
+    this.loadSliders();
   }
 
   customizeCardsAmount() {
-    const wasAmount = this.videoItemCardsAmount;
+    const breakpoints = [
+      { maxWidth: 690, cards: 2 },
+      { maxWidth: 1160, cards: 3 },
+      { maxWidth: 1450, cards: 4 },
+      { maxWidth: 1730, cards: 5 },
+      { maxWidth: 1920, cards: 6 },
+      { maxWidth: Infinity, cards: 7 },
+    ];
 
-    if (window.innerWidth < 690) {
-      this.videoItemCardsAmount = 2;
-    } else if (window.innerWidth < 1160) {
-      this.videoItemCardsAmount = 3;
-    } else if (window.innerWidth < 1450) {
-      this.videoItemCardsAmount = 4;
-    } else if (window.innerWidth < 1730) {
-      this.videoItemCardsAmount = 5;
-    } else if (window.innerWidth < 1920) {
-      this.videoItemCardsAmount = 6;
-    } else {
-      this.videoItemCardsAmount = 7;
-    }
+    const wasAmount = this.videoItemCardsAmount;
+    this.videoItemCardsAmount = breakpoints.find((bp) => window.innerWidth < bp.maxWidth)!.cards;
 
     if (this.videoItemCardsAmount !== wasAmount) {
       this.cacheClear();
@@ -164,254 +216,93 @@ export class SliderCompComponent {
   }
 
   cacheClear() {
-    this.groupedSliderVids = {};
-    this.groupedSliderVidsWatched = {};
-    this.groupedSliderVidsDrama = {};
-    this.groupedSliderVidsAction = {};
-    this.groupedSliderVidsDrone = {};
-    this.groupedSliderVidsDocumentation = {};
-    this.groupedVideosByGenre = {};
-
-    this.numberOfPacksDocumentation = [];
-    this.numberOfPacksDrama = [];
-    this.numberOfPacksAction = [];
-    this.numberOfPacksDrone = [];
-    this.numberOfPacksWatched = [];
-    this.numberOfPacks = [];
-    this.videoItems = [];
-  }
-
-  loadSliders() {
-    this.windowSize = window.innerWidth;
-    //console.log(this.windowSize);
-    this.backService.fetchVideoItems().subscribe({
-      next: (resp) => {
-        //console.log('Hier die Videos: ', resp);
-        this.globals.currentVideoResponse.set(resp);
-        this.sortVideosByGenre(resp);
-        this.groupVideoItems(resp); // Neu Slider
-        this.groupVideoItemsByGenre('Drama'); // Drama-Slider
-        this.groupVideoItemsByGenre('Dokumentation'); // Doku Slider
-        this.groupVideoItemsByGenre('Action'); // Action Slider
-        this.groupVideoItemsByGenre('Drohne'); // Drone Slider
-      },
-      error: (err) => {
-        console.error(err);
-        this.spinner.hide();
-      },
-      complete: () => {
-        //console.log('hier die groupedslidervids: ', this.groupedSliderVids);
-        //console.log('Hier die numberofPacks: ', this.numberOfPacks);
-        this.spinner.hide();
-      },
+    this.categories.forEach((category) => {
+      category.groupedVideos = {};
+      category.numberOfPacks = [];
     });
+    this.groupedVideosByGenre = {};
   }
 
   sortVideosByGenre(videos: VideoItem[]) {
     videos.forEach((video) => {
       if (!this.groupedVideosByGenre[video.genre]) {
         this.groupedVideosByGenre[video.genre] = [];
-        //console.log(`Hier das ${video.genre} Genre`,this.groupedVideosByGenre[video.genre]);
       }
       this.groupedVideosByGenre[video.genre].push(video);
     });
-    //console.log(this.groupedVideosByGenre);
   }
 
-  groupVideoItems(resp: any) {
+  groupVideos(videos: VideoItem[], category: Category, filterFn?: (video: VideoItem) => boolean) {
     let groupIndex = 0;
     let tempPack: VideoItem[] = [];
-    resp.forEach((video: VideoItem, index: number) => {
+    const filteredVideos = filterFn ? videos.filter(filterFn) : videos;
+
+    filteredVideos.forEach((video, index) => {
       tempPack.push(new VideoItem(video));
-      if (
-        tempPack.length === this.videoItemCardsAmount ||
-        index === resp.length - 1
-      ) {
-        this.groupedSliderVids[`group${groupIndex}`] = [...tempPack];
+      if (tempPack.length === this.videoItemCardsAmount || index === filteredVideos.length - 1) {
+        category.groupedVideos[`group${groupIndex}`] = [...tempPack];
         tempPack = [];
         groupIndex++;
       }
     });
-    this.numberOfPacks = Object.keys(this.groupedSliderVids);
+    category.numberOfPacks = Object.keys(category.groupedVideos);
   }
 
-  groupWatchedVideos(
-    videos: VideoItem[],
-    watchedVideos: { URL: string; STAMP: number }[]
-  ) {
-    //console.log(videos);
-    let groupIndex = 0;
-    let tempPack: VideoItem[] = [];
+  loadSliders() {
+    this.spinner.show();
+    this.backService.fetchVideoItems().subscribe({
+      next: (resp: VideoItem[]) => {
+        this.globals.currentVideoResponse.set(resp);
+        this.sortVideosByGenre(resp);
 
-    const watchedVideoItems = videos
-      .filter(
-        (video) => watchedVideos.some((watched) => watched.URL === video.url) // compares url from watched user vids and all available videos
-      )
-      .map((video) => {
-        // creates the new video[] with timestamps
-        const timestamp =
-          watchedVideos.find((watched) => watched.URL === video.url)?.STAMP ||
-          null;
-        return { ...video, timestamp };
-      });
-    //console.log('Hier die gefundenen Videos: ', watchedVideoItems);
+        this.groupVideos(resp, this.categories[0]); // Neu auf VideoFlix
+        this.groupVideos(resp, this.categories[2], (video) => video.genre === 'Dokumentation');
+        this.groupVideos(resp, this.categories[3], (video) => video.genre === 'Drama');
+        this.groupVideos(resp, this.categories[4], (video) => video.genre === 'Action');
+        this.groupVideos(resp, this.categories[5], (video) => video.genre === 'Drohne');
 
-    watchedVideoItems.forEach((video: VideoItem, index: number) => {
-      tempPack.push(new VideoItem(video));
-      if (
-        // creation of packs
-        tempPack.length === this.videoItemCardsAmount ||
-        index === watchedVideoItems.length - 1
-      ) {
-        this.groupedSliderVidsWatched[`group${groupIndex}`] = [...tempPack];
-        tempPack = [];
-        groupIndex++;
-      }
+        if (this.currentUser) {
+          const watchedVideos = resp
+            .filter((video) =>
+              this.currentUser!.video_timestamps.some(
+                (watched: { URL: string; STAMP: any }) => watched.URL === video.url
+              )
+            )
+            .map((video) => ({
+              ...video,
+              timestamp:
+                this.currentUser!.video_timestamps.find(
+                  (watched: { URL: string; STAMP: any }) => watched.URL === video.url
+                )?.STAMP || null,
+            }));
+          this.groupVideos(watchedVideos, this.categories[1]);
+        }
+        this.globals.isDataLoaded.set(true);
+      },
+      error: (err) => {
+        console.error(err);
+        this.spinner.hide();
+      },
+      complete: () => {
+        this.spinner.hide();
+      },
     });
-    //console.log('Hier die gefundenen und fertig gruppierten Videos: ',this.groupedSliderVidsWatched);
-    this.numberOfPacksWatched = Object.keys(this.groupedSliderVidsWatched);
   }
 
-  groupVideoItemsByGenre(genre: string) {
-    let groupIndex = 0;
-    let tempPack: VideoItem[] = [];
-    const genreVideos = this.groupedVideosByGenre[genre] || [];
+  nextVideos(direction: string, categoryIndex: number) {
+    const category = this.categories[categoryIndex];
+    if (!category.ref) return;
 
-    let groupedVids: { [key: string]: VideoItem[] } = {};
-    let numberOfPacks: string[] = [];
-
-    genreVideos.forEach((video: VideoItem, index: number) => {
-      tempPack.push(new VideoItem(video));
-      if (
-        tempPack.length === this.videoItemCardsAmount ||
-        index === genreVideos.length - 1
-      ) {
-        groupedVids[`group${groupIndex}`] = [...tempPack];
-        tempPack = [];
-        groupIndex++;
-      }
-    });
-    numberOfPacks = Object.keys(groupedVids);
-
-    this.assignSliderGroupsByGenre(genre, groupedVids, numberOfPacks)
-    
-  }
-
-  assignSliderGroupsByGenre(genre: string, groupedVids: { [key: string]: VideoItem[] }, numberOfPacks: string[] = []) {
-    switch (genre) {
-      case 'Drama':
-        this.groupedSliderVidsDrama = groupedVids;
-        this.numberOfPacksDrama = numberOfPacks;
-        break;
-      case 'Dokumentation':
-        this.groupedSliderVidsDocumentation = groupedVids;
-        this.numberOfPacksDocumentation = numberOfPacks;
-        break;
-      case 'Action':
-        this.groupedSliderVidsAction = groupedVids;
-        this.numberOfPacksAction = numberOfPacks;
-        break;
-      case 'Drohne':
-        this.groupedSliderVidsDrone = groupedVids;
-        this.numberOfPacksDrone = numberOfPacks;
-        break;
-      default:
-        console.warn(`Genre ${genre} existiert nicht.`);
-        return;
-    }
-  }
-
-  nextVideos(direction: string, category: keyof typeof this.currentIndexes) {
-    const sliderCategory = this.getRightCategory(category);
-
-    if (!sliderCategory) {
-      //console.warn(`Kategorie ${category} existiert nicht.`);
-      return;
-    }
-
-    const itemWidth = sliderCategory.offsetWidth;
-    const maxIndex = this.getRightPacks(category);
-    const currentIndex = this.getIndex(category);
+    const itemWidth = category.ref.nativeElement.offsetWidth;
+    const maxIndex = category.numberOfPacks.length - 1;
 
     if (direction === '-') {
-      this.setIndex(category, Math.min(currentIndex + 1, maxIndex));
+      category.currentIndex = Math.min(category.currentIndex + 1, maxIndex);
     } else {
-      this.setIndex(category, Math.max(currentIndex - 1, 0));
+      category.currentIndex = Math.max(category.currentIndex - 1, 0);
     }
 
-    const newPosition = -this.getIndex(category) * itemWidth;
-    sliderCategory.style.transform = `translateX(${newPosition}px)`;
-  }
-
-  resizeCategory(category: keyof typeof this.currentIndexes, numbX: number) {
-    //numb is the currentPosition 1, 2, 3, 4 etc..
-    const sliderCategory = this.getRightCategory(category);
-    if (!sliderCategory) {
-      //console.warn(`Kategorie ${category} existiert nicht.`);
-      return;
-    }
-    const itemWidth = sliderCategory.offsetWidth;
-    const cIndex = this.getIndex(category);
-    const cPosition = -cIndex * itemWidth; // sync position with currentslide index
-    sliderCategory.style.transform = `translateX(${cPosition}px)`;
-    this.setXPosition(numbX, cPosition); //sets the new x-Position for the slide comp which has been slided to right or left
-  }
-
-  setXPosition(numbX: number, newcPosition: number) {
-    if (numbX == 1) {
-      this.currentPosition1 = newcPosition;
-    } else if (numbX == 2) {
-      this.currentPosition2 = newcPosition;
-    } else if (numbX == 3) {
-      this.currentPosition3 = newcPosition;
-    } else if (numbX == 4) {
-      this.currentPosition4 = newcPosition;
-    } else if (numbX == 5) {
-      this.currentPosition5 = newcPosition;
-    } else if (numbX == 6) {
-      this.currentPosition6 = newcPosition;
-    }
-  }
-
-  setIndex(category: keyof typeof this.currentIndexes, newIndex: number) {
-    this.currentIndexes[category] = newIndex;
-  }
-
-  getIndex(category: keyof typeof this.currentIndexes): number {
-    return this.currentIndexes[category] || 0;
-  }
-
-  getRightCategory(category: keyof typeof this.currentIndexes | undefined) {
-    switch (category) {
-      case 'category1':
-        return this.category1 ? this.category1.nativeElement : null;
-      case 'category2':
-        return this.category2 ? this.category2.nativeElement : null;
-      case 'category3':
-        return this.category3 ? this.category3.nativeElement : null;
-      case 'category4':
-        return this.category4 ? this.category4.nativeElement : null;
-      case 'category5':
-        return this.category5 ? this.category5.nativeElement : null;
-      case 'category6':
-        return this.category6 ? this.category6.nativeElement : null;
-      default:
-        console.warn(`Kategorie ${category} existiert nicht.`);
-        return null;
-    }
-  }
-
-  getRightPacks(category: string) {
-    return category === 'category1'
-      ? this.numberOfPacks.length - 1
-      : category === 'category2'
-      ? this.numberOfPacksDocumentation.length - 1
-      : category === 'category3'
-      ? this.numberOfPacksDrama.length - 1
-      : category === 'category4'
-      ? this.numberOfPacksWatched.length - 1
-      : category === 'category5'
-      ? this.numberOfPacksAction.length - 1
-      : this.numberOfPacksDrone.length - 1;
+    category.currentPosition = -category.currentIndex * itemWidth;
+    category.ref.nativeElement.style.transform = `translateX(${category.currentPosition}px)`;
   }
 }

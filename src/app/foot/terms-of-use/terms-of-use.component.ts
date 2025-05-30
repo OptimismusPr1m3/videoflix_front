@@ -3,11 +3,10 @@ import { HeaderComponent } from '../../head/header/header.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-terms-of-use',
-  standalone: true,
-  imports: [HeaderComponent, RouterLink],
-  templateUrl: './terms-of-use.component.html',
-  styleUrl: './terms-of-use.component.scss'
+    selector: 'app-terms-of-use',
+    imports: [HeaderComponent, RouterLink],
+    templateUrl: './terms-of-use.component.html',
+    styleUrl: './terms-of-use.component.scss'
 })
 export class TermsOfUseComponent {
 

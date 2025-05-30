@@ -10,21 +10,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-pw-reset',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    MatIconModule,
-    ReactiveFormsModule,
-    HeaderComponent,
-    FooterComponent,
-    MatFormFieldModule,
-    FormsModule,
-    MatInputModule
-  ],
-  templateUrl: './pw-reset.component.html',
-  styleUrl: './pw-reset.component.scss',
+    selector: 'app-pw-reset',
+    imports: [
+        CommonModule,
+        RouterLink,
+        MatIconModule,
+        ReactiveFormsModule,
+        HeaderComponent,
+        FooterComponent,
+        MatFormFieldModule,
+        FormsModule,
+        MatInputModule
+    ],
+    templateUrl: './pw-reset.component.html',
+    styleUrl: './pw-reset.component.scss'
 })
 export class PwResetComponent {
   mail = new FormControl('', [

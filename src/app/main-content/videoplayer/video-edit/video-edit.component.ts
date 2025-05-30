@@ -19,19 +19,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { timestamp } from 'rxjs';
 
 @Component({
-  selector: 'app-video-edit',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NgxSpinnerModule,
-    MatFormFieldModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule
-  ],
-  templateUrl: './video-edit.component.html',
-  styleUrl: './video-edit.component.scss',
+    selector: 'app-video-edit',
+    imports: [
+        CommonModule,
+        NgxSpinnerModule,
+        MatFormFieldModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSelectModule
+    ],
+    templateUrl: './video-edit.component.html',
+    styleUrl: './video-edit.component.scss'
 })
 export class VideoEditComponent {
   videoEditForm: FormGroup;

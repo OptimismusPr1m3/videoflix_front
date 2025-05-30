@@ -27,20 +27,19 @@ import { GlobalVariablesService } from '../../../services/global-variables.servi
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-step-1',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './step-1.component.html',
-  styleUrl: './step-1.component.scss',
+    selector: 'app-step-1',
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './step-1.component.html',
+    styleUrl: './step-1.component.scss'
 })
 export class Step1Component {
   stepChange = output<string>();

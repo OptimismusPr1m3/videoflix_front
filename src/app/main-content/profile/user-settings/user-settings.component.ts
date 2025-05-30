@@ -16,21 +16,20 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 @Component({
-  selector: 'app-user-settings',
-  standalone: true,
-  providers: [provideNativeDateAdapter()],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatDatepickerModule,
-    NgxSpinnerModule
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './user-settings.component.html',
-  styleUrl: './user-settings.component.scss',
+    selector: 'app-user-settings',
+    providers: [provideNativeDateAdapter()],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatDatepickerModule,
+        NgxSpinnerModule
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './user-settings.component.html',
+    styleUrl: './user-settings.component.scss'
 })
 export class UserSettingsComponent {
   currentUserData: User | any;

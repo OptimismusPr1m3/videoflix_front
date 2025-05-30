@@ -5,11 +5,10 @@ import { GlobalVariablesService } from '../../services/global-variables.service'
 import { VideoItem } from '../../models/videoItem.class';
 
 @Component({
-  selector: 'app-preview-comp',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './preview-comp.component.html',
-  styleUrl: './preview-comp.component.scss'
+    selector: 'app-preview-comp',
+    imports: [CommonModule],
+    templateUrl: './preview-comp.component.html',
+    styleUrl: './preview-comp.component.scss'
 })
 export class PreviewCompComponent {
   @ViewChild('previewFrame') previewFrame!: ElementRef<HTMLVideoElement>

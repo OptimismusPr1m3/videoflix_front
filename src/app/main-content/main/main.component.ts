@@ -12,19 +12,18 @@ import { PreviewCompComponent } from "../preview-comp/preview-comp.component";
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-main',
-  standalone: true,
-  imports: [
-    CommonModule,
-    LoggedHeaderComponent,
-    SliderCompComponent,
-    VideoplayerComponent,
-    FooterComponent,
-    PreviewCompComponent,
-    MatIconModule
-],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss',
+    selector: 'app-main',
+    imports: [
+        CommonModule,
+        LoggedHeaderComponent,
+        SliderCompComponent,
+        VideoplayerComponent,
+        FooterComponent,
+        PreviewCompComponent,
+        MatIconModule
+    ],
+    templateUrl: './main.component.html',
+    styleUrl: './main.component.scss'
 })
 export class MainComponent {
 

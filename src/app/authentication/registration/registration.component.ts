@@ -10,21 +10,20 @@ import { FooterComponent } from '../../foot/footer/footer.component';
 import { HeaderComponent } from '../../head/header/header.component';
 
 @Component({
-  selector: 'app-registration',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    Step1Component,
-    Step1Component,
-    Step2Component,
-    Step0Component,
-    MatProgressSpinnerModule,
-    FooterComponent,
-    HeaderComponent
-  ],
-  templateUrl: './registration.component.html',
-  styleUrl: './registration.component.scss',
+    selector: 'app-registration',
+    imports: [
+        CommonModule,
+        RouterModule,
+        Step1Component,
+        Step1Component,
+        Step2Component,
+        Step0Component,
+        MatProgressSpinnerModule,
+        FooterComponent,
+        HeaderComponent
+    ],
+    templateUrl: './registration.component.html',
+    styleUrl: './registration.component.scss'
 })
 export class RegistrationComponent {
   isStep1: boolean = false;

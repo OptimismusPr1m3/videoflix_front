@@ -20,22 +20,21 @@ import { SuccToastComponent } from '../../../toasts/succ-toast/succ-toast.compon
 import { SuccToastMobileComponent } from '../../../toasts/succ-toast-mobile/succ-toast-mobile.component';
 
 @Component({
-  selector: 'app-file-upload',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    NgxSpinnerModule,
-    MatSelectModule,
-    RouterLink,
-    SuccToastComponent,
-    SuccToastMobileComponent,
-  ],
-  templateUrl: './file-upload.component.html',
-  styleUrl: './file-upload.component.scss',
+    selector: 'app-file-upload',
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        NgxSpinnerModule,
+        MatSelectModule,
+        RouterLink,
+        SuccToastComponent,
+        SuccToastMobileComponent,
+    ],
+    templateUrl: './file-upload.component.html',
+    styleUrl: './file-upload.component.scss'
 })
 export class FileUploadComponent {
   @ViewChild('videoInput') videoInput!: ElementRef<HTMLInputElement>;

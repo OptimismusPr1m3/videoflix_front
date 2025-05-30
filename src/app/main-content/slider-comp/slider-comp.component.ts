@@ -16,16 +16,15 @@ import { GlobalVariablesService } from '../../services/global-variables.service'
 import { User } from '../../models/user.class';
 
 @Component({
-  selector: 'app-slider-comp',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatIconModule,
-    VideoItemComponent,
-    NgxSpinnerComponent,
-  ],
-  templateUrl: './slider-comp.component.html',
-  styleUrl: './slider-comp.component.scss',
+    selector: 'app-slider-comp',
+    imports: [
+        CommonModule,
+        MatIconModule,
+        VideoItemComponent,
+        NgxSpinnerComponent,
+    ],
+    templateUrl: './slider-comp.component.html',
+    styleUrl: './slider-comp.component.scss'
 })
 export class SliderCompComponent {
   @ViewChild('category1', { read: ElementRef }) category1: ElementRef | any;

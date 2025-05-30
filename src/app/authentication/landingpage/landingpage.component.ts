@@ -14,22 +14,21 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'app-landingpage',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatIconModule,
-    HeaderComponent,
-    NgxSpinnerComponent,
-    FooterComponent,
-    MatFormFieldModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './landingpage.component.html',
-  styleUrl: './landingpage.component.scss',
+    selector: 'app-landingpage',
+    imports: [
+        CommonModule,
+        MatIconModule,
+        HeaderComponent,
+        NgxSpinnerComponent,
+        FooterComponent,
+        MatFormFieldModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './landingpage.component.html',
+    styleUrl: './landingpage.component.scss'
 })
 export class LandingpageComponent {
   mail = new FormControl('', [

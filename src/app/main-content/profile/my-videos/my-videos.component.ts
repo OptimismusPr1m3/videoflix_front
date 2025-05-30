@@ -9,11 +9,10 @@ import { User } from '../../../models/user.class';
 import { VideoItemComponent } from "../../slider-comp/video-item/video-item.component";
 
 @Component({
-  selector: 'app-my-videos',
-  standalone: true,
-  imports: [CommonModule, NgxSpinnerModule, VideoItemComponent, NgxSpinnerComponent],
-  templateUrl: './my-videos.component.html',
-  styleUrl: './my-videos.component.scss',
+    selector: 'app-my-videos',
+    imports: [CommonModule, NgxSpinnerModule, VideoItemComponent, NgxSpinnerComponent],
+    templateUrl: './my-videos.component.html',
+    styleUrl: './my-videos.component.scss'
 })
 export class MyVideosComponent {
   //videoURLS: string[] = []

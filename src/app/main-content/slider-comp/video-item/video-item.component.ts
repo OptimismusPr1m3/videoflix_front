@@ -4,11 +4,10 @@ import { VideoItem } from '../../../models/videoItem.class';
 import { GlobalVariablesService } from '../../../services/global-variables.service';
 
 @Component({
-  selector: 'app-video-item',
-  standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
-  templateUrl: './video-item.component.html',
-  styleUrl: './video-item.component.scss',
+    selector: 'app-video-item',
+    imports: [CommonModule, NgOptimizedImage],
+    templateUrl: './video-item.component.html',
+    styleUrl: './video-item.component.scss'
 })
 export class VideoItemComponent {
   @Input() videoItem!: VideoItem;

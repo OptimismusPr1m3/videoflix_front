@@ -5,11 +5,10 @@ import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-oversight',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MatIconModule],
-  templateUrl: './oversight.component.html',
-  styleUrl: './oversight.component.scss'
+    selector: 'app-oversight',
+    imports: [CommonModule, RouterModule, MatIconModule],
+    templateUrl: './oversight.component.html',
+    styleUrl: './oversight.component.scss'
 })
 export class OversightComponent {
   

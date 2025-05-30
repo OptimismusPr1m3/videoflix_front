@@ -21,26 +21,25 @@ import { ErrorToastComponent } from "../../toasts/error-toast/error-toast.compon
 import { ErrorToastMobileComponent } from '../../toasts/error-toast-mobile/error-toast-mobile.component';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterLink,
-    HeaderComponent,
-    NgxSpinnerModule,
-    FooterComponent,
-    ErrorToastComponent,
-    ErrorToastMobileComponent
-],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterLink,
+        HeaderComponent,
+        NgxSpinnerModule,
+        FooterComponent,
+        ErrorToastComponent,
+        ErrorToastMobileComponent
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
   form: FormGroup;

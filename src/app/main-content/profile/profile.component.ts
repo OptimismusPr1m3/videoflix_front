@@ -26,25 +26,24 @@ import { VideoplayerComponent } from '../videoplayer/videoplayer.component';
 import { FooterComponent } from '../../foot/footer/footer.component';
 
 @Component({
-  selector: 'app-profile',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatIconModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    FormsModule,
-    ProfileHeaderComponent,
-    RouterOutlet,
-    MatListModule,
-    OversightComponent,
-    VideoplayerComponent,
-    FooterComponent
-  ],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss',
+    selector: 'app-profile',
+    imports: [
+        CommonModule,
+        MatIconModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        FormsModule,
+        ProfileHeaderComponent,
+        RouterOutlet,
+        MatListModule,
+        OversightComponent,
+        VideoplayerComponent,
+        FooterComponent
+    ],
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
   constructor(

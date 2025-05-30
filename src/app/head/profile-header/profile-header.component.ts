@@ -8,11 +8,10 @@ import { Router, RouterLink } from '@angular/router';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
 
 @Component({
-  selector: 'app-profile-header',
-  standalone: true,
-  imports: [ CommonModule, MatButtonModule, MatMenuModule, MatIconModule, RouterLink],
-  templateUrl: './profile-header.component.html',
-  styleUrl: './profile-header.component.scss',
+    selector: 'app-profile-header',
+    imports: [CommonModule, MatButtonModule, MatMenuModule, MatIconModule, RouterLink],
+    templateUrl: './profile-header.component.html',
+    styleUrl: './profile-header.component.scss'
 })
 export class ProfileHeaderComponent {
 

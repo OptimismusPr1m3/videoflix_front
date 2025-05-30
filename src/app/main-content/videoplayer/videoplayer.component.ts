@@ -13,11 +13,10 @@ import { VideoEditComponent } from './video-edit/video-edit.component';
 import { BackendCommunicationService } from '../../services/backend-communication.service';
 
 @Component({
-  selector: 'app-videoplayer',
-  standalone: true,
-  imports: [CommonModule, MatIconModule, VideoEditComponent],
-  templateUrl: './videoplayer.component.html',
-  styleUrl: './videoplayer.component.scss',
+    selector: 'app-videoplayer',
+    imports: [CommonModule, MatIconModule, VideoEditComponent],
+    templateUrl: './videoplayer.component.html',
+    styleUrl: './videoplayer.component.scss'
 })
 export class VideoplayerComponent {
   @ViewChild('videoFrame') videoFrame!: ElementRef<HTMLVideoElement>;

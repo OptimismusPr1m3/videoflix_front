@@ -9,17 +9,16 @@ import { User } from '../../models/user.class';
 import { GlobalVariablesService } from '../../services/global-variables.service';
 
 @Component({
-  selector: 'app-logged-header',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-  ],
-  templateUrl: './logged-header.component.html',
-  styleUrl: './logged-header.component.scss',
+    selector: 'app-logged-header',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+    ],
+    templateUrl: './logged-header.component.html',
+    styleUrl: './logged-header.component.scss'
 })
 export class LoggedHeaderComponent {
   menuIsOpen: boolean = false;

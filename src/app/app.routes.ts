@@ -15,32 +15,32 @@ import { SuccToastComponent } from './toasts/succ-toast/succ-toast.component';
 
 export const routes: Routes = [
   { path: '', component: LandingpageComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'pw-reset', component: PwResetComponent },
-  { path: 'main', component: MainComponent },
+  // { path: 'login', component: LoginComponent },
+  // { path: 'registration', component: RegistrationComponent },
+  // { path: 'pw-reset', component: PwResetComponent },
+  // { path: 'main', component: MainComponent },
   { path: 'imprint', component: ImprintComponent },
   { path: 'policy', component: PpolicyComponent },
-  { path: 'terms', component: TermsOfUseComponent },
-  { path: 'toast', component: SuccToastComponent },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    children: [
-      {
-        path: 'user_settings',
-        component: UserSettingsComponent,
-      },
-      {
-        path: 'upload',
-        component: FileUploadComponent,
-      },
-      {
-        path: 'my_videos',
-        component: MyVideosComponent,
-      },
-    ],
-  },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // { path: 'terms', component: TermsOfUseComponent },
+  // { path: 'toast', component: SuccToastComponent },
+  // {
+  //   path: 'profile',
+  //   component: ProfileComponent,
+  //   children: [
+  //     {
+  //       path: 'user_settings',
+  //       component: UserSettingsComponent,
+  //     },
+  //     {
+  //       path: 'upload',
+  //       component: FileUploadComponent,
+  //     },
+  //     {
+  //       path: 'my_videos',
+  //       component: MyVideosComponent,
+  //     },
+  //   ],
+  // },
+  // { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: LandingpageComponent}
 ];

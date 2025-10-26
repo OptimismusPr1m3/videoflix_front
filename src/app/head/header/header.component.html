@@ -7,9 +7,9 @@
         <img class="mobile-logo" src="./assets/logos/Symbol.png" alt="logo-mobile">
     </div>
     <div *ngIf="!isLoginScreen" class="right-cont">
-        <a [routerLink]="['/login']" class="login-btn">
+        <!-- <a [routerLink]="['/login']" class="login-btn">
             <span>Login</span>
-        </a>
+        </a> MUSS WIEDER EINKOMMENTIERT WERDEN -->
     </div>
     <div *ngIf="isImprint" class="right-imprint-cont" (click)="stepBack()">
         <mat-icon>arrow_back</mat-icon>

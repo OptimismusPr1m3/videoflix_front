@@ -1,12 +1,19 @@
 <section class="landing-cont">
   <app-header></app-header>
 
-  <div class="mail-cont">
-    <span>Unbegrenzt Filme, Serien und mehr.</span>
-    <p>Geniesse Videoflix wo immer du willst.</p>
-    <p>Startklar? Dann gib deine E-Mailadresse ein, um loszulegen!</p>
-    <p>Angetrieben vom Raspberry PI 5</p>
-    <div class="mail-container custom-input-login">
+  <div style="text-align: center;" class="mail-cont">
+    <span style="text-decoration: line-through;">Unbegrenzt Filme, Serien und mehr.</span>
+    <p style="text-decoration: line-through;">Geniesse Videoflix wo immer du willst.</p>
+    <p style="text-decoration: line-through;">Startklar? Dann gib deine E-Mailadresse ein, um loszulegen!</p>
+    <p style="text-decoration: line-through;">Angetrieben vom Raspberry PI 5</p>
+    <br />
+
+    <p style="font-size: 60px; text-decoration: underline; text-decoration-color: #2E3EDF; font-weight: 900;">
+      Aktuell ist das Backend (Raspberry PI) offline, wenn interesse besteht 
+      Videoflix in Aktion zu sehen, melde dich gern bei mir!
+    </p>
+
+    <!--<div class="mail-container custom-input-login">
       <mat-form-field>
         <mat-label>Gib deine E-Mail ein</mat-label>
         <input
@@ -26,15 +33,10 @@
       <div (click)="checkMail()" type="button" class="login-btn" >
         <div [ngClass]="mail.valid ? 'enabled' : 'disabled'">Loslegen <mat-icon>chevron_right</mat-icon> </div>
       </div>
-    </div>
+    </div>!-->
   </div>
 
-  <ngx-spinner
-    bdColor="rgba(0, 0, 0, 0.8)"
-    size="medium"
-    color="#fff"
-    type="square-jelly-box"
-    [fullScreen]="true"
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true"
     ><p style="color: white">Bitte einen Moment Geduld...</p></ngx-spinner
   >
   <app-footer></app-footer>
